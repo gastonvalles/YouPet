@@ -1,60 +1,65 @@
-const { Pet } = require('../models/Pet.js');
+const { Pet } = require('../db.js');
+const { Op } = require("sequelize");
 
 const petJson = [
     {
         name: "Yomo",
         detail: "Pitbull Terrier, 30kg, 2 years old",
-        date: ""
+        date: new Date(2020, 8, 4).toISOString()
     },
     {
         name: "Tuca",
-        detail: "Turkish Angora, 5kg, 2 years old",
-        date: ""
+        detail: "Turkish Angora, 5kg",
+        date: new Date(2020, 10, 15).toISOString()
     }
 ]
 
-const getAllPets = async () => {
-    let db = await Pet.findAll({
-        // include: [
-        //     {
-        //         model:
-        //     }
-        // ],
-        // order: [
-        //     ['id', 'ASC']
-        // ]
-    })
-    if (!db.length) {
+const getAllPets = async (name) => {
+    if ((await Pet.count()) === 0) {
         await Pet.bulkCreate(petJson);
     }
-    return db;
+    if (!name) {
+        return await Pet.findAll({});
+    } else {
+        return await Pet.findAll({
+            where: {
+                name: {
+                    [Op.iLike]: `%${name}%`
+                }
+            }
+        });
+    }
 };
 
 const getPetByPK = async (id) => {
-    if (!id) {
-        throw new Error("Pet not found")
-    } else {
-        let db = await Pet.findOne({
+    if (id) {
+        let pet = await Pet.findOne({
             where: {
                 id
             }
-        })
-        if (!db.length) {
+        });
+        if (!pet) {
             throw new Error("Pet not found");
         }
-        return db;
+        return pet;
+    } else {
+        throw new Error("Pet not found");
     }
 };
 
-const getPetByName = async (name) => {
-    let pets = await Pet.findAll({
-        where: {
-            name: {
-                [Op.iLike]: `%${name}%`
-            }
-        }
-    })
-    return pets;
-};
+// const getByPetOwner = async (UserId) => {
+//     const petOwner = await Pet.findAll({
+//         where: {
+//             UserId: {
+//                 [Op.iLike]: `%${UserId}%`
+//             }
+//         }
+//     })
+//     if (!petOwner) {
+//         throw new Error(" Pet not found");
+//     } else {
+//         return petOwner;
+//     }
+// };
 
-module.exports = { getAllPets, getPetByName, getPetByPK };
+module.exports = { getAllPets, getPetByPK, getByPetOwner };

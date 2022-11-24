@@ -1,15 +1,15 @@
 const { Router, json } = require("express");
 const router = Router();
-const users = require("./users.js");
-const pets = require("./pet.js");
 const serviceController = require("../middlewares/service");
+const userController = require("../middlewares/user");
+const petController = require("../middlewares/pet");
 
 router.use(json());
 
 router.use("/service", serviceController);
 
-router.use("/users", users);
+router.use("/user", userController);
 
-router.use("/pets", pets);
+router.use("/pet", petController);
 
 module.exports = router;

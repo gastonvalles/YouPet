@@ -1,4 +1,5 @@
-const { User } = require('../models/User.js');
+const { User } = require('../db.js');
+const { Op } = require("sequelize");
 
 const userJson = [
     {
@@ -8,7 +9,7 @@ const userJson = [
         password: "saffores1235",
         email: "fedesaffo@gmail.com",
         address: "calle falsa 123",
-        dni: 25136789,
+        dni: 35136789,
         isAdmin: true,
         isActive: true
     },
@@ -18,55 +19,61 @@ const userJson = [
         username: "gastonvalles",
         password: "kajlskdja12312",
         email: "gastonvallesyeou@gmail.com",
-        address: "calle falsa 123",
-        dni: 25136789,
-        isAdmin: true,
+        address: "san juan 1511",
+        dni: 40558498,
+        isAdmin: false,
         isActive: true
     }
 ]
 
-const getAllUsers = async () => {
-    let db = await User.findAll({
-        // include: [
-        //     {
-        //         model:
-        //     }
-        // ],
-        // order: [
-        //     ['id', 'ASC']
-        // ]
-    })
-    if (!db.length) {
-        await User.bulkCreate(userJson, { validate: true });
+const getAllUsers = async (name) => {
+    if ((await User.count()) === 0) {
+        await User.bulkCreate(userJson);
     }
-    return db;
+    if (!name) {
+        return await User.findAll({});
+    } else {
+        return await User.findAll({
+            where: {
+                name: {
+                    [Op.iLike]: `%${name}%`
+                }
+            }
+        });
+    }
 };
 
 const getUserByPK = async (id) => {
-    if (!id) {
-        throw new Error("User not found")
-    } else {
-        let db = await User.findOne({
+    if (id) {
+        let user = await User.findOne({
             where: {
                 id
             }
-        })
-        if (!db.length) {
+        });
+        if (!user) {
             throw new Error("User not found");
         }
-        return db;
+        return user;
+    } else {
+        throw new Error("User not found");
     }
 };
 
-const getUserByName = async (name) => {
-    let users = await User.findAll({
-        where: {
-            name: {
-                [Op.iLike]: `%${name}%`
-            }
-        }
-    })
-    return users;
-};
+// getUserByUsername = async (username) => {
+//     if (username) {
+//         let user = await User.findOne({
+//             where: {
+//                 username: {
+//                     [Op.iLike]: `%${username}%`
+//                 }
+//             }
+//         });
+//         if (!user) {
+//             throw new Error("User not found");
+//         }
+//     } else {
+//         throw new Error("User not found");
+//     }
+// };
 
-module.exports = { getAllUsers, getUserByPK, getUserByName }
+module.exports = { getAllUsers, getUserByPK, getUserByUsername };
