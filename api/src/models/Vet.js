@@ -49,7 +49,7 @@ module.exports = (sequelize) => {
       },
 
       average: {
-        type: DataTypes.NUMBER,
+        type: DataTypes.INTEGER,
         defaultValue: 0,
         validate: {
           min: 0,
@@ -59,8 +59,8 @@ module.exports = (sequelize) => {
     },
     {
       timestamps: false,
-      createdAt: null,
-      updatedAt: null,
+      createdAt: false,
+      updatedAt: false,
     }
   );
 };
