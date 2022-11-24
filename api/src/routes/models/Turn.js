@@ -17,16 +17,14 @@ module.exports = (sequelize) => {
             }
         },
         globalprice: {
-                type: DataTypes.NUMBER,
+                type: DataTypes.INTEGER,
                 defaultValue: 0,
             },
 
         date: {
                 type: DataTypes.DATE,
                 allowNull: false
-        },
-
-        
+             }      
     }, {
         timestamps: false,
         createdAt: false,

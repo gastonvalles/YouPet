@@ -1,26 +1,21 @@
 const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
-    sequelize.define("Nedical-diagnostic", {
+    sequelize.define("Medical-diagnostic", {
         id: {
             type: DataTypes.UUID,
             defaultValue: DataTypes.UUIDV4,
             primaryKey: true,
             allowNull: false
         },
-
         detail: {
             type: DataTypes.STRING,
-            allowNull: false,
-            
+            allowNull: false        
         },
-
         date: {
                 type: DataTypes.DATE,
                 allowNull: false
-        },
-
-        
+             }       
     }, {
         timestamps: false,
         createdAt: false,
