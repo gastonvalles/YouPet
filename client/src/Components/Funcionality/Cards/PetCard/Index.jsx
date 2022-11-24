@@ -1,11 +1,13 @@
 import React from "react";
+import {useSelector} from 'react-redux';
+import MedicalDiagnostic from "../MedDiag";
 
 export default function PetCard({
   name,
   species,
-  medicalDiagnostic,
   description,
 }) {
+  const alldignostics = useSelector(state=> state.medDiag)
   return (
     <div>
       <div>
@@ -14,7 +16,16 @@ export default function PetCard({
         <h4>Description: {description}</h4>
       </div>
       <div>
-        <h4>Medical Diagnostic: {medicalDiagnostic}</h4>
+        <h4>Medical Diagnostic:</h4>
+        {
+          alldignostics?.map(diagnostic=> {
+            return (
+              <div>
+                <MedicalDiagnostic detail={diagnostic.detail} date={diagnostic.date}/>
+              </div>
+            )
+          })
+        }
       </div>
     </div>
   );

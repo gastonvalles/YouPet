@@ -1,9 +1,10 @@
 import React from "react";
 
-export default function MedicalDiagnostic(){
+export default function MedicalDiagnostic({detail, date}){
   return (
     <div>
-      
+      <h4>Detail: {detail}</h4>
+      <h4>Date: {date}</h4>
     </div>
   )
 }
