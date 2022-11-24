@@ -29,7 +29,7 @@ module.exports = (sequelize) => {
         
     }, {
         timestamps: false,
-        createdAt: null,
-        updatedAt: null
+        createdAt: false,
+        updatedAt: false
     })
 };
