@@ -37,12 +37,44 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { } = sequelize.models;
+const { User, Pet, Admin, MedicalDiagnostic, Score, Service, Turn, Vet } =
+  sequelize.models;
 
 // Aca vendrian las relaciones
+User.hasMany(Pet);
+Pet.belongsTo(User);
 
+User.hasMany(Turn);
+Turn.belongsTo(User);
 
-(module.exports = {
+Pet.hasMany(Turn);
+Turn.belongsTo(Pet);
+
+Vet.hasMany(Turn);
+Turn.belongsTo(Vet);
+
+Pet.hasMany(MedicalDiagnostic);
+MedicalDiagnostic.belongsTo(Pet);
+
+Admin.belongsToMany(Service, { through: "Admin_Service" });
+Service.belongsToMany(Admin, { through: "Admin_Service" });
+
+Admin.belongsToMany(Turn, { through: "Admin_Turn" });
+Turn.belongsToMany(Admin, { through: "Admin_Turn" });
+
+Admin.belongsToMany(Vet, { through: "Admin-Vet" });
+Vet.belongsToMany(Admin, { through: "Admin-Vet" });
+
+Service.belongsToMany(Vet, { through: "Service-Vet" });
+Vet.belongsToMany(Service, { through: "Service-Vet" });
+
+Score.belongsToMany(Vet, { through: "Vet-Score" });
+Vet.belongsToMany(Score, { through: "Vet-Score" });
+
+Score.belongsToMany(Service, { through: "Service-Score" });
+Service.belongsToMany(Score, { through: "Service-Score" });
+
+module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
   conn: sequelize, // para importart la conexión { conn } = require('./db.js');
-});
+};
