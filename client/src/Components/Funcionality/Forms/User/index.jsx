@@ -60,7 +60,7 @@ function FormUser() {
           }
           if (!values.address) {
             errors.adress = "Por favor ingresa una direccion";
-          } else if (values.address.length>10 && values.address.length>50) {
+          } else if (values.address.length>10 && values.address.length>30) {
             errors.adress = "Solo puedes ingresar Letras";
           }
           /* if (!values.address.street) {
