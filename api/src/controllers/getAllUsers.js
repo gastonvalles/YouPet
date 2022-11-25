@@ -1,62 +1,62 @@
-const { User } = require('../db.js');
+const { User } = require("../db.js");
 const { Op } = require("sequelize");
 
 const userJson = [
-    {
-        name: "Federico",
-        lastname: "Saffores",
-        username: "FedeSaffo",
-        password: "saffores1235",
-        email: "fedesaffo@gmail.com",
-        address: "calle falsa 123",
-        dni: 35136789,
-        isAdmin: true,
-        isActive: true
-    },
-    {
-        name: "Gaston",
-        lastname: "Valles",
-        username: "gastonvalles",
-        password: "kajlskdja12312",
-        email: "gastonvallesyeou@gmail.com",
-        address: "san juan 1511",
-        dni: 40558498,
-        isAdmin: false,
-        isActive: true
-    }
-]
+  {
+    name: "Federico",
+    lastname: "Saffores",
+    username: "FedeSaffo",
+    password: "saffores1235",
+    email: "fedesaffo@gmail.com",
+    address: "calle falsa 123",
+    dni: 35136789,
+    isAdmin: true,
+    isActive: true,
+  },
+  {
+    name: "Gaston",
+    lastname: "Valles",
+    username: "gastonvalles",
+    password: "kajlskdja12312",
+    email: "gastonvallesyeou@gmail.com",
+    address: "san juan 1511",
+    dni: 40558498,
+    isAdmin: false,
+    isActive: true,
+  },
+];
 
 const getAllUsers = async (name) => {
-    if ((await User.count()) === 0) {
-        await User.bulkCreate(userJson);
-    }
-    if (!name) {
-        return await User.findAll({});
-    } else {
-        return await User.findAll({
-            where: {
-                name: {
-                    [Op.iLike]: `%${name}%`
-                }
-            }
-        });
-    }
+  if ((await User.count()) === 0) {
+    await User.bulkCreate(userJson);
+  }
+  if (!name) {
+    return await User.findAll({});
+  } else {
+    return await User.findAll({
+      where: {
+        name: {
+          [Op.iLike]: `%${name}%`,
+        },
+      },
+    });
+  }
 };
 
 const getUserByPK = async (id) => {
-    if (id) {
-        let user = await User.findOne({
-            where: {
-                id
-            }
-        });
-        if (!user) {
-            throw new Error("User not found");
-        }
-        return user;
-    } else {
-        throw new Error("User not found");
+  if (id) {
+    let user = await User.findOne({
+      where: {
+        id,
+      },
+    });
+    if (!user) {
+      throw new Error("User not found");
     }
+    return user;
+  } else {
+    throw new Error("User not found");
+  }
 };
 
 // getUserByUsername = async (username) => {
@@ -76,4 +76,8 @@ const getUserByPK = async (id) => {
 //     }
 // };
 
-module.exports = { getAllUsers, getUserByPK, getUserByUsername };
+module.exports = {
+  getAllUsers,
+  getUserByPK,
+  //getUserByUsername
+};
