@@ -31,6 +31,7 @@
 
   "vets": [
     {
+      "id": 1,
       "image": "https://imturologia.com/wp-content/uploads/2018/07/slide-doctor-4.png",
       "name": "John",
       "lastName": "Smith",
@@ -39,6 +40,7 @@
       "reviews": ["Dr. Smith is the best vet in my city. He has helped me and my family out of some sticky situations with our pets, and always has a calming effect on them as well. He's also easy to talk to and does a great job of making you feel like your pet is in good hands!", "Dr. Smith is the most knowledgeable vet in the area. He always takes the time to explain everything and answer any questions. He also has a great bedside manner and will hold your hand while administering any shots or treatments if needed. I would recommend him to anyone looking for a vet!"]
     },
     {
+      "id": 2,
       "image": "https://e7.pngegg.com/pngimages/180/521/png-clipart-physician-medicine-health-care-surgeon-health-service-medical.png",
       "name": "Juan",
       "lastName": "Pérez",
