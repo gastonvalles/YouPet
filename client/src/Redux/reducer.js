@@ -1,3 +1,4 @@
+
 import { CLEAR_DETAILS, GET_PETS, GET_VETS, GET_VET_DETAIL } from "./const";
 
 const initialState = {
@@ -5,10 +6,12 @@ const initialState = {
   vets: [],
   medDiag: [],
   vetDetail: [],
+
 };
 
 function rootReducer(state = initialState, action) {
   switch (action.type) {
+
     case GET_PETS:
       return {
         ...state,
