@@ -62,4 +62,4 @@ const getPetByPK = async (id) => {
 //     }
 // };
 
-module.exports = { getAllPets, getPetByPK, getByPetOwner };
+module.exports = { getAllPets, getPetByPK };
