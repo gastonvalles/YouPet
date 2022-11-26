@@ -1,5 +1,8 @@
 const { Router } = require("express");
-const { getAllUsers, getUserByPK, getUserByUsername } = require("../controllers/getAllUsers.js");
+const {
+    getAllUsers,
+    getUserByPK,
+} = require("../controllers/getAllUsers.js");
 const router = Router();
 
 router.get('/', async (req, res) => {

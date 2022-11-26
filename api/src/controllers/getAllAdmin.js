@@ -1,4 +1,3 @@
-const { Sequelize } = require("sequelize");
 const { Admin } = require("../db");
 const { Op } = require("sequelize");
 
@@ -39,6 +38,7 @@ const getDBAdmin = async (name) => {
     });
   }
 };
+
 const getDBAdminByPK = async (id) => {
   if (id) {
     let admin = await Admin.findOne({
@@ -55,21 +55,20 @@ const getDBAdminByPK = async (id) => {
   }
 };
 
-/* const getAdminByName = async (name) => {
-  const admin = await User.findAll({
-    where: {
-      name: {
-        [Op.iLike]: `%${name}%`,
-      },
-    },
-  });
-  return admin;
-}; */
+// const getAdminByName = async (name) => {
+//   const admin = await User.findAll({
+//     where: {
+//       name: {
+//         [Op.iLike]: `%${name}%`,
+//       },
+//     },
+//   });
+//   return admin;
+// };
 
 const dbCreateAdmin = async (body) => {
   try {
     const { name, lastname, adminame, password } = body;
-    console.log(name, lastname, adminame, password);
     if (!name || !lastname || !adminame || !password) {
       throw new Error("missing query");
     } else {
@@ -84,6 +83,6 @@ const dbCreateAdmin = async (body) => {
 module.exports = {
   getDBAdmin,
   getDBAdminByPK,
-  //getAdminByName,
+  //   getAdminByName,
   dbCreateAdmin,
 };

@@ -2,10 +2,9 @@ const { Router } = require("express");
 const {
   getDBAdmin,
   getDBAdminByPK,
-  getAdminByName,
+//   getAdminByName,
   dbCreateAdmin,
 } = require("../controllers/getAllAdmin");
-
 const router = Router();
 
 router.get("/", async (req, res) => {
@@ -17,6 +16,7 @@ router.get("/", async (req, res) => {
     res.status(404).send(error.message);
   }
 });
+
 router.get("/:id", async (req, res) => {
   try {
     const { id } = req.params;
@@ -26,21 +26,14 @@ router.get("/:id", async (req, res) => {
     res.status(404).send(error.message);
   }
 });
-router.get("/", async (req, res) => {
+
+router.post("/create", async (req, res) => {
   try {
-    const allAdmin = await getAdminByName(req.query.name);
-    res.status(200).json(allAdmin);
-  } catch (error) {
-    res.status(404).send(error.message);
-  }
-});
-router.post("/", async (req, res) => {
-  try {
-    console.log(req.body);
     const createAdmin = await dbCreateAdmin(req.body);
     res.status(200).json(createAdmin);
   } catch (error) {
-    res.status(404).send(error.message);
+    res.status(404).send(error);
   }
 });
+
 module.exports = router;
