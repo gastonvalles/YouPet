@@ -3,7 +3,7 @@ const {
   getDBAdmin,
   getDBAdminByPK,
   getAdminByName,
-  dbCreate,
+  dbCreateAdmin,
 } = require("../controllers/getAllAdmin");
 
 const router = Router();
@@ -37,7 +37,7 @@ router.get("/", async (req, res) => {
 router.post("/", async (req, res) => {
   try {
     console.log(req.body);
-    const createAdmin = await dbCreate(req.body);
+    const createAdmin = await dbCreateAdmin(req.body);
     res.status(200).json(createAdmin);
   } catch (error) {
     res.status(404).send(error.message);
