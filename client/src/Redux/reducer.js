@@ -1,10 +1,12 @@
-import { CLEAR_DETAILS, GET_PETS, GET_VETS, GET_VET_DETAIL } from "./const";
+import { CLEAR_DETAILS, GET_PETS, GET_VETS, GET_VET_DETAIL, CREATE_TURN, GET_PET_DETAIL } from "./const";
 
 const initialState = {
   pets: [],
   vets: [],
   medDiag: [],
   vetDetail: [],
+  petDetail: [],
+  turn: [],
 };
 
 function rootReducer(state = initialState, action) {
@@ -24,10 +26,21 @@ function rootReducer(state = initialState, action) {
         ...state,
         vetDetail: action.payload
       }
+    case GET_PET_DETAIL:
+      return {
+        ...state,
+        petDetail: action.payload
+      }
     case CLEAR_DETAILS:
       return {
         ...state,
-        vetDetail: []
+        vetDetail: [],
+        petDetail: []
+      }
+    case CREATE_TURN:
+      return {
+        ...state,
+        turn: [...state.turn, action.payload]
       }
 
     default:
