@@ -26,6 +26,7 @@ router.get("/:serviceId", async (req, res) => {
     res.status(404).send(error.message);
   }
 });
+
 /* router.post("/", async (req, res) => {
   try {
     const createService = await dbServiceCreate(req.body);
@@ -34,6 +35,7 @@ router.get("/:serviceId", async (req, res) => {
     res.status(404).send(error.message);
   }
 });
+
 router.delete("/:serviceId", async (req, res) => {
   try {
     const service = await dbDeleteService(req.params.serviceId);

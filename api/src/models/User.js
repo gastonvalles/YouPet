@@ -37,7 +37,7 @@ module.exports = (sequelize) => {
                     args: [1, 50],
                     msg: "Username should have 8 characters at least"
                 },
-                is: /^[0-9a-f]{64}$/i
+                //is: /^[0-9a-f]{64}$/i
             }
         },
         password: {
@@ -48,7 +48,7 @@ module.exports = (sequelize) => {
                     args: [8, 24],
                     msg: "Password should have 8 characters at least"
                 },
-                is: /^[0-9a-f]{64}$/i
+                //is: /^[0-9a-f]{64}$/i
             }
         },
         email: {
@@ -56,7 +56,7 @@ module.exports = (sequelize) => {
             unique: true,
             allowNull: false,
             validate: {
-                is: /^[0-9a-f]{64}$/i
+                //is: /^[0-9a-f]{64}$/i
             }
         },
         address: {
