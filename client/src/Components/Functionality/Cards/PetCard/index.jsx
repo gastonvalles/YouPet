@@ -9,6 +9,7 @@ export default function PetCard({
       <div className="">
         <h1>Name: {name}</h1>
         <h4>Species: {species}</h4>
+
       </div>
     </div>
   );
