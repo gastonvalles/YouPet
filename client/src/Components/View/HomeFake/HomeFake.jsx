@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { getPets, getVets } from "../../Redux/actions";
-import VetCard from "../Functionality/Cards/VetCard";
+import { getVets } from "../../../Redux/actions";
+import VetCard from "../../Functionality/Cards/VetCard";
+import "./HomeFake.css"
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -10,7 +11,6 @@ export default function Home() {
 
   useEffect(() => {
     dispatch(getVets());
-    dispatch(getPets());
   }, [dispatch]);
 
   return (
@@ -21,8 +21,8 @@ export default function Home() {
         </Link>
       </div>
       <h1>Our Professionals</h1>
-      <div className="container">
-        <div className="row">
+      <div>
+        <div className="grid-fluid">
         {allVets?.map((vet) => {
           return (
             <div key={vet.id} className="col-lg-4">
