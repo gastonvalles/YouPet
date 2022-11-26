@@ -1,16 +1,17 @@
 
 
-import Home from "./Components/View/HomeFake";
-import VetDetail from "./Components/Functionality/Details/VetDetail";
+//import Home from "./Components/View/HomeFake";
+//import VetDetail from "./Components/Functionality/Details/VetDetail";
 import 'bootstrap/dist/css/bootstrap.min.css';
+
 import { Routes, Route } from "react-router-dom";
 
 import Home from "./Components/View/HomeFake/HomeFake";
 import VetDetail from "./Components/Functionality/Details/VetDetail";
 import PetDetail from "./Components/Functionality/Details/PetDetail";
 import Profile from "./Components/Functionality/Details/UserDetail";
-import FormHistoryPet from './Components/Funcionality/Forms/HistoryPet';
-import FormUser from './Components/Funcionality/Forms/User';
+import FormHistoryPet from './Components/Functionality/Forms/HistoryPet';
+import FormUser from './Components/Functionality/Forms/User';
 
 function App() {
   return (
