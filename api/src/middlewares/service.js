@@ -2,8 +2,8 @@ const { Router } = require("express");
 const {
   getDBService,
   getDBServiceByPK,
-  //dbServiceCreate,
-  //dbDeleteService,
+  dbServiceCreate,
+  dbDeleteService,
 } = require("../controllers/getAllService");
 //falta la ruta del put
 const router = Router();
@@ -28,7 +28,7 @@ router.get("/:serviceId", async (req, res) => {
   }
 });
 
-/* router.post("/", async (req, res) => {
+router.post("/", async (req, res) => {
   try {
     const createService = await dbServiceCreate(req.body);
     res.status(200).json(createService);
@@ -46,6 +46,6 @@ router.delete("/:serviceId", async (req, res) => {
   } catch (error) {
     res.status(404).send(error.message);
   }
-}); */
+});
 
 module.exports = router;

@@ -2,7 +2,8 @@ const { Router } = require("express");
 const {
   getDBAdmin,
   getDBAdminByPK,
-  dbCreate,
+//   getAdminByName,
+  dbCreateAdmin,
 } = require("../controllers/getAllAdmin");
 const router = Router();
 
@@ -28,7 +29,7 @@ router.get("/:id", async (req, res) => {
 
 router.post("/create", async (req, res) => {
   try {
-    const createAdmin = await dbCreate(req.body);
+    const createAdmin = await dbCreateAdmin(req.body);
     res.status(200).json(createAdmin);
   } catch (error) {
     res.status(404).send(error);
