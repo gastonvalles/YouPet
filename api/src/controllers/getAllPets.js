@@ -48,39 +48,24 @@ const getPetByPK = async (id) => {
   }
 };
 
-const getByPetOwner = async (UserId) => {
-  const petOwner = await Pet.findAll({
-    where: {
-      UserId: {
-        [Op.iLike]: `%${UserId}%`,
-      },
-    },
-  });
-  if (!petOwner) {
-    throw new Error(" Pet not found");
-  } else {
-    return petOwner;
-  }
-};
-/* const dbCreatePet = async (body) => {
-  const { name, detail } = body;
-  //console.log(name, detail);
-  if (!name || !detail) {
-    throw new Error("missing params");
-  }
-  try {
-    const parceDate = new Date(date);
-    if (new Date() > parceDate) throw Error("The date has's passed");
-    await Pet.create(body);
-    return `service ${body.name} created successfully`;
-  } catch (error) {
-    throw error;
-  }
-}; */
+// const getByPetOwner = async (UserId) => {
+//   const petOwner = await Pet.findAll({
+//     where: {
+//       UserId: {
+//         [Op.iLike]: `%${UserId}%`,
+//       },
+//     },
+//   });
+//   if (!petOwner) {
+//     throw new Error(" Pet not found");
+//   } else {
+//     return petOwner;
+//   }
+// };
+
 const dbCreatePet = async (body) => {
   try {
     const { name, detail, date } = body;
-    //console.log(name, detail);
     if (!name || !detail || !date) {
       throw new Error("missing query");
     } else {
@@ -91,9 +76,10 @@ const dbCreatePet = async (body) => {
     throw error;
   }
 };
+
 module.exports = {
   getAllPets,
   getPetByPK,
-  getByPetOwner,
+  //getByPetOwner,
   dbCreatePet,
 };
