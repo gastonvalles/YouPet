@@ -23,8 +23,63 @@ const userJson = [
         dni: 40558498,
         isAdmin: false,
         isActive: true
+    },
+    {
+        name: "Veronica",
+        lastname: "Mosquera",
+        username: "vemodi",
+        password: "vemodi1234",
+        email: "vemodi@gmail.com",
+        address: "calle falsa 124",
+        dni: 30888432,
+        isAdmin: false,
+        isActive: true
+    },
+    {
+        name: "Ernesto",
+        lastname: "Velazquez",
+        username: "ernestovv",
+        password: "kasdasd431",
+        email: "ernestovelzquezx2@gmail.com",
+        address: "calle real 123",
+        dni: 30497442,
+        isAdmin: false,
+        isActive: false
+    },
+    {
+        name: "Pedro",
+        lastname: "Gonzalez",
+        username: "pdg94xd",
+        password: "kajlskdjasda2312",
+        email: "pedrodavidgonzalez@gmail.com",
+        address: "calle dudosa 123",
+        dni: 38456098,
+        isAdmin: true,
+        isActive: false
+    },
+    {
+        name: "Luis",
+        lastname: "Goytia",
+        username: "luisgoytiacabezas",
+        password: "kajlskdja123das",
+        email: "luisgoytia@gmail.com",
+        address: "calle dudosa 456",
+        dni: 41123123,
+        isAdmin: false,
+        isActive: true
+    },
+    {
+        name: "Kelvin",
+        lastname: "Reyes",
+        username: "klevensrey",
+        password: "kajlskdja1kelvo2",
+        email: "kelvinreyesramirez@gmail.com",
+        address: "calle real 987",
+        dni: 40558555,
+        isAdmin: true,
+        isActive: true
     }
-]
+];
 
 const getAllUsers = async (name) => {
     if ((await User.count()) === 0) {
@@ -76,4 +131,7 @@ const getUserByPK = async (id) => {
 //     }
 // };
 
-module.exports = { getAllUsers, getUserByPK, getUserByUsername };
+module.exports = {
+    getAllUsers,
+    getUserByPK,
+};

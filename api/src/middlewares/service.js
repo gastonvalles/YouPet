@@ -17,6 +17,7 @@ router.get("/", async (req, res) => {
     res.status(404).send(error.message);
   }
 });
+
 router.get("/:serviceId", async (req, res) => {
   try {
     const { serviceId } = req.params;
