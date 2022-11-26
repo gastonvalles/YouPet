@@ -25,7 +25,7 @@ export default function Home() {
         <div className="grid-fluid">
         {allVets?.map((vet) => {
           return (
-            <div key={vet.id} className="col-lg-4">
+            <div key={vet.id}>
               <Link
                 to={`/${vet.id}`}
                 type="button"
