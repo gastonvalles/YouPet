@@ -55,17 +55,6 @@ const getDBAdminByPK = async (id) => {
   }
 };
 
-// const getAdminByName = async (name) => {
-//   const admin = await User.findAll({
-//     where: {
-//       name: {
-//         [Op.iLike]: `%${name}%`,
-//       },
-//     },
-//   });
-//   return admin;
-// };
-
 const dbCreateAdmin = async (body) => {
   try {
     const { name, lastname, adminame, password } = body;
@@ -80,10 +69,8 @@ const dbCreateAdmin = async (body) => {
   }
 };
 
-};
 module.exports = {
   getDBAdmin,
   getDBAdminByPK,
-//   getAdminByName,
   dbCreateAdmin,
 };
