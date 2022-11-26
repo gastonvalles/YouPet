@@ -55,7 +55,7 @@ const getDBAdminByPK = async (id) => {
   }
 };
 
-const getAdminByName = async (name) => {
+/* const getAdminByName = async (name) => {
   const admin = await User.findAll({
     where: {
       name: {
@@ -64,7 +64,7 @@ const getAdminByName = async (name) => {
     },
   });
   return admin;
-};
+}; */
 
 const dbCreateAdmin = async (body) => {
   try {
@@ -81,18 +81,9 @@ const dbCreateAdmin = async (body) => {
   }
 };
 
-/* const dbCreate = async (body) => {
-  const { name, lastname, adminame, password } = body;
-  if (name && lastname && adminame && password) {
-    await Admin.create(body);
-    return `user ${body.name} create successfully`;
-  } else {
-    throw new Error("missing params");
-  }
-}; */
 module.exports = {
   getDBAdmin,
   getDBAdminByPK,
-  getAdminByName,
+  //getAdminByName,
   dbCreateAdmin,
 };
