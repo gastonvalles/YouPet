@@ -17,22 +17,24 @@ module.exports = (sequelize) => {
           len: {
             args: [1, 50],
             msg: "The name should contain at least 1 letter",
-          },
-        },
-        date: {
-            type: DataTypes.DATE,
-            allowNull: false
-        },
-        detail: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        img: {
-            type: DataTypes.STRING,
+          }
         }
+      },
+      date: {
+        type: DataTypes.DATE,
+        allowNull: false
+      },
+      detail: {
+        type: DataTypes.STRING,
+        allowNull: false
+      },
+      img: {
+        type: DataTypes.STRING,
+      }
     }, {
-        timestamps: false,
-        createdAt: false,
-        updatedAt: false
-    })
+    timestamps: false,
+    createdAt: false,
+    updatedAt: false
+  })
+
 };
