@@ -1,4 +1,4 @@
-const { User } = require('../db.js');
+const { User } = require("../db.js");
 const { Op } = require("sequelize");
 
 const userJson = [
@@ -82,36 +82,36 @@ const userJson = [
 ];
 
 const getAllUsers = async (name) => {
-    if ((await User.count()) === 0) {
-        await User.bulkCreate(userJson);
-    }
-    if (!name) {
-        return await User.findAll({});
-    } else {
-        return await User.findAll({
-            where: {
-                name: {
-                    [Op.iLike]: `%${name}%`
-                }
-            }
-        });
-    }
+  if ((await User.count()) === 0) {
+    await User.bulkCreate(userJson);
+  }
+  if (!name) {
+    return await User.findAll({});
+  } else {
+    return await User.findAll({
+      where: {
+        name: {
+          [Op.iLike]: `%${name}%`,
+        },
+      },
+    });
+  }
 };
 
 const getUserByPK = async (id) => {
-    if (id) {
-        let user = await User.findOne({
-            where: {
-                id
-            }
-        });
-        if (!user) {
-            throw new Error("User not found");
-        }
-        return user;
-    } else {
-        throw new Error("User not found");
+  if (id) {
+    let user = await User.findOne({
+      where: {
+        id,
+      },
+    });
+    if (!user) {
+      throw new Error("User not found");
     }
+    return user;
+  } else {
+    throw new Error("User not found");
+  }
 };
 
 // getUserByUsername = async (username) => {
@@ -132,6 +132,7 @@ const getUserByPK = async (id) => {
 // };
 
 module.exports = {
-    getAllUsers,
-    getUserByPK,
+  getAllUsers,
+  getUserByPK,
+  //getUserByUsername
 };
