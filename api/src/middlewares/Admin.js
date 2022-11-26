@@ -2,7 +2,6 @@ const { Router } = require("express");
 const {
   getDBAdmin,
   getDBAdminByPK,
-//   getAdminByName,
   dbCreateAdmin,
 } = require("../controllers/getAllAdmin");
 const router = Router();
