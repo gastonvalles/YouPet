@@ -1,16 +1,11 @@
 const { Router, json } = require("express");
 const router = Router();
-router.use(json());
 const serviceController = require("../middlewares/service");
-const turn= require ("../middlewares/turn.js")
-const user= require ("../middlewares/user.js")
+const turn = require ("../middlewares/turn")
+const user =requie("../middlewares/user")
 
-
+router.use("/admin", admController);
 router.use("/service", serviceController);
-router.use("/turn", turn);
-router.use("/user", user);
-
-
-
-
+router.use("/turn",turn);
+router.use("/user",user)
 module.exports = router;
