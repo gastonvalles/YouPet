@@ -26,7 +26,7 @@ export default function Home() {
             dispatch(filterService(e.target.value));
           }}
           defaultValue={""}
-          className=""
+          className="selectorFiltros"
         >
           <option disabled value={""}></option>
           <option value="">All Service</option>
