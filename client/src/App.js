@@ -1,4 +1,6 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/js/bootstrap.bundle';
+import Navbar from "./Components/Functionality/Navbar";
 import { Routes, Route } from "react-router-dom";
 import Home from "./Components/View/HomeFake/HomeFake";
 import VetDetail from "./Components/Functionality/Details/VetDetail";
@@ -10,6 +12,7 @@ import "./App.css";
 import ServiceDetail from './Components/Functionality/Details/ServiceDetail';
 import FormPet from './Components/Functionality/Forms/Pet';
 import FormVet from './Components/Functionality/Forms/Vet';
+
 
 function App() {
   return (
@@ -24,6 +27,7 @@ function App() {
         <Route exact path='/formdescrip' element={<FormHistoryPet/>}/>
         <Route exact path="/pet/register" element={<FormPet/>}/>
         <Route exact path="/vet/register" element={<FormVet/>}/>
+        <Route exact path="/navbar" element ={<Navbar/>}/>
       </Routes>
     </div>
   );
