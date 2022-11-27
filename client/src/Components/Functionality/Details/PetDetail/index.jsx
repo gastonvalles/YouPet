@@ -17,6 +17,9 @@ export default function PetDetail() {
 
   return (
     <div>
+        <div>
+        <Link to='/formdescrip'>Add History</Link>
+        </div>
       <h1>Pet Profile</h1>
       <Link to="/profile/:id" type="button" className="text-decoration-none btn btn-dark">
         Regresar
@@ -27,14 +30,14 @@ export default function PetDetail() {
           <h1>{pet.name}</h1>
           <h3>Date: {pet.date}</h3>
           <h5>Detail: {pet.detail}</h5>
-          {/* <h3>Medical Diagnostic:</h3>
+          <h3>Medical Diagnostic:</h3>
           {
             pet.medicalDiagnostic?.map(diagnostic=>{
               return(<h5>{diagnostic}</h5>)
 
             }
             )
-          } */}
+          }
         </div>
 
     </div>
