@@ -1,8 +1,10 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { getServices, getVets } from "../../../Redux/actions";
-import { default as ServiceCard, default as VetCard } from "../../Functionality/Cards/VetCard";
+import { getVets, getServices } from "../../../Redux/actions";
+import ServiceCard from "../../Functionality/Cards/ServiceCard";
+import VetCard from "../../Functionality/Cards/VetCard";
+import SearchBarHome from "../../Functionality/SearchBar/SearchBarHome";
 import "./HomeFake.css";
 
 export default function Home() {
@@ -24,6 +26,7 @@ export default function Home() {
         <Link to="/reguser" type="button" className="text-decoration-none">
           Register
         </Link>
+        <SearchBarHome/>
       </div>
       <h1>Our Services</h1>
       <div className="grid-fluid">

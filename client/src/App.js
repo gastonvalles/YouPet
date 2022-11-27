@@ -10,6 +10,8 @@ import FormHistoryPet from './Components/Functionality/Forms/HistoryPet';
 import FormUser from './Components/Functionality/Forms/User';
 import "./App.css";
 import ServiceDetail from './Components/Functionality/Details/ServiceDetail';
+import FormPet from './Components/Functionality/Forms/Pet';
+import FormVet from './Components/Functionality/Forms/Vet';
 
 
 function App() {
@@ -20,9 +22,11 @@ function App() {
         <Route path="/vet/:id" element={<VetDetail/>} />
         <Route path="/pet/:id" element={<PetDetail/>}/>
         <Route path="/profile/:id" element={<Profile/>}/>
+        <Route path="/service/:id" element={<ServiceDetail/>}/>
         <Route exact path='/reguser' element={<FormUser />} />
         <Route exact path='/formdescrip' element={<FormHistoryPet/>}/>
-        <Route path="/service/:id" element={<ServiceDetail/>}/>
+        <Route exact path="/pet/register" element={<FormPet/>}/>
+        <Route exact path="/vet/register" element={<FormVet/>}/>
         <Route exact path="/navbar" element ={<Navbar/>}/>
       </Routes>
     </div>
