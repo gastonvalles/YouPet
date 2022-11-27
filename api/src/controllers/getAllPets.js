@@ -1,5 +1,5 @@
 const { Sequelize } = require("sequelize");
-const { Pet } = require("../db.js");
+const { Pet, MedicalDiagnostic } = require("../db.js");
 const { Op } = require("sequelize");
 
 const petJson = [
@@ -36,9 +36,12 @@ const getPetByPK = async (id) => {
   if (id) {
     let pet = await Pet.findOne({
       where: {
-        id,
+         id,
       },
-    });
+    include: {
+      model: MedicalDiagnostic,
+    },
+  });
     if (!pet) {
       throw new Error("Pet not found");
     }
