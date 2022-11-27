@@ -11,6 +11,7 @@ import {
   GET_USER_DETAIL,
   GET_ADMINS,
   GET_ADMIN_DETAIL,
+  FILTER_SERVICE,
 } from "./const";
 
 const initialState = {
@@ -26,6 +27,7 @@ const initialState = {
   userDetail: [],
   admins: [],
   adminDetail: [],
+  filterService: [],
 };
 
 function rootReducer(state = initialState, action) {
@@ -39,6 +41,19 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         petDetail: action.payload,
+      };
+
+    case FILTER_SERVICE:
+      const service = state.services;
+      const filter =
+        action.payload === ""
+          ? service
+          : service.filter(
+              (r) => r.type.toLowerCase() === action.payload.toLowerCase()
+            );
+      return {
+        ...state,
+        filterService: filter,
       };
     case GET_VETS:
       return {
@@ -54,6 +69,7 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         services: action.payload,
+        filterService: action.payload,
       };
     case GET_SERVICE_DETAIL:
       return {

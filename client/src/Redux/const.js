@@ -10,3 +10,4 @@ export const GET_USERS = "GET_USERS";
 export const GET_USER_DETAIL = "GET_USER_DETAIL";
 export const GET_ADMINS = "GET_ADMINS";
 export const GET_ADMIN_DETAIL = "GET_ADMIN_DETAIL";
+export const FILTER_SERVICE = "FILTER_SERVICE";

@@ -12,10 +12,11 @@ import {
   GET_USER_DETAIL,
   GET_ADMINS,
   GET_ADMIN_DETAIL,
+  FILTER_SERVICE,
 } from "./const";
 
 export function getPets() {
-  return async function (dispatch) {
+  return async function(dispatch) {
     let json = await axios.get("http://localhost:3001/pet");
     return dispatch({
       type: GET_PETS,
@@ -25,7 +26,7 @@ export function getPets() {
 }
 
 export function getPetDetail(id) {
-  return async function (dispatch) {
+  return async function(dispatch) {
     let json = await axios.get(`http://localhost:3001/pet/${id}`);
     return dispatch({
       type: GET_PET_DETAIL,
@@ -35,7 +36,7 @@ export function getPetDetail(id) {
 }
 
 export function getVets() {
-  return async function (dispatch) {
+  return async function(dispatch) {
     let json = await axios.get("http://localhost:3001/vet");
     return dispatch({
       type: GET_VETS,
@@ -45,7 +46,7 @@ export function getVets() {
 }
 
 export function getVetsDetail(id) {
-  return async function (dispatch) {
+  return async function(dispatch) {
     let json = await axios.get(`http://localhost:3001/vet/${id}`);
     return dispatch({
       type: GET_VET_DETAIL,
@@ -55,7 +56,7 @@ export function getVetsDetail(id) {
 }
 
 export function getServices() {
-  return async function (dispatch) {
+  return async function(dispatch) {
     let json = await axios.get("http://localhost:3001/service");
     return dispatch({
       type: GET_SERVICES,
@@ -65,7 +66,7 @@ export function getServices() {
 }
 
 export function getServiceDetail(id) {
-  return async function (dispatch) {
+  return async function(dispatch) {
     let json = await axios.get(`http://localhost:3001/service/${id}`);
     return dispatch({
       type: GET_SERVICE_DETAIL,
@@ -75,7 +76,7 @@ export function getServiceDetail(id) {
 }
 
 export function getUsers() {
-  return async function (dispatch) {
+  return async function(dispatch) {
     let json = await axios.get("http://localhost:3001/user");
     return dispatch({
       type: GET_USERS,
@@ -85,7 +86,7 @@ export function getUsers() {
 }
 
 export function getUserDetail(id) {
-  return async function (dispatch) {
+  return async function(dispatch) {
     let json = await axios.get(`http://localhost:3001/user/${id}`);
     return dispatch({
       type: GET_USER_DETAIL,
@@ -95,7 +96,7 @@ export function getUserDetail(id) {
 }
 
 export function getAdmins() {
-  return async function (dispatch) {
+  return async function(dispatch) {
     let json = await axios.get("http://localhost:3001/admin");
     return dispatch({
       type: GET_ADMINS,
@@ -105,7 +106,7 @@ export function getAdmins() {
 }
 
 export function getAdminDetail(id) {
-  return async function (dispatch) {
+  return async function(dispatch) {
     let json = await axios.get(`http://localhost:3001/admin/${id}`);
     return dispatch({
       type: GET_ADMIN_DETAIL,
@@ -115,7 +116,7 @@ export function getAdminDetail(id) {
 }
 
 export function createTurn(payload) {
-  return async function (dispatch) {
+  return async function(dispatch) {
     let json = await axios.post("http://localhost/turn", payload);
     return dispatch({
       type: CREATE_TURN,
@@ -128,5 +129,11 @@ export function clearDetails() {
   return {
     type: CLEAR_DETAILS,
     payload: [],
+  };
+}
+export function filterService(payload) {
+  return {
+    type: FILTER_SERVICE,
+    payload,
   };
 }
