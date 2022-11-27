@@ -11,3 +11,15 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.card {
+  width: 15vw;
+  min-height: 10vh;
+  align-items: center;
+  justify-content: center;
+  transition: 0.3s;
+}
+
+.card:hover {
+  box-shadow: #D94A98 0px 1px 4px, #D94A98 0px 0px 0px 3px;
+}
