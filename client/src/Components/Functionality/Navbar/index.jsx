@@ -1,8 +1,24 @@
-import React from "react";
+import React, {useState} from "react";
+import { useDispatch } from "react-redux";
+import {getServiceByName, getVetByName} from "../../../Redux/actions"
 import { Link } from "react-router-dom";
 import logo from "../../../img/logo.png";
 
-export default function Navbar() {
+export default function NavBar() {
+  const dispatch = useDispatch();
+  const [name, setName] = useState(null);
+
+  function handleInputChange(event) {
+    event.preventDefault();
+    setName(event.target.value);
+  }
+  function handleSubmit(event) {
+    event.preventDefault();
+    dispatch(getServiceByName(name));
+    dispatch(getVetByName(name));
+    setName(null);
+  }
+
   return (
     <>
       <nav className="navbar navbar-expand-md bg-info">
@@ -24,16 +40,16 @@ export default function Navbar() {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-1">
               <li className="nav-item">
-                <Link to={"/Home"}>
+                <Link to={"/"}>
                   <span className="nav-link active me-3" aria-current="page">
                     Home
                   </span>
                 </Link>
               </li>
               <li className="nav-item">
-                <Link to={"/Home"}>
+                <Link to={"/"}>
                   <span className="nav-link active me-3" aria-current="page">
-                    Contac
+                    Contact
                   </span>
                 </Link>
               </li>
@@ -75,8 +91,9 @@ export default function Navbar() {
                 type="search"
                 placeholder="Search"
                 aria-label="Search"
+                onChange={(event)=>handleInputChange(event)}
               />
-              <button className="btn btn-outline-success me-4" type="submit">
+              <button className="btn btn-outline-success me-4" type="submit" onClick={(event)=>handleSubmit(event)}>
                 Search
               </button>
             </form>
