@@ -11,11 +11,23 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       type: {
-        type: DataTypes.ENUM(["Health", "Aesthetics"]),
-        defaultValue: "Health",
+        type: DataTypes.ENUM([
+          "Healthcare Clinic",
+          "Surgery and Anesthesia",
+          "Diagnostics",
+          "Aesthetics",
+        ]),
+        defaultValue: "Healthcare Clinic",
         validate: {
           isIn: {
-            args: [["Health", "Aesthetics"]],
+            args: [
+              [
+                "Healthcare Clinic",
+                "Surgery and Anesthesia",
+                "Diagnostics",
+                "Aesthetics",
+              ],
+            ],
             msg: "It should be Health or Aesthetics",
           },
         },
@@ -42,15 +54,15 @@ module.exports = (sequelize) => {
           max: 2880,
         },
       },
-      inicialDate: {
+      /* inicialDate: {
         type: DataTypes.DATE,
         allowNull: false,
       },
       finishDate: {
         type: DataTypes.DATE,
         allowNull: false,
-      },
-      review: {
+      }, */
+      /*   review: {
         type: DataTypes.TEXT,
       },
       average: {
@@ -60,7 +72,7 @@ module.exports = (sequelize) => {
           min: 0,
           max: 5,
         },
-      },
+      }, */
     },
     {
       timestamps: false,

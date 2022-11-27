@@ -1,4 +1,3 @@
-const { Sequelize } = require("sequelize");
 const { Admin } = require("../db");
 const { Op } = require("sequelize");
 
@@ -39,6 +38,7 @@ const getDBAdmin = async (name) => {
     });
   }
 };
+
 const getDBAdminByPK = async (id) => {
   if (id) {
     let admin = await Admin.findOne({
@@ -55,29 +55,22 @@ const getDBAdminByPK = async (id) => {
   }
 };
 
-const getAdminByName = async (name) => {
-  const admin = await User.findAll({
-    where: {
-      name: {
-        [Op.iLike]: `%${name}%`,
-      },
-    },
-  });
-  return admin;
-};
-
-const dbCreate = async (body) => {
-  const { name, lastname, adminame, password } = body;
-  if (name && lastname && adminame && password) {
-    await Admin.create(body);
-    return `user ${body.name} create successfully`;
-  } else {
-    throw new Error("missing params");
+const dbCreateAdmin = async (body) => {
+  try {
+    const { name, lastname, adminame, password } = body;
+    if (!name || !lastname || !adminame || !password) {
+      throw new Error("missing query");
+    } else {
+      await Admin.create(body);
+      return `admin ${body.name} created successfully`;
+    }
+  } catch (error) {
+    throw error;
   }
 };
+
 module.exports = {
   getDBAdmin,
   getDBAdminByPK,
-  getAdminByName,
-  dbCreate,
+  dbCreateAdmin,
 };
