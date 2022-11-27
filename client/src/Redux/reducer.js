@@ -11,6 +11,10 @@ import {
   GET_USER_DETAIL,
   GET_ADMINS,
   GET_ADMIN_DETAIL,
+  GET_VET_BY_NAME,
+  GET_SERVICE_BY_NAME,
+  GET_USER_BY_NAME,
+  GET_ADMIN_BY_NAME,
 } from "./const";
 
 const initialState = {
@@ -50,6 +54,11 @@ function rootReducer(state = initialState, action) {
         ...state,
         vetDetail: action.payload,
       };
+    case GET_VET_BY_NAME:
+      return {
+        ...state,
+        vets: action.payload,
+      }
     case GET_SERVICES:
       return {
         ...state,
@@ -60,6 +69,11 @@ function rootReducer(state = initialState, action) {
         ...state,
         serviceDetail: action.payload,
       };
+    case GET_SERVICE_BY_NAME:
+      return {
+        ...state,
+        services: action.payload,
+      }
     case GET_USERS:
       return {
         ...state,
@@ -70,6 +84,11 @@ function rootReducer(state = initialState, action) {
         ...state,
         userDetail: action.payload,
       };
+    case GET_USER_BY_NAME:
+      return {
+        ...state,
+        users: action.payload,
+      }
     case GET_ADMINS:
       return {
         ...state,
@@ -78,8 +97,13 @@ function rootReducer(state = initialState, action) {
     case GET_ADMIN_DETAIL:
       return {
         ...state,
-        admins: action.payload,
+        adminDetail: action.payload,
       };
+    case GET_ADMIN_BY_NAME:
+      return {
+        ...state,
+        admins: action.payload,
+      }
 
     case CLEAR_DETAILS:
       return {
