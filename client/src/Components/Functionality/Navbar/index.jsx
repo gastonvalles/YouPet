@@ -1,11 +1,12 @@
 import React, {useState} from "react";
-import { useDispatch } from "react-redux";
-import {getServiceByName, getVetByName} from "../../../Redux/actions"
+import { useDispatch, useSelector } from "react-redux";
+import {getServiceByName, getVetByName, getUserByName} from "../../../Redux/actions"
 import { Link } from "react-router-dom";
 import logo from "../../../img/logo.png";
 
 export default function NavBar() {
   const dispatch = useDispatch();
+  const users = useSelector(state=> state.users)
   const [name, setName] = useState(null);
 
   function handleInputChange(event) {
@@ -16,6 +17,9 @@ export default function NavBar() {
     event.preventDefault();
     dispatch(getServiceByName(name));
     dispatch(getVetByName(name));
+    if(users.isAdmin===true){
+      dispatch(getUserByName(name))
+    }
     setName(null);
   }
 
@@ -23,7 +27,7 @@ export default function NavBar() {
     <>
       <nav className="navbar navbar-expand-md bg-info">
         <div className="container-fluid">
-          <Link className="Link  me-4" to={"/Home"}>
+          <Link className="Link  me-4" to={"/"}>
             <img src={logo} alt="Bootstrap" height="55" />
           </Link>
           <button
