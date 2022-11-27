@@ -25,16 +25,16 @@ export default function VetDetail() {
         Home
       </Link>
       <div>
-        <img src={vet.image} alt="vet" height="300px" width="300px" />
+        {/* <img src={vet.image} alt="vet" height="300px" width="300px" /> */}
         <h1>
-          {vet.name} {vet.lastName}
+          {vet.name} {vet.lastname}
         </h1>
         <h3>Speciality: {vet.speciality}</h3>
-        <h3>Score: {vet.score}</h3>
+        <h3>Average: {vet.average}</h3>
         <h3>Reviews:</h3>
-        {vet.reviews?.map((review) => {
+        {/* {vet.review?.map((review) => {
           return <h5>{review}</h5>;
-        })}
+        })} */}
       </div>
     </div>
   );

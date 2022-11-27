@@ -25,16 +25,16 @@ export default function PetDetail() {
           <img src={pet.image} alt="pet" width="300px" height="300px"
           />
           <h1>{pet.name}</h1>
-          <h3>Species: {pet.species}</h3>
-          <h5>Description: {pet.description}</h5>
-          <h3>Medical Diagnostic:</h3>
+          <h3>Date: {pet.date}</h3>
+          <h5>Detail: {pet.detail}</h5>
+          {/* <h3>Medical Diagnostic:</h3>
           {
             pet.medicalDiagnostic?.map(diagnostic=>{
               return(<h5>{diagnostic}</h5>)
 
             }
             )
-          }
+          } */}
         </div>
 
     </div>

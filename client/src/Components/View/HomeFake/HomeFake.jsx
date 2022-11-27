@@ -34,7 +34,7 @@ export default function Home() {
                 <VetCard
                   image={vet.image}
                   name={vet.name}
-                  lastName={vet.lastName}
+                  lastname={vet.lastname}
                   id={vet.id}
                 />
               </Link>
