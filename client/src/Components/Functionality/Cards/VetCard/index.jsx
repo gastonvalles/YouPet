@@ -2,7 +2,7 @@ import React from "react";
 
 export default function VetCard({ name, lastname }) {
     return (
-        <div className="card bg-dark">
+        <div className="card">
             <div>
                 {/* <img src={image} alt="médico" height="200px" width="200px" . /> */}
                 <div className="card-body">
