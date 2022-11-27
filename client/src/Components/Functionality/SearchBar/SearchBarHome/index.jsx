@@ -4,7 +4,7 @@ import { getServiceByName, getVetByName } from "../../../../Redux/actions";
 
 export default function SearchBarHome() {
   const dispatch = useDispatch();
-  const [name, setName] = useState("");
+  const [name, setName] = useState(null);
 
   function handleInputChange(event) {
     event.preventDefault();
