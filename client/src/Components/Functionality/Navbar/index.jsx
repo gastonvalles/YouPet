@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {getServiceByName, getVetByName, getUserByName} from "../../../Redux/actions"
 import { Link } from "react-router-dom";
 import logo from "../../../img/logo.png";
+import "./index.css";
 
 export default function NavBar() {
   const dispatch = useDispatch();
@@ -95,9 +96,9 @@ export default function NavBar() {
                 type="search"
                 placeholder="Search"
                 aria-label="Search"
-                onChange={(event)=>handleInputChange(event)}
+                onChange={(event) => handleInputChange(event)}
               />
-              <button className="btn btn-outline-success me-4" type="submit" onClick={(event)=>handleSubmit(event)}>
+              <button className="btn btn-outline-success me-4" type="submit" onClick={(event) => handleSubmit(event)}>
                 Search
               </button>
             </form>
