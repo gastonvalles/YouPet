@@ -10,7 +10,7 @@ import {
 
 export function getPets() {
   return async function (dispatch) {
-    let json = await axios.get("http://localhost:5000/pets");
+    let json = await axios.get("http://localhost:3001/pet");
     return dispatch({
       type: GET_PETS,
       payload: json.data,
@@ -20,7 +20,7 @@ export function getPets() {
 
 export function getPetDetail(id) {
   return async function (dispatch) {
-    let json = await axios.get(`http://localhost:5000/pets/${id}`);
+    let json = await axios.get(`http://localhost:3001/pet/${id}`);
     return dispatch({
       type: GET_PET_DETAIL,
       payload: json.data,
@@ -30,7 +30,7 @@ export function getPetDetail(id) {
 
 export function getVets() {
   return async function (dispatch) {
-    let json = await axios.get("http://localhost:5000/vets");
+    let json = await axios.get("http://localhost:3001/vet");
     return dispatch({
       type: GET_VETS,
       payload: json.data,
@@ -40,7 +40,7 @@ export function getVets() {
 
 export function getVetsDetail(id) {
   return async function (dispatch) {
-    let json = await axios.get(`http://localhost:5000/vets/${id}`);
+    let json = await axios.get(`http://localhost:3001/vet/${id}`);
     return dispatch({
       type: GET_VET_DETAIL,
       payload: json.data,
