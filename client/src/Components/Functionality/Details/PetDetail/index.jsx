@@ -17,7 +17,7 @@ export default function PetDetail() {
 
   return (
     <div>
-        <div>
+        <div >
         <Link to='/formdescrip'>Add History</Link>
         </div>
       <h1>Pet Profile</h1>

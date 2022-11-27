@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getServices, getVets } from "../../../Redux/actions";
 import ServiceCard from "../../Functionality/Cards/VetCard";
-import VetCard from "../../Functionality/Cards/VetCard/Index.js";
+import VetCard from "../../Functionality/Cards/VetCard";
 import "./HomeFake.css";
 
 export default function Home() {
