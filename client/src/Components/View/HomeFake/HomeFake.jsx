@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { getVets, getServices } from "../../../Redux/actions";
-import ServiceCard from "../../Functionality/Cards/ServiceCard";
-import VetCard from "../../Functionality/Cards/VetCard";
+import { getServices, getVets } from "../../../Redux/actions";
+import ServiceCard from "../../Functionality/Cards/VetCard";
+import VetCard from "../../Functionality/Cards/VetCard/Index.js";
 import "./HomeFake.css";
 
 export default function Home() {
@@ -28,15 +28,15 @@ export default function Home() {
       </div>
       <h1>Our Services</h1>
       <div className="grid-fluid">
-      {allServices?.map((service) => {
-        return (
-          <div key={service.id} className="p-2">
-            <Link to={`/service/${service.id}`} type="button" className="text-decoration-none">
-              <ServiceCard name={service.name} id={service.id} />
-            </Link>
-          </div>
-        );
-      })}
+        {allServices?.map((service) => {
+          return (
+            <div key={service.id} className="p-2">
+              <Link to={`/service/${service.id}`} type="button" className="text-decoration-none">
+                <ServiceCard name={service.name} id={service.id} />
+              </Link>
+            </div>
+          );
+        })}
       </div>
       <h1>Our Professionals</h1>
       <div>
