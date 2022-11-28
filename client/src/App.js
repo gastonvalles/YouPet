@@ -4,8 +4,6 @@ import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import PetDetail from "./Components/Functionality/Details/PetDetail";
 import ServiceDetail from "./Components/Functionality/Details/ServiceDetail";
-import TakeTurn from "./Components/Functionality/Turns/TakeTurn";
-import ChooseVetTurn from "./Components/Functionality/Turns/ChooseVetTurn";
 import Profile from "./Components/Functionality/Details/UserDetail";
 import Login from "./Components/Functionality/Forms/Login";
 import VetDetail from "./Components/Functionality/Details/VetDetail";
