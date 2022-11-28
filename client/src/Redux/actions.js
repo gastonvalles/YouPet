@@ -10,12 +10,14 @@ import {
   GET_SERVICE_DETAIL,
   GET_USERS,
   GET_USER_DETAIL,
+  GET_USER_BY_NAME,
+  GET_USER_BY_EMAIL,
   GET_ADMINS,
   GET_ADMIN_DETAIL,
   GET_SERVICE_BY_NAME,
   GET_VET_BY_NAME,
   GET_ADMIN_BY_NAME,
-  GET_USER_BY_NAME,
+  
 } from "./const";
 
 export function getPets() {
@@ -122,6 +124,16 @@ export function getUserByName(name) {
     let json = await axios.get(`http://localhost:3001/user?name=${name}`);
     return dispatch({
       type: GET_USER_BY_NAME,
+      payload: json.data,
+    });
+  };
+}
+
+export function getUserByEmail(email) {
+  return async function (dispatch) {
+    let json = await axios.get(`http://localhost:3001/user/log/${email}`);
+    return dispatch({
+      type: GET_USER_BY_EMAIL,
       payload: json.data,
     });
   };

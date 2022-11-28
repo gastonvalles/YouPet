@@ -31,7 +31,6 @@ router.get('/:id', async (req, res) => {
 router.get('/log/:email', async (req, res) => {
   try {
     const { email } = req.params;
-    console.log(email);
     const userId = await getUserByEmail(email);
     res.status(200).send(userId);
   } catch (error) {

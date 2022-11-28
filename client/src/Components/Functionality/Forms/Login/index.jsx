@@ -2,8 +2,8 @@
 import React, { useEffect, useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useDispatch, useSelector } from "react-redux";
-import { getUserByName } from "../../../../Redux/actions";
-
+import { getUserByEmail } from "../../../../Redux/actions";
+import { useNavigate } from "react-router-dom";
 import logo from "../../../../img/logo.png";
 import "./index.css";
 export default function Login() {
@@ -13,8 +13,11 @@ export default function Login() {
   const dispatch = useDispatch();
   let user = useSelector((state) => state.user);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
-    if (user.length < 1) dispatch(getUserByName(email));
+    if (user.length < 1) dispatch(getUserByEmail(email));
+
   }, [dispatch, user, email]);
 
 
@@ -51,14 +54,14 @@ export default function Login() {
           }}
           onSubmit={(values, { resetForm }) => {
             console.log(values);
-            resetForm();
-
             setEmail(values.email);
-            console.log("contraseña store:", user.password);
+            dispatch(getUserByEmail(email))
             if (values.password === user.password) {
               setFormSuccess(true);
               setTimeout(() => {
                 setFormSuccess(false);
+                resetForm();
+                navigate("/");
               }, 3000);
             }
 
@@ -111,7 +114,7 @@ export default function Login() {
                 <button type="submit" className="btn btn-primary ">
                   Submit
                 </button>
-                {formSuccess && <p className="text-success">Probar inicio</p>}
+                {formSuccess && <p className="text-success">¡Bienvenido {user.name}!</p>}
               </Form>
             </div>
           )}
