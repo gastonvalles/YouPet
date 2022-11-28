@@ -11,7 +11,7 @@ import Login from './Components/Functionality/Forms/Login';
 import FormPet from "./Components/Functionality/Forms/Pet";
 import FormUser from "./Components/Functionality/Forms/User";
 import FormVet from "./Components/Functionality/Forms/Vet";
-import NavBar from "./Components/Functionality/NavBar";
+import NavBar from "./Components/Functionality/Navbar";
 import ChooseVetTurn from "./Components/Functionality/Turns/ChooseVetTurn";
 import TakeTurn from "./Components/Functionality/Turns/TakeTurn";
 import Home from "./Components/View/HomeFake/HomeFake";
