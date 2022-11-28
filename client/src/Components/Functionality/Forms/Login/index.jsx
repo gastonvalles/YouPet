@@ -1,9 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import { useDispatch, useSelector } from "react-redux";
+import { getUserByName } from "../../../../Redux/actions";
 import logo from "../../../../img/logo.png";
 import "./index.css";
 export default function Login() {
   const [formSuccess, setFormSuccess] = useState(false);
+  const [email, setEmail] = useState(" ");
+  const dispatch = useDispatch();
+  let user = useSelector((state) => state.user);
+
+  useEffect(() => {
+    if (user.length < 1) dispatch(getUserByName(email));
+  }, [dispatch, user, email]);
+
   return (
     <div className="backgroud">
       <div className="containerlogin">
@@ -22,11 +32,13 @@ export default function Login() {
               )
             ) {
               errors.email = "Solo puedes ingresar un email valido";
-              }
-              console.log(values.password)
+            }
             if (!values.password) {
               errors.password = "Por favor ingresa una contraseña";
-            } else if (values.password.length < 5 || values.password.length > 16) {
+            } else if (
+              values.password.length < 5 ||
+              values.password.length > 16
+            ) {
               errors.password = "Debe tener al menos 5 digitos";
             }
             return errors;
@@ -34,11 +46,14 @@ export default function Login() {
           onSubmit={(values, { resetForm }) => {
             console.log(values);
             resetForm();
-            console.log("formulario enviado");
-            setFormSuccess(true);
-            setTimeout(() => {
-              setFormSuccess(false);
-            }, 5000);
+            setEmail(values.email);
+            console.log("contraseña store:", user.password);
+            if (values.password === user.password) {
+              setFormSuccess(true);
+              setTimeout(() => {
+                setFormSuccess(false);
+              }, 3000);
+            }
           }}
         >
           {({ errors }) => (
