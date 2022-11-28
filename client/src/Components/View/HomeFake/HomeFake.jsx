@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getServices, getVets } from "../../../Redux/actions";
-import ServiceCard from "../../Functionality/Cards/VetCard";
+import ServiceCard from "../../Functionality/Cards/ServiceCard";
 import VetCard from "../../Functionality/Cards/VetCard";
 import "./HomeFake.css";
 
@@ -19,18 +19,12 @@ export default function Home() {
   return (
     <div>
       <div className="grid-fluid">
-        <Link to="/profile/:id" type="button" className="text-decoration-none">
-          Profile
-        </Link>
-        <Link to="/reguser" type="button" className="text-decoration-none">
-          Register
-        </Link>
       </div>
       <h1>Our Services</h1>
       <div className="grid-fluid">
         {allServices?.map((service) => {
           return (
-            <div key={service.id} className="p-2">
+            <div key={service.id} className="m-2">
               <Link to={`/service/${service.id}`} type="button" className="text-decoration-none">
                 <ServiceCard name={service.name} id={service.id} />
               </Link>
@@ -43,7 +37,7 @@ export default function Home() {
         <div className="grid-fluid">
           {allVets?.map((vet) => {
             return (
-              <div key={vet.id} className="p-2">
+              <div key={vet.id} className="m-2">
                 <Link
                   to={`/vet/${vet.id}`}
                   type="button"
