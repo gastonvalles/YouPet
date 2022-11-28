@@ -3,16 +3,20 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
+import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
-import {store} from './Redux/store'
+import { store } from "./Redux/store";
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(
+import axios from "axios";
+
+axios.defaults.baseURL = process.env.REACT_APP_API || "http:/localhost:3001";
+//const root = ReactDOM.createRoot(document.getElementById("root"));
+ReactDOM.render(
   <Provider store={store}>
-    <React.StrictMode>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </React.StrictMode>
-  </Provider>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </Provider>,
+  document.getElementById("root")
 );
+reportWebVitals();
