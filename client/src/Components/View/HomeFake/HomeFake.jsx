@@ -9,7 +9,7 @@ import "./HomeFake.css";
 export default function Home() {
   const dispatch = useDispatch();
   const allVets = useSelector((state) => state.vets);
-  const allServices = useSelector((state) => state.services);
+  const allServices = useSelector((state) => state.filterService||state.services);
 
   useEffect(() => {
     dispatch(getVets());

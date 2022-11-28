@@ -1,14 +1,21 @@
-import React, {useState} from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {getServiceByName, getVetByName, getUserByName} from "../../../Redux/actions"
 import { Link } from "react-router-dom";
 import logo from "../../../img/logo.png";
+import { filterService, getServiceByName, getServices, getVetByName } from "../../../Redux/actions";
 import "./index.css";
 
 export default function NavBar() {
   const dispatch = useDispatch();
   const users = useSelector(state=> state.users)
   const [name, setName] = useState(null);
+  const allServices = useSelector(
+    (state) => state.filterService || state.services
+  );
+
+  useEffect(() => {
+    dispatch(getServices());
+  }, [dispatch]);
 
   function handleInputChange(event) {
     event.preventDefault();
@@ -42,6 +49,22 @@ export default function NavBar() {
           >
             <span className="navbar-toggler-icon"></span>
           </button>
+          <select
+            onChange={(e) => {
+              dispatch(filterService(e.target.value));
+            }}
+            defaultValue={""}
+            className="selectorFiltros"
+          >
+            <option disabled value={""}></option>
+            <option value="">All Service</option>
+            <option value={"Healthcare Clinic"}>Healthcare Clinic</option>
+            <option value={"Surgery and Anesthesia"}>
+              Surgery and Anesthesia
+            </option>
+            <option value={"Diagnostics"}>Diagnostics</option>
+            <option value={"Aesthetics"}>Aesthetics</option>
+          </select>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-1">
               {/* <li className="nav-item">
