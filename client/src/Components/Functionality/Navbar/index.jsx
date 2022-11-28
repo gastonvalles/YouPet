@@ -44,20 +44,13 @@ export default function NavBar() {
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-1">
-              <li className="nav-item">
-                <Link to={"/"}>
-                  <span className="nav-link active me-3" aria-current="page">
-                    Home
-                  </span>
-                </Link>
-              </li>
-              <li className="nav-item">
+              {/* <li className="nav-item">
                 <Link to={"/"}>
                   <span className="nav-link active me-3" aria-current="page">
                     Contact
                   </span>
                 </Link>
-              </li>
+              </li> */}
               <li className="nav-item dropdown">
                 <span
                   className="nav-link dropdown-toggle me-3"
@@ -86,9 +79,9 @@ export default function NavBar() {
                   </li>
                 </ul>
               </li>
-              <li className="nav-item">
+              {/* <li className="nav-item">
                 <span className="nav-link">Disabled</span>
-              </li>
+              </li> */}
             </ul>
             <form className="d-flex" role="search">
               <input
