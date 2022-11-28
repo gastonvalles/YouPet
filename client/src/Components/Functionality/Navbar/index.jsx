@@ -71,7 +71,24 @@ export default function NavBar() {
                   </span>
                 </Link>
               </li> */}
-              <li className="nav-item dropdown">
+
+              <div class="dropdown">
+              <span
+                  className="nav-link dropdown-toggle me-3"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Go to...
+                </span>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                  <li><Link to={"/veterinario"}><button class="dropdown-item" type="button" >Veterinario</button></Link></li>
+                  <li><Link to={"/nutricionista"}><button class="dropdown-item" type="button">Nutricionista</button></Link></li>
+                  <li><Link to={"/cirugias"}><button class="dropdown-item" type="button">Cirugias</button></Link></li>
+                </ul>
+              </div>
+
+              {/* <li className="nav-item dropdown">
                 <span
                   className="nav-link dropdown-toggle me-3"
                   role="button"
@@ -98,7 +115,8 @@ export default function NavBar() {
                     </Link>
                   </li>
                 </ul>
-              </li>
+              </li> */}
+              
               {/* <li className="nav-item">
                 <span className="nav-link">Disabled</span>
               </li> */}
