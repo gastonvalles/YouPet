@@ -8,9 +8,8 @@ import PetDetail from "./Components/Functionality/Details/PetDetail";
 import Profile from "./Components/Functionality/Details/UserDetail";
 import FormHistoryPet from './Components/Functionality/Forms/HistoryPet';
 import FormUser from './Components/Functionality/Forms/User';
-import "./App.css";
 import ServiceDetail from './Components/Functionality/Details/ServiceDetail';
-
+import Login from './Components/Functionality/Forms/Login'
 
 function App() {
   return (
@@ -23,7 +22,8 @@ function App() {
         <Route exact path='/reguser' element={<FormUser />} />
         <Route exact path='/formdescrip' element={<FormHistoryPet/>}/>
         <Route path="/service/:id" element={<ServiceDetail/>}/>
-        <Route exact path="/navbar" element ={<Navbar/>}/>
+        <Route exact path="/navbar" element={<Navbar />} />
+        <Route exact path='/login' element={<Login/>}/>
       </Routes>
     </div>
   );
