@@ -14,7 +14,6 @@ import FormPet from "./Components/Functionality/Forms/Pet";
 import FormUser from "./Components/Functionality/Forms/User";
 import FormVet from "./Components/Functionality/Forms/Vet";
 import NavBar from "./Components/Functionality/NavBar";
-import Login from "./Components/Functionality/Forms/Login";
 import Home from "./Components/View/HomeFake/HomeFake";
 function App() {
   return (

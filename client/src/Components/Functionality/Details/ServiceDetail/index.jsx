@@ -18,15 +18,6 @@ export default function ServiceDetail() {
   return (
     <div>
       <div>
-      <Link
-        to="/"
-        type="button"
-        className="text-decoration-none btn btn-dark"
-      >
-        Home
-      </Link>
-      </div>
-      <div>
       <h1>{service.name}</h1>
       </div>
       <div className= "grid-fluid">
