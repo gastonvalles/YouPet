@@ -12,6 +12,10 @@ import {
   GET_USER_DETAIL,
   GET_ADMINS,
   GET_ADMIN_DETAIL,
+  GET_SERVICE_BY_NAME,
+  GET_VET_BY_NAME,
+  GET_ADMIN_BY_NAME,
+  GET_USER_BY_NAME,
 } from "./const";
 
 export function getPets() {
@@ -53,12 +57,31 @@ export function getVetsDetail(id) {
     });
   };
 }
+export function getVetByName(name) {
+  return async function (dispatch) {
+    let json = await axios.get(`http://localhost:3001/vet?name=${name}`);
+    return dispatch({
+      type: GET_VET_BY_NAME,
+      payload: json.data,
+    });
+  };
+}
 
 export function getServices() {
   return async function (dispatch) {
     let json = await axios.get("http://localhost:3001/service");
     return dispatch({
       type: GET_SERVICES,
+      payload: json.data,
+    });
+  };
+}
+
+export function getServiceByName(name) {
+  return async function (dispatch) {
+    let json = await axios.get(`http://localhost:3001/service?name=${name}`);
+    return dispatch({
+      type: GET_SERVICE_BY_NAME,
       payload: json.data,
     });
   };
@@ -94,6 +117,16 @@ export function getUserDetail(id) {
   };
 }
 
+export function getUserByName(name) {
+  return async function (dispatch) {
+    let json = await axios.get(`http://localhost:3001/user?name=${name}`);
+    return dispatch({
+      type: GET_USER_BY_NAME,
+      payload: json.data,
+    });
+  };
+}
+
 export function getAdmins() {
   return async function (dispatch) {
     let json = await axios.get("http://localhost:3001/admin");
@@ -109,6 +142,15 @@ export function getAdminDetail(id) {
     let json = await axios.get(`http://localhost:3001/admin/${id}`);
     return dispatch({
       type: GET_ADMIN_DETAIL,
+      payload: json.data,
+    });
+  };
+}
+export function getAdminByName(name) {
+  return async function (dispatch) {
+    let json = await axios.get(`http://localhost:3001/admin?name=${name}`);
+    return dispatch({
+      type: GET_ADMIN_BY_NAME,
       payload: json.data,
     });
   };
