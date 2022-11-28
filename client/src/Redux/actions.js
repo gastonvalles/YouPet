@@ -1,21 +1,9 @@
 import axios from "axios";
 import {
-  GET_PETS,
-  GET_VETS,
-  GET_VET_DETAIL,
   CLEAR_DETAILS,
-  CREATE_TURN,
-  GET_PET_DETAIL,
-  GET_SERVICES,
-  GET_SERVICE_DETAIL,
-  GET_USERS,
-  GET_USER_DETAIL,
-  GET_ADMINS,
-  GET_ADMIN_DETAIL,
-  GET_SERVICE_BY_NAME,
-  GET_VET_BY_NAME,
-  GET_ADMIN_BY_NAME,
-  GET_USER_BY_NAME,
+  CREATE_TURN, FILTER_SERVICE, GET_ADMINS, GET_ADMIN_BY_NAME, GET_ADMIN_DETAIL, GET_PETS, GET_PET_DETAIL,
+  GET_SERVICES, GET_SERVICE_BY_NAME, GET_SERVICE_DETAIL,
+  GET_USERS, GET_USER_BY_EMAIL, GET_USER_BY_NAME, GET_USER_DETAIL, GET_VETS, GET_VET_BY_NAME, GET_VET_DETAIL
 } from "./const";
 
 export function getPets() {
@@ -127,6 +115,16 @@ export function getUserByName(name) {
   };
 }
 
+export function getUserByEmail(email) {
+  return async function (dispatch) {
+    let json = await axios.get(`http://localhost:3001/user/log/${email}`);
+    return dispatch({
+      type: GET_USER_BY_EMAIL,
+      payload: json.data,
+    });
+  };
+}
+
 export function getAdmins() {
   return async function (dispatch) {
     let json = await axios.get("http://localhost:3001/admin");
@@ -170,5 +168,12 @@ export function clearDetails() {
   return {
     type: CLEAR_DETAILS,
     payload: [],
+  };
+}
+
+export function filterService(payload) {
+  return {
+    type: FILTER_SERVICE,
+    payload,
   };
 }

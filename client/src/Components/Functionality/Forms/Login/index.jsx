@@ -1,18 +1,25 @@
+
 import React, { useEffect, useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useDispatch, useSelector } from "react-redux";
-import { getUserByName } from "../../../../Redux/actions";
+import { getUserByEmail } from "../../../../Redux/actions";
+import { useNavigate } from "react-router-dom";
 import logo from "../../../../img/logo.png";
 import "./index.css";
 export default function Login() {
   const [formSuccess, setFormSuccess] = useState(false);
+
   const [email, setEmail] = useState(" ");
   const dispatch = useDispatch();
   let user = useSelector((state) => state.user);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
-    if (user.length < 1) dispatch(getUserByName(email));
+    if (user.length < 1) dispatch(getUserByEmail(email));
+
   }, [dispatch, user, email]);
+
 
   return (
     <div className="backgroud">
@@ -32,6 +39,7 @@ export default function Login() {
               )
             ) {
               errors.email = "Solo puedes ingresar un email valido";
+
             }
             if (!values.password) {
               errors.password = "Por favor ingresa una contraseña";
@@ -39,21 +47,24 @@ export default function Login() {
               values.password.length < 5 ||
               values.password.length > 16
             ) {
+
               errors.password = "Debe tener al menos 5 digitos";
             }
             return errors;
           }}
           onSubmit={(values, { resetForm }) => {
             console.log(values);
-            resetForm();
             setEmail(values.email);
-            console.log("contraseña store:", user.password);
+            dispatch(getUserByEmail(email))
             if (values.password === user.password) {
               setFormSuccess(true);
               setTimeout(() => {
                 setFormSuccess(false);
+                resetForm();
+                navigate("/");
               }, 3000);
             }
+
           }}
         >
           {({ errors }) => (
@@ -103,7 +114,7 @@ export default function Login() {
                 <button type="submit" className="btn btn-primary ">
                   Submit
                 </button>
-                {formSuccess && <p className="text-success">Probar inicio</p>}
+                {formSuccess && <p className="text-success">¡Bienvenido {user.name}!</p>}
               </Form>
             </div>
           )}

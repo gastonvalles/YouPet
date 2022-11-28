@@ -1,20 +1,7 @@
 import {
-  CLEAR_DETAILS,
-  GET_PETS,
-  GET_VETS,
-  GET_VET_DETAIL,
-  CREATE_TURN,
-  GET_PET_DETAIL,
-  GET_SERVICES,
-  GET_SERVICE_DETAIL,
-  GET_USERS,
-  GET_USER_DETAIL,
-  GET_ADMINS,
-  GET_ADMIN_DETAIL,
-  GET_VET_BY_NAME,
-  GET_SERVICE_BY_NAME,
-  GET_USER_BY_NAME,
-  GET_ADMIN_BY_NAME,
+  CLEAR_DETAILS, CREATE_TURN, FILTER_SERVICE, GET_ADMINS, GET_ADMIN_BY_NAME, GET_ADMIN_DETAIL, GET_PETS, GET_PET_DETAIL,
+  GET_SERVICES, GET_SERVICE_BY_NAME, GET_SERVICE_DETAIL,
+  GET_USERS, GET_USER_BY_EMAIL, GET_USER_BY_NAME, GET_USER_DETAIL, GET_VETS, GET_VET_BY_NAME, GET_VET_DETAIL
 } from "./const";
 
 const initialState = {
@@ -26,10 +13,12 @@ const initialState = {
   turn: [],
   services: [],
   serviceDetail: [],
+  user: {},
   users: [],
   userDetail: [],
   admins: [],
   adminDetail: [],
+  filterService: [],
 };
 
 function rootReducer(state = initialState, action) {
@@ -58,11 +47,12 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         vets: action.payload,
-      }
+      };
     case GET_SERVICES:
       return {
         ...state,
         services: action.payload,
+        filterService: action.payload,
       };
     case GET_SERVICE_DETAIL:
       return {
@@ -73,7 +63,7 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         services: action.payload,
-      }
+      };
     case GET_USERS:
       return {
         ...state,
@@ -88,7 +78,12 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         users: action.payload,
-      }
+      };
+    case GET_USER_BY_EMAIL:
+      return {
+        ...state,
+        user: action.payload,
+      };
     case GET_ADMINS:
       return {
         ...state,
@@ -103,8 +98,19 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         admins: action.payload,
-      }
-
+      };
+    case FILTER_SERVICE:
+      const service = state.services;
+      const filter =
+        action.payload === ""
+          ? service
+          : service.filter(
+            (r) => r.type.toLowerCase() === action.payload.toLowerCase()
+          );
+      return {
+        ...state,
+        filterService: filter,
+      };
     case CLEAR_DETAILS:
       return {
         ...state,
