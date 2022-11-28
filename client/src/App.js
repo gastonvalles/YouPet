@@ -10,7 +10,7 @@ import FormHistoryPet from "./Components/Functionality/Forms/HistoryPet";
 import FormPet from "./Components/Functionality/Forms/Pet";
 import FormUser from "./Components/Functionality/Forms/User";
 import FormVet from "./Components/Functionality/Forms/Vet";
-import NavBar from "./Components/Functionality/Navbar/index";
+import NavBar from "./Components/Functionality/NavBar";
 import Home from "./Components/View/HomeFake/HomeFake";
 
 function App() {
