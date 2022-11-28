@@ -4,6 +4,8 @@ import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import PetDetail from "./Components/Functionality/Details/PetDetail";
 import ServiceDetail from "./Components/Functionality/Details/ServiceDetail";
+import TakeTurn from "./Components/Functionality/Turns/TakeTurn";
+import ChooseVetTurn from "./Components/Functionality/Turns/ChooseVetTurn";
 import Profile from "./Components/Functionality/Details/UserDetail";
 import VetDetail from "./Components/Functionality/Details/VetDetail";
 import FormHistoryPet from "./Components/Functionality/Forms/HistoryPet";
@@ -23,6 +25,8 @@ function App() {
         <Route path="/pet/:id" element={<PetDetail />} />
         <Route path="/profile/:id" element={<Profile />} />
         <Route path="/service/:id" element={<ServiceDetail />} />
+        <Route path="/service/:id/vet" element={<ChooseVetTurn />} />
+        <Route path="/service/:id/vet/:vetId/turn" element={<TakeTurn />} />
         <Route exact path="/reguser" element={<FormUser />} />
         <Route exact path="/formdescrip" element={<FormHistoryPet />} />
         <Route exact path="/pet/register" element={<FormPet />} />
