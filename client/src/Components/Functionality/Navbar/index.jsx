@@ -2,16 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import logo from "../../../img/logo.png";
-import { filterService, getServiceByName, getServices, getVetByName } from "../../../Redux/actions";
+import { filterService, getServiceByName, getServices, getVetByName, getUserByName } from "../../../Redux/actions";
 import "./index.css";
 
 export default function NavBar() {
   const dispatch = useDispatch();
   const users = useSelector(state=> state.users)
   const [name, setName] = useState(null);
-  const allServices = useSelector(
-    (state) => state.filterService || state.services
-  );
 
   useEffect(() => {
     dispatch(getServices());
