@@ -1,7 +1,16 @@
 export const GET_PETS = "GET_PETS";
 export const GET_VETS = "GET_VETS";
-export const GET_MDIAG = "GET_MDIAG";
 export const GET_VET_DETAIL = "GET_VET_DETAIL";
+export const GET_VET_BY_NAME = "GET_VET_BY_NAME";
 export const CLEAR_DETAILS = "CLEAR_DETAILS";
 export const CREATE_TURN = "CREATE_TURN";
 export const GET_PET_DETAIL = "GET_PET_DETAIL";
+export const GET_SERVICES = "GET_SERVICES";
+export const GET_SERVICE_DETAIL = "GET_SERVICE_DETAIL";
+export const GET_SERVICE_BY_NAME = "GET_SERVICE_BY_NAME";
+export const GET_USERS = "GET_USERS";
+export const GET_USER_DETAIL = "GET_USER_DETAIL";
+export const GET_USER_BY_NAME = "GET_USER_BY_NAME";
+export const GET_ADMINS = "GET_ADMINS";
+export const GET_ADMIN_DETAIL = "GET_ADMIN_DETAIL";
+export const GET_ADMIN_BY_NAME = "GET_ADMIN_BY_NAME";

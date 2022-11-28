@@ -1,4 +1,21 @@
-import { CLEAR_DETAILS, GET_PETS, GET_VETS, GET_VET_DETAIL, CREATE_TURN, GET_PET_DETAIL } from "./const";
+import {
+  CLEAR_DETAILS,
+  GET_PETS,
+  GET_VETS,
+  GET_VET_DETAIL,
+  CREATE_TURN,
+  GET_PET_DETAIL,
+  GET_SERVICES,
+  GET_SERVICE_DETAIL,
+  GET_USERS,
+  GET_USER_DETAIL,
+  GET_ADMINS,
+  GET_ADMIN_DETAIL,
+  GET_VET_BY_NAME,
+  GET_SERVICE_BY_NAME,
+  GET_USER_BY_NAME,
+  GET_ADMIN_BY_NAME,
+} from "./const";
 
 const initialState = {
   pets: [],
@@ -7,6 +24,12 @@ const initialState = {
   vetDetail: [],
   petDetail: [],
   turn: [],
+  services: [],
+  serviceDetail: [],
+  users: [],
+  userDetail: [],
+  admins: [],
+  adminDetail: [],
 };
 
 function rootReducer(state = initialState, action) {
@@ -14,35 +37,87 @@ function rootReducer(state = initialState, action) {
     case GET_PETS:
       return {
         ...state,
-        pets: action.payload
-      }
-    case GET_VETS:
-      return {
-        ...state,
-        vets: action.payload
-      }
-    case GET_VET_DETAIL:
-      return {
-        ...state,
-        vetDetail: action.payload
-      }
+        pets: action.payload,
+      };
     case GET_PET_DETAIL:
       return {
         ...state,
-        petDetail: action.payload
+        petDetail: action.payload,
+      };
+    case GET_VETS:
+      return {
+        ...state,
+        vets: action.payload,
+      };
+    case GET_VET_DETAIL:
+      return {
+        ...state,
+        vetDetail: action.payload,
+      };
+    case GET_VET_BY_NAME:
+      return {
+        ...state,
+        vets: action.payload,
       }
+    case GET_SERVICES:
+      return {
+        ...state,
+        services: action.payload,
+      };
+    case GET_SERVICE_DETAIL:
+      return {
+        ...state,
+        serviceDetail: action.payload,
+      };
+    case GET_SERVICE_BY_NAME:
+      return {
+        ...state,
+        services: action.payload,
+      }
+    case GET_USERS:
+      return {
+        ...state,
+        users: action.payload,
+      };
+    case GET_USER_DETAIL:
+      return {
+        ...state,
+        userDetail: action.payload,
+      };
+    case GET_USER_BY_NAME:
+      return {
+        ...state,
+        users: action.payload,
+      }
+    case GET_ADMINS:
+      return {
+        ...state,
+        admins: action.payload,
+      };
+    case GET_ADMIN_DETAIL:
+      return {
+        ...state,
+        adminDetail: action.payload,
+      };
+    case GET_ADMIN_BY_NAME:
+      return {
+        ...state,
+        admins: action.payload,
+      }
+
     case CLEAR_DETAILS:
       return {
         ...state,
         vetDetail: [],
-        petDetail: []
-      }
+        petDetail: [],
+        serviceDetail: [],
+        userDetail: [],
+      };
     case CREATE_TURN:
       return {
         ...state,
-        turn: [...state.turn, action.payload]
-      }
-
+        turn: [...state.turn, action.payload],
+      };
     default:
       return state;
   }

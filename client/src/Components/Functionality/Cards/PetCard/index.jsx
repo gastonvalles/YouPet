@@ -7,9 +7,8 @@ export default function PetCard({
   return (
     <div className="card text-bg-secondary">
       <div className="">
-        <h1>Name: {name}</h1>
-        <h4>Species: {species}</h4>
-
+        <h1>{name}</h1>
+        {/* <h4>Species: {species}</h4> */}
       </div>
     </div>
   );

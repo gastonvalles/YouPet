@@ -10,7 +10,7 @@ module.exports = (sequelize) => {
         },
         timelapse: {
             type: DataTypes.INTEGER,
-            defaultValue: 10,
+            defaultValue: 60,
             validate: {
                 min: 60,
                 max: 2880
@@ -21,10 +21,15 @@ module.exports = (sequelize) => {
                 defaultValue: 0,
             },
 
-        date: {
+        inicialDate: {
                 type: DataTypes.DATE,
                 allowNull: false
-             }      
+             },
+             
+       finishDate: {
+                type: DataTypes.DATE,
+                allowNull: false
+             },    
     }, {
         timestamps: false,
         createdAt: false,
