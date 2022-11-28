@@ -11,6 +11,7 @@ import FormPet from "./Components/Functionality/Forms/Pet";
 import FormUser from "./Components/Functionality/Forms/User";
 import FormVet from "./Components/Functionality/Forms/Vet";
 import NavBar from "./Components/Functionality/Navbar/index";
+import Login from "./Components/Functionality/Forms/Login";
 import Home from "./Components/View/HomeFake/HomeFake";
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
         <Route path="/pet/:id" element={<PetDetail />} />
         <Route path="/profile/:id" element={<Profile />} />
         <Route path="/service/:id" element={<ServiceDetail />} />
+        <Route exact path="/login" element={<Login />} />
         <Route exact path="/reguser" element={<FormUser />} />
         <Route exact path="/formdescrip" element={<FormHistoryPet />} />
         <Route exact path="/pet/register" element={<FormPet />} />
