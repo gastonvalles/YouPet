@@ -35,6 +35,13 @@ export default function ServiceDetail() {
       <h4>Price: ${service.price}</h4>
       <h4>Time Lapse: {service.timelapse} min</h4>
       </div>
+      <Link
+        to="vet"
+        type="button"
+        className="text-decoration-none btn btn-dark"
+      >
+        Take turn
+      </Link>
     </div>
   );
 }
