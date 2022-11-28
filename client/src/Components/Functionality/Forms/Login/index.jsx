@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,6 +8,7 @@ import logo from "../../../../img/logo.png";
 import "./index.css";
 export default function Login() {
   const [formSuccess, setFormSuccess] = useState(false);
+
   const [email, setEmail] = useState(" ");
   const dispatch = useDispatch();
   let user = useSelector((state) => state.user);
@@ -17,6 +19,7 @@ export default function Login() {
     if (user.length < 1) dispatch(getUserByEmail(email));
 
   }, [dispatch, user, email]);
+
 
   return (
     <div className="backgroud">
@@ -36,6 +39,7 @@ export default function Login() {
               )
             ) {
               errors.email = "Solo puedes ingresar un email valido";
+
             }
             if (!values.password) {
               errors.password = "Por favor ingresa una contraseña";
@@ -43,6 +47,7 @@ export default function Login() {
               values.password.length < 5 ||
               values.password.length > 16
             ) {
+
               errors.password = "Debe tener al menos 5 digitos";
             }
             return errors;
@@ -59,6 +64,7 @@ export default function Login() {
                 navigate("/");
               }, 3000);
             }
+
           }}
         >
           {({ errors }) => (
