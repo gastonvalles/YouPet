@@ -10,10 +10,12 @@ export default function Login() {
   const [email, setEmail] = useState(" ");
   const dispatch = useDispatch();
   let user = useSelector((state) => state.user);
+
   const navigate = useNavigate();
 
   useEffect(() => {
     if (user.length < 1) dispatch(getUserByEmail(email));
+
   }, [dispatch, user, email]);
 
   return (

@@ -4,7 +4,10 @@ import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import PetDetail from "./Components/Functionality/Details/PetDetail";
 import ServiceDetail from "./Components/Functionality/Details/ServiceDetail";
+import TakeTurn from "./Components/Functionality/Turns/TakeTurn";
+import ChooseVetTurn from "./Components/Functionality/Turns/ChooseVetTurn";
 import Profile from "./Components/Functionality/Details/UserDetail";
+import Login from './Components/Functionality/Forms/Login'
 import VetDetail from "./Components/Functionality/Details/VetDetail";
 import FormHistoryPet from "./Components/Functionality/Forms/HistoryPet";
 import FormPet from "./Components/Functionality/Forms/Pet";
@@ -13,7 +16,6 @@ import FormVet from "./Components/Functionality/Forms/Vet";
 import NavBar from "./Components/Functionality/Navbar/index";
 import Login from "./Components/Functionality/Forms/Login";
 import Home from "./Components/View/HomeFake/HomeFake";
-
 function App() {
   return (
     <div className="App">
@@ -24,11 +26,13 @@ function App() {
         <Route path="/pet/:id" element={<PetDetail />} />
         <Route path="/profile/:id" element={<Profile />} />
         <Route path="/service/:id" element={<ServiceDetail />} />
-        <Route exact path="/login" element={<Login />} />
+        <Route path="/service/:id/vet" element={<ChooseVetTurn />} />
+        <Route path="/service/:id/vet/:vetId/turn" element={<TakeTurn />} />
         <Route exact path="/reguser" element={<FormUser />} />
         <Route exact path="/formdescrip" element={<FormHistoryPet />} />
         <Route exact path="/pet/register" element={<FormPet />} />
         <Route exact path="/vet/register" element={<FormVet />} />
+        <Route exact path='/login' element={<Login/>}/>
       </Routes>
     </div>
   );
