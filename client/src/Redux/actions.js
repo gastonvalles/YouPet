@@ -127,6 +127,16 @@ export function getUserByName(name) {
   };
 }
 
+export function getUserByEmail(email) {
+  return async function (dispatch) {
+    let json = await axios.get(`http://localhost:3001/user?name=${email}`);
+    return dispatch({
+      type: GET_USER_BY_NAME,
+      payload: json.data,
+    });
+  };
+}
+
 export function getAdmins() {
   return async function (dispatch) {
     let json = await axios.get("http://localhost:3001/admin");
