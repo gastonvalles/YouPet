@@ -114,6 +114,22 @@ const getUserByPK = async (id) => {
   }
 };
 
+const getUserByEmail = async (email) => {
+  if (email) {
+    let user = await User.findOne({
+      where: {
+        email,
+      },
+    });
+    if (!user) {
+      throw new Error("User not found");
+    }
+    return user;
+  } else {
+    throw new Error("User not found");
+  }
+};
+
 // getUserByUsername = async (username) => {
 //     if (username) {
 //         let user = await User.findOne({
@@ -134,5 +150,6 @@ const getUserByPK = async (id) => {
 module.exports = {
   getAllUsers,
   getUserByPK,
+  getUserByEmail
   //getUserByUsername
 };

@@ -9,11 +9,12 @@ import {
   GET_SERVICE_DETAIL,
   GET_USERS,
   GET_USER_DETAIL,
+  GET_USER_BY_NAME,
+  GET_USER_BY_EMAIL,
   GET_ADMINS,
   GET_ADMIN_DETAIL,
   GET_VET_BY_NAME,
   GET_SERVICE_BY_NAME,
-  GET_USER_BY_NAME,
   GET_ADMIN_BY_NAME,
 } from "./const";
 
@@ -26,6 +27,7 @@ const initialState = {
   turn: [],
   services: [],
   serviceDetail: [],
+  user :{},
   users: [],
   userDetail: [],
   admins: [],
@@ -58,7 +60,7 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         vets: action.payload,
-      }
+      };
     case GET_SERVICES:
       return {
         ...state,
@@ -73,7 +75,7 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         services: action.payload,
-      }
+      };
     case GET_USERS:
       return {
         ...state,
@@ -88,7 +90,12 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         users: action.payload,
-      }
+      };
+    case GET_USER_BY_EMAIL:
+      return {
+        ...state,
+        user: action.payload,
+      };
     case GET_ADMINS:
       return {
         ...state,
@@ -103,7 +110,7 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         admins: action.payload,
-      }
+      };
 
     case CLEAR_DETAILS:
       return {
