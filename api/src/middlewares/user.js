@@ -4,7 +4,8 @@ const {
 } = require("../controllers/postUser");
 const {
   getAllUsers,
-  getUserByPK
+  getUserByPK,
+  getUserByEmail
 } = require("../controllers/getAllUsers");
 const router = Router();
 
@@ -26,6 +27,18 @@ router.get('/:id', async (req, res) => {
     res.status(404).send(error);
   }
 });
+
+router.get('/log/:email', async (req, res) => {
+  try {
+    const { email } = req.params;
+    console.log(email);
+    const userId = await getUserByEmail(email);
+    res.status(200).send(userId);
+  } catch (error) {
+    res.status(404).send(error);
+  }
+});
+
 
 router.post("/", async (req, res) => {
   try {
