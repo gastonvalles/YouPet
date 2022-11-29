@@ -1,9 +1,11 @@
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/js/bootstrap.bundle";
+import ChooseVetTurn from "./Components/Functionality/Turns/ChooseVetTurn/index";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import PetDetail from "./Components/Functionality/Details/PetDetail";
 import ServiceDetail from "./Components/Functionality/Details/ServiceDetail";
+import TakeTurn from "./Components/Functionality/Turns/TakeTurn/index";
 import Profile from "./Components/Functionality/Details/UserDetail";
 import Login from "./Components/Functionality/Forms/Login";
 import VetDetail from "./Components/Functionality/Details/VetDetail";
