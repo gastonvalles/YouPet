@@ -22,6 +22,9 @@ export default function NavBar() {
     event.preventDefault();
     dispatch(getServiceByName(name));
     dispatch(getVetByName(name));
+    if(users.isAdmin===true){
+      dispatch(getUserByName(name))
+    }
     setName(null);
   }
 
