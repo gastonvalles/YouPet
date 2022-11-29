@@ -7,25 +7,25 @@ import { getVets } from "../../../../Redux/actions";
 import VetCard from "../../Cards/VetCard";
 
 function ChooseVetTurn() {
-  const { id } = useParams();
+  const { servId } = useParams();
   const dispatch = useDispatch();
 
   const allVets = useSelector((state) => state.vets);
   const service = useSelector((state) => state.serviceDetail);
 
   const navigate = useNavigate();
-  const path = `/service/${id}`;
+  const path = `/service/${servId}`;
 
   useEffect(() => {
     if (!allVets?.length) {
       dispatch(getVets());
     }
 
-    dispatch(getServiceDetail(id));
+    dispatch(getServiceDetail(servId));
     return () => {
       dispatch(clearDetails());
     };
-  }, [dispatch, id, allVets]);
+  }, [dispatch, servId, allVets]);
 
   return (
     <div>

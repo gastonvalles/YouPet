@@ -5,6 +5,7 @@ import {
   GET_VET_DETAIL,
   CLEAR_DETAILS,
   CREATE_TURN,
+  GET_TURN,
   GET_PET_DETAIL,
   GET_SERVICES,
   GET_SERVICE_DETAIL,
@@ -17,7 +18,7 @@ import {
   GET_SERVICE_BY_NAME,
   GET_VET_BY_NAME,
   GET_ADMIN_BY_NAME,
-  
+  CLEAR_TURN,
 } from "./const";
 
 export function getPets() {
@@ -170,11 +171,29 @@ export function getAdminByName(name) {
 
 export function createTurn(payload) {
   return async function (dispatch) {
-    let json = await axios.post("http://localhost/turn", payload);
+    let json = await axios.post("http://localhost:3001/turn", payload);
     return dispatch({
       type: CREATE_TURN,
       payload: json.data,
     });
+  };
+}
+
+export function getTurn(payload) {
+  const {vetId, servId } = payload;
+  return async function (dispatch) {
+    let json = await axios.get(`http://localhost:3001/turn/${vetId}/${servId}`);
+    return dispatch({
+      type: GET_TURN,
+      payload: json.data,
+    });
+  };
+}
+
+export function clearTurn() {
+  return {
+    type: CLEAR_TURN,
+    payload: [],
   };
 }
 
@@ -184,3 +203,4 @@ export function clearDetails() {
     payload: [],
   };
 }
+

@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
-
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { getTurn, clearTurn, createTurn } from "../../../../Redux/actions";
 import timeSlots from "./timeSlotsCalculator";
 
 import "./turns.css";
@@ -8,49 +10,67 @@ import "./turns.css";
 function Times(props) {
   const [event, setEvent] = useState(null);
   const [info, setInfo] = useState(false);
+  const [calcularSlots, setCalcularSlots] = useState(true);
+  const [calcularTime, setCalcularTime] = useState(true);
   const [time, setTime] = useState([]);
+  const [timesAvailable, setTimesAvailable] = useState([]);
+  const [slotSelected, setSlotSelected] = useState(null);
   const [prevButton, setPrevButton] = useState(null);
 
-  // Datos para el time slots
-  const turnsList = [
-    {
-      startTurn: new Date(2021, 1, 10, 12, 0, 0),
-      endTurn: new Date(2021, 1, 10, 13, 0, 0),
+  const { vetId, servId } = useParams();
+  const dispatch = useDispatch();
+
+  const Turns = useSelector((state) => state.turn);
+
+  useEffect(() => {
+    if (!Turns?.length) {
+      dispatch(getTurn({ vetId, servId }));
+    }
+  }, [vetId, servId, dispatch, Turns]);
+
+  useEffect(
+    () => () => {
+      dispatch(clearTurn());
+      console.log("se dispacho");
     },
+    [dispatch]
+  );
 
-    {
-      startTurn: new Date(2021, 1, 10, 13, 0, 0),
-      endTurn: new Date(2021, 1, 10, 14, 0, 0),
-    },
+  useEffect(() => {
+    setCalcularSlots(true);
+  }, [props.date]);
 
-    {
-      startTurn: new Date(2021, 1, 10, 14, 0, 0),
-      endTurn: new Date(2021, 1, 10, 14, 35, 0),
-    },
-  ];
+  if (Turns[0] && calcularSlots) {
+    const intervalo = Turns[0].service.timelapse;
+    const turnsList = Turns[0].turn.map((tur) => {
+      return {
+        id: tur.id,
+        initialDate: new Date(tur.inicialDate),
+        finishDate: new Date(tur.finishDate),
+      };
+    });
+    const initialDate = Turns[0].vet.inicialDate;
+    const finishDate = Turns[0].vet.finishDate;
 
-  const doctorHours = [
-    new Date(2021, 1, 10, 10, 0, 0),
-    new Date(2021, 1, 10, 16, 0, 0),
-  ];
-
-  let date = doctorHours[0];
-  let endDate = doctorHours[1];
-  let intervalo = 30;
-
-  const timesAvailable = timeSlots(date, endDate, intervalo, turnsList);
-
-  if (timesAvailable?.length && !time.length) {
-    let allTimeSlots = timesAvailable.map((times) => times.timeSlot);
-    setTime(allTimeSlots);
+    setTimesAvailable(
+      timeSlots(initialDate, finishDate, intervalo, turnsList, props.date)
+    );
+    setCalcularSlots(false);
+    setCalcularTime(true);
   }
 
-  function displayInfo(e) {
+  if (timesAvailable?.length && calcularTime) {
+    setTime(timesAvailable);
+    setCalcularTime(false);
+  }
+
+  const displayInfo = (e) => {
     setInfo(true);
     setEvent(e.target.innerText);
-  }
+  };
 
-  const handleClickTime = (e) => {
+  const handleClickTime = (e, times) => {
+    setSlotSelected(times.realDate)
     displayInfo(e);
 
     const restoreButton = prevButton;
@@ -63,18 +83,46 @@ function Times(props) {
     setPrevButton(e.target);
   };
 
+  const handleClickTakeTurn = (e) => {
+    if (prevButton === null) {
+      console.log("Debes de elegir al menos 1 hora");
+    } else {
+      // const formDate =
+      //   props.date.toDateString() + " " + event.substring(0, 5) + ":00";
+      // let myDate = new Date(formDate);
+
+      let startDate = new Date(slotSelected);
+
+      let finishDate = new Date(slotSelected);
+      finishDate.setMinutes(
+        finishDate.getMinutes() + Turns[0].service.timelapse
+      );
+      const turnInfo = {
+        timelapse: Turns[0].service.timelapse,
+        globalprice: Turns[0].service.price,
+        inicialDate: startDate.toUTCString(),
+        finishDate: finishDate.toUTCString(),
+        VetId: vetId,
+      };
+
+      console.log(turnInfo);
+
+      dispatch(createTurn(turnInfo));
+    }
+  };
+
   return (
     <div className="timeSlotContainer">
       <div className="d-flex flex-wrap justify-content-center">
         {time.map((times) => {
           return (
             <button
+              key={times.id}
               type="button"
-              onClick={(e) => handleClickTime(e)}
+              onClick={(e) => handleClickTime(e, times)}
               className="timeSlotButton btn btn-outline-info"
             >
-              {" "}
-              {times}{" "}
+              {times.timeSlot}
             </button>
           );
         })}
@@ -86,7 +134,14 @@ function Times(props) {
 
       <div>
         <hr />
-        <button className="text-decoration-none btn btn-dark">Take turn</button>
+        <button
+          className="text-decoration-none btn btn-dark"
+          onClick={(e) => {
+            handleClickTakeTurn(e);
+          }}
+        >
+          Take turn
+        </button>
       </div>
     </div>
   );

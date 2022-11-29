@@ -4,6 +4,8 @@ import {
   GET_VETS,
   GET_VET_DETAIL,
   CREATE_TURN,
+  GET_TURN,
+  CLEAR_TURN,
   GET_PET_DETAIL,
   GET_SERVICES,
   GET_SERVICE_DETAIL,
@@ -25,6 +27,7 @@ const initialState = {
   vetDetail: [],
   petDetail: [],
   turn: [],
+  vetTurns: [],
   services: [],
   serviceDetail: [],
   user :{},
@@ -123,7 +126,17 @@ function rootReducer(state = initialState, action) {
     case CREATE_TURN:
       return {
         ...state,
-        turn: [...state.turn, action.payload],
+        turn: [...state.turn, ...action.payload],
+      };
+    case GET_TURN:
+      return {
+        ...state,
+        turn: [action.payload],
+      };
+    case CLEAR_TURN:
+      return {
+        ...state,
+        turn: [],
       };
     default:
       return state;

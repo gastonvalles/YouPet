@@ -56,6 +56,15 @@ module.exports = (sequelize) => {
           max: 5,
         },
       },
+      inicialDate: {
+        type: DataTypes.DATE,
+        allowNull: false,
+      },
+
+      finishDate: {
+        type: DataTypes.DATE,
+        allowNull: false,
+      },
     },
     {
       timestamps: false,
