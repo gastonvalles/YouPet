@@ -17,3 +17,4 @@ export const GET_USER_BY_EMAIL = "GET_USER_BY_EMAIL";
 export const GET_ADMINS = "GET_ADMINS";
 export const GET_ADMIN_DETAIL = "GET_ADMIN_DETAIL";
 export const GET_ADMIN_BY_NAME = "GET_ADMIN_BY_NAME";
+export const FILTER_SERVICE = "FILTER_SERVICE";
