@@ -21,7 +21,7 @@ const initialState = {
   userDetail: [],
   admins: [],
   adminDetail: [],
-  filterService: [],
+  allServices: [],
 };
 
 function rootReducer(state = initialState, action) {
@@ -55,7 +55,7 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         services: action.payload,
-        filterService: action.payload,
+        allServices: action.payload,
       };
     case GET_SERVICE_DETAIL:
       return {
@@ -103,16 +103,16 @@ function rootReducer(state = initialState, action) {
         admins: action.payload,
       };
     case FILTER_SERVICE:
-      const service = state.services;
+      const allservices = state.filterService;
       const filter =
         action.payload === ""
-          ? service
-          : service.filter(
+          ? allservices
+          : allservices.filter(
             (r) => r.type.toLowerCase() === action.payload.toLowerCase()
           );
       return {
         ...state,
-        filterService: filter,
+        services: filter,
       };
     case CLEAR_DETAILS:
       return {

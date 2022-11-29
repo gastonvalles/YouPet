@@ -1,18 +1,37 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { useLocation } from "react-router";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import logo from "../../../img/logo.png";
-import { filterService, getServiceByName, getServices, getVetByName } from "../../../Redux/actions";
+import {
+  filterService,
+  getServiceByName,
+  getServices,
+  getVetByName,
+  getUserByName,
+  getVetsDetail,
+} from "../../../Redux/actions";
 import "./index.css";
 
 export default function NavBar() {
   const dispatch = useDispatch();
-  const users = useSelector(state=> state.users)
-  const [name, setName] = useState(null);
+  const {search} = useLocation();
+  // const navigate = useNavigate();
+  const {id} = useParams()
+  let query = new URLSearchParams(search)
+  console.log(query)
+  const users = useSelector((state) => state.users);
+  const [name, setName] = useState("");
 
   useEffect(() => {
     dispatch(getServices());
-  }, [dispatch]);
+    dispatch(getVetsDetail(id))
+  }, [dispatch, id]);
+
+  function handleFilter(event){
+    event.preventDefault();
+    dispatch(filterService(event.target.value))
+  }
 
   function handleInputChange(event) {
     event.preventDefault();
@@ -22,10 +41,11 @@ export default function NavBar() {
     event.preventDefault();
     dispatch(getServiceByName(name));
     dispatch(getVetByName(name));
-    if(users.isAdmin===true){
-      dispatch(getUserByName(name))
+    if (users.isAdmin === true) {
+      dispatch(getUserByName(name));
     }
-    setName(null);
+    // navigate(`/vet/${id}`)
+    setName("");
   }
 
   return (
@@ -47,11 +67,9 @@ export default function NavBar() {
             <span className="navbar-toggler-icon"></span>
           </button>
           <select
-            onChange={(e) => {
-              dispatch(filterService(e.target.value));
-            }}
             defaultValue={""}
             className="selectorFiltros"
+            onChange={(event) => handleFilter(event)}
           >
             <option disabled value={""}></option>
             <option value="">All Service</option>
@@ -73,7 +91,7 @@ export default function NavBar() {
               </li> */}
 
               <div class="dropdown">
-              <span
+                <span
                   className="nav-link dropdown-toggle me-3"
                   role="button"
                   data-bs-toggle="dropdown"
@@ -82,9 +100,27 @@ export default function NavBar() {
                   Go to...
                 </span>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                  <li><Link to={"/veterinario"}><button class="dropdown-item" type="button" >Veterinario</button></Link></li>
-                  <li><Link to={"/nutricionista"}><button class="dropdown-item" type="button">Nutricionista</button></Link></li>
-                  <li><Link to={"/cirugias"}><button class="dropdown-item" type="button">Cirugias</button></Link></li>
+                  <li>
+                    <Link to={"/veterinario"}>
+                      <button class="dropdown-item" type="button">
+                        Veterinario
+                      </button>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to={"/nutricionista"}>
+                      <button class="dropdown-item" type="button">
+                        Nutricionista
+                      </button>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to={"/cirugias"}>
+                      <button class="dropdown-item" type="button">
+                        Cirugias
+                      </button>
+                    </Link>
+                  </li>
                 </ul>
               </div>
 
@@ -116,7 +152,7 @@ export default function NavBar() {
                   </li>
                 </ul>
               </li> */}
-              
+
               {/* <li className="nav-item">
                 <span className="nav-link">Disabled</span>
               </li> */}
@@ -129,7 +165,11 @@ export default function NavBar() {
                 aria-label="Search"
                 onChange={(event) => handleInputChange(event)}
               />
-              <button className="btn btn-outline-success me-4" type="submit" onClick={(event) => handleSubmit(event)}>
+              <button
+                className="btn btn-outline-success me-4"
+                type="submit"
+                onClick={(event) => handleSubmit(event)}
+              >
                 Search
               </button>
             </form>
