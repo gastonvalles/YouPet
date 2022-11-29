@@ -8,9 +8,6 @@ import "./index.css";
 export default function NavBar() {
   const dispatch = useDispatch();
   const [name, setName] = useState(null);
-  const allServices = useSelector(
-    (state) => state.filterService || state.services
-  );
 
   useEffect(() => {
     dispatch(getServices());
