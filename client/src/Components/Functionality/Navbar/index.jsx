@@ -7,6 +7,7 @@ import "./index.css";
 
 export default function NavBar() {
   const dispatch = useDispatch();
+  const users = useSelector(state=> state.users)
   const [name, setName] = useState(null);
 
   useEffect(() => {
