@@ -28,6 +28,7 @@ const initialState = {
   petDetail: [],
   turn: [],
   vetTurns: [],
+  createdTurn: [],
   services: [],
   serviceDetail: [],
   user :{},
@@ -126,7 +127,7 @@ function rootReducer(state = initialState, action) {
     case CREATE_TURN:
       return {
         ...state,
-        turn: [...state.turn, ...action.payload],
+        createdTurn: [action.payload],
       };
     case GET_TURN:
       return {
@@ -137,6 +138,7 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         turn: [],
+        createdTurn: []
       };
     default:
       return state;

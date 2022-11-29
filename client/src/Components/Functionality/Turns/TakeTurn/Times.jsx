@@ -3,7 +3,10 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getTurn, clearTurn, createTurn } from "../../../../Redux/actions";
+
 import timeSlots from "./timeSlotsCalculator";
+
+import LoadingComponent from "./Loading";
 
 import "./turns.css";
 
@@ -16,11 +19,13 @@ function Times(props) {
   const [timesAvailable, setTimesAvailable] = useState([]);
   const [slotSelected, setSlotSelected] = useState(null);
   const [prevButton, setPrevButton] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const { vetId, servId } = useParams();
   const dispatch = useDispatch();
 
   const Turns = useSelector((state) => state.turn);
+  const createdTur = useSelector((state) => state.createdTurn);
 
   useEffect(() => {
     if (!Turns?.length) {
@@ -30,8 +35,8 @@ function Times(props) {
 
   useEffect(
     () => () => {
+      setIsLoading(false);
       dispatch(clearTurn());
-      console.log("se dispacho");
     },
     [dispatch]
   );
@@ -59,9 +64,10 @@ function Times(props) {
     setCalcularTime(true);
   }
 
-  if (timesAvailable?.length && calcularTime) {
+  if (timesAvailable && calcularTime) {
     setTime(timesAvailable);
     setCalcularTime(false);
+    
   }
 
   const displayInfo = (e) => {
@@ -70,7 +76,7 @@ function Times(props) {
   };
 
   const handleClickTime = (e, times) => {
-    setSlotSelected(times.realDate)
+    setSlotSelected(times.realDate);
     displayInfo(e);
 
     const restoreButton = prevButton;
@@ -105,32 +111,37 @@ function Times(props) {
         VetId: vetId,
       };
 
-      console.log(turnInfo);
-
       dispatch(createTurn(turnInfo));
+      setIsLoading(true);
     }
   };
 
   return (
     <div className="timeSlotContainer">
       <div className="d-flex flex-wrap justify-content-center">
-        {time.map((times) => {
-          return (
-            <button
-              key={times.id}
-              type="button"
-              onClick={(e) => handleClickTime(e, times)}
-              className="timeSlotButton btn btn-outline-info"
-            >
-              {times.timeSlot}
-            </button>
-          );
-        })}
+        {time?.length ? (
+          time.map((times) => {
+            return (
+              <button
+                key={times.id}
+                type="button"
+                onClick={(e) => handleClickTime(e, times)}
+                className="timeSlotButton btn btn-outline-info"
+              >
+                {times.timeSlot}
+              </button>
+            );
+          })
+        ) : (
+          <h3>No turns available</h3>
+        )}
       </div>
 
       <div>
         {info ? `Turn selected at ${event} ${props.date.toDateString()}` : null}
       </div>
+
+      {isLoading && <LoadingComponent createdTur={createdTur} setIsLoading={setIsLoading} />}
 
       <div>
         <hr />

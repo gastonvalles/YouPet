@@ -23,7 +23,7 @@ const timeSlotsCalculator = (
 
   let turnsListActual = turnsList.filter(tur => tur.initialDate.getDate() === date.getDate())
 
-  console.log(datesAndTimes);
+  
 
   do {
 
@@ -51,6 +51,8 @@ const timeSlotsCalculator = (
     addInterval = true;
   } while (date.getHours() < endDate.getHours() + 1);
 
+
+ 
   return datesAndTimes;
 };
 
