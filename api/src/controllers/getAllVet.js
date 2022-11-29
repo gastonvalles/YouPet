@@ -10,6 +10,8 @@ const JsonVet = [
     speciality: "Clinic",
     review: "",
     average: 0,
+    inicialDate: new Date(2022, 1, 10, 9, 0, 0),
+    finishDate: new Date(2022, 1, 10, 12, 0, 0)
   },
   {
     name: "Gaston",
@@ -18,6 +20,8 @@ const JsonVet = [
     speciality: "Anesthesia",
     review: "",
     average: 0,
+    inicialDate: new Date(2022, 1, 10, 13, 0, 0),
+    finishDate: new Date(2022, 1, 10, 18, 0, 0)
   },
   {
     name: "Vero",
@@ -26,6 +30,8 @@ const JsonVet = [
     speciality: "Diagnostics",
     review: "",
     average: 0,
+    inicialDate: new Date(2022, 1, 10, 9, 0, 0),
+    finishDate: new Date(2022, 1, 10, 11, 0, 0)
   },
   {
     name: "Kelvin",
@@ -34,6 +40,8 @@ const JsonVet = [
     speciality: "Aesthetics",
     review: "",
     average: 0,
+    inicialDate: new Date(2022, 1, 10, 14, 0, 0),
+    finishDate: new Date(2022, 1, 10, 18, 0, 0)
   },
 ];
 const getDBVet = async (name) => {
@@ -70,9 +78,9 @@ const getDBVetByPK = async (id) => {
 };
 const dbCreateVet = async (body) => {
   try {
-    const { name, lastname, isActive, speciality, review, average } = body;
-    console.log(name, lastname, isActive, speciality, review, average);
-    if (!name || !lastname || !isActive || !speciality || review || average) {
+    const { name, lastname, isActive, speciality, review, average, inicialDate, finishDate } = body;
+    console.log(name, lastname, isActive, speciality, review, average, inicialDate, finishDate);
+    if (!name || !lastname || !isActive || !speciality || review || average || !inicialDate || !finishDate) {
       throw new Error("missing query");
     } else {
       await Vet.create(body);
