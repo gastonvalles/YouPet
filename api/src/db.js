@@ -30,6 +30,7 @@ let sequelize =
       `postgres:${PG_USER}:${PG_PASSWORD}@${PG_HOST}/${PG_DATABASE}`,
       { logging: false, native: false }
     )
+const basename = path.basename(__filename);
 
 const modelDefiners = [];
 
