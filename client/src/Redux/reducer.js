@@ -103,7 +103,7 @@ function rootReducer(state = initialState, action) {
         admins: action.payload,
       };
     case FILTER_SERVICE:
-      const allservices = state.filterService;
+      const allservices = state.allServices;
       const filter =
         action.payload === ""
           ? allservices
