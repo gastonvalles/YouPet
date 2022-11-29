@@ -23,8 +23,8 @@ function App() {
         <Route path="/pet/:id" element={<PetDetail />} />
         <Route path="/profile/:id" element={<Profile />} />
         <Route path="/service/:id" element={<ServiceDetail />} />
-        <Route path="/service/:id/vet" element={<ChooseVetTurn />} />
-        <Route path="/service/:id/vet/:vetId/turn" element={<TakeTurn />} />
+        <Route path="/service/:servId/vet" element={<ChooseVetTurn />} />
+        <Route path="/service/:servId/vet/:vetId/turn" element={<TakeTurn />} />
         <Route exact path="/reguser" element={<FormUser />} />
         <Route exact path="/formdescrip" element={<FormHistoryPet />} />
         <Route exact path="/pet/register" element={<FormPet />} />

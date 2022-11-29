@@ -1,24 +1,45 @@
-const timeSlotsCalculator = (date, endDate, interval, turnsList) => {
+const timeSlotsCalculator = (
+  initialDate,
+  finishDate,
+  interval,
+  turnsList,
+  selectedDate
+) => {
+  const dateInitial = new Date(initialDate);
+  const datefinish = new Date(finishDate);
+  let actualDateStart =
+    selectedDate.toDateString() + " " + dateInitial.getHours() + ":00";
+  let actualDateEnd =
+    selectedDate.toDateString() + " " + datefinish.getHours() + ":00";
+  let date = new Date(actualDateStart);
+
+  let endDate = new Date(actualDateEnd);
   const intervalMinutes = interval;
 
   let datesAndTimes = [];
   let addInterval = true;
+  let idDates = 0;
   let i = 0;
 
+  let turnsListActual = turnsList.filter(tur => tur.initialDate.getDate() === date.getDate())
+
+  
+
   do {
-    //Descarta las horas ya ocupadas
-    if (i < turnsList.length) {
-      if (turnsList[i].startTurn.getTime() === date.getTime()) {
-        date = new Date(turnsList[i].endTurn);
+
+    if (i < turnsListActual.length) {
+      
+      if (turnsListActual[i].initialDate.getTime() === date.getTime()) {
+        date = new Date(turnsListActual[i].finishDate);
         addInterval = false;
         i++;
       }
     }
-
-    //Pushea el array de horas disponibles solo ni no se han descartado horas
     if (addInterval) {
+      idDates++;
       datesAndTimes.push({
-        realDate: date,
+        id: idDates,
+        realDate: date.toUTCString(),
         timeSlot: date.toLocaleTimeString("en-US", {
           hour: "2-digit",
           minute: "2-digit",
@@ -30,6 +51,8 @@ const timeSlotsCalculator = (date, endDate, interval, turnsList) => {
     addInterval = true;
   } while (date.getHours() < endDate.getHours() + 1);
 
+
+ 
   return datesAndTimes;
 };
 

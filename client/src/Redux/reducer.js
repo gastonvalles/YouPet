@@ -1,7 +1,8 @@
 import {
-  CLEAR_DETAILS, CREATE_TURN, FILTER_SERVICE, GET_ADMINS, GET_ADMIN_BY_NAME, GET_ADMIN_DETAIL, GET_PETS, GET_PET_DETAIL,
+ GET_TURN, CLEAR_TURN, CLEAR_DETAILS, CREATE_TURN, FILTER_SERVICE, GET_ADMINS, GET_ADMIN_BY_NAME, GET_ADMIN_DETAIL, GET_PETS, GET_PET_DETAIL,
   GET_SERVICES, GET_SERVICE_BY_NAME, GET_SERVICE_DETAIL,
   GET_USERS, GET_USER_BY_EMAIL, GET_USER_BY_NAME, GET_USER_DETAIL, GET_VETS, GET_VET_BY_NAME, GET_VET_DETAIL
+
 } from "./const";
 
 const initialState = {
@@ -11,6 +12,8 @@ const initialState = {
   vetDetail: [],
   petDetail: [],
   turn: [],
+  vetTurns: [],
+  createdTurn: [],
   services: [],
   serviceDetail: [],
   user: {},
@@ -122,7 +125,18 @@ function rootReducer(state = initialState, action) {
     case CREATE_TURN:
       return {
         ...state,
-        turn: [...state.turn, action.payload],
+        createdTurn: [action.payload],
+      };
+    case GET_TURN:
+      return {
+        ...state,
+        turn: [action.payload],
+      };
+    case CLEAR_TURN:
+      return {
+        ...state,
+        turn: [],
+        createdTurn: []
       };
     default:
       return state;
