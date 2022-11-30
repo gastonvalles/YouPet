@@ -1,23 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import logo from "../../../img/logo.png";
 import {
   filterService,
   getServiceByName,
-  getServices,
-  getVetByName,
-  getUserByName,
-  getVetsDetail,
+  getServices, getUserByName, getVetByName, getVetsDetail
 } from "../../../Redux/actions";
 import "./index.css";
 
 export default function NavBar() {
   const dispatch = useDispatch();
-  const {search} = useLocation();
+  const { search } = useLocation();
   // const navigate = useNavigate();
-  const {id} = useParams()
+  const { id } = useParams()
   let query = new URLSearchParams(search)
   console.log(query)
   const users = useSelector((state) => state.users);
@@ -28,7 +25,7 @@ export default function NavBar() {
     dispatch(getVetsDetail(id))
   }, [dispatch, id]);
 
-  function handleFilter(event){
+  function handleFilter(event) {
     event.preventDefault();
     dispatch(filterService(event.target.value))
   }
@@ -66,97 +63,7 @@ export default function NavBar() {
           >
             <span className="navbar-toggler-icon"></span>
           </button>
-          <select
-            defaultValue={""}
-            className="selectorFiltros"
-            onChange={(event) => handleFilter(event)}
-          >
-            <option disabled value={""}></option>
-            <option value="">All Service</option>
-            <option value={"Healthcare Clinic"}>Healthcare Clinic</option>
-            <option value={"Surgery and Anesthesia"}>
-              Surgery and Anesthesia
-            </option>
-            <option value={"Diagnostics"}>Diagnostics</option>
-            <option value={"Aesthetics"}>Aesthetics</option>
-          </select>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav me-auto mb-2 mb-lg-1">
-              {/* <li className="nav-item">
-                <Link to={"/"}>
-                  <span className="nav-link active me-3" aria-current="page">
-                    Contact
-                  </span>
-                </Link>
-              </li> */}
-
-              <div class="dropdown">
-                <span
-                  className="nav-link dropdown-toggle me-3"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  Go to...
-                </span>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                  <li>
-                    <Link to={"/veterinario"}>
-                      <button class="dropdown-item" type="button">
-                        Veterinario
-                      </button>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to={"/nutricionista"}>
-                      <button class="dropdown-item" type="button">
-                        Nutricionista
-                      </button>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to={"/cirugias"}>
-                      <button class="dropdown-item" type="button">
-                        Cirugias
-                      </button>
-                    </Link>
-                  </li>
-                </ul>
-              </div>
-
-              {/* <li className="nav-item dropdown">
-                <span
-                  className="nav-link dropdown-toggle me-3"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  Dropdown
-                </span>
-                <ul className="dropdown-menu">
-                  <li>
-                    <Link to={"/veterinario"}>
-                      <span className="dropdown-item" />1 Option
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to={"/nutricionista"}>
-                      <span className="dropdown-item" />2 Option
-                    </Link>
-                  </li>
-                  <li></li>
-                  <li>
-                    <Link to={"/cirugias"}>
-                      <span className="dropdown-item" />3 Option
-                    </Link>
-                  </li>
-                </ul>
-              </li> */}
-
-              {/* <li className="nav-item">
-                <span className="nav-link">Disabled</span>
-              </li> */}
-            </ul>
             <form className="d-flex" role="search">
               <input
                 className="form-control me-4"
@@ -185,6 +92,20 @@ export default function NavBar() {
               </Link>
             </div>
           </div>
+          <select
+            defaultValue={""}
+            className="selectorFiltros"
+            onChange={(event) => handleFilter(event)}
+          >
+            <option disabled value={""}></option>
+            <option value="">All Service</option>
+            <option value={"Healthcare Clinic"}>Healthcare Clinic</option>
+            <option value={"Surgery and Anesthesia"}>
+              Surgery and Anesthesia
+            </option>
+            <option value={"Diagnostics"}>Diagnostics</option>
+            <option value={"Aesthetics"}>Aesthetics</option>
+          </select>
         </div>
       </nav>
     </>
