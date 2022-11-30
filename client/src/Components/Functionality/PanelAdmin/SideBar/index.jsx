@@ -29,7 +29,7 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
       icon={icon}
     >
       <Typography>{title}</Typography>
-      <Link to={to} />
+      <Link to={to} type="button"/>
     </MenuItem>
   );
 };
@@ -132,8 +132,8 @@ export default function SideBar() {
               Data
             </Typography>
             <Item
-              title="Manage Team"
-              to="/team"
+              title="Users"
+              to="/admin/users"
               icon={<PeopleOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}

@@ -33,7 +33,7 @@ function App() {
         <Route exact path="/pet/register" element={<FormPet />} />
         <Route exact path="/vet/register" element={<FormVet />} />
         <Route exact path='/login' element={<Login />} />
-        <Route exact path="/admin" element={<PanelAdmin/>} />
+        <Route exact path="/admin/*" element={<PanelAdmin/>} />
       </Routes>
     </div>
   );

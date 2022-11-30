@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
-import { getVetsDetail, clearDetails } from "../../../../Redux/actions";
+import { useParams } from "react-router-dom";
+import { clearDetails, getVetsDetail } from "../../../../Redux/actions";
 
 export default function VetDetail() {
   let { id } = useParams();
@@ -16,14 +16,7 @@ export default function VetDetail() {
   }, [dispatch, id]);
 
   return (
-    <div>
-      <Link
-        to="/"
-        type="button"
-        className="text-decoration-none btn btn-outline-primary"
-      >
-        Home
-      </Link>
+    <>
       <div>
         {/* <img src={vet.image} alt="vet" height="300px" width="300px" /> */}
         <h1>
@@ -36,6 +29,6 @@ export default function VetDetail() {
           return <h5>{review}</h5>;
         })} */}
       </div>
-    </div>
+    </>
   );
 }

@@ -1,11 +1,12 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom"
-import { ColorModeContext, useMode } from "../theme.js";
+import { ColorModeContext, useMode } from "../theme";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import "./PanelAdmin.css";
 import TopBar from "../TopBar/index.jsx";
 import SideBar from "../SideBar/index.jsx";
 import Dashboard from "../Dashboard/index.jsx";
+import Users from "../Users/index.jsx";
 
 export default function PanelAdmin() {
   const [theme, colorMode] = useMode();
@@ -18,7 +19,8 @@ export default function PanelAdmin() {
           <main className="content">
             <TopBar />
             <Routes>
-              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/" element={<Dashboard />} />
+              <Route path="/users" element={<Users />} />
             </Routes>
           </main>
         </div>
