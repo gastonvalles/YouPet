@@ -123,7 +123,11 @@ export default function NavBar() {
                   </li>
                 </ul>
               </div>
-
+                <div>
+                  <Link to="/admin" type="button" className="text-decoration-none dropdown-item">
+                    Admin
+                  </Link>
+                </div>
               {/* <li className="nav-item dropdown">
                 <span
                   className="nav-link dropdown-toggle me-3"
