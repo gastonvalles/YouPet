@@ -54,6 +54,19 @@ module.exports = (sequelize) => {
       img: {
         type: DataTypes.STRING,
       },
+      tel: {
+        type: DataTypes.INTEGER
+      },
+      dni: {
+        type: DataTypes.INTEGER,
+        unique: true,
+        allowNull: false
+      },
+      isAdmin: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+        allowNull: false
+      }
     },
     {
       timestamp: false,
