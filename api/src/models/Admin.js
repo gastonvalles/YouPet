@@ -55,7 +55,7 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
       },
       tel: {
-        type: DataTypes.INTEGER
+        type: DataTypes.BIGINT
       },
       dni: {
         type: DataTypes.INTEGER,

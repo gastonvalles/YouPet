@@ -77,7 +77,7 @@ module.exports = (sequelize) => {
             allowNull: false
         },
         tel: {
-            type: DataTypes.INTEGER
+            type: DataTypes.BIGINT
         }
     }, {
         timestamps: false,
