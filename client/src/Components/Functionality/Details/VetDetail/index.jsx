@@ -20,9 +20,13 @@ export default function VetDetail() {
       <h1>
         {vet.name} {vet.lastname}
       </h1>
+      <img src={vet.img} alt="Not found" />
       <h2>{vet.speciality}</h2>
       <h3>Average: {vet.average}</h3>
-      <h3>Reviews: {vet.review}</h3>
+      <div>
+        <h3>Reviews: {vet.review}</h3>
+        <input type="text" placeholder="Leave a comment"></input>
+      </div>
     </>
   );
 }
