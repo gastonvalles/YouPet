@@ -5,7 +5,8 @@ const {
 const {
   getAllUsers,
   getUserByPK,
-  getUserByEmail
+  getUserByEmail,
+  deleteUser
 } = require("../controllers/getAllUsers");
 const router = Router();
 
@@ -45,6 +46,16 @@ router.post("/", async (req, res) => {
     res.status(200).json(createUser);
   } catch (error) {
     res.status(404).send(error.message);
+  }
+});
+
+router.delete("/delete", async (req, res) => {
+  try {
+    const { id } = req.params;
+    await deleteUser(id);
+    res.status(200).json({ msg: `User id: ${id} deleted successfully` });
+  } catch (error) {
+    res.status(404).send(error);
   }
 });
 

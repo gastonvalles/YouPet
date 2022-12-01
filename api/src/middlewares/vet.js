@@ -11,7 +11,6 @@ const router = Router();
 router.get("/", async (req, res) => {
   try {
     const allVet = await getDBVet(req.query.name);
-    console.log(allVet);
     res.status(200).json(allVet);
   } catch (error) {
     res.status(404).send(error.message);
@@ -29,13 +28,13 @@ router.get("/:id", async (req, res) => {
 
 router.post("/", async (req, res) => {
   try {
-    //console.log(req.body);
     const createVet = await dbCreateVet(req.body);
     res.status(200).json(createVet);
   } catch (error) {
     res.status(404).send(error.message);
   }
 });
+
 router.delete("/:vetId", async (req, res) => {
   try {
     const vet = await dbDeleteVet(req.params.vetId);
@@ -46,4 +45,5 @@ router.delete("/:vetId", async (req, res) => {
     res.status(404).send(error.message);
   }
 });
+
 module.exports = router;
