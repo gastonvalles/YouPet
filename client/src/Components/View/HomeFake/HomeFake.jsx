@@ -38,10 +38,10 @@ export default function Home() {
               </div>
             );
           })}
-          </div>
+        </div>
       </div>
       <h1>Our Professionals</h1>
-      <div>
+      <div className="cardl-list">
         <div className="grid-fluid">
           {allVets?.map((vet) => {
             return (

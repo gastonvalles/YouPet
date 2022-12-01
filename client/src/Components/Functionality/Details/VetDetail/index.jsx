@@ -17,18 +17,12 @@ export default function VetDetail() {
 
   return (
     <>
-      <div>
-        {/* <img src={vet.image} alt="vet" height="300px" width="300px" /> */}
-        <h1>
-          {vet.name} {vet.lastname}
-        </h1>
-        <h3>Speciality: {vet.speciality}</h3>
-        <h3>Average: {vet.average}</h3>
-        <h3>Reviews:</h3>
-        {/* {vet.review?.map((review) => {
-          return <h5>{review}</h5>;
-        })} */}
-      </div>
+      <h1>
+        {vet.name} {vet.lastname}
+      </h1>
+      <h2>{vet.speciality}</h2>
+      <h3>Average: {vet.average}</h3>
+      <h3>Reviews: {vet.review}</h3>
     </>
   );
 }

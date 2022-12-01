@@ -2,14 +2,12 @@ import React from "react";
 
 export default function VetCard({ name, lastname }) {
     return (
-        <div className="card">
-            <div>
-                {/* <img src={image} alt="médico" height="200px" width="200px" . /> */}
-                <div className="card-body">
-                    <h4 className="card-title">
-                        {name} {lastname}
-                    </h4>
-                </div>
+        <div className="cardl">
+            <div className="cardl_image">
+                <img src="https://img.freepik.com/foto-gratis/cerca-veterinario-cuidando-gato_23-2149100172.jpg" />
+            </div>
+            <div className="cardl_title title-white">
+                <p>{name} {lastname}</p>
             </div>
         </div>
     );
