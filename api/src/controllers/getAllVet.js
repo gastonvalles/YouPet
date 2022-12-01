@@ -10,7 +10,8 @@ const JsonVet = [
     review: "",
     average: 0,
     inicialDate: new Date(2022, 1, 10, 9, 0, 0),
-    finishDate: new Date(2022, 1, 10, 12, 0, 0)
+    finishDate: new Date(2022, 1, 10, 12, 0, 0),
+    tel: 2615594318
   },
   {
     name: "Gaston",
@@ -20,7 +21,8 @@ const JsonVet = [
     review: "",
     average: 0,
     inicialDate: new Date(2022, 1, 10, 13, 0, 0),
-    finishDate: new Date(2022, 1, 10, 18, 0, 0)
+    finishDate: new Date(2022, 1, 10, 18, 0, 0),
+    tel: 2619994718
   },
   {
     name: "Veronica",
@@ -30,7 +32,8 @@ const JsonVet = [
     review: "",
     average: 0,
     inicialDate: new Date(2022, 1, 10, 9, 0, 0),
-    finishDate: new Date(2022, 1, 10, 11, 0, 0)
+    finishDate: new Date(2022, 1, 10, 11, 0, 0),
+    tel: 2612904318
   },
   {
     name: "Kelvin",
@@ -40,7 +43,8 @@ const JsonVet = [
     review: "",
     average: 0,
     inicialDate: new Date(2022, 1, 10, 14, 0, 0),
-    finishDate: new Date(2022, 1, 10, 18, 0, 0)
+    finishDate: new Date(2022, 1, 10, 18, 0, 0),
+    tel: 2617774318
   },
   {
     name: "Ernesto",
@@ -50,7 +54,8 @@ const JsonVet = [
     review: "",
     average: 0,
     inicialDate: new Date(2022, 1, 10, 15, 0, 0),
-    finishDate: new Date(2022, 1, 10, 19, 0, 0)
+    finishDate: new Date(2022, 1, 10, 19, 0, 0),
+    tel: 2619004318
   },
   {
     name: "Pedro",
@@ -60,7 +65,8 @@ const JsonVet = [
     review: "",
     average: 0,
     inicialDate: new Date(2022, 1, 10, 13, 0, 0),
-    finishDate: new Date(2022, 1, 10, 15, 0, 0)
+    finishDate: new Date(2022, 1, 10, 15, 0, 0),
+    tel: 2612294318
   },
   {
     name: "Luis",
@@ -70,17 +76,19 @@ const JsonVet = [
     review: "",
     average: 0,
     inicialDate: new Date(2022, 1, 10, 12, 0, 0),
-    finishDate: new Date(2022, 1, 10, 19, 0, 0)
+    finishDate: new Date(2022, 1, 10, 19, 0, 0),
+    tel: 2619394318
   },
   {
     name: "Mathias",
     lastname: "Ledesma",
-    isActive: true,
+    isActive: false,
     speciality: "Aesthetics",
     review: "",
     average: 0,
     inicialDate: new Date(2022, 1, 10, 14, 0, 0),
-    finishDate: new Date(2022, 1, 10, 18, 0, 0)
+    finishDate: new Date(2022, 1, 10, 18, 0, 0),
+    tel: 2618894318
   },
 ];
 
@@ -119,9 +127,9 @@ const getDBVetByPK = async (id) => {
 
 const dbCreateVet = async (body) => {
   try {
-    const { name, lastname, isActive, speciality, review, average, inicialDate, finishDate } = body;
+    const { name, lastname, isActive, speciality, review, average, inicialDate, finishDate, tel } = body;
     console.log(name, lastname, isActive, speciality, review, average, inicialDate, finishDate);
-    if (!name || !lastname || !isActive || !speciality || review || average || !inicialDate || !finishDate) {
+    if (!name || !lastname || !isActive || !speciality || review || average || !inicialDate || !finishDate || !tel) {
       throw new Error("missing query");
     } else {
       await Vet.create(body);
@@ -136,7 +144,7 @@ const dbDeleteVet = async (id) => {
   await Vet.destroy({
     where: { id },
   });
-  return `vet id:${id} deleted sucessfully`;
+  return `Vet id:${id} deleted sucessfully`;
 };
 
 module.exports = {
