@@ -54,25 +54,9 @@ module.exports = (sequelize) => {
           max: 2880,
         },
       },
-      /* inicialDate: {
-        type: DataTypes.DATE,
-        allowNull: false,
-      },
-      finishDate: {
-        type: DataTypes.DATE,
-        allowNull: false,
-      }, */
-      /*   review: {
+      detail: {
         type: DataTypes.TEXT,
-      },
-      average: {
-        type: DataTypes.INTEGER,
-        defaultValue: 0,
-        validate: {
-          min: 0,
-          max: 5,
-        },
-      }, */
+      }
     },
     {
       timestamps: false,
