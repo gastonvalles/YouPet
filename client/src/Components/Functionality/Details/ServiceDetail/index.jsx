@@ -21,9 +21,9 @@ export default function ServiceDetail() {
         <h1>{service.name}</h1>
       </div>
       <div className="grid-fluid">
-        <h4>{service.type}</h4>
-        <h4>Price: ${service.price}</h4>
-        <h4>Timelapse: {service.timelapse} min</h4>
+        <p>{service.detail}</p>
+        <p>Timelapse: {service.timelapse} min</p>
+        <p>Price: ${service.price}</p>
       </div>
       <Link
         to="vet"
