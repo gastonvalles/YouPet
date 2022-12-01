@@ -23,7 +23,7 @@ export default function ServiceDetail() {
       <p>Timelapse: {service.timelapse} min</p>
       <p>Price: ${service.price}</p>
       <Link
-        to="vet"
+        to="turn"
         type="button"
         className="text-decoration-none btn btn-dark"
       >
