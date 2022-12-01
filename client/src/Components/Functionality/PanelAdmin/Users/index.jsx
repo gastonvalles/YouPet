@@ -1,11 +1,10 @@
 import React, {useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Box, Typography, useTheme } from "@mui/material";
+import { Box, useTheme } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { tokens } from "../theme";
 import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
 import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
-import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
 import Header from "../Header";
 import { getUsers } from '../../../../Redux/actions';
 
@@ -32,7 +31,7 @@ export default function Users() {
       field: "username",
       headerName: "User Name",
       flex: 1,
-      cellClassName: "name-column--cell",
+      cellClassName: "username-column--cell",
     },
     {
       field: "email",
@@ -41,7 +40,7 @@ export default function Users() {
     },
     {
       field: "isAdmin",
-      headerName: "Baner Status",
+      headerName: "Acces Level",
       flex: 1,
       renderCell: ({ row: { isAdmin } }) => {
         return (
@@ -52,26 +51,21 @@ export default function Users() {
             display="flex"
             justifyContent="center"
             backgroundColor={
-              isAdmin === "admin"
+              isAdmin === true
                 ? colors.greenAccent[600]
-                : isAdmin === "manager"
-                ? colors.greenAccent[700]
-                : colors.greenAccent[700]
+                : colors.redAccent[700]
             }
             borderRadius="4px"
           >
             {isAdmin === true && <AdminPanelSettingsOutlinedIcon />}
             {isAdmin === false && <LockOpenOutlinedIcon />}
-            <Typography color={colors.grey[100]} sx={{ ml: "5px" }}>
-              {isAdmin}
-            </Typography>
           </Box>
         );
       },
     },
     {
       field: "isActive",
-      headerName: "Access Level",
+      headerName: "Banner Status",
       flex: 1,
       renderCell: ({ row: { isActive } }) => {
         return (
@@ -82,19 +76,14 @@ export default function Users() {
             display="flex"
             justifyContent="center"
             backgroundColor={
-              isActive === "admin"
+              isActive === true
                 ? colors.greenAccent[600]
-                : isActive === "manager"
-                ? colors.greenAccent[700]
-                : colors.greenAccent[700]
+                : colors.redAccent[700]
             }
             borderRadius="4px"
           >
             {isActive === true && <AdminPanelSettingsOutlinedIcon />}
             {isActive === false && <LockOpenOutlinedIcon />}
-            <Typography color={colors.grey[100]} sx={{ ml: "5px" }}>
-              {isActive}
-            </Typography>
           </Box>
         );
       },

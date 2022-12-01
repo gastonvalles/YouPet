@@ -13,20 +13,11 @@ import FormUser from "./Components/Functionality/Forms/User";
 import FormVet from "./Components/Functionality/Forms/Vet";
 import NavBar from "./Components/Functionality/Navbar/index";
 import PanelAdmin from "./Components/Functionality/PanelAdmin/Body/PanelAdmin";
-// import Dashboard from "./Components/Functionality/PanelAdmin/Dashboard";
-// import Users from "./Components/Functionality/PanelAdmin/Users";
 import ChooseVetTurn from "./Components/Functionality/Turns/ChooseVetTurn";
 import TakeTurn from "./Components/Functionality/Turns/TakeTurn";
 import Home from "./Components/View/HomeFake/HomeFake";
-// import TopBar
-//  from "./Components/Functionality/PanelAdmin/TopBar";
-
-//  import SideBar from "./Components/Functionality/PanelAdmin/SideBar";
-//  import { CssBaseline, ThemeProvider } from "@mui/material";
-//  import { ColorModeContext, useMode } from "./Components/Functionality/PanelAdmin/theme";
 
 function App() {
-  // const [theme, colorMode] = useMode();
   return (
     <div className="App">
       <NavBar />
@@ -44,34 +35,6 @@ function App() {
         <Route exact path="/vet/register" element={<FormVet />} />
         <Route exact path='/login' element={<Login />} />
         <Route path="/admin/*" element={<PanelAdmin/>}/>
-
-        {/* <ColorModeContext.Provider value={colorMode}>
-
-
-
-
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <div className="app">
-        <Route path="/admin" element={<SideBar/>}/>
-          
-          <main className="content">
-          <Route path="/admin" element={<TopBar/>}/>
-            {/* <TopBar/> */}
-          
-            {/* <Dashboard/>
-            <Users />  */}
-            {/* <Route path="/admin" element={<PanelAdmin/>}/>
-            <Route path="/admin/dashboard" element={<Dashboard />} /> 
-            <Route path="/admin/users" element={<Users />} />
-          </main>
-        </div>
-      </ThemeProvider>
-    </ColorModeContext.Provider> */}
-
-
-
-      
       </Routes>
     </div>
   );

@@ -7,6 +7,7 @@ import TopBar from "../TopBar/index.jsx";
 import SideBar from "../SideBar/index.jsx";
 import Dashboard from "../Dashboard/index.jsx";
 import Users from "../Users/index.jsx";
+import FormVet from "../../Forms/Vet";
 
 export default function PanelAdmin() {
   const [theme, colorMode] = useMode();
@@ -19,9 +20,9 @@ export default function PanelAdmin() {
           <main className="content">
             <TopBar />
             <Routes>
-              <Route path="dashboard" element={<Dashboard />} >
-              <Route path="user" element={<Users />} />
-              </Route>
+              <Route path="/" element={<Dashboard />} />
+              <Route path="/users" element={<Users />} />
+              <Route path="/vetregister" element={<FormVet/>}/>
             </Routes>
           </main>
         </div>

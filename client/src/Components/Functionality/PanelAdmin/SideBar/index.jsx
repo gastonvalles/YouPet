@@ -27,9 +27,9 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
       }}
       onClick={() => setSelected(title)}
       icon={icon}
+      routerLink={<Link to={to} />}
     >
       <Typography>{title}</Typography>
-      <Link to={to} type="button"/>
     </MenuItem>
   );
 };
@@ -118,7 +118,7 @@ export default function SideBar() {
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
             <Item
               title="Dashboard"
-              to="/dashboard"
+              to="/admin"
               icon={<HomeOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
@@ -133,7 +133,7 @@ export default function SideBar() {
             </Typography>
             <Item
               title="Users"
-              to="/users"
+              to="/admin/users"
               icon={<PeopleOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
@@ -161,8 +161,8 @@ export default function SideBar() {
               Pages
             </Typography>
             <Item
-              title="Profile Form"
-              to="/form"
+              title="Vet Register"
+              to="/admin/vetregister"
               icon={<PersonOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}

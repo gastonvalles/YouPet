@@ -8,12 +8,6 @@ const FormVet = () => {
 
   return (
     <>
-      <div>
-        <Link to="/profile/:id" type="button"
-            className="text-decoration-none btn btn-dark">
-          Back to Profile
-        </Link>
-      </div>
       <Formik
         initialValues={{
           name: "",
