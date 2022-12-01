@@ -4,7 +4,7 @@ const { Op } = require("sequelize");
 const JSONService = [
   {
     type: "Healthcare Clinic",
-    name: "Vacunacion",
+    name: "Vacunation",
     price: 100,
     timelapse: 60,
     //inicialDate: new Date(2022, 12, 8, 13, 30).toISOString(),
