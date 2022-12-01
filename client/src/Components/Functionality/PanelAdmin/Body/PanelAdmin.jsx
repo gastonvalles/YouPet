@@ -10,7 +10,6 @@ import Users from "../Users/index.jsx";
 import FormVet from "../../Forms/Vet";
 import Contacts from "../Contacts";
 import VetInformation from "../VetInformation";
-import Calendar from "../Calendar";
 
 export default function PanelAdmin() {
   const [theme, colorMode] = useMode();
@@ -28,7 +27,6 @@ export default function PanelAdmin() {
               <Route path="/contacts" element={<Contacts/>} />
               <Route path="/allvets" element={<VetInformation/>}/>
               <Route path="/vetregister" element={<FormVet/>}/>
-              <Route path="/calendar" element={<Calendar />} />
             </Routes>
           </main>
         </div>
