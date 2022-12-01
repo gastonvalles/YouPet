@@ -1,18 +1,5 @@
-.fade-enter {
-  opacity: 0;
-}
-.fade-exit {
-  opacity: 1;
-}
-.fade-enter-active {
-  opacity: 1;
-}
-.fade-exit-active {
-  opacity: 0;
-}
-.fade-enter-active,
-.fade-exit-active {
-  transition: opacity 200ms;
+.calendar-container{
+  margin-left: 40px;
 }
 
 .loadingTurnsTime {
@@ -22,7 +9,7 @@
 .timeSlotContainer {
   margin-top: 20px;
   margin-left: 20px;
-  max-width: 400px;
+  max-width: 340px;
 }
 
 button.timeSlotButton {

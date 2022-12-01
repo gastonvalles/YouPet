@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { getServiceDetail, clearDetails } from "../../../../Redux/actions";
 import { getVets } from "../../../../Redux/actions";
 
@@ -18,6 +18,12 @@ function ChooseVetTurn() {
   const allVets = useSelector((state) => state.vets);
   const service = useSelector((state) => state.serviceDetail);
 
+
+  const navigate = useNavigate();
+  const path = `/service/${servId}`;
+
+  let findVets = [];
+  
   useEffect(() => {
     if (!allVets?.length) {
       dispatch(getVets());
@@ -29,62 +35,84 @@ function ChooseVetTurn() {
     };
   }, [dispatch, servId, allVets]);
 
-
-
   const handleSelectChange = (e) => {
     setVetSelect(e.target.value);
-    setUpdateCalendar(true)
+    setUpdateCalendar(true);
   };
 
   return (
-    <div className={ChooseVetStyle.container}>
-      <div className="d-flex flex-column ">
-        <h1>Choose vet</h1>
+    <div>
+      <h1 className="header">Turns</h1>
+      <div className={ChooseVetStyle.container}>
+        <div className="d-flex flex-column ">
+          <h1>Vet</h1>
 
-        <select
-          name="vets"
-          className={"form-select " + ChooseVetStyle.select}
-          value={vetSelect}
-          onChange={(e) => {
-            handleSelectChange(e);
-          }}
-        >
-          <option key={"noneVet"} value={"none"}>
-            none
-          </option>
-          {allVets?.map((vet) => {
-            const vetSpeciality = vet.speciality.toLowerCase();
-            const serviceType = service?.type?.toLowerCase();
+          <select
+            name="vets"
+            className={"form-select " + ChooseVetStyle.select}
+            value={vetSelect}
+            onChange={(e) => {
+              handleSelectChange(e);
+            }}
+          >
+            <option key={"noneVet"} value={"none"}>
+              none
+            </option>
+            {allVets?.map((vet) => {
+              const vetSpeciality = vet.speciality.toLowerCase();
+              const serviceType = service?.type?.toLowerCase();
 
-            if (serviceType?.includes(vetSpeciality)) {
-              return (
-                <option key={vet.id} value={vet.id}>
-                  {vet.name} {vet.lastname}
-                </option>
+              if (serviceType?.includes(vetSpeciality)) {
+                findVets.push(vet);
 
-                // <div key={vet.id} className="m-2">
-                //     <VetCard
-                //       image={vet.image}
-                //       name={vet.name}
-                //       lastname={vet.lastname}
-                //       id={vet.id}
-                //     />
-                // </div>
-              );
-            } else {
-              return null;
-            }
-          })}
-        </select>
+                return (
+                  <option key={vet.id} value={vet.id}>
+                    {vet.name} {vet.lastname}
+                  </option>
+                );
+              } else {
+                return null;
+              }
+            })}
+          </select>
+
+          <div>
+            {vetSelect !== "none" ? (
+              findVets.map((vet) => {
+                if (vet.id === vetSelect) {
+                  return (
+                    <div key={vet.id}>
+                      <h1>
+                        {vet.name} {vet.lastname}
+                      </h1>
+                      <img
+                        src={vet.img}
+                        alt="Not found"
+                        className={ChooseVetStyle.imgVet}
+                      />
+                      <h2>{vet.speciality}</h2>
+                      <h3>Average: {vet.average}</h3>
+                    </div>
+                  );
+                } else return null;
+              })
+            ) : (
+              <></>
+            )}
+          </div>
+        </div>
+
+        <div>
+          <TakeTurn
+            vetSelect={vetSelect}
+            updateCalendar={updateCalendar}
+            setUpdateCalendar={setUpdateCalendar}
+          />
+        </div>
       </div>
-
-      <div>
-        <TakeTurn
-          vetSelect={vetSelect}
-          updateCalendar={updateCalendar}
-          setUpdateCalendar={setUpdateCalendar}
-        />
-      </div>
+      <button onClick={() => navigate(path)} className={"btn"}>
+        Go back
+      </button>
     </div>
   );
 }
