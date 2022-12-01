@@ -6,15 +6,14 @@ import { tokens } from "../theme";
 import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
 import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
 import Header from "../Header";
-import { getUsers } from '../../../../Redux/actions';
+import { getVets } from '../../../../Redux/actions';
 
-export default function Users() {
+export default function VetInformation() {
   const dispatch = useDispatch()
-  const allUsers = useSelector(state=> state.users)
+  const allVets = useSelector(state=> state.vets)
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const columns = [
-    { field: "id", headerName: "ID" },
     {
       field: "name",
       headerName: "Name",
@@ -28,10 +27,22 @@ export default function Users() {
       cellClassName: "lastname-column--cell",
     },
     {
-      field: "username",
-      headerName: "User Name",
+      field: "speciality",
+      headerName: "Speciality",
       flex: 1,
-      cellClassName: "username-column--cell",
+      cellClassName: "speciality-column--cell",
+    },
+    {
+      field: "address",
+      headerName: "Address",
+      flex: 1,
+      cellClassName: "address-column--cell",
+    },
+    {
+      field:"telephoneNumber",
+      headerName:"Telephon Number",
+      flex: 1,
+      cellClassName: "telephone-column--cell",
     },
     {
       field: "email",
@@ -39,29 +50,9 @@ export default function Users() {
       flex: 1,
     },
     {
-      field: "isAdmin",
-      headerName: "Acces Level",
+      field: "dni",
+      headerName: "DNI",
       flex: 1,
-      renderCell: ({ row: { isAdmin } }) => {
-        return (
-          <Box
-            width="60%"
-            m="0 auto"
-            p="5px"
-            display="flex"
-            justifyContent="center"
-            backgroundColor={
-              isAdmin === true
-                ? colors.greenAccent[600]
-                : colors.redAccent[700]
-            }
-            borderRadius="4px"
-          >
-            {isAdmin === true && <AdminPanelSettingsOutlinedIcon />}
-            {isAdmin === false && <LockOpenOutlinedIcon />}
-          </Box>
-        );
-      },
     },
     {
       field: "isActive",
@@ -91,12 +82,12 @@ export default function Users() {
   ];
 
   useEffect(()=> {
-    dispatch(getUsers())
+    dispatch(getVets())
   }, [dispatch])
 
   return (
     <Box m="20px">
-      <Header title="USERS" subtitle="Managing the Users" />
+      <Header title="Contacts" subtitle="List of contacts" />
       <Box
         m="40px 0 0 0"
         height="75vh"
@@ -129,7 +120,7 @@ export default function Users() {
           },
         }}
       >
-        <DataGrid checkboxSelection rows={allUsers} columns={columns} components={{ Toolbar: GridToolbar }}/>
+        <DataGrid checkboxSelection rows={allVets} columns={columns} components={{ Toolbar: GridToolbar }}/>
       </Box>
     </Box>
   );
