@@ -40,10 +40,10 @@ export default function Users() {
       flex: 1,
     },
     {
-      field: "accessLevel",
-      headerName: "Access Level",
+      field: "isAdmin",
+      headerName: "Baner Status",
       flex: 1,
-      renderCell: ({ row: { access } }) => {
+      renderCell: ({ row: { isAdmin } }) => {
         return (
           <Box
             width="60%"
@@ -52,19 +52,48 @@ export default function Users() {
             display="flex"
             justifyContent="center"
             backgroundColor={
-              access === "admin"
+              isAdmin === "admin"
                 ? colors.greenAccent[600]
-                : access === "manager"
+                : isAdmin === "manager"
                 ? colors.greenAccent[700]
                 : colors.greenAccent[700]
             }
             borderRadius="4px"
           >
-            {access === "admin" && <AdminPanelSettingsOutlinedIcon />}
-            {access === "manager" && <SecurityOutlinedIcon />}
-            {access === "user" && <LockOpenOutlinedIcon />}
+            {isAdmin === true && <AdminPanelSettingsOutlinedIcon />}
+            {isAdmin === false && <LockOpenOutlinedIcon />}
             <Typography color={colors.grey[100]} sx={{ ml: "5px" }}>
-              {access}
+              {isAdmin}
+            </Typography>
+          </Box>
+        );
+      },
+    },
+    {
+      field: "isActive",
+      headerName: "Access Level",
+      flex: 1,
+      renderCell: ({ row: { isActive } }) => {
+        return (
+          <Box
+            width="60%"
+            m="0 auto"
+            p="5px"
+            display="flex"
+            justifyContent="center"
+            backgroundColor={
+              isActive === "admin"
+                ? colors.greenAccent[600]
+                : isActive === "manager"
+                ? colors.greenAccent[700]
+                : colors.greenAccent[700]
+            }
+            borderRadius="4px"
+          >
+            {isActive === true && <AdminPanelSettingsOutlinedIcon />}
+            {isActive === false && <LockOpenOutlinedIcon />}
+            <Typography color={colors.grey[100]} sx={{ ml: "5px" }}>
+              {isActive}
             </Typography>
           </Box>
         );

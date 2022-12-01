@@ -73,7 +73,7 @@ export default function NavBar() {
                 </Link>
               </li> */}
 
-              <div class="dropdown">
+              <div className="dropdown">
                 <span
                   className="nav-link dropdown-toggle me-3"
                   role="button"
@@ -82,24 +82,24 @@ export default function NavBar() {
                 >
                   Go to...
                 </span>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                <ul className="dropdown-menu" aria-labelledby="dropdownMenu2">
                   <li>
                     <Link to={"/veterinario"}>
-                      <button class="dropdown-item" type="button">
+                      <button className="dropdown-item" type="button">
                         Veterinario
                       </button>
                     </Link>
                   </li>
                   <li>
                     <Link to={"/nutricionista"}>
-                      <button class="dropdown-item" type="button">
+                      <button className="dropdown-item" type="button">
                         Nutricionista
                       </button>
                     </Link>
                   </li>
                   <li>
                     <Link to={"/cirugias"}>
-                      <button class="dropdown-item" type="button">
+                      <button className="dropdown-item" type="button">
                         Cirugias
                       </button>
                     </Link>

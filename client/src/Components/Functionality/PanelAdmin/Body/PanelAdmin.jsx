@@ -19,8 +19,9 @@ export default function PanelAdmin() {
           <main className="content">
             <TopBar />
             <Routes>
-              <Route path="/" element={<Dashboard />} />
-              <Route path="/users" element={<Users />} />
+              <Route path="dashboard" element={<Dashboard />} >
+              <Route path="user" element={<Users />} />
+              </Route>
             </Routes>
           </main>
         </div>

@@ -118,7 +118,7 @@ export default function SideBar() {
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
             <Item
               title="Dashboard"
-              to="/"
+              to="/dashboard"
               icon={<HomeOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
@@ -133,7 +133,7 @@ export default function SideBar() {
             </Typography>
             <Item
               title="Users"
-              to="/admin/users"
+              to="/users"
               icon={<PeopleOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
