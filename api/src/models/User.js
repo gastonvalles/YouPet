@@ -37,10 +37,6 @@ module.exports = (sequelize) => {
                     args: [1, 50],
                     msg: "Username should have 8 characters at least"
                 },
-
-                //is: /^[0-9a-f]{64}$/i
-
-              
             }
         },
         password: {
@@ -51,9 +47,6 @@ module.exports = (sequelize) => {
                     args: [8, 24],
                     msg: "Password should have 8 characters at least"
                 },
-
-                //is: /^[0-9a-f]{64}$/i
-
             }
         },
         img: {
@@ -63,11 +56,6 @@ module.exports = (sequelize) => {
             type: DataTypes.TEXT,
             unique: true,
             allowNull: false,
-
-            validate: {
-                //is: /^[0-9a-f]{64}$/i
-            }
-
         },
         address: {
             type: DataTypes.STRING,
@@ -87,6 +75,9 @@ module.exports = (sequelize) => {
             type: DataTypes.BOOLEAN,
             defaultValue: true,
             allowNull: false
+        },
+        tel: {
+            type: DataTypes.INTEGER
         }
     }, {
         timestamps: false,

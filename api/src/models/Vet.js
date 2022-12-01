@@ -65,6 +65,14 @@ module.exports = (sequelize) => {
         type: DataTypes.DATE,
         allowNull: false,
       },
+      tel: {
+        type: DataTypes.INTEGER
+      },
+      dni: {
+        type: DataTypes.INTEGER,
+        unique: true,
+        allowNull: false
+      }
     },
     {
       timestamps: false,
