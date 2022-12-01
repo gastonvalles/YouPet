@@ -1,0 +1,14 @@
+
+.select {
+    max-width: 300px;
+    max-height: 40px;
+
+    
+
+}
+
+.container {
+    justify-content: center;
+    display: flex;
+    padding-top: 20px;
+}

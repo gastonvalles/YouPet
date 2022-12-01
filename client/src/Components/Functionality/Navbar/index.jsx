@@ -23,7 +23,7 @@ export default function NavBar() {
 
   useEffect(() => {
     dispatch(getServices());
-    dispatch(getVetsDetail(id))
+    //dispatch(getVetsDetail(id))
   }, [dispatch, id]);
 
   function handleFilter(event) {

@@ -26,7 +26,7 @@ export default function ServiceDetail() {
         <p>Price: ${service.price}</p>
       </div>
       <Link
-        to="vet"
+        to="turn"
         type="button"
         className="text-decoration-none btn btn-dark"
       >

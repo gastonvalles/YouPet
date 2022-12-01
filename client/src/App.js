@@ -7,13 +7,13 @@ import ServiceDetail from "./Components/Functionality/Details/ServiceDetail";
 import Profile from "./Components/Functionality/Details/UserDetail";
 import VetDetail from "./Components/Functionality/Details/VetDetail";
 import FormHistoryPet from "./Components/Functionality/Forms/HistoryPet";
-import Login from './Components/Functionality/Forms/Login';
+import Login from "./Components/Functionality/Forms/Login";
 import FormPet from "./Components/Functionality/Forms/Pet";
 import FormUser from "./Components/Functionality/Forms/User";
 import FormVet from "./Components/Functionality/Forms/Vet";
 import NavBar from "./Components/Functionality/Navbar/index";
 import ChooseVetTurn from "./Components/Functionality/Turns/ChooseVetTurn";
-import TakeTurn from "./Components/Functionality/Turns/TakeTurn";
+
 import Home from "./Components/View/HomeFake/HomeFake";
 function App() {
   return (
@@ -25,13 +25,12 @@ function App() {
         <Route path="/pet/:id" element={<PetDetail />} />
         <Route path="/profile/:id" element={<Profile />} />
         <Route path="/service/:id" element={<ServiceDetail />} />
-        <Route path="/service/:servId/vet" element={<ChooseVetTurn />} />
-        <Route path="/service/:servId/vet/:vetId/turn" element={<TakeTurn />} />
+        <Route path="/service/:servId/turn" element={<ChooseVetTurn />} />
         <Route exact path="/reguser" element={<FormUser />} />
         <Route exact path="/formdescrip" element={<FormHistoryPet />} />
         <Route exact path="/pet/register" element={<FormPet />} />
         <Route exact path="/vet/register" element={<FormVet />} />
-        <Route exact path='/login' element={<Login />} />
+        <Route exact path="/login" element={<Login />} />
       </Routes>
     </div>
   );
