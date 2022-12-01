@@ -11,7 +11,8 @@ const JsonVet = [
     average: 0,
     inicialDate: new Date(2022, 1, 10, 9, 0, 0),
     finishDate: new Date(2022, 1, 10, 12, 0, 0),
-    tel: 2615594318
+    tel: 2615594312,
+    dni: 39987470
   },
   {
     name: "Gaston",
@@ -22,7 +23,8 @@ const JsonVet = [
     average: 0,
     inicialDate: new Date(2022, 1, 10, 13, 0, 0),
     finishDate: new Date(2022, 1, 10, 18, 0, 0),
-    tel: 2619994718
+    tel: 2619994713,
+    dni: 39987329
   },
   {
     name: "Veronica",
@@ -33,7 +35,8 @@ const JsonVet = [
     average: 0,
     inicialDate: new Date(2022, 1, 10, 9, 0, 0),
     finishDate: new Date(2022, 1, 10, 11, 0, 0),
-    tel: 2612904318
+    tel: 2612904314,
+    dni: 39987915
   },
   {
     name: "Kelvin",
@@ -44,7 +47,8 @@ const JsonVet = [
     average: 0,
     inicialDate: new Date(2022, 1, 10, 14, 0, 0),
     finishDate: new Date(2022, 1, 10, 18, 0, 0),
-    tel: 2617774318
+    tel: 2617774315,
+    dni: 39987007
   },
   {
     name: "Ernesto",
@@ -55,7 +59,8 @@ const JsonVet = [
     average: 0,
     inicialDate: new Date(2022, 1, 10, 15, 0, 0),
     finishDate: new Date(2022, 1, 10, 19, 0, 0),
-    tel: 2619004318
+    tel: 2619004316,
+    dni: 39987321
   },
   {
     name: "Pedro",
@@ -66,7 +71,8 @@ const JsonVet = [
     average: 0,
     inicialDate: new Date(2022, 1, 10, 13, 0, 0),
     finishDate: new Date(2022, 1, 10, 15, 0, 0),
-    tel: 2612294318
+    tel: 2612294317,
+    dni: 39987265
   },
   {
     name: "Luis",
@@ -77,7 +83,8 @@ const JsonVet = [
     average: 0,
     inicialDate: new Date(2022, 1, 10, 12, 0, 0),
     finishDate: new Date(2022, 1, 10, 19, 0, 0),
-    tel: 2619394318
+    tel: 2619394318,
+    dni: 39987237
   },
   {
     name: "Mathias",
@@ -88,7 +95,8 @@ const JsonVet = [
     average: 0,
     inicialDate: new Date(2022, 1, 10, 14, 0, 0),
     finishDate: new Date(2022, 1, 10, 18, 0, 0),
-    tel: 2618894318
+    tel: 2618894319,
+    dni: 39987235
   },
 ];
 
