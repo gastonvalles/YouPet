@@ -1,14 +1,16 @@
-import React, {useEffect} from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { Box, useTheme } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { tokens } from "../theme";
 import Header from "../Header";
-import { getUsers } from '../../../../Redux/actions';
+import { getAdmins, getUsers } from "../../../../Redux/actions";
 
 export default function Contacts() {
-  const dispatch = useDispatch()
-  const allUsers = useSelector(state=> state.users)
+  const dispatch = useDispatch();
+  const users = useSelector((state) => state.users);
+  const allAdmins = useSelector((state)=> state.admins);
+  const allUsers = [...users, ...allAdmins];
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const columns = [
@@ -36,8 +38,8 @@ export default function Contacts() {
       flex: 1,
     },
     {
-      field:"telephoneNumber",
-      headerName:"Telephon Number",
+      field: "tel",
+      headerName: "Telephon Number",
       flex: 1,
       cellClassName: "telephone-column--cell",
     },
@@ -48,9 +50,10 @@ export default function Contacts() {
     },
   ];
 
-  useEffect(()=> {
-    dispatch(getUsers())
-  }, [dispatch])
+  useEffect(() => {
+    dispatch(getUsers());
+    dispatch(getAdmins())
+  }, [dispatch]);
 
   return (
     <Box m="20px">
@@ -87,7 +90,12 @@ export default function Contacts() {
           },
         }}
       >
-        <DataGrid checkboxSelection rows={allUsers} columns={columns} components={{ Toolbar: GridToolbar }}/>
+        <DataGrid
+          checkboxSelection
+          rows={allUsers}
+          columns={columns}
+          components={{ Toolbar: GridToolbar }}
+        />
       </Box>
     </Box>
   );

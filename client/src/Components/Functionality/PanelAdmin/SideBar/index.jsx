@@ -95,7 +95,7 @@ export default function SideBar() {
                   alt="profile-user"
                   width="100px"
                   height="100px"
-                  src={`../../assets/user.png`}
+                  src="https://imagenes.elpais.com/resizer/aLxnjXn1RbFWOtS0HMQVpP8hfTo=/1960x1470/cloudfront-eu-central-1.images.arcpublishing.com/prisa/Y5A4MAGE3BDDDIP7MD5SFEPZJY.jpg"
                   style={{ cursor: "pointer", borderRadius: "50%" }}
                 />
               </Box>

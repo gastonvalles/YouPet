@@ -1,16 +1,19 @@
-import React, {useEffect} from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import { Box, useTheme } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { tokens } from "../theme";
 import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
 import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
 import Header from "../Header";
-import { getUsers } from '../../../../Redux/actions';
+import { getAdmins, getUsers } from "../../../../Redux/actions";
 
 export default function Users() {
-  const dispatch = useDispatch()
-  const allUsers = useSelector(state=> state.users)
+  const dispatch = useDispatch();
+  const users = useSelector((state) => state.users);
+  const admins = useSelector((state) => state.admins);
+  const allUsers = [...users, ...admins];
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const columns = [
@@ -51,9 +54,7 @@ export default function Users() {
             display="flex"
             justifyContent="center"
             backgroundColor={
-              isAdmin === true
-                ? colors.greenAccent[600]
-                : colors.redAccent[700]
+              isAdmin === true ? colors.greenAccent[600] : colors.redAccent[700]
             }
             borderRadius="4px"
           >
@@ -90,9 +91,10 @@ export default function Users() {
     },
   ];
 
-  useEffect(()=> {
-    dispatch(getUsers())
-  }, [dispatch])
+  useEffect(() => {
+    dispatch(getUsers());
+    dispatch(getAdmins())
+  }, [dispatch]);
 
   return (
     <Box m="20px">
@@ -128,8 +130,16 @@ export default function Users() {
             color: `${colors.grey[100]} !important`,
           },
         }}
+        key={allUsers.id}
       >
-        <DataGrid checkboxSelection rows={allUsers} columns={columns} components={{ Toolbar: GridToolbar }}/>
+        <Link to={`/users/${allUsers.id}`}>
+        <DataGrid
+          rows={allUsers}
+          columns={columns}
+          components={{ Toolbar: GridToolbar }}
+          id={allUsers.id}
+        />
+        </Link>
       </Box>
     </Box>
   );

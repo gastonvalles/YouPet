@@ -55,6 +55,16 @@ export default function VetInformation() {
       flex: 1,
     },
     {
+      field: "inicialDate",
+      headerName: "Inicial Date",
+      type:"date",
+    },
+    {
+      field: "finishDate",
+      headerName: "Finish Date",
+      type:"date",
+    },
+    {
       field: "isActive",
       headerName: "Banner Status",
       flex: 1,
@@ -72,6 +82,7 @@ export default function VetInformation() {
                 : colors.redAccent[700]
             }
             borderRadius="4px"
+            type="button"
           >
             {isActive === true && <AdminPanelSettingsOutlinedIcon />}
             {isActive === false && <LockOpenOutlinedIcon />}
@@ -120,7 +131,7 @@ export default function VetInformation() {
           },
         }}
       >
-        <DataGrid checkboxSelection rows={allVets} columns={columns} components={{ Toolbar: GridToolbar }}/>
+        <DataGrid rows={allVets} columns={columns} components={{ Toolbar: GridToolbar }}/>
       </Box>
     </Box>
   );

@@ -10,6 +10,8 @@ import Users from "../Users/index.jsx";
 import FormVet from "../../Forms/Vet";
 import Contacts from "../Contacts";
 import VetInformation from "../VetInformation";
+import CalendarAdmin from "../Calendar";
+import AdminProfileDetail from "../Users/Detail";
 
 export default function PanelAdmin() {
   const [theme, colorMode] = useMode();
@@ -23,10 +25,13 @@ export default function PanelAdmin() {
             <TopBar />
             <Routes>
               <Route path="/" element={<Dashboard />} />
-              <Route path="/users" element={<Users />} />
+              <Route path="/users" element={<Users />}>
+                <Route path="/users/:id" element={<AdminProfileDetail />} />
+              </Route>
               <Route path="/contacts" element={<Contacts/>} />
               <Route path="/allvets" element={<VetInformation/>}/>
               <Route path="/vetregister" element={<FormVet/>}/>
+              <Route path="/calendar" element={<CalendarAdmin/>} />
             </Routes>
           </main>
         </div>
