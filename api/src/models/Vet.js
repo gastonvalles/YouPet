@@ -32,7 +32,9 @@ module.exports = (sequelize) => {
           },
         },
       },
-
+      img: {
+        type: DataTypes.STRING,
+      },
       isActive: {
         type: DataTypes.BOOLEAN,
         defaultValue: true,
@@ -65,6 +67,14 @@ module.exports = (sequelize) => {
         type: DataTypes.DATE,
         allowNull: false,
       },
+      tel: {
+        type: DataTypes.BIGINT
+      },
+      dni: {
+        type: DataTypes.INTEGER,
+        unique: true,
+        allowNull: false
+      }
     },
     {
       timestamps: false,

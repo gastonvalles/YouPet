@@ -33,15 +33,15 @@ export default function Home() {
                   type="button"
                   className="text-decoration-none"
                 >
-                  <ServiceCard name={service.name} id={service.id} />
+                  <ServiceCard name={service.name} id={service.id} img={service.img} />
                 </Link>
               </div>
             );
           })}
-          </div>
+        </div>
       </div>
       <h1>Our Professionals</h1>
-      <div>
+      <div className="cardl-list">
         <div className="grid-fluid">
           {allVets?.map((vet) => {
             return (
@@ -52,7 +52,7 @@ export default function Home() {
                   className="text-decoration-none"
                 >
                   <VetCard
-                    image={vet.image}
+                    img={vet.img}
                     name={vet.name}
                     lastname={vet.lastname}
                     id={vet.id}

@@ -5,6 +5,7 @@ import { Link, useParams } from "react-router-dom";
 import logo from "../../../img/logo.png";
 import {
   filterService,
+  // filterVets,
   getServiceByName,
   getServices, getUserByName, getVetByName, getVetsDetail
 } from "../../../Redux/actions";
@@ -22,12 +23,13 @@ export default function NavBar() {
 
   useEffect(() => {
     dispatch(getServices());
-    dispatch(getVetsDetail(id))
+    //dispatch(getVetsDetail(id))
   }, [dispatch, id]);
 
   function handleFilter(event) {
     event.preventDefault();
     dispatch(filterService(event.target.value))
+    // dispatch(filterVets(event.target.value))
   }
 
   function handleInputChange(event) {
@@ -81,6 +83,38 @@ export default function NavBar() {
               </button>
             </form>
             {/* preguntar si esta logueado o no */}
+          </div>
+          {/* <div>
+            <select
+              defaultValue={""}
+              className="selectorFiltros"
+              onChange={(event) => handleFilter(event)}
+            >
+              <option value={""}>All Vets</option>
+              <option value={"Clinic"}>Healthcare Clinic</option>
+              <option value={"Anesthesia"}>
+                Surgery and Anesthesia
+              </option>
+              <option value={"Diagnostics"}>Diagnostics</option>
+              <option value={"Aesthetics"}>Aesthetics</option>
+            </select>
+          </div> */}
+          <div>
+            <select
+              defaultValue={""}
+              className="selectorFiltros"
+              onChange={(event) => handleFilter(event)}
+            >
+              <option value={""}>All Services</option>
+              <option value={"Healthcare Clinic"}>Healthcare Clinic</option>
+              <option value={"Surgery and Anesthesia"}>
+                Surgery and Anesthesia
+              </option>
+              <option value={"Diagnostics"}>Diagnostics</option>
+              <option value={"Aesthetics"}>Aesthetics</option>
+            </select>
+          </div>
+          <div>
             <div className="d-flex">
               <Link to={"/login"}>
                 <button className="btn"> Sign in</button>
@@ -92,20 +126,6 @@ export default function NavBar() {
               </Link>
             </div>
           </div>
-          <select
-            defaultValue={""}
-            className="selectorFiltros"
-            onChange={(event) => handleFilter(event)}
-          >
-            <option disabled value={""}></option>
-            <option value="">All Service</option>
-            <option value={"Healthcare Clinic"}>Healthcare Clinic</option>
-            <option value={"Surgery and Anesthesia"}>
-              Surgery and Anesthesia
-            </option>
-            <option value={"Diagnostics"}>Diagnostics</option>
-            <option value={"Aesthetics"}>Aesthetics</option>
-          </select>
         </div>
       </nav>
     </>

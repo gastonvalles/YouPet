@@ -9,6 +9,7 @@ const petController = require("../middlewares/pet");
 const vetController = require("../middlewares/vet");
 const turnController = require("../middlewares/turn.js")
 const userController = require("../middlewares/user.js")
+const paymentController = require("../middlewares/payments")
 
 const { Admin, Vet, User } = require("../db");
 
@@ -18,6 +19,7 @@ router.use("/pet", petController);
 router.use("/vet", vetController);
 router.use("/turn", turnController);
 router.use("/user", userController);
+router.use("/payment", paymentController);
 
 
 
@@ -97,3 +99,4 @@ router.put('/user/:id', userctualizado)
 
 
 module.exports = router;
+//

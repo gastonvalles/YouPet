@@ -5,21 +5,47 @@ const FirstAdmin = [
   {
     name: "Federico",
     lastname: "Saffores",
-    adminame: "AppName",
+    adminame: "AppFede",
     password: "12345678",
+    tel: 2613994310,
+    img: "",
+    dni: 35987456,
+    isAdmin: true,
+    isActive: true
   },
   {
     name: "Gaston",
     lastname: "Valles",
     adminame: "AppGas",
     password: "12345",
+    tel: 2619584318,
+    img: "",
+    dni: 40558498,
+    isAdmin: true,
+    isActive: true
   },
   {
     name: "Luis",
-    lastname: "xxx",
-    adminame: "Luisxxx",
+    lastname: "Goytia",
+    adminame: "AppLuis",
     password: "12345",
+    tel: 2619694318,
+    img: "",
+    dni: 41987456,
+    isAdmin: true,
+    isActive: false
   },
+  {
+    name: "Ernesto",
+    lastname: "Velazquez",
+    adminame: "AppErnesto",
+    password: "123456",
+    tel: 2619994318,
+    img: "",
+    dni: 32987456,
+    isAdmin: true,
+    isActive: true
+  }
 ];
 
 const getDBAdmin = async (name) => {
@@ -47,7 +73,7 @@ const getDBAdminByPK = async (id) => {
       },
     });
     if (!admin) {
-      throw new Error("admin not found");
+      throw new Error("Admin not found");
     }
     return admin;
   } else {
@@ -57,22 +83,21 @@ const getDBAdminByPK = async (id) => {
 
 const dbCreateAdmin = async (body) => {
   try {
-    const { name, lastname, adminame, password } = body;
-    if (!name || !lastname || !adminame || !password) {
-      throw new Error("missing query");
+    const { name, lastname, adminame, password, tel, img, dni, isAdmin, isActive } = body;
+    if (!name || !lastname || !adminame || !password || !tel || !dni || !isAdmin || !isActive) {
+      throw new Error("Missing params");
     } else {
       await Admin.create(body);
-      return `admin ${body.name} created successfully`;
+      return `Admin ${body.name} created successfully`;
     }
   } catch (error) {
     throw error;
   }
 };
 
-
-const dbDeleteAdmin = async (id) => {
+const deleteAdmin = async (id) => {
   await Admin.destroy({
-    where: { id }
+    where: { id },
   });
   return `Admin id:${id} deleted sucessfully`;
 };
@@ -81,5 +106,4 @@ module.exports = {
   getDBAdmin,
   getDBAdminByPK,
   dbCreateAdmin,
-  dbDeleteAdmin
 };

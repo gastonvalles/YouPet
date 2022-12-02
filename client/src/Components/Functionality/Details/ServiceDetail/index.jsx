@@ -25,27 +25,13 @@ export default function ServiceDetail() {
     <div className={style.containerPrincipal}>
 =======
     <>
->>>>>>> c16122abe4eb4fbf942393b2e7c78703317254c1
-      <div>
-        <h1>{service.name}</h1>
-      </div>
-<<<<<<< HEAD
-      <div className={style.titleDetail}>
       <h1>{service.name}</h1>
-      </div>
-      <div>
-      <h4 >Type: {service.type}</h4>
-      <h4>Price: ${service.price}</h4>
-      <h4>Time Lapse: {service.timelapse} min</h4>
-=======
-      <div className="grid-fluid">
-        <h4>{service.type}</h4>
-        <h4>Price: ${service.price}</h4>
-        <h4>Timelapse: {service.timelapse} min</h4>
->>>>>>> c16122abe4eb4fbf942393b2e7c78703317254c1
-      </div>
+      <img src={service.img} alt="Not found" />
+      <h2>{service.detail}</h2>
+      <p>Timelapse: {service.timelapse} min</p>
+      <p>Price: ${service.price}</p>
       <Link
-        to="vet"
+        to="turn"
         type="button"
         className="text-decoration-none btn btn-dark"
       >
