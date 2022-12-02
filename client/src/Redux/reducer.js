@@ -121,6 +121,7 @@ function rootReducer(state = initialState, action) {
         petDetail: [],
         serviceDetail: [],
         userDetail: [],
+        adminDetail: [],
       };
     case CREATE_TURN:
       return {

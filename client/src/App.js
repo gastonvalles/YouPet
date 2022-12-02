@@ -13,6 +13,7 @@ import FormUser from "./Components/Functionality/Forms/User";
 import FormVet from "./Components/Functionality/Forms/Vet";
 import NavBar from "./Components/Functionality/Navbar/index";
 import PanelAdmin from "./Components/Functionality/PanelAdmin/Body/PanelAdmin";
+import AdminProfileDetail from "./Components/Functionality/PanelAdmin/Users/Detail";
 import ChooseVetTurn from "./Components/Functionality/Turns/ChooseVetTurn";
 
 import Home from "./Components/View/HomeFake/HomeFake";
@@ -33,6 +34,7 @@ function App() {
         <Route exact path="/pet/register" element={<FormPet />} />
         <Route exact path="/vet/register" element={<FormVet />} />
         <Route exact path='/login' element={<Login />} />
+        <Route path="/user/:id" element={<AdminProfileDetail />} />
         <Route path="/admin/*" element={<PanelAdmin/>}/>
       </Routes>
     </div>

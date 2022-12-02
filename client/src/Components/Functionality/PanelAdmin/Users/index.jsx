@@ -17,7 +17,14 @@ export default function Users() {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const columns = [
-    { field: "id", headerName: "ID" },
+    { field: "id", 
+    headerName: "ID",
+    renderCell: ({ row: { id } }) => {
+      return( 
+      <Link to={`/user/${id}`} className="text-decoration-none">{id}</Link>
+      )
+    }, 
+    },
     {
       field: "name",
       headerName: "Name",
@@ -130,16 +137,12 @@ export default function Users() {
             color: `${colors.grey[100]} !important`,
           },
         }}
-        key={allUsers.id}
       >
-        <Link to={`/users/${allUsers.id}`}>
         <DataGrid
           rows={allUsers}
           columns={columns}
           components={{ Toolbar: GridToolbar }}
-          id={allUsers.id}
         />
-        </Link>
       </Box>
     </Box>
   );

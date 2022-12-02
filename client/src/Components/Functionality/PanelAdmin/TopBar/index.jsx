@@ -1,23 +1,23 @@
 import React, { useContext } from "react";
 import { Box, IconButton, useTheme } from "@mui/material";
 import { ColorModeContext, tokens } from "../theme";
-import InputBase from "@mui/material/InputBase";
+// import InputBase from "@mui/material/InputBase";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
-import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
-import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
-import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
-import SearchIcon from "@mui/icons-material/Search";
+// import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
+// import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
+// import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
+// import SearchIcon from "@mui/icons-material/Search";
 
 export default function TopBar() {
   const theme = useTheme();
-  const colors = tokens(theme.palette.mode);
+  // const colors = tokens(theme.palette.mode);
   const colorMode = useContext(ColorModeContext);
 
   return (
     <Box display="flex" justifyContent="space-between" p={2}>
     {/* SEARCH BAR */}
-    <Box
+    {/* <Box
       display="flex"
       backgroundColor={colors.primary[400]}
       borderRadius="3px"
@@ -26,7 +26,7 @@ export default function TopBar() {
       <IconButton type="button" sx={{ p: 1 }}>
         <SearchIcon />
       </IconButton>
-    </Box>
+    </Box> */}
 
     {/* ICONS */}
     <Box display="flex">
@@ -37,7 +37,7 @@ export default function TopBar() {
           <LightModeOutlinedIcon />
         )}
       </IconButton>
-      <IconButton>
+      {/* <IconButton>
         <NotificationsOutlinedIcon />
       </IconButton>
       <IconButton>
@@ -45,7 +45,7 @@ export default function TopBar() {
       </IconButton>
       <IconButton>
         <PersonOutlinedIcon />
-      </IconButton>
+      </IconButton> */}
     </Box>
   </Box>
 );

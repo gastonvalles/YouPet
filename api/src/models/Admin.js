@@ -30,7 +30,7 @@ module.exports = (sequelize) => {
           },
         },
       },
-      adminame: {
+      username: {
         type: DataTypes.TEXT,
         unique: true,
         allowNull: false,
@@ -63,6 +63,11 @@ module.exports = (sequelize) => {
         allowNull: false
       },
       isAdmin: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+        allowNull: false
+      },
+      isActive: {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
         allowNull: false

@@ -5,7 +5,7 @@ const FirstAdmin = [
   {
     name: "Federico",
     lastname: "Saffores",
-    adminame: "AppFede",
+    username: "AppFede",
     password: "12345678",
     tel: 2613994310,
     img: "",
@@ -16,7 +16,7 @@ const FirstAdmin = [
   {
     name: "Gaston",
     lastname: "Valles",
-    adminame: "AppGas",
+    username: "AppGas",
     password: "12345",
     tel: 2619584318,
     img: "",
@@ -27,7 +27,7 @@ const FirstAdmin = [
   {
     name: "Luis",
     lastname: "Goytia",
-    adminame: "AppLuis",
+    username: "AppLuis",
     password: "12345",
     tel: 2619694318,
     img: "",
@@ -38,7 +38,7 @@ const FirstAdmin = [
   {
     name: "Ernesto",
     lastname: "Velazquez",
-    adminame: "AppErnesto",
+    username: "AppErnesto",
     password: "123456",
     tel: 2619994318,
     img: "",
