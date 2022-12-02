@@ -163,9 +163,9 @@ export function createTurn(payload) {
 }
 
 export function getTurn(payload) {
-  const { vetId, servId } = payload;
+  const { vetSelect, servId } = payload;
   return async function (dispatch) {
-    let json = await axios.get(`http://localhost:3001/turn/${vetId}/${servId}`);
+    let json = await axios.get(`http://localhost:3001/turn/${vetSelect}/${servId}`);
     return dispatch({
       type: GET_TURN,
       payload: json.data,
