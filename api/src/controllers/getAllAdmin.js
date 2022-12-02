@@ -69,8 +69,17 @@ const dbCreateAdmin = async (body) => {
   }
 };
 
+
+const dbDeleteAdmin = async (id) => {
+  await Admin.destroy({
+    where: { id }
+  });
+  return `Admin id:${id} deleted sucessfully`;
+};
+
 module.exports = {
   getDBAdmin,
   getDBAdminByPK,
   dbCreateAdmin,
+  dbDeleteAdmin
 };

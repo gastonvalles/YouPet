@@ -3,6 +3,7 @@ const {
   getDBAdmin,
   getDBAdminByPK,
   dbCreateAdmin,
+  dbDeleteAdmin
 } = require("../controllers/getAllAdmin");
 const router = Router();
 
@@ -32,6 +33,17 @@ router.post("/create", async (req, res) => {
     res.status(200).json(createAdmin);
   } catch (error) {
     res.status(404).send(error);
+  }
+});
+
+router.delete("/:AdminId", async (req, res) => {
+  try {
+    const admin = await dbDeleteAdmin(req.params.AdminId);
+    if (admin) await dbDeleteAdmin(req.params.AdminId, admin);
+    const deletedAdmin = await dbDeleteAdmin(req.params.AdminId);
+    res.status(200).send(deletedAdmin);
+  } catch (error) {
+    res.status(404).send(error.message);
   }
 });
 

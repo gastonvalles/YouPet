@@ -1,10 +1,24 @@
 .grid-fluid {
   display: grid;
+<<<<<<< HEAD
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   padding: 3px;
   
+=======
+  width: 80%;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  padding: 10px;
+>>>>>>> c16122abe4eb4fbf942393b2e7c78703317254c1
 }
 
 h1 {
   color: #D94A98;
+}
+
+
+.cardl-list {
+  z-index: 0;
+  display: flex;
+  justify-content: center;
+
 }

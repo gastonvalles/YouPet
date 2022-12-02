@@ -12,9 +12,9 @@ function TakeTurns() {
   const [showTime, setShowTime] = useState(false);
 
   const miniDate = new Date();
-  const { id } = useParams();
+  const { servId } = useParams();
   const navigate = useNavigate();
-  const path = `/service/${id}/vet`;
+  const path = `/service/${servId}/vet`;
 
   return (
     <div className="container">

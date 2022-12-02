@@ -36,6 +36,7 @@ router.post("/", async (req, res) => {
     res.status(404).send(error.message);
   }
 });
+
 router.delete("/:vetId", async (req, res) => {
   try {
     const vet = await dbDeleteVet(req.params.vetId);

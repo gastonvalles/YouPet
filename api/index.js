@@ -6,3 +6,8 @@ conn.sync({ force: true }).then(() => {
         console.log(`Server listening at ${process.env.PORT}`);
     });
 });
+
+
+
+
+

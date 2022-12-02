@@ -7,6 +7,7 @@ const {
   getUserByPK,
   getUserByEmail
 } = require("../controllers/getAllUsers");
+const {findByUserName} = require ("../controllers/find")
 const router = Router();
 
 router.get('/', async (req, res) => {
@@ -41,10 +42,11 @@ router.get('/log/:email', async (req, res) => {
 
 router.post("/", async (req, res) => {
   try {
+   
     const createUser = await dbCreateUser(req.body);
-    res.status(200).json(createUser);
+    res.status(200).json( createUser);
   } catch (error) {
-    res.status(404).send(error.message);
+    res.status(404).send(error);
   }
 });
 
