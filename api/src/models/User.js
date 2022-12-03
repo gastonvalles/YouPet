@@ -11,43 +11,19 @@ module.exports = (sequelize) => {
         name: {
             type: DataTypes.STRING,
             allowNull: false,
-            validate: {
-                len: {
-                    args: [1, 50],
-                    msg: "The name should contain at least 1 letter",
-                }
-            }
         },
         lastname: {
             type: DataTypes.STRING,
             allowNull: false,
-            validate: {
-                len: {
-                    args: [1, 50],
-                    msg: "The lastname should contain at least 1 letter",
-                }
-            }
         },
         username: {
             type: DataTypes.TEXT,
             unique: true,
             allowNull: false,
-            validate: {
-                len: {
-                    args: [1, 50],
-                    msg: "Username should have 8 characters at least"
-                },
-            }
         },
         password: {
             type: DataTypes.TEXT,
             allowNull: false,
-            validate: {
-                len: {
-                    args: [8, 24],
-                    msg: "Password should have 8 characters at least"
-                },
-            }
         },
         img: {
             type: DataTypes.STRING,
@@ -61,8 +37,11 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING,
             allowNull: false
         },
+        tel: {
+            type: DataTypes.BIGINT
+        },
         dni: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.BIGINT,
             unique: true,
             allowNull: false
         },
@@ -76,9 +55,6 @@ module.exports = (sequelize) => {
             defaultValue: true,
             allowNull: false
         },
-        tel: {
-            type: DataTypes.BIGINT
-        }
     }, {
         timestamps: false,
         createdAt: false,
