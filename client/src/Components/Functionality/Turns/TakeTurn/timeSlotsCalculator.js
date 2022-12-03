@@ -13,7 +13,6 @@ const timeSlotsCalculator = (
     selectedDate.toDateString() + " " + datefinish.getHours() + ":00";
   let date = new Date(actualDateStart);
 
-  let todayDate = new Date();
   let endDate = new Date(actualDateEnd);
   const intervalMinutes = interval;
 
@@ -35,12 +34,6 @@ const timeSlotsCalculator = (
         addInterval = false;
         i++;
       }
-    }
-
-    if (date.getDate() === todayDate.getDate() && date.getHours() < todayDate.getHours() ) {
-       addInterval = false
-       date = new Date(date.setMinutes(date.getMinutes() + intervalMinutes));
-      
     }
     if (addInterval) {
       idDates++;

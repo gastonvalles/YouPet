@@ -32,9 +32,7 @@ module.exports = (sequelize) => {
           },
         },
       },
-      img: {
-        type: DataTypes.STRING,
-      },
+
       isActive: {
         type: DataTypes.BOOLEAN,
         defaultValue: true,

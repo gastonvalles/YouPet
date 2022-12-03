@@ -32,9 +32,6 @@ module.exports = (sequelize) => {
           },
         },
       },
-      img: {
-        type: DataTypes.STRING
-      },
       name: {
         type: DataTypes.STRING,
         defaultValue: false,
@@ -59,7 +56,7 @@ module.exports = (sequelize) => {
       },
       detail: {
         type: DataTypes.TEXT,
-      },
+      }
     },
     {
       timestamps: false,

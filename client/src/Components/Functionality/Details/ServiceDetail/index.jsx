@@ -17,13 +17,16 @@ export default function ServiceDetail() {
 
   return (
     <>
-      <h1>{service.name}</h1>
-      <img src={service.img} alt="Not found" />
-      <h2>{service.detail}</h2>
-      <p>Timelapse: {service.timelapse} min</p>
-      <p>Price: ${service.price}</p>
+      <div>
+        <h1>{service.name}</h1>
+      </div>
+      <div className="grid-fluid">
+        <p>{service.detail}</p>
+        <p>Timelapse: {service.timelapse} min</p>
+        <p>Price: ${service.price}</p>
+      </div>
       <Link
-        to="turn"
+        to="vet"
         type="button"
         className="text-decoration-none btn btn-dark"
       >

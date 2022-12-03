@@ -23,7 +23,7 @@ export default function NavBar() {
 
   useEffect(() => {
     dispatch(getServices());
-    //dispatch(getVetsDetail(id))
+    dispatch(getVetsDetail(id))
   }, [dispatch, id]);
 
   function handleFilter(event) {
@@ -83,6 +83,16 @@ export default function NavBar() {
               </button>
             </form>
             {/* preguntar si esta logueado o no */}
+            <div className="d-flex">
+              <Link to={"/login"}>
+                <button className="btn"> Sign in</button>
+              </Link>
+              <Link to={"/reguser"}>
+                <button className="btn btn-outline-success me-4">
+                  Sign up
+                </button>
+              </Link>
+            </div>
           </div>
           {/* <div>
             <select
@@ -113,18 +123,6 @@ export default function NavBar() {
               <option value={"Diagnostics"}>Diagnostics</option>
               <option value={"Aesthetics"}>Aesthetics</option>
             </select>
-          </div>
-          <div>
-            <div className="d-flex">
-              <Link to={"/login"}>
-                <button className="btn"> Sign in</button>
-              </Link>
-              <Link to={"/reguser"}>
-                <button className="btn btn-outline-success me-4">
-                  Sign up
-                </button>
-              </Link>
-            </div>
           </div>
         </div>
       </nav>

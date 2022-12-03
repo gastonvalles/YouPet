@@ -11,6 +11,7 @@ const router = Router();
 router.get("/", async (req, res) => {
   try {
     const allService = await getDBService(req.query.name);
+    console.log(allService);
     res.status(200).json(allService);
   } catch (error) {
     res.status(404).send(error.message);

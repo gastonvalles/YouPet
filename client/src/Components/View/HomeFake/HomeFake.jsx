@@ -33,7 +33,7 @@ export default function Home() {
                   type="button"
                   className="text-decoration-none"
                 >
-                  <ServiceCard name={service.name} id={service.id} img={service.img} />
+                  <ServiceCard name={service.name} id={service.id} />
                 </Link>
               </div>
             );
@@ -52,7 +52,7 @@ export default function Home() {
                   className="text-decoration-none"
                 >
                   <VetCard
-                    img={vet.img}
+                    image={vet.image}
                     name={vet.name}
                     lastname={vet.lastname}
                     id={vet.id}
