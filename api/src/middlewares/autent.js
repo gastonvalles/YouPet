@@ -1,16 +1,16 @@
 const { Router } = require("express");
 const { User } = require("../db");
 const passport = require("passport");
-const autController = require("../controllers/autentController");
+const authController = require("../controllers/autentController.js");
 
 const router = Router();
 
-router.post("/register", autController.register);
-router.post("/login", autController.login);
+router.post("/register", authController.register);
+router.post("/login", authController.login);
 router.get(
   "/protected",
   passport.authenticate("jwt", { session: false }),
-  autController.protectedRoute
+  authController.protectedRoute
 );
-router.get("/logout", autController.logout);
+router.get("/logout", authController.logout);
 module.exports = router;
