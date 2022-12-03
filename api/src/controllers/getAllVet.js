@@ -15,7 +15,10 @@ const JsonVet = [
     inicialDate: new Date(2022, 1, 10, 9, 0, 0),
     finishDate: new Date(2022, 1, 10, 12, 0, 0),
     tel: 2615594312,
-    dni: 39987470
+    dni: 39987470,
+    fav: "",
+    email: "fedesafforesvet@gmail.com",
+    address: "ya no se ayuda 234",
   },
   {
     name: "Gaston",
@@ -28,7 +31,10 @@ const JsonVet = [
     inicialDate: new Date(2022, 1, 10, 13, 0, 0),
     finishDate: new Date(2022, 1, 10, 18, 0, 0),
     tel: 2619994713,
-    dni: 39987329
+    dni: 39987329,
+    fav: "",
+    email: "gastonvallesvet@gmail.com",
+    address: "ya no se ayuda 345",
   },
   {
     name: "Veronica",
@@ -41,7 +47,10 @@ const JsonVet = [
     inicialDate: new Date(2022, 1, 10, 9, 0, 0),
     finishDate: new Date(2022, 1, 10, 11, 0, 0),
     tel: 2612904314,
-    dni: 39987915
+    dni: 39987915,
+    fav: "",
+    email: "vetronica@gmail.com",
+    address: "ya no se ayuda 456",
   },
   {
     name: "Kelvin",
@@ -54,7 +63,10 @@ const JsonVet = [
     inicialDate: new Date(2022, 1, 10, 14, 0, 0),
     finishDate: new Date(2022, 1, 10, 18, 0, 0),
     tel: 2617774315,
-    dni: 39987007
+    dni: 39987007,
+    fav: "",
+    email: "kelvin@gmail.com",
+    address: "ya no se ayuda 567",
   },
   {
     name: "Ernesto",
@@ -67,7 +79,10 @@ const JsonVet = [
     inicialDate: new Date(2022, 1, 10, 15, 0, 0),
     finishDate: new Date(2022, 1, 10, 19, 0, 0),
     tel: 2619004316,
-    dni: 39987321
+    dni: 39987321,
+    fav: "",
+    email: "ernestovvetlazquez@gmail.com",
+    address: "ya no se ayuda 678",
   },
   {
     name: "Pedro",
@@ -80,7 +95,10 @@ const JsonVet = [
     inicialDate: new Date(2022, 1, 10, 13, 0, 0),
     finishDate: new Date(2022, 1, 10, 15, 0, 0),
     tel: 2612294317,
-    dni: 39987265
+    dni: 39987265,
+    fav: "",
+    email: "pedrobaneado@gmail.com",
+    address: "ya no se ayuda 789",
   },
   {
     name: "Luis",
@@ -93,7 +111,10 @@ const JsonVet = [
     inicialDate: new Date(2022, 1, 10, 12, 0, 0),
     finishDate: new Date(2022, 1, 10, 19, 0, 0),
     tel: 2619394318,
-    dni: 39987237
+    dni: 39987237,
+    fav: "",
+    email: "luisgoytiavet@gmail.com",
+    address: "ya no se ayuda 890",
   },
   {
     name: "Mathias",
@@ -106,7 +127,10 @@ const JsonVet = [
     inicialDate: new Date(2022, 1, 10, 14, 0, 0),
     finishDate: new Date(2022, 1, 10, 18, 0, 0),
     tel: 2618894319,
-    dni: 39987235
+    dni: 39987235,
+    fav: "",
+    email: "mathiasvetledesma@gmail.com",
+    address: "ya no se ayuda 900",
   },
 ];
 
@@ -145,8 +169,8 @@ const getDBVetByPK = async (id) => {
 
 const dbCreateVet = async (body) => {
   try {
-    const { name, lastname, isActive, speciality, review, average, inicialDate, finishDate, tel, img } = body;
-    if (!name || !lastname || !isActive || !speciality || review || average || !inicialDate || !finishDate || !tel) {
+    const { name, lastname, isActive, speciality, review, average, inicialDate, finishDate, tel, img, fav, email, address, dni } = body;
+    if (!name && !lastname && !isActive && !speciality && review && average && !inicialDate && !finishDate && !tel && !email && !address && !dni) {
       throw new Error("missing query");
     } else {
       await Vet.create(body);

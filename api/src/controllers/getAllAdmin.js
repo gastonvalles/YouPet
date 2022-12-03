@@ -6,12 +6,12 @@ const FirstAdmin = [
     name: "Federico",
     lastname: "Saffores",
     username: "AppFede",
-    email: "federicosaffores3@gmail.com",
-    address: "calle falsa 124",
     password: "12345678",
     tel: 2613994310,
-    img: "",
+    img: "alberdi 123",
     dni: 35987456,
+    email: "fedesaffores@gmail.com",
+    address: "",
     isAdmin: true,
     isActive: true
   },
@@ -19,12 +19,12 @@ const FirstAdmin = [
     name: "Gaston",
     lastname: "Valles",
     username: "AppGas",
-    email: "gastonvalles98@gmail.com",
-    address: "calle dudosa 123",
     password: "12345",
     tel: 2619584318,
-    img: "",
+    img: "san juan 1511",
     dni: 40558498,
+    email: "gastonvallesyeou@gmail.com",
+    address: "",
     isAdmin: true,
     isActive: true
   },
@@ -32,12 +32,12 @@ const FirstAdmin = [
     name: "Luis",
     lastname: "Goytia",
     username: "AppLuis",
-    email: "luisgoytia2@gmail.com",
-    address: "calle real 123",
     password: "12345",
     tel: 2619694318,
-    img: "",
+    img: "calle falsa 123",
     dni: 41987456,
+    email: "luisgoytia@gmail.com",
+    address: "",
     isAdmin: true,
     isActive: false
   },
@@ -45,12 +45,12 @@ const FirstAdmin = [
     name: "Ernesto",
     lastname: "Velazquez",
     username: "AppErnesto",
-    email: "ernestovx2@gmail.com",
-    address: "calle real 987",
     password: "123456",
     tel: 2619994318,
     img: "",
     dni: 32987456,
+    email: "ernestovvelazquez@gmail.com",
+    address: "calle real 321",
     isAdmin: true,
     isActive: true
   }
@@ -91,8 +91,8 @@ const getDBAdminByPK = async (id) => {
 
 const dbCreateAdmin = async (body) => {
   try {
-    const { name, lastname, username, email, address, password, tel, img, dni, isAdmin, isActive } = body;
-    if (!name || !lastname || !username || email || address || !password || !tel || !dni || !isAdmin || !isActive) {
+    const { name, lastname, username, password, email, address, tel, img, dni, isAdmin, isActive } = body;
+    if (!name && !lastname && !username && !password && !tel && !dni && !isAdmin && !isActive && !email && !address) {
       throw new Error("Missing params");
     } else {
       await Admin.create(body);
