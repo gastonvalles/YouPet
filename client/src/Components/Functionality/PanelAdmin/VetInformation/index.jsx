@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Box, useTheme } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
@@ -13,6 +13,17 @@ export default function VetInformation() {
   const allVets = useSelector(state=> state.vets)
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const [status, setStatus] = useState(true)
+
+  function handleStatus(event) {
+    event.preventDefault();
+    if(allVets.isActive === true) {
+      setStatus(false)
+    } else{
+      setStatus(true)
+    }
+  }
+
   const columns = [
     {
       field: "name",
@@ -83,6 +94,7 @@ export default function VetInformation() {
             }
             borderRadius="4px"
             type="button"
+            onClick={handleStatus}
           >
             {isActive === true && <AdminPanelSettingsOutlinedIcon />}
             {isActive === false && <LockOpenOutlinedIcon />}
