@@ -7,7 +7,7 @@ export default function VetDetail() {
   let { id } = useParams();
   const dispatch = useDispatch();
   const vet = useSelector((state) => state.vetDetail);
-
+ 
   useEffect(() => {
     dispatch(getVetsDetail(id));
     return () => {

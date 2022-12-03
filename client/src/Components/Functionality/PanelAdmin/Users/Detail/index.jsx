@@ -1,8 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import { ColorModeContext, useMode } from "../../theme";
-import { Box, CssBaseline, ThemeProvider } from "@mui/material";
+import { ColorModeContext, tokens, useMode } from "../../theme";
+import { Box, CssBaseline, ThemeProvider, useTheme } from "@mui/material";
+import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
+import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
+
 import Header from "../../Header";
 import {
   clearDetails,
@@ -11,11 +14,23 @@ import {
 } from "../../../../../Redux/actions";
 
 export default function AdminProfileDetail() {
+  const theeme = useTheme();
+  const colors = tokens(theeme.palette.mode);
   const { id } = useParams();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.userDetail);
   const admin = useSelector((state) => state.adminDetail);
   const [theme, colorMode] = useMode();
+  const [status, setStatus] = useState(user.isActive)
+
+  function handleStatus(event) {
+    event.preventDefault();
+    if(user.isActive === true) {
+      setStatus(false)
+    } else{
+      setStatus(true)
+    }
+  }
 
   useEffect(() => {
     dispatch(getUserDetail(id));
@@ -50,6 +65,24 @@ export default function AdminProfileDetail() {
                 <h3>Username: {user.username}</h3>
                 <h3>Telephone Numbre: {user.tel}</h3>
                 <h3>DNI: {user.dni}</h3>
+                <Box
+            width="60%"
+            m="0 auto"
+            p="5px"
+            display="flex"
+            justifyContent="center"
+            backgroundColor={
+              user.isActive === true
+                ? colors.greenAccent[600]
+                : colors.redAccent[700]
+            }
+            borderRadius="4px"
+            type="button"
+            onClick={(event)=>handleStatus(event)}
+          >
+            {user.isActive === true && <AdminPanelSettingsOutlinedIcon />}
+            {user.isActive === false && <LockOpenOutlinedIcon />}
+          </Box>
               </Box>
             )}
             {admin.id && (
