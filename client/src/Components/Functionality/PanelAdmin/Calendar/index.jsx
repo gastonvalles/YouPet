@@ -21,7 +21,7 @@ import { tokens } from "../theme";
 export default function CalendarAdmin() {
 
   const dispatch = useDispatch();
-  const allTurns = useSelector((state) => state.allTurn);
+  const allTurns = useSelector((state) => state.turns);
 
 
 
@@ -48,9 +48,7 @@ export default function CalendarAdmin() {
       setCurrentEvents(eventTurns)
     }
   }, [allTurns])
-
-
-
+  
   const handleDateClick = (selected) => {
     const title = prompt("Please enter a new title for your event");
     const calendarApi = selected.view.calendar;
@@ -68,8 +66,6 @@ export default function CalendarAdmin() {
   };
 
   const handleEventClick = (selected) => {
-
-  
     if (
       window.confirm(
         `Are you sure you want to delete the event '${selected.event.title}'`
@@ -142,7 +138,6 @@ export default function CalendarAdmin() {
             select={handleDateClick}
             eventClick={handleEventClick}
             events={currentEvents}
-
           />
         </Box>
       </Box>

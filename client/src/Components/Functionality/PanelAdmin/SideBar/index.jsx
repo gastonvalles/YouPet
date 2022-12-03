@@ -161,6 +161,13 @@ export default function SideBar() {
               Pages
             </Typography>
             <Item
+              title="Admin Register"
+              to="/admin/adminregister"
+              icon={<PersonOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
               title="Vet Register"
               to="/admin/vetregister"
               icon={<PersonOutlinedIcon />}

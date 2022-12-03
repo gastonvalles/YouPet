@@ -41,6 +41,15 @@ module.exports = (sequelize) => {
           },
         },
       },
+      email: {
+        type: DataTypes.TEXT,
+        unique: true,
+        allowNull: false,
+      },
+      address: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
       password: {
         type: DataTypes.TEXT,
         allowNull: false,
@@ -55,23 +64,23 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
       },
       tel: {
-        type: DataTypes.BIGINT
+        type: DataTypes.BIGINT,
       },
       dni: {
         type: DataTypes.INTEGER,
         unique: true,
-        allowNull: false
+        allowNull: false,
       },
       isAdmin: {
         type: DataTypes.BOOLEAN,
-        defaultValue: false,
-        allowNull: false
+        defaultValue: true,
+        allowNull: false,
       },
       isActive: {
         type: DataTypes.BOOLEAN,
-        defaultValue: false,
-        allowNull: false
-      }
+        defaultValue: true,
+        allowNull: false,
+      },
     },
     {
       timestamp: false,

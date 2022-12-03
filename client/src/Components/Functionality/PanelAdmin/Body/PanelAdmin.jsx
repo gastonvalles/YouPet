@@ -7,10 +7,11 @@ import "./PanelAdmin.css";
 import SideBar from "../SideBar/index.jsx";
 import Dashboard from "../Dashboard/index.jsx";
 import Users from "../Users/index.jsx";
-import FormVet from "../../Forms/Vet";
 import Contacts from "../Contacts";
 import VetInformation from "../VetInformation";
 import CalendarAdmin from "../Calendar";
+import AdminRegister from "../AdminRegister";
+import VetForm from "../../Forms/Vet";
 
 export default function PanelAdmin() {
   const [theme, colorMode] = useMode();
@@ -27,7 +28,8 @@ export default function PanelAdmin() {
               <Route path="/users" element={<Users />} />
               <Route path="/contacts" element={<Contacts/>} />
               <Route path="/allvets" element={<VetInformation/>}/>
-              <Route path="/vetregister" element={<FormVet/>}/>
+              <Route path="/adminregister" element={<AdminRegister/>} />
+              <Route path="/vetregister" element={<VetForm/>}/>
               <Route path="/calendar" element={<CalendarAdmin/>} />
             </Routes>
           </main>

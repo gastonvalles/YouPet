@@ -50,7 +50,7 @@ export default function VetInformation() {
       cellClassName: "address-column--cell",
     },
     {
-      field:"telephoneNumber",
+      field:"tel",
       headerName:"Telephon Number",
       flex: 1,
       cellClassName: "telephone-column--cell",

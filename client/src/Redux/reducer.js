@@ -1,27 +1,61 @@
 import {
- GET_TURN, CLEAR_TURN, CLEAR_DETAILS, CREATE_TURN, FILTER_SERVICE, GET_ADMINS, GET_ADMIN_BY_NAME, GET_ADMIN_DETAIL, GET_PETS, GET_PET_DETAIL,
-  GET_SERVICES, GET_SERVICE_BY_NAME, GET_SERVICE_DETAIL,
-  GET_USERS, GET_USER_BY_EMAIL, GET_USER_BY_NAME, GET_USER_DETAIL, GET_VETS, GET_VET_BY_NAME, GET_VET_DETAIL, GET_All_TURN
-
+  GET_TURN,
+  CLEAR_TURN,
+  CLEAR_DETAILS,
+  CREATE_TURN,
+  FILTER_SERVICE,
+  GET_ADMINS,
+  GET_ADMIN_BY_NAME,
+  GET_ADMIN_DETAIL,
+  GET_PETS,
+  GET_PET_DETAIL,
+  GET_SERVICES,
+  GET_SERVICE_BY_NAME,
+  GET_SERVICE_DETAIL,
+  GET_USERS,
+  GET_USER_BY_EMAIL,
+  GET_USER_BY_NAME,
+  GET_USER_DETAIL,
+  GET_VETS,
+  GET_VET_BY_NAME,
+  GET_VET_DETAIL,
+  GET_All_TURN,
+  CREATE_SERVICE,
+  CREATE_ADMIN,
+  DELETE_PET,
+  DELETE_VET,
+  DELETE_ADMIN,
+  DELETE_SERVICE,
+  DELETE_TURN,
 } from "./const";
 
 const initialState = {
   pets: [],
-  vets: [],
-  medDiag: [],
-  vetDetail: [],
+  allPets: [],
   petDetail: [],
-  allTurn: [],
+  petCreate: [],
+  vets: [],
+  allVets: [],
+  vetDetail: [],
+  vetCreate: [],
+  medDiag: [],
+  turns: [],
+  allTurns: [],
   turn: [],
   vetTurns: [],
   createdTurn: [],
   services: [],
   serviceDetail: [],
-  user: {},
+  createService: [],
+  user: [],
   users: [],
+  allUsers: [],
   userDetail: [],
+  userCreate: [],
   admins: [],
+  allAdmins: [],
   adminDetail: [],
+  adminCreate: [],
   allServices: [],
 };
 
@@ -31,11 +65,18 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         pets: action.payload,
+        allPets: action.payload,
       };
     case GET_PET_DETAIL:
       return {
         ...state,
         petDetail: action.payload,
+      };
+    case DELETE_PET:
+      const deletePet = state.allPets;
+      return {
+        ...state,
+        pets: deletePet.filter((pet) => pet.id !== action.payload),
       };
     case GET_VETS:
       return {
@@ -52,6 +93,12 @@ function rootReducer(state = initialState, action) {
         ...state,
         vets: action.payload,
       };
+    case DELETE_VET:
+      const deleteVet = state.allVets;
+      return {
+        ...state,
+        vets: deleteVet.filter((vet) => vet.id !== action.payload),
+      };
     case GET_SERVICES:
       return {
         ...state,
@@ -67,6 +114,19 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         services: action.payload,
+      };
+    case CREATE_SERVICE:
+      return {
+        ...state,
+        createService: [action.payload],
+      };
+    case DELETE_SERVICE:
+      const deleteService = state.allServices;
+      return {
+        ...state,
+        services: deleteService.filter(
+          (service) => service.id !== action.payload
+        ),
       };
     case GET_USERS:
       return {
@@ -103,14 +163,25 @@ function rootReducer(state = initialState, action) {
         ...state,
         admins: action.payload,
       };
+    case CREATE_ADMIN:
+      return {
+        ...state,
+        adminCreate: [action.payload],
+      };
+    case DELETE_ADMIN:
+      const deleteAdmin = state.allAdmins;
+      return {
+        ...state,
+        admins: deleteAdmin.filter((c) => c.id !== action.payload),
+      };
     case FILTER_SERVICE:
       const allservices = state.allServices;
       const filter =
         action.payload === ""
           ? allservices
           : allservices.filter(
-            (r) => r.type.toLowerCase() === action.payload.toLowerCase()
-          );
+              (r) => r.type.toLowerCase() === action.payload.toLowerCase()
+            );
       return {
         ...state,
         services: filter,
@@ -137,13 +208,20 @@ function rootReducer(state = initialState, action) {
     case GET_All_TURN:
       return {
         ...state,
-        allTurn: action.payload,
+        turns: action.payload,
+        allTurns: action.payload,
+      };
+    case DELETE_TURN:
+      const deleteTurn = state.allTurns;
+      return {
+        ...state,
+        turns: deleteTurn.filter((c) => c.id !== action.payload),
       };
     case CLEAR_TURN:
       return {
         ...state,
         turn: [],
-        createdTurn: []
+        createdTurn: [],
       };
     default:
       return state;

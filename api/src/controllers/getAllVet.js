@@ -5,6 +5,8 @@ const JsonVet = [
   {
     name: "Federico",
     lastname: "Saffores",
+    email: "federicosaffores3@gmail.com",
+    address: "calle falsa 124",
     isActive: true,
     speciality: "Healthcare Clinic",
     review: "",

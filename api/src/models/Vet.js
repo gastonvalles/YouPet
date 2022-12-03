@@ -10,7 +10,6 @@ module.exports = (sequelize) => {
         primaryKey: true,
         allowNull: false,
       },
-
       name: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -21,7 +20,6 @@ module.exports = (sequelize) => {
           },
         },
       },
-
       lastname: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -40,7 +38,6 @@ module.exports = (sequelize) => {
         defaultValue: true,
         allowNull: false,
       },
-
       speciality: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -49,7 +46,6 @@ module.exports = (sequelize) => {
       review: {
         type: DataTypes.TEXT,
       },
-
       average: {
         type: DataTypes.INTEGER,
         defaultValue: 0,
@@ -62,19 +58,18 @@ module.exports = (sequelize) => {
         type: DataTypes.DATE,
         allowNull: false,
       },
-
       finishDate: {
         type: DataTypes.DATE,
         allowNull: false,
       },
       tel: {
-        type: DataTypes.BIGINT
+        type: DataTypes.BIGINT,
       },
       dni: {
         type: DataTypes.INTEGER,
         unique: true,
-        allowNull: false
-      }
+        allowNull: false,
+      },
     },
     {
       timestamps: false,

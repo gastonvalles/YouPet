@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 
-export default function VetForm() {
+export default function AdminRegister() {
   const [formSuccess, setformSuccess] = useState(false);
 
   return (
@@ -10,9 +10,11 @@ export default function VetForm() {
         initialValues={{
           name: "",
           lastname: "",
-          speciality: "",
+          username: "",
           dni: "",
           email: "",
+          password: "",
+          passwordCopy: "",
           address: "",
         }}
         validate={(values) => {
@@ -27,7 +29,7 @@ export default function VetForm() {
           } else if (!/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(values.name)) {
             errors.lastname = "Solo puedes ingresar Letras";
           }
-          if (!values.speciality) {
+          if (!values.username) {
             errors.username = "Por favor ingresa un nombre";
           } else if (!/^[a-zA-Z0-9\_\-]{4,16}$/.test(values.username)) {
             errors.username = "Solo puedes ingresar Letras";
@@ -45,6 +47,16 @@ export default function VetForm() {
             )
           ) {
             errors.email = "Solo puedes ingresar un email valido";
+          }
+          if (!values.passwordCopy) {
+            errors.passwordCopy = "Por favor ingresa una contraseña";
+          } else if (!/^[a-zA-Z0-9\_\-]{4,16}$/.test(values.passwordCopy)) {
+            errors.passwordCopy = "Debe tener al menos 5 digitos";
+          }
+          if (!values.password) {
+            errors.password = "Por favor ingresa nuevamente contraseña";
+          } else if (values.passwordCopy !== values.password) {
+            errors.password = "La contraseñas no conciden";
           }
           if (!values.address) {
             errors.adress = "Por favor ingresa una direccion";
@@ -91,15 +103,15 @@ export default function VetForm() {
                 />
               </div>
               <div>
-                <label htmlFor="speciality">Speciality</label>
+                <label htmlFor="userName">Username</label>
                 <Field
                   type="text"
-                  name="speciality"
+                  name="username"
                   className="form-control"
-                  placeholder="Speciality"
+                  placeholder="Username"
                 />
                 <ErrorMessage
-                  name="speciality"
+                  name="username"
                   render={(msg) => <p className="text-danger">{msg}</p>}
                 />
               </div>
@@ -132,14 +144,60 @@ export default function VetForm() {
                   render={(msg) => <p className="text-danger">{msg}</p>}
                 />
               </div>
-              
+              <div className="password">
+                <div className="row g-3 align-items-center">
+                  <div className="col-auto">
+                    <label htmlFor="inputPassword6" className="col-form-label">
+                      Password
+                    </label>
+                  </div>
+                  <div className="col-auto">
+                    <Field
+                      type="password"
+                      name="passwordCopy"
+                      className="form-control"
+                      aria-describedby="passwordHelpInline"
+                    />
+                    <ErrorMessage
+                      name="passwordCopy"
+                      render={(msg) => <p className="text-danger">{msg}</p>}
+                    />
+                  </div>
+                  <div className="col-auto">
+                    <span id="passwordHelpInline" className="form-text">
+                      Must be 8-20 characters long.
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div className="password">
+                <div className="row g-3 align-items-center">
+                  <div className="col-auto">
+                    <label htmlFor="inputPassword6" className="col-form-label">
+                      Confirm Password
+                    </label>
+                  </div>
+                  <div className="col-auto">
+                    <Field
+                      type="password"
+                      name="password"
+                      className="form-control"
+                      aria-describedby="passwordHelpInline"
+                    />
+                    <ErrorMessage
+                      name="password"
+                      render={(msg) => <p className="text-danger">{msg}</p>}
+                    />
+                  </div>
+                </div>
+              </div>
               <div>
                 <label htmlFor="address">Address</label>
                 <Field
                   type="text"
                   name="address"
                   className="form-control"
-                  placeholder="Address"
+                  placeholder="John"
                 />
                 <ErrorMessage
                   name="address"
