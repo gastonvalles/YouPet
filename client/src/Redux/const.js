@@ -5,6 +5,7 @@ export const GET_VET_BY_NAME = "GET_VET_BY_NAME";
 export const CLEAR_DETAILS = "CLEAR_DETAILS";
 export const CREATE_TURN = "CREATE_TURN";
 export const GET_TURN = "GET_TURN";
+export const GET_All_TURN = "GET_All_TURN";
 export const CLEAR_TURN = "CLEAR_TURN";
 export const GET_PET_DETAIL = "GET_PET_DETAIL";
 export const GET_SERVICES = "GET_SERVICES";

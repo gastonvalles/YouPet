@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import FullCalendar, { formatDate } from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import listPlugin from "@fullcalendar/list";
+import { useSelector, useDispatch } from "react-redux";
+import { getAllTurn } from "../../../../Redux/actions";
+
 import {
   Box,
   List,
@@ -16,9 +19,37 @@ import Header from "../Header";
 import { tokens } from "../theme";
 
 export default function CalendarAdmin() {
+
+  const dispatch = useDispatch();
+  const allTurns = useSelector((state) => state.allTurn);
+
+
+
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [currentEvents, setCurrentEvents] = useState([]);
+
+
+  useEffect(() => {
+    dispatch(getAllTurn())
+  }, [dispatch]);
+
+  useEffect(()=>{
+    if (allTurns?.length) {
+  
+      let eventTurns = allTurns?.map(turn => {
+        return {
+          id: turn.id,
+          title: `${turn.Service.name} - ${turn.Vet.name} ${turn.Vet.lastname}`,
+          start: turn.inicialDate,
+          end: turn.finishDate
+        }
+      })
+      setCurrentEvents(eventTurns)
+    }
+  }, [allTurns])
+
+
 
   const handleDateClick = (selected) => {
     const title = prompt("Please enter a new title for your event");
@@ -37,6 +68,8 @@ export default function CalendarAdmin() {
   };
 
   const handleEventClick = (selected) => {
+
+  
     if (
       window.confirm(
         `Are you sure you want to delete the event '${selected.event.title}'`
@@ -49,7 +82,7 @@ export default function CalendarAdmin() {
   return (
     <Box m="20px">
       <Header title="Calendar" subtitle="Full Calendar Interactive Page" />
-
+          
       <Box display="flex" justifyContent="space-between">
         {/* CALENDAR SIDEBAR */}
         <Box
@@ -108,19 +141,8 @@ export default function CalendarAdmin() {
             dayMaxEvents={true}
             select={handleDateClick}
             eventClick={handleEventClick}
-            eventsSet={(events) => setCurrentEvents(events)}
-            initialEvents={[
-              {
-                id: "12315",
-                title: "All-day event",
-                date: "2022-09-14",
-              },
-              {
-                id: "5123",
-                title: "Timed event",
-                date: "2022-09-28",
-              },
-            ]}
+            events={currentEvents}
+
           />
         </Box>
       </Box>
