@@ -1,10 +1,11 @@
 import React from "react";
-import "./ServiceCard.css"
-export default function ServiceCard({ name }) {
+import "./ServiceCard.css";
+
+export default function ServiceCard({ name, img }) {
   return (
     <div className="cardl">
       <div className="cardl_image">
-        <img src="https://img.freepik.com/foto-gratis/cerca-veterinario-cuidando-gato_23-2149100172.jpg" />
+        <img src={img} alt="Not found" />
       </div>
       <div className="cardl_title title-white">
         <p>{name}</p>

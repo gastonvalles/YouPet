@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getTurn, clearTurn, createTurn } from "../../../../Redux/actions";
+import loading_dualring from "./loading_dualring.svg";
 
 import timeSlots from "./timeSlotsCalculator";
 
@@ -11,6 +12,8 @@ import LoadingComponent from "./Loading";
 import "./turns.css";
 
 function Times(props) {
+  const { vetSelect, updateCalendar, setUpdateCalendar } = props;
+
   const [event, setEvent] = useState(null);
   const [info, setInfo] = useState(false);
   const [calcularSlots, setCalcularSlots] = useState(true);
@@ -20,18 +23,21 @@ function Times(props) {
   const [slotSelected, setSlotSelected] = useState(null);
   const [prevButton, setPrevButton] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [loadingTimeSlots, setLoadingTimeSlots] = useState(false);
 
-  const { vetId, servId } = useParams();
+  const { servId } = useParams();
   const dispatch = useDispatch();
 
   const Turns = useSelector((state) => state.turn);
   const createdTur = useSelector((state) => state.createdTurn);
 
   useEffect(() => {
-    if (!Turns?.length) {
-      dispatch(getTurn({ vetId, servId }));
+    if (updateCalendar && vetSelect !== "none") {
+      dispatch(getTurn({ vetSelect, servId }));
+      setUpdateCalendar(false);
+      setLoadingTimeSlots(true);
     }
-  }, [vetId, servId, dispatch, Turns]);
+  }, [servId, dispatch, Turns, vetSelect, updateCalendar, setUpdateCalendar]);
 
   useEffect(
     () => () => {
@@ -43,7 +49,7 @@ function Times(props) {
 
   useEffect(() => {
     setCalcularSlots(true);
-  }, [props.date]);
+  }, [props.date, Turns]);
 
   if (Turns[0] && calcularSlots) {
     const intervalo = Turns[0].service.timelapse;
@@ -67,7 +73,10 @@ function Times(props) {
   if (timesAvailable && calcularTime) {
     setTime(timesAvailable);
     setCalcularTime(false);
-    
+
+    setTimeout(() => {
+      setLoadingTimeSlots(false);
+    }, "500");
   }
 
   const displayInfo = (e) => {
@@ -108,7 +117,7 @@ function Times(props) {
         globalprice: Turns[0].service.price,
         inicialDate: startDate.toUTCString(),
         finishDate: finishDate.toUTCString(),
-        VetId: vetId,
+        VetId: vetSelect,
       };
 
       dispatch(createTurn(turnInfo));
@@ -119,7 +128,15 @@ function Times(props) {
   return (
     <div className="timeSlotContainer">
       <div className="d-flex flex-wrap justify-content-center">
-        {time?.length ? (
+        {vetSelect === "none" ? (
+          <h3>Choose a vet first</h3>
+        ) : loadingTimeSlots ? (
+          <img
+            src={loading_dualring}
+            alt="Loading..."
+            className="loadingTurnsTime"
+          />
+        ) : time?.length ? (
           time.map((times) => {
             return (
               <button
@@ -141,7 +158,9 @@ function Times(props) {
         {info ? `Turn selected at ${event} ${props.date.toDateString()}` : null}
       </div>
 
-      {isLoading && <LoadingComponent createdTur={createdTur} setIsLoading={setIsLoading} />}
+      {isLoading && (
+        <LoadingComponent createdTur={createdTur} setIsLoading={setIsLoading} />
+      )}
 
       <div>
         <hr />

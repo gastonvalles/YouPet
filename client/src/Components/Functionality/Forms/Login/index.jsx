@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useDispatch, useSelector } from "react-redux";
@@ -5,9 +6,6 @@ import { getUserByEmail } from "../../../../Redux/actions";
 import { useNavigate } from "react-router-dom";
 import logo from "../../../../img/logo.png";
 import "./index.css";
-import axios from "axios";
-import Swal from "sweetalert2";
-
 export default function Login() {
   const [formSuccess, setFormSuccess] = useState(false);
 
@@ -19,7 +17,9 @@ export default function Login() {
 
   useEffect(() => {
     if (user.length < 1) dispatch(getUserByEmail(email));
+
   }, [dispatch, user, email]);
+
 
   return (
     <div className="backgroud">
@@ -39,6 +39,7 @@ export default function Login() {
               )
             ) {
               errors.email = "Solo puedes ingresar un email valido";
+
             }
             if (!values.password) {
               errors.password = "Por favor ingresa una contraseña";
@@ -46,25 +47,24 @@ export default function Login() {
               values.password.length < 5 ||
               values.password.length > 16
             ) {
+
               errors.password = "Debe tener al menos 5 digitos";
             }
             return errors;
           }}
-          onSubmit={(value) => {
-            axios
-              .post("http://localhost:3001/login/", value)
-              .then((res) => {
-                document.cookie = `token=${res.data.data}; 
-            max-age=${60 * 60 * 24 * 90}; path=/; samesite=strict`;
+          onSubmit={(values, { resetForm }) => {
+            console.log(values);
+            setEmail(values.email);
+            dispatch(getUserByEmail(email))
+            if (values.password === user.password) {
+              setFormSuccess(true);
+              setTimeout(() => {
+                setFormSuccess(false);
+                resetForm();
                 navigate("/");
-              })
-              .catch((error) => {
-                return Swal.fire({
-                  icon: "error",
-                  title: "error",
-                  text: `${error.response.data.message}`,
-                });
-              });
+              }, 3000);
+            }
+
           }}
         >
           {({ errors }) => (
@@ -114,9 +114,7 @@ export default function Login() {
                 <button type="submit" className="btn btn-primary ">
                   Submit
                 </button>
-                {formSuccess && (
-                  <p className="text-success">¡Bienvenido {user.name}!</p>
-                )}
+                {formSuccess && <p className="text-success">¡Bienvenido {user.name}!</p>}
               </Form>
             </div>
           )}
