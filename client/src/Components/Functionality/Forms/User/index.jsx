@@ -114,10 +114,8 @@ function FormUser() {
           return errors;
         }}
         onSubmit={(values, { resetForm }) => {
-          //funciones con las actions
-          console.log(values);
+          axios.post()
           resetForm();
-          console.log("formulario enviado");
           setformSuccess(true);
           setTimeout(() => {
             setformSuccess(false);
