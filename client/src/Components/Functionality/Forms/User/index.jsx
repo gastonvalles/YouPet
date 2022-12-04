@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import axios from "axios";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 function FormUser() {
   const [formSuccess, setformSuccess] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <div className="container-md">
@@ -60,7 +64,7 @@ function FormUser() {
           }
           if (!values.address) {
             errors.adress = "Por favor ingresa una direccion";
-          } else if (values.address.length<10 && values.address.length>30) {
+          } else if (values.address.length < 10 && values.address.length > 30) {
             errors.adress = "Ingresa una direccion correcta";
           }
           /* if (!values.address.street) {
@@ -106,15 +110,27 @@ function FormUser() {
 
           return errors;
         }}
-        onSubmit={(values, { resetForm }) => {
-          //funciones con las actions
-          console.log(values);
-          resetForm();
-          console.log("formulario enviado");
-          setformSuccess(true);
-          setTimeout(() => {
-            setformSuccess(false);
-          }, 5000);
+        onSubmit={(values) => {
+          axios
+            .post("http://localhost:3001/register/", values, {
+              withCredentials: false,
+            })
+            .then((res) => {
+              Swal.fire({
+                //icon: "succes",
+                title: `Creado exitosamente`,
+                showConfirmButton: false,
+                timer: 1000,
+              });
+              navigate("/login");
+            })
+            .catch((error) =>
+              Swal.fire({
+                icon: "error",
+                title: "existe un error",
+                text: `${error}`,
+              })
+            );
         }}
       >
         {({ errors }) => (
