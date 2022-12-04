@@ -56,7 +56,7 @@ const { transporter } = require("../../config/mailer");
 
 exports.register = async (req, res) => {
   const { name, lastname, username, password, email, dni, address } = req.body;
-  console.log(name, lastname, username, password, email);
+  //console.log(name, lastname, username, password, email);
   if (
     !name ||
     !lastname ||
