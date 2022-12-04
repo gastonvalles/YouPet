@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { getServiceDetail, clearDetails } from "../../../../Redux/actions";
@@ -9,12 +10,32 @@ import VetCard from "../../Cards/VetCard";
 function ChooseVetTurn() {
   const { servId } = useParams();
   const dispatch = useDispatch();
+  const [usuario, setUsuario] = useState(null);
+  const [cargandoUsuario, setCargandoUsuario] = useState(true);
 
   const allVets = useSelector((state) => state.vets);
   const service = useSelector((state) => state.serviceDetail);
 
   const navigate = useNavigate();
   const path = `/service/${servId}`;
+
+  useEffect(() => {
+    async function cargarUsuario() {
+      const { data: user } = await axios.get("http://localhost:3001/user");
+      if (!user.password) {
+        setCargandoUsuario(false);
+        return;
+      } else {
+        try {
+          setUsuario(user);
+          setCargandoUsuario(false);
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    }
+    cargarUsuario();
+  }, []);
 
   useEffect(() => {
     if (!allVets?.length) {

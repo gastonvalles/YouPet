@@ -52,7 +52,9 @@ export default function Login() {
           }}
           onSubmit={(value) => {
             axios
-              .post("http://localhost:3001/login/", value)
+              .post("http://localhost:3001/login/", value, {
+                withCredentials: false,
+              })
               .then((res) => {
                 document.cookie = `token=${res.data.data}; 
             max-age=${60 * 60 * 24 * 90}; path=/; samesite=strict`;

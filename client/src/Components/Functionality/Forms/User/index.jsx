@@ -112,7 +112,9 @@ function FormUser() {
         }}
         onSubmit={(values) => {
           axios
-            .post("http://localhost:3001/register/", values)
+            .post("http://localhost:3001/register/", values, {
+              withCredentials: false,
+            })
             .then((res) => {
               Swal.fire({
                 //icon: "succes",
@@ -126,7 +128,7 @@ function FormUser() {
               Swal.fire({
                 icon: "error",
                 title: "existe un error",
-                text: `${error.response.data.error}`,
+                text: `${error}`,
               })
             );
         }}

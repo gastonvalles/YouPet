@@ -86,7 +86,7 @@ exports.register = async (req, res) => {
         email: req.body.email,
         address: req.body.address,
       });
-      console.log(user);
+      //console.log(user);
       sendEmail(req.body.email);
       res.status(200).json(user);
     } else {
@@ -109,7 +109,7 @@ const sendEmail = async (email) => {
 
 exports.login = async (req, res) => {
   const { email, password } = req.body;
-  console.log(email, password);
+  //console.log(email, password);
   try {
     if (!email || !password) {
       return res.status(404).send("Debe completar todos los campos");
@@ -117,7 +117,7 @@ exports.login = async (req, res) => {
     const findUser = await User.findOne({
       where: { email },
     });
-    console.log(findUser);
+    //console.log(findUser);
     if (
       findUser === null ||
       !(await bcryptjs.compare(password, findUser.password))
