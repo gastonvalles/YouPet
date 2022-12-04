@@ -1,7 +1,10 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import { createUser } from "../../../../Redux/actions";
 
 function FormUser() {
+  const dispatch = useDispatch();
   const [formSuccess, setformSuccess] = useState(false);
 
   return (
@@ -60,7 +63,7 @@ function FormUser() {
           }
           if (!values.address) {
             errors.adress = "Por favor ingresa una direccion";
-          } else if (values.address.length<10 && values.address.length>30) {
+          } else if (values.address.length < 10 && values.address.length > 30) {
             errors.adress = "Ingresa una direccion correcta";
           }
           /* if (!values.address.street) {
@@ -108,6 +111,7 @@ function FormUser() {
         }}
         onSubmit={(values, { resetForm }) => {
           //funciones con las actions
+          dispatch(createUser(values));
           console.log(values);
           resetForm();
           console.log("formulario enviado");

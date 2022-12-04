@@ -152,6 +152,13 @@ export default function SideBar() {
               selected={selected}
               setSelected={setSelected}
             />
+            <Item
+              title="Service Information"
+              to="/admin/service"
+              icon={<ReceiptOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
 
             <Typography
               variant="h6"
@@ -170,6 +177,13 @@ export default function SideBar() {
             <Item
               title="Vet Register"
               to="/admin/vetregister"
+              icon={<PersonOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Service Register"
+              to="/admin/servregister"
               icon={<PersonOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
