@@ -8,12 +8,12 @@ const passport = require("passport");
 require("./db.js");
 require("./middlewares/passport");
 const server = express();
-const cors = require("cors");
+//const cors = require("cors");
 dotenv.config();
 
 server.name = "API";
 
-server.use(cors());
+//server.use(cors());
 //server.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 server.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 server.use(bodyParser.json({ limit: "50mb" }));
