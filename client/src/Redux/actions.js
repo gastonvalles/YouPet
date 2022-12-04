@@ -1,4 +1,5 @@
 import axios from "axios";
+
 import {
   CLEAR_DETAILS,
   CLEAR_TURN,
@@ -37,6 +38,7 @@ import {
   UPDATE_SERVICE,
   UPDATE_VET,
 } from "./const";
+//axios.defaults.withCredentials = true;
 
 export function getPets() {
   return async function (dispatch) {

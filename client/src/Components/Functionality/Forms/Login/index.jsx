@@ -1,5 +1,5 @@
-
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserByEmail } from "../../../../Redux/actions";
@@ -17,9 +17,7 @@ export default function Login() {
 
   useEffect(() => {
     if (user.length < 1) dispatch(getUserByEmail(email));
-
   }, [dispatch, user, email]);
-
 
   return (
     <div className="backgroud">
@@ -39,7 +37,6 @@ export default function Login() {
               )
             ) {
               errors.email = "Solo puedes ingresar un email valido";
-
             }
             if (!values.password) {
               errors.password = "Por favor ingresa una contraseña";
@@ -47,24 +44,20 @@ export default function Login() {
               values.password.length < 5 ||
               values.password.length > 16
             ) {
-
               errors.password = "Debe tener al menos 5 digitos";
             }
             return errors;
           }}
-          onSubmit={(values, { resetForm }) => {
-            console.log(values);
-            setEmail(values.email);
-            dispatch(getUserByEmail(email))
-            if (values.password === user.password) {
-              setFormSuccess(true);
-              setTimeout(() => {
-                setFormSuccess(false);
-                resetForm();
+          onSubmit={(value) => {
+            axios
+              .post("http://localhost:3001/login/", value, {
+                withCredentials: false,
+              })
+              .then((res) => {
+                document.cookie = `token=${res.data.data}; 
+            max-age=${60 * 60 * 24 * 90}; path=/; samesite=strict`;
                 navigate("/");
               }, 3000);
-            }
-
           }}
         >
           {({ errors }) => (
@@ -114,7 +107,9 @@ export default function Login() {
                 <button type="submit" className="btn btn-primary ">
                   Submit
                 </button>
-                {formSuccess && <p className="text-success">¡Bienvenido {user.name}!</p>}
+                {formSuccess && (
+                  <p className="text-success">¡Bienvenido {user.name}!</p>
+                )}
               </Form>
             </div>
           )}

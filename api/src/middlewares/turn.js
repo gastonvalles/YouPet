@@ -15,27 +15,15 @@ router.post("/", async (req, res) => {
 
 module.exports = router;
 
-
-
-router.get("/", async (req, res)=>{
-  try {
-    const getTurns = await getAllTurns();
-    res.status(200).json(getTurns);
-  } catch (error) {
-    res.status(404).send(error.message);
-  }
-})
-
-
-
 router.get("/vet/:vetId", async (req, res)=>{
   try {
+    console.log(req.params);
     const getTurn = await getTurnForVet(req.params);
     res.status(200).json(getTurn);
   } catch (error) {
     res.status(404).send(error.message);
   }
-})
+});
 
 router.get("/:vetId/:servId", async (req, res) => {
   try {
