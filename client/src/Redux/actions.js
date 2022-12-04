@@ -1,8 +1,29 @@
 import axios from "axios";
+
 import {
-  CLEAR_DETAILS, CLEAR_TURN, CREATE_TURN, FILTER_SERVICE, FILTER_VETS, GET_ADMINS, GET_ADMIN_BY_NAME, GET_ADMIN_DETAIL, GET_PETS, GET_PET_DETAIL,
-  GET_SERVICES, GET_SERVICE_BY_NAME, GET_SERVICE_DETAIL, GET_TURN, GET_USERS, GET_USER_BY_EMAIL, GET_USER_BY_NAME, GET_USER_DETAIL, GET_VETS, GET_VET_BY_NAME, GET_VET_DETAIL
+  CLEAR_DETAILS,
+  CLEAR_TURN,
+  CREATE_TURN,
+  FILTER_SERVICE,
+  //FILTER_VETS,
+  GET_ADMINS,
+  GET_ADMIN_BY_NAME,
+  GET_ADMIN_DETAIL,
+  GET_PETS,
+  GET_PET_DETAIL,
+  GET_SERVICES,
+  GET_SERVICE_BY_NAME,
+  GET_SERVICE_DETAIL,
+  GET_TURN,
+  GET_USERS,
+  GET_USER_BY_EMAIL,
+  GET_USER_BY_NAME,
+  GET_USER_DETAIL,
+  GET_VETS,
+  GET_VET_BY_NAME,
+  GET_VET_DETAIL,
 } from "./const";
+//axios.defaults.withCredentials = true;
 
 export function getPets() {
   return async function (dispatch) {
@@ -186,7 +207,6 @@ export function clearDetails() {
     payload: [],
   };
 }
-
 
 export function filterService(payload) {
   return {
