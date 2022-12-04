@@ -102,6 +102,8 @@ const deleteAdmin = async (id) => {
   return `Admin id:${id} deleted sucessfully`;
 };
 
+
+
 module.exports = {
   getDBAdmin,
   getDBAdminByPK,
