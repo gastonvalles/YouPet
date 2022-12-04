@@ -16,6 +16,7 @@ const getPaymentLink = async(services) => {
     },
     auto_return: "approved",
     binary_mode: true,
+    notification_url:'https://30be-181-199-156-167.sa.ngrok.io/payment/notify'
   };
   return preference;
 };

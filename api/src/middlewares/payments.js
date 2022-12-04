@@ -30,4 +30,10 @@ router.post("/mp", async (req, res) => {
     .catch((error) => console.log(error));
 });
 
+router.post('/notify', (req, res) => {
+  const { body, query } = req;
+  console.log("notificar")
+  console.log({ body, query });
+})
+
 module.exports = router;
