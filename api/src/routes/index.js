@@ -9,6 +9,7 @@ const vetController = require("../middlewares/vet");
 const turnController = require("../middlewares/turn.js");
 const userController = require("../middlewares/user.js");
 const paymentController = require("../middlewares/payments");
+const autentController = require("../middlewares/autent");
 
 router.use("/admin", admController);
 router.use("/service", serviceController);
@@ -17,5 +18,6 @@ router.use("/vet", vetController);
 router.use("/turn", cualquiera.authenticate("jwt"), turnController);
 router.use("/user", userController);
 router.use("/payment", paymentController);
+router.use("/", autentController);
 
 module.exports = router;
