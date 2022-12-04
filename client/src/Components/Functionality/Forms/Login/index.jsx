@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserByEmail } from "../../../../Redux/actions";
 import { useNavigate } from "react-router-dom";
 import logo from "../../../../img/logo.png";
 import "./index.css";
-import axios from "axios";
-import Swal from "sweetalert2";
-
 export default function Login() {
   const [formSuccess, setFormSuccess] = useState(false);
 
@@ -59,14 +57,7 @@ export default function Login() {
                 document.cookie = `token=${res.data.data}; 
             max-age=${60 * 60 * 24 * 90}; path=/; samesite=strict`;
                 navigate("/");
-              })
-              .catch((error) => {
-                return Swal.fire({
-                  icon: "error",
-                  title: "error",
-                  text: `${error.response.data.message}`,
-                });
-              });
+              }, 3000);
           }}
         >
           {({ errors }) => (

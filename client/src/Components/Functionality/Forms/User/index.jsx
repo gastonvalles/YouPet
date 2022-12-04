@@ -132,16 +132,6 @@ function FormUser() {
               })
             );
         }}
-        /*   onSubmit={(values, { resetForm }) => {
-          //funciones con las actions
-          console.log(values);
-          resetForm();
-          console.log("formulario enviado");
-          setformSuccess(true);
-          setTimeout(() => {
-            setformSuccess(false);
-          }, 5000);
-        }} */
       >
         {({ errors }) => (
           <div className="contenedor">
