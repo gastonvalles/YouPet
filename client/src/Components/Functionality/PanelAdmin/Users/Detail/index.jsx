@@ -74,30 +74,30 @@ export default function AdminProfileDetail() {
                   </h3>
                 </Box>
                 <Grid container spacing={10} alignItems="center" justifyContent="center">
-                  <Grid item xl={3}>
+                  <Grid item lg={3}>
                     <Box>
                       <h3>Username:</h3>
                       <h3>{user.username}</h3>
                     </Box>
                   </Grid>
-                  <Grid item xl={3}>
+                  <Grid item lg={3}>
                     <Box>
                       <h3>Telephone Number:</h3>
                       <h3>{user.tel}</h3>
                     </Box>
                   </Grid>
-                  <Grid item xl={3}>
+                  <Grid item lg={3}>
                     <Box>
                       <h3>Email:</h3>
                       <h3>{user.email}</h3>
                     </Box>
                   </Grid>
-                  <Grid item xl={3}>
+                  <Grid item lg={3}>
                     <Box>
                       <h3>DNI: {user.dni}</h3>
                     </Box>
                   </Grid>
-                  <Grid item xl={3}>
+                  <Grid item lg={3}>
                     <Box>
                       <Box
                         width="15%"
@@ -124,7 +124,7 @@ export default function AdminProfileDetail() {
                       </Typography>
                     </Box>
                   </Grid>
-                  <Grid item xl={3}>
+                  <Grid item lg={3}>
                     <Box>
                       <Box
                         width="15%"
@@ -165,30 +165,30 @@ export default function AdminProfileDetail() {
                   </h3>
                 </Box>
                 <Grid container spacing={10} alignItems="center" justifyContent="center">
-                  <Grid item xl={3}>
+                  <Grid item lg={3}>
                     <Box>
                       <h3>Username:</h3>
                       <h3>{admin.username}</h3>
                     </Box>
                   </Grid>
-                  <Grid item xl={3}>
+                  <Grid item lg={3}>
                     <Box>
                       <h3>Telephone Number:</h3>
                       <h3>{admin.tel}</h3>
                     </Box>
                   </Grid>
-                  <Grid item xl={3}>
+                  <Grid item lg={3}>
                     <Box>
                       <h3>Email:</h3>
                       <h3>{admin.email}</h3>
                     </Box>
                   </Grid>
-                  <Grid item xl={3}>
+                  <Grid item lg={3}>
                     <Box>
                       <h3>DNI: {admin.dni}</h3>
                     </Box>
                   </Grid>
-                  <Grid item xl={3}>
+                  <Grid item lg={3}>
                     <Box>
                       <Box
                         width="15%"
@@ -215,7 +215,7 @@ export default function AdminProfileDetail() {
                       </Typography>
                     </Box>
                   </Grid>
-                  <Grid item xl={3}>
+                  <Grid item lg={3}>
                     <Box>
                       <Box
                         width="15%"

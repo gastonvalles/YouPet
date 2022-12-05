@@ -174,7 +174,7 @@ const dbCreateVet = async (body) => {
       throw new Error("missing query");
     } else {
       await Vet.create(body);
-      return `admin ${body.name} created successfully`;
+      return `vet ${body.name} created successfully`;
     }
   } catch (error) {
     throw error;
