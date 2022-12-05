@@ -223,9 +223,9 @@ export function filterService(payload) {
 //   };
 // }
 
-export function getPaymentMP(userId) {
+export function getPaymentMP(service) {
   return async function (dispatch) {
-    let json = await axios.post(`http://localhost:3001/payment/mp/${userId}`);
+    let json = await axios.post(`http://localhost:3001/payment/mp/`,service);
     return dispatch({
       type: GET_PAYMENT_MP,
       payload: json.data,
