@@ -18,6 +18,7 @@ import {
   clearDetails,
   getAdminDetail,
   getUserDetail,
+  updateUser
 } from "../../../../../Redux/actions";
 
 export default function AdminProfileDetail() {
@@ -28,6 +29,13 @@ export default function AdminProfileDetail() {
   const user = useSelector((state) => state.userDetail);
   const admin = useSelector((state) => state.adminDetail);
   const [theme, colorMode] = useMode();
+
+  function handleStatus() {
+    dispatch(updateUser(id))
+    if (user.isAdmin === true){
+       return user.isAdmin === false
+    }
+  }
 
   useEffect(() => {
     dispatch(getUserDetail(id));
@@ -104,6 +112,7 @@ export default function AdminProfileDetail() {
                         }
                         borderRadius="4px"
                         type="button"
+                        onClick={(event)=>handleStatus(event)}
                       >
                         {user.isActive === true && (
                           <AdminPanelSettingsOutlinedIcon />

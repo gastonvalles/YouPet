@@ -28,6 +28,7 @@ import {
   DELETE_SERVICE,
   DELETE_TURN,
   CREATE_VET,
+  UPDATE_ADMIN,
 } from "./const";
 
 const initialState = {
@@ -174,7 +175,14 @@ function rootReducer(state = initialState, action) {
       const deleteAdmin = state.allAdmins;
       return {
         ...state,
-        admins: deleteAdmin.filter((c) => c.id !== action.payload),
+        admins: deleteAdmin.filter((admin) => admin.id !== action.payload),
+      };
+    case UPDATE_ADMIN:
+      return {
+        ...state,
+        adminDetail: state.adminDetail.map((admin) =>
+          admin.id === action.payload.id ? action.payload : admin
+        ),
       };
     case FILTER_SERVICE:
       const allservices = state.allServices;
