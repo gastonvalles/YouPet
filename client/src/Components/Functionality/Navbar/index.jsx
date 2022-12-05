@@ -14,7 +14,7 @@ import {
 
   //getVetsDetail,
 } from "../../../Redux/actions";
-import "./index.css";
+import "./Navbar.css";
 
 export default function NavBar() {
   const dispatch = useDispatch();
@@ -106,7 +106,7 @@ export default function NavBar() {
               <option value={"Aesthetics"}>Aesthetics</option>
             </select>
           </div> */}
-          <div>
+          {/* <div>
             <select
               defaultValue={""}
               className="selectorFiltros"
@@ -120,7 +120,7 @@ export default function NavBar() {
               <option value={"Diagnostics"}>Diagnostics</option>
               <option value={"Aesthetics"}>Aesthetics</option>
             </select>
-          </div>
+          </div> */}
           <div>
             <div className="d-flex">
               {!myuser?.id ? (
