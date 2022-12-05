@@ -61,6 +61,86 @@ export default function NavBar() {
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul className="navbar-nav me-auto mb-2 mb-lg-1">
+              {/* <li className="nav-item">
+                <Link to={"/"}>
+                  <span className="nav-link active me-3" aria-current="page">
+                    Contact
+                  </span>
+                </Link>
+              </li> */}
+
+              <div className="dropdown">
+                <span
+                  className="nav-link dropdown-toggle me-3"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Go to...
+                </span>
+                <ul className="dropdown-menu" aria-labelledby="dropdownMenu2">
+                  <li>
+                    <Link to={"/veterinario"}>
+                      <button className="dropdown-item" type="button">
+                        Veterinario
+                      </button>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to={"/nutricionista"}>
+                      <button className="dropdown-item" type="button">
+                        Nutricionista
+                      </button>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to={"/cirugias"}>
+                      <button className="dropdown-item" type="button">
+                        Cirugias
+                      </button>
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+              <div>
+                  <Link to="/admin" type="button" className="text-decoration-none dropdown-item">
+                    Admin
+                  </Link>
+                </div>
+              {/* <li className="nav-item dropdown">
+                <span
+                  className="nav-link dropdown-toggle me-3"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Dropdown
+                </span>
+                <ul className="dropdown-menu">
+                  <li>
+                    <Link to={"/veterinario"}>
+                      <span className="dropdown-item" />1 Option
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to={"/nutricionista"}>
+                      <span className="dropdown-item" />2 Option
+                    </Link>
+                  </li>
+                  <li></li>
+                  <li>
+                    <Link to={"/cirugias"}>
+                      <span className="dropdown-item" />3 Option
+                    </Link>
+                  </li>
+                </ul>
+              </li> */}
+
+              {/* <li className="nav-item">
+                <span className="nav-link">Disabled</span>
+              </li> */}
+            </ul>
             <form className="d-flex" role="search">
               <input
                 className="form-control me-4"

@@ -25,6 +25,10 @@ module.exports = (sequelize) => {
       type: DataTypes.TEXT,
       allowNull: false,
     },
+    address: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
     img: {
       type: DataTypes.STRING,
     },
@@ -32,10 +36,6 @@ module.exports = (sequelize) => {
       type: DataTypes.TEXT,
       unique: true,
       allowNull: false,
-    },
-    address: {
-      type: DataTypes.STRING,
-      allowNull: false
     },
     tel: {
       type: DataTypes.BIGINT
@@ -47,7 +47,7 @@ module.exports = (sequelize) => {
     },
     isAdmin: {
       type: DataTypes.BOOLEAN,
-      defaultValue: false,
+      defaultValue: true,
       allowNull: false
     },
     isActive: {

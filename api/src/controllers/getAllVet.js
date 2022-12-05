@@ -5,6 +5,8 @@ const JsonVet = [
   {
     name: "Federico",
     lastname: "Saffores",
+    email: "federicosaffores3@gmail.com",
+    address: "calle falsa 124",
     isActive: true,
     speciality: "Healthcare Clinic",
     review: "",
@@ -15,8 +17,6 @@ const JsonVet = [
     tel: 2615594312,
     dni: 39987470,
     fav: "",
-    email: "fedesafforesvet@gmail.com",
-    address: "ya no se ayuda 234",
   },
   {
     name: "Gaston",
@@ -172,7 +172,7 @@ const dbCreateVet = async (body) => {
       throw new Error("missing query");
     } else {
       await Vet.create(body);
-      return `admin ${body.name} created successfully`;
+      return `vet ${body.name} created successfully`;
     }
   } catch (error) {
     throw error;
