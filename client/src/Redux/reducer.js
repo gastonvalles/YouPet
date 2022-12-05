@@ -139,6 +139,11 @@ function rootReducer(state = initialState, action) {
         turn: [],
         createdTurn: []
       };
+      case GET_PAYMENT_MP:
+        return {
+          ...state,
+          paymentLink: action.payload,
+        };
     default:
       return state;
   }

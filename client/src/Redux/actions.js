@@ -9,6 +9,7 @@ import {
   GET_ADMINS,
   GET_ADMIN_BY_NAME,
   GET_ADMIN_DETAIL,
+  GET_PAYMENT_MP,
   GET_PETS,
   GET_PET_DETAIL,
   GET_SERVICES,
@@ -222,6 +223,12 @@ export function filterService(payload) {
 //   };
 // }
 
-export function getPaymentMP(params) {
-  
+export function getPaymentMP(userId) {
+  return async function (dispatch) {
+    let json = await axios.post(`http://localhost:3001/payment/mp/${userId}`);
+    return dispatch({
+      type: GET_PAYMENT_MP,
+      payload: json.data,
+    });
+  };
 }
