@@ -1,39 +1,21 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import { getPets, getUsers, clearDetails } from "../../../../Redux/actions";
+import { getPets, clearDetails } from "../../../../Redux/actions";
 import PetCard from "../../Cards/PetCard";
 
 export default function Profile() {
   const dispatch = useDispatch();
-  const allUsers = useSelector(state=> state.users)
   const allPets = useSelector((state) => state.pets);
 
   useEffect(() => {
     dispatch(getPets());
-    dispatch(getUsers());
     return () => {
       dispatch(clearDetails());
     };
   }, [dispatch]);
 
-  if(allUsers.isAdmin===true){
-    return (
-      <div>
-        <Link to="/vet/register" type="button"
-            className="text-decoration-none">
-              Vet Register
-            </Link>
-        <div>
-        <h2>Full name:</h2>
-            <h4>DNI:</h4>
-            <h4>E-mail:</h4>
-            <h4>Addres:</h4>
-        </div>
-      </div>
-    )
-  }else{
-    return (
+  return (
       <div>
         <div>
           <Link
@@ -78,5 +60,4 @@ export default function Profile() {
         </div>
       </div>
     );
-  }
 }

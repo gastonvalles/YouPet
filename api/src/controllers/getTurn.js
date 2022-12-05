@@ -41,7 +41,7 @@ const getTurnForVet = async ({ vetId, servId }) => {
       where: {
         VetId: vetId,
       },
-      
+
       order: [["inicialDate", "ASC"]],
     });
 
@@ -51,7 +51,28 @@ const getTurnForVet = async ({ vetId, servId }) => {
   }
 };
 
+const getAllTurns = async () => {
+  let turn = await Turn.findAll({
+    include: [
+      {
+        model: Vet,
+        attributes: ["name", "lastname"],
+      },
+      {
+        model: Service,
+        attributes: ["name"],
+      },
+    ],
+  });
+  if (turn.length) {
+    return turn;
+  } else {
+    throw new Error("Turns not found");
+  }
+};
+
 module.exports = {
+  getAllTurns,
   getTurnByVetPK,
   getTurnForVet,
 };

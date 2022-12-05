@@ -118,6 +118,7 @@ function Times(props) {
         inicialDate: startDate.toUTCString(),
         finishDate: finishDate.toUTCString(),
         VetId: vetSelect,
+        ServiceId: servId
       };
 
       dispatch(createTurn(turnInfo));
