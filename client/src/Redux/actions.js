@@ -111,7 +111,7 @@ export function getVetByName(name) {
 
 export function createVet(payload) {
   return async function (dispatch) {
-    let json = await axios.post("http://localhost:3001/admin", payload);
+    let json = await axios.post("http://localhost:3001/vet", payload);
     return dispatch({
       type: CREATE_VET,
       payload: json.data,

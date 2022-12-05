@@ -13,6 +13,7 @@ import CalendarAdmin from "../Calendar";
 import AdminRegister from "../AdminRegister";
 import VetForm from "../../Forms/Vet";
 import ServiceRegister from "../AllServices/ServiceRegister";
+import ServicesInfo from "../AllServices/ServicesInfo";
 
 export default function PanelAdmin() {
   const [theme, colorMode] = useMode();
@@ -29,9 +30,10 @@ export default function PanelAdmin() {
               <Route path="/users" element={<Users />} />
               <Route path="/contacts" element={<Contacts/>} />
               <Route path="/allvets" element={<VetInformation/>}/>
+              <Route path="/services" element={<ServicesInfo/>} />
               <Route path="/adminregister" element={<AdminRegister/>} />
               <Route path="/vetregister" element={<VetForm/>}/>
-              <Route path="/servregister" element={<ServiceRegister/>}/>
+              <Route path="/servregister" element={<ServiceRegister/>} />
               <Route path="/calendar" element={<CalendarAdmin/>} />
             </Routes>
           </main>

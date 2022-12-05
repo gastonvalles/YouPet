@@ -27,17 +27,16 @@ import {
   DELETE_ADMIN,
   DELETE_SERVICE,
   DELETE_TURN,
+  CREATE_VET,
 } from "./const";
 
 const initialState = {
   pets: [],
   allPets: [],
   petDetail: [],
-  petCreate: [],
   vets: [],
   allVets: [],
   vetDetail: [],
-  vetCreate: [],
   medDiag: [],
   turns: [],
   allTurns: [],
@@ -46,16 +45,13 @@ const initialState = {
   createdTurn: [],
   services: [],
   serviceDetail: [],
-  createService: [],
   user: [],
   users: [],
   allUsers: [],
   userDetail: [],
-  userCreate: [],
   admins: [],
   allAdmins: [],
   adminDetail: [],
-  adminCreate: [],
   allServices: [],
 };
 
@@ -92,6 +88,11 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         vets: action.payload,
+      };
+    case CREATE_VET:
+      return {
+        ...state,
+        vets: [],
       };
     case DELETE_VET:
       const deleteVet = state.allVets;
@@ -166,7 +167,7 @@ function rootReducer(state = initialState, action) {
     case CREATE_ADMIN:
       return {
         ...state,
-        adminCreate: [action.payload],
+        admins: [],
       };
     case DELETE_ADMIN:
       const deleteAdmin = state.allAdmins;

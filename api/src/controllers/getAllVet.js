@@ -17,8 +17,6 @@ const JsonVet = [
     tel: 2615594312,
     dni: 39987470,
     fav: "",
-    email: "fedesafforesvet@gmail.com",
-    address: "ya no se ayuda 234",
   },
   {
     name: "Gaston",
