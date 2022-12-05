@@ -52,11 +52,11 @@ module.exports = (sequelize) => {
     },
     inicialDate: {
       type: DataTypes.DATE,
-      allowNull: false,
+      allowNull: true,
     },
     finishDate: {
       type: DataTypes.DATE,
-      allowNull: false,
+      allowNull: true,
     },
     isActive: {
       type: DataTypes.BOOLEAN,

@@ -154,7 +154,7 @@ export default function SideBar() {
             />
             <Item
               title="Service Information"
-              to="/admin/service"
+              to="/admin/services"
               icon={<ReceiptOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
