@@ -23,7 +23,7 @@ import {
   GET_VET_BY_NAME,
   GET_VET_DETAIL,
 } from "./const";
-//axios.defaults.withCredentials = true;
+axios.defaults.withCredentials = true;
 
 export function getPets() {
   return async function (dispatch) {

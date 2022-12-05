@@ -1,5 +1,4 @@
 const { Router, json } = require("express");
-const cualquiera = require("../middlewares/passport");
 const router = Router();
 router.use(json());
 const serviceController = require("../middlewares/service");
@@ -15,7 +14,7 @@ router.use("/admin", admController);
 router.use("/service", serviceController);
 router.use("/pet", petController);
 router.use("/vet", vetController);
-router.use("/turn", cualquiera.authenticate("jwt"), turnController);
+router.use("/turn", turnController);
 router.use("/user", userController);
 router.use("/payment", paymentController);
 router.use("/", autentController);

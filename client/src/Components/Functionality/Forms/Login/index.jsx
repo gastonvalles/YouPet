@@ -56,7 +56,7 @@ export default function Login() {
               })
               .then((res) => {
                 document.cookie = `token=${res.data.data}; 
-            max-age=${60 * 60 * 24 * 90}; path=/; samesite=strict`;
+            max-age=${60 * 60 * 24 * 90}; path=/; samesite=none`;
                 navigate("/");
               }, 3000);
           }}

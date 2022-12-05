@@ -129,8 +129,9 @@ exports.login = async (req, res) => {
     const cookies = {
       expires: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000),
       httpOnly: true,
+      sameSite: "none",
     };
-    res.cookie("jwt", token, cookies);
+    res.cookie("token", token, cookies);
     return res.json({
       msg: "usuario logueado satisfactoriamente",
       data: token,
