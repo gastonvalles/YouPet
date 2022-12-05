@@ -10,3 +10,7 @@
     background-color: hsl(327, 50%, 48%);
     color: white;
 }
+
+.d-flex {
+    margin-left: 1rem;
+}
