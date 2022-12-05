@@ -28,16 +28,6 @@ export default function AdminProfileDetail() {
   const user = useSelector((state) => state.userDetail);
   const admin = useSelector((state) => state.adminDetail);
   const [theme, colorMode] = useMode();
-  const [status, setStatus] = useState(user.isActive);
-
-  function handleStatus(event) {
-    event.preventDefault();
-    if (user.isActive === true) {
-      setStatus(false);
-    } else {
-      setStatus(true);
-    }
-  }
 
   useEffect(() => {
     dispatch(getUserDetail(id));
@@ -52,6 +42,7 @@ export default function AdminProfileDetail() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Box>
+          <Box p="20px">
           <Link
             to="/admin/users"
             type="button"
@@ -59,6 +50,7 @@ export default function AdminProfileDetail() {
           >
             Back to users
           </Link>
+          </Box>
           <Box m="20px">
             <Header title="USER" subtitle="Managing user" />
           </Box>
@@ -112,7 +104,6 @@ export default function AdminProfileDetail() {
                         }
                         borderRadius="4px"
                         type="button"
-                        onClick={(event) => handleStatus(event)}
                       >
                         {user.isActive === true && (
                           <AdminPanelSettingsOutlinedIcon />
@@ -139,7 +130,6 @@ export default function AdminProfileDetail() {
                         }
                         borderRadius="4px"
                         type="button"
-                        onClick={(event) => handleStatus(event)}
                       >
                         {user.isAdmin === true && (
                           <AdminPanelSettingsOutlinedIcon />
@@ -203,7 +193,6 @@ export default function AdminProfileDetail() {
                         }
                         borderRadius="4px"
                         type="button"
-                        onClick={(event) => handleStatus(event)}
                       >
                         {admin.isActive === true && (
                           <AdminPanelSettingsOutlinedIcon />
@@ -230,7 +219,6 @@ export default function AdminProfileDetail() {
                         }
                         borderRadius="4px"
                         type="button"
-                        onClick={(event) => handleStatus(event)}
                       >
                         {admin.isAdmin === true && (
                           <AdminPanelSettingsOutlinedIcon />

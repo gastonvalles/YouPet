@@ -17,7 +17,7 @@ export default function ServicesInfo() {
     headerName: "ID",
     renderCell: ({ row: { id } }) => {
       return( 
-      <Link to={`/user/${id}`} className="text-decoration-none">{id}</Link>
+      <Link to={`/serv/${id}`} className="text-decoration-none">{id}</Link>
       )
     }, 
     },

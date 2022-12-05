@@ -125,7 +125,7 @@ export default function ServiceRegister() {
                 <Box>
                   <label>Type</label>
                 </Box>
-                <Box >
+                <Box>
                   <input
                     className="form-control"
                     type="text"
@@ -144,7 +144,7 @@ export default function ServiceRegister() {
                 <Box>
                   <label>Price</label>
                 </Box>
-                <Box >
+                <Box>
                   <input
                     className="form-control"
                     type="text"
@@ -163,7 +163,7 @@ export default function ServiceRegister() {
                 <Box>
                   <label>Timelapse</label>
                 </Box>
-                <Box >
+                <Box>
                   <input
                     className="form-control"
                     type="text"
@@ -182,7 +182,7 @@ export default function ServiceRegister() {
                 <Box>
                   <label>Image</label>
                 </Box>
-                <Box >
+                <Box>
                   <input
                     className="form-control"
                     type="text"
