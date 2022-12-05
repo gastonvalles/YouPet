@@ -15,7 +15,7 @@ router.use("/admin", admController);
 router.use("/service", serviceController);
 router.use("/pet", petController);
 router.use("/vet", vetController);
-router.use("/turn", cualquiera.authenticate("jwt"), turnController);
+router.use("/turn", turnController);
 router.use("/user", userController);
 router.use("/payment", paymentController);
 router.use("/", autentController);
