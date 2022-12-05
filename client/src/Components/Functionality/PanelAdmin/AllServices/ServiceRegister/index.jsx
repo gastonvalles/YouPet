@@ -73,6 +73,7 @@ export default function ServiceRegister() {
     setErrors(validate(input));
     if (Object.keys(errors).length === 0) {
       dispatch(createService(input));
+      alert("Vet register successfully");
       setInput({
         name: "",
         type: "",
