@@ -13,9 +13,16 @@ import FormUser from "./Components/Functionality/Forms/User";
 import FormVet from "./Components/Functionality/Forms/Vet";
 import NavBar from "./Components/Functionality/Navbar/index";
 import ChooseVetTurn from "./Components/Functionality/Turns/ChooseVetTurn";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 
 import Home from "./Components/View/HomeFake/HomeFake";
+import { getMyUser } from "./Redux/actions";
 function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getMyUser());
+  }, [dispatch]);
   return (
     <div className="App">
       <NavBar />

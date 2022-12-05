@@ -112,9 +112,7 @@ function FormUser() {
         }}
         onSubmit={(values) => {
           axios
-            .post("http://localhost:3001/register/", values, {
-              withCredentials: false,
-            })
+            .post("http://localhost:3001/register/", values, {})
             .then((res) => {
               Swal.fire({
                 //icon: "succes",

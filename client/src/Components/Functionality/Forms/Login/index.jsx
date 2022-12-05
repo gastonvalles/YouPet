@@ -50,15 +50,10 @@ export default function Login() {
             return errors;
           }}
           onSubmit={(value) => {
-            axios
-              .post("http://localhost:3001/login/", value, {
-                //  withCredentials: false,
-              })
-              .then((res) => {
-                document.cookie = `token=${res.data.data}; 
-            max-age=${60 * 60 * 24 * 90}; path=/; samesite=none`;
-                navigate("/");
-              }, 3000);
+            axios.post("http://localhost:3001/login/", value).then((res) => {
+              localStorage.setItem("jwt", res.data.data);
+              navigate("/");
+            }, 3000);
           }}
         >
           {({ errors }) => (

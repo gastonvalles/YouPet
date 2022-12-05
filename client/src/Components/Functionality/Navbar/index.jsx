@@ -3,22 +3,29 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router";
 import { Link, useParams } from "react-router-dom";
 import logo from "../../../img/logo.png";
+import { useNavigate } from "react-router";
 import {
   filterService,
   // filterVets,
   getServiceByName,
-  getServices, getUserByName, getVetByName, getVetsDetail
+  getServices,
+  getUserByName,
+  getVetByName,
+
+  //getVetsDetail,
 } from "../../../Redux/actions";
 import "./index.css";
 
 export default function NavBar() {
   const dispatch = useDispatch();
   const { search } = useLocation();
-  // const navigate = useNavigate();
-  const { id } = useParams()
-  let query = new URLSearchParams(search)
-  console.log(query)
+  const navigate = useNavigate();
+  const { id } = useParams();
+  let query = new URLSearchParams(search);
+  console.log(query);
   const users = useSelector((state) => state.users);
+  const myuser = useSelector((state) => state.myuser);
+  console.log(myuser);
   const [name, setName] = useState("");
 
   useEffect(() => {
@@ -28,7 +35,7 @@ export default function NavBar() {
 
   function handleFilter(event) {
     event.preventDefault();
-    dispatch(filterService(event.target.value))
+    dispatch(filterService(event.target.value));
     // dispatch(filterVets(event.target.value))
   }
 
@@ -116,14 +123,29 @@ export default function NavBar() {
           </div>
           <div>
             <div className="d-flex">
-              <Link to={"/login"}>
-                <button className="btn"> Sign in</button>
-              </Link>
-              <Link to={"/reguser"}>
-                <button className="btn btn-outline-success me-4">
-                  Sign up
+              {!myuser?.id ? (
+                <>
+                  <Link to={"/login"}>
+                    <button className="btn"> Sign in</button>
+                  </Link>
+                  <Link to={"/reguser"}>
+                    <button className="btn btn-outline-success me-4">
+                      Sign up
+                    </button>
+                  </Link>
+                </>
+              ) : (
+                <button
+                  onClick={() => {
+                    localStorage.removeItem("jwt");
+                    navigate(0);
+                  }}
+                  className="btn"
+                >
+                  {" "}
+                  Sign out
                 </button>
-              </Link>
+              )}
             </div>
           </div>
         </div>

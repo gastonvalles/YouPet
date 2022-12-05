@@ -126,12 +126,7 @@ exports.login = async (req, res) => {
     }
     const id = findUser.id;
     const token = jwt.sign({ id: id }, "userKey");
-    const cookies = {
-      expires: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000),
-      httpOnly: true,
-      sameSite: "none",
-    };
-    res.cookie("token", token, cookies);
+
     return res.json({
       msg: "usuario logueado satisfactoriamente",
       data: token,
@@ -180,7 +175,3 @@ exports.protectedRoute = async (req, res) => {
     next();
   }
 }; */
-exports.logout = (req, res) => {
-  res.clearCookie("jwt");
-  return res.redirect("/");
-};
