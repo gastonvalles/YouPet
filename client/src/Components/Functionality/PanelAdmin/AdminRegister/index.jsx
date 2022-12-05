@@ -137,13 +137,13 @@ import { createAdmin } from "../../../../Redux/actions";
       <form onSubmit={(event)=>handleSubmit(event)}>
         <Grid container spacing={2} alignItems="center" justifyContent="center">
           <Grid item lg={3}>
-            <Box>
+            <Box p="10px">
               <Box>
                 <label>Name</label>
               </Box>
               <Box>
                 <input
-                  className="input-group-text"
+                  className="form-control"
                   type="text"
                   name="name"
                   placeholder="Enter your name"
@@ -156,13 +156,13 @@ import { createAdmin } from "../../../../Redux/actions";
             </Box>
           </Grid>
           <Grid item lg={3}>
-            <Box>
+            <Box p="10px">
               <Box>
                 <label>Lastname</label>
               </Box>
               <Box>
                 <input
-                  className="input-group-text"
+                  className="form-control"
                   type="text"
                   name="lastname"
                   value={input.lastname}
@@ -173,14 +173,14 @@ import { createAdmin } from "../../../../Redux/actions";
               </Box>
             </Box>
           </Grid>
-          <Grid item lg={3}>
-            <Box>
+          <Grid item lg={2}>
+            <Box p="10px">
               <Box>
                 <label>Username</label>
               </Box>
               <Box>
                 <input
-                  className="input-group-text"
+                  className="form-control"
                   type="text"
                   name="username"
                   value={input.username}
@@ -191,14 +191,14 @@ import { createAdmin } from "../../../../Redux/actions";
               </Box>
             </Box>
           </Grid>
-          <Grid item lg={3}>
-            <Box>
+          <Grid item lg={2}>
+            <Box p="10px">
               <Box>
                 <label>Password</label>
               </Box>
               <Box>
                 <input
-                  className="input-group-text"
+                  className="form-control"
                   type="password"
                   name="password"
                   value={input.password}
@@ -210,14 +210,14 @@ import { createAdmin } from "../../../../Redux/actions";
             </Box>
           </Grid>
 
-          <Grid item lg={3}>
-            <Box>
+          <Grid item lg={2}>
+            <Box p="10px">
               <Box>
-                <label>Confirmation Password</label>
+                <label>Password Confirmation</label>
               </Box>
               <Box>
                 <input
-                  className="input-group-text"
+                  className="form-control"
                   type="password"
                   name="passwordCopy"
                   value={input.passwordCopy}
@@ -230,13 +230,13 @@ import { createAdmin } from "../../../../Redux/actions";
           </Grid>
 
           <Grid item lg={3}>
-            <Box>
+            <Box p="10px">
               <Box>
                 <label>Address</label>
               </Box>
               <Box>
                 <input
-                  className="input-group-text"
+                  className="form-control"
                   type="text"
                   name="address"
                   value={input.address}
@@ -249,13 +249,13 @@ import { createAdmin } from "../../../../Redux/actions";
           </Grid>
 
           <Grid item lg={3}>
-            <Box>
+            <Box p="10px">
               <Box>
                 <label>URL Image</label>
               </Box>
               <Box>
                 <input
-                  className="input-group-text"
+                  className="form-control"
                   type="text"
                   name="img"
                   value={input.img}
@@ -268,13 +268,13 @@ import { createAdmin } from "../../../../Redux/actions";
           </Grid>
 
           <Grid item lg={3}>
-            <Box>
+            <Box p="10px">
               <Box>
                 <label>Email</label>
               </Box>
               <Box>
                 <input
-                  className="input-group-text"
+                  className="form-control"
                   type="email"
                   name="email"
                   value={input.email}
@@ -287,14 +287,14 @@ import { createAdmin } from "../../../../Redux/actions";
           </Grid>
          
             
-          <Grid item lg={3}>
-            <Box>
+          <Grid item lg={2}>
+            <Box p="10px">
               <Box>
                 <label>Telephone Number</label>
               </Box>
               <Box>
                 <input
-                  className="input-group-text"
+                  className="form-control"
                   type="text"
                   name="tel"
                   value={input.tel}
@@ -305,14 +305,14 @@ import { createAdmin } from "../../../../Redux/actions";
               </Box>
             </Box>
           </Grid>
-          <Grid item lg={3}>
-            <Box>
+          <Grid item lg={2}>
+            <Box p="10px">
               <Box>
                 <label>DNI</label>
               </Box>
               <Box>
                 <input
-                  className="input-group-text"
+                  className="form-control"
                   type="text"
                   name="dni"
                   value={input.dni}
