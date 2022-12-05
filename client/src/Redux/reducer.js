@@ -45,6 +45,7 @@ const initialState = {
   createdTurn: [],
   services: [],
   serviceDetail: [],
+  createService: [],
   user: [],
   users: [],
   allUsers: [],
@@ -119,7 +120,7 @@ function rootReducer(state = initialState, action) {
     case CREATE_SERVICE:
       return {
         ...state,
-        createService: [action.payload],
+        services: [],
       };
     case DELETE_SERVICE:
       const deleteService = state.allServices;
@@ -167,7 +168,7 @@ function rootReducer(state = initialState, action) {
     case CREATE_ADMIN:
       return {
         ...state,
-        adminCreate: [action.payload],
+        adminCreate: [],
       };
     case DELETE_ADMIN:
       const deleteAdmin = state.allAdmins;

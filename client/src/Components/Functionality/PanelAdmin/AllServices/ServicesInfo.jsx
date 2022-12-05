@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import { Box, useTheme } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { tokens } from "../theme";
@@ -12,6 +13,14 @@ export default function ServicesInfo() {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const columns = [
+    { field: "id", 
+    headerName: "ID",
+    renderCell: ({ row: { id } }) => {
+      return( 
+      <Link to={`/user/${id}`} className="text-decoration-none">{id}</Link>
+      )
+    }, 
+    },
     {
       field: "name",
       headerName: "Name",
@@ -19,32 +28,27 @@ export default function ServicesInfo() {
       cellClassName: "name-column--cell",
     },
     {
-      field: "lastname",
+      field: "type",
       headerName: "Last name",
       flex: 1,
-      cellClassName: "lastname-column--cell",
+      cellClassName: "type-column--cell",
     },
     {
-      field: "address",
-      headerName: "Address",
+      field: "price",
+      headerName: "Price",
       flex: 1,
-      cellClassName: "address-column--cell",
+      cellClassName: "price-column--cell",
     },
     {
-      field: "email",
-      headerName: "Email",
+      field: "timelapse",
+      headerName: "Timelapse",
       flex: 1,
     },
     {
-      field: "tel",
-      headerName: "Telephon Number",
+      field: "detail",
+      headerName: "Detail Number",
       flex: 1,
-      cellClassName: "telephone-column--cell",
-    },
-    {
-      field: "dni",
-      headerName: "DNI",
-      flex: 1,
+      cellClassName: "detail-column--cell",
     },
   ];
 

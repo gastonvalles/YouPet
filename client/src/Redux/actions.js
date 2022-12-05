@@ -170,7 +170,7 @@ export function getServiceDetail(id) {
 }
 export function createService(payload) {
   return async function (dispatch) {
-    let json = await axios.post("http://localhost:3001/admin", payload);
+    let json = await axios.post("http://localhost:3001/service", payload);
     return dispatch({
       type: CREATE_SERVICE,
       payload: json.data,

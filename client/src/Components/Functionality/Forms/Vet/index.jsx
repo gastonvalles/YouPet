@@ -58,7 +58,7 @@ export default function VetForm() {
       errors.tel = "Please enter a valid telephone number";
     } else if (input.tel.length > 10) {
       errors.tel = "Please enter a valid telephone number";
-    } else if(!regexNumber.test(input.tel)){
+    } else if (!regexNumber.test(input.tel)) {
       errors.tel = "Can only enter numbers";
     }
     if (!input.dni.trim()) {
@@ -67,7 +67,7 @@ export default function VetForm() {
       errors.dni = "Please enter a valid DNI";
     } else if (input.dni.length > 8) {
       errors.dni = "Please enter a valid DNI";
-    } else if(!regexNumber.test(input.dni)){
+    } else if (!regexNumber.test(input.dni)) {
       errors.dni = "Can only enter numbers";
     }
 
@@ -105,166 +105,174 @@ export default function VetForm() {
   return (
     <Box p="50px">
       <Box m="20px" p="50px">
-        <Box display="flex" justifyContent="space-between" alignItems="center">
+        <Box display="flex" justifycontent="space-between" alignItems="center">
           <Header title="Vet Register" subtitle="Form to register new vet" />
         </Box>
+        <form onSubmit={(event) => handleSubmit(event)}>
+          <Grid
+            container
+            spacing={2}
+            alignItems="center"
+            justifycontent="center"
+          >
+            <Grid item lg={3}>
+              <Box>
+                <Box>
+                  <label>Name</label>
+                </Box>
+                <Box>
+                  <input
+                    className="form-control"
+                    type="text"
+                    name="name"
+                    placeholder="Enter your name"
+                    value={input.name}
+                    onChange={(event) => handleInputName(event)}
+                    onBlur={(event) => handleErrors(event)}
+                  />
+                  {errors.name && <p className="error">{errors.name}</p>}
+                </Box>
+              </Box>
+            </Grid>
+            <Grid item lg={3}>
+              <Box>
+                <Box>
+                  <label>Lastname</label>
+                </Box>
+                <Box>
+                  <input
+                    className="form-control"
+                    type="text"
+                    name="lastname"
+                    value={input.lastname}
+                    placeholder="Enter your lastname"
+                    onChange={(event) => handleInputName(event)}
+                    onBlur={(event) => handleErrors(event)}
+                  />
+                  {errors.lastname && (
+                    <p className="error">{errors.lastname}</p>
+                  )}
+                </Box>
+              </Box>
+            </Grid>
+            <Grid item lg={3}>
+              <Box>
+                <Box>
+                  <label>Email</label>
+                </Box>
+                <Box>
+                  <input
+                    className="form-control"
+                    type="email"
+                    name="email"
+                    value={input.email}
+                    onChange={(event) => handleInputName(event)}
+                    onBlur={(event) => handleErrors(event)}
+                  />
+                  {errors.email && <p className="error">{errors.email}</p>}
+                </Box>
+              </Box>
+            </Grid>
+            <Grid item lg={3}>
+              <Box>
+                <Box>
+                  <label>Address</label>
+                </Box>
+                <Box>
+                  <input
+                    className="form-control"
+                    type="text"
+                    name="address"
+                    value={input.address}
+                    onChange={(event) => handleInputName(event)}
+                    onBlur={(event) => handleErrors(event)}
+                  />
+                  {errors.address && <p className="error">{errors.address}</p>}
+                </Box>
+              </Box>
+            </Grid>
+            <Grid item lg={3}>
+              <Box>
+                <Box>
+                  <label>Speciality</label>
+                </Box>
+                <Box>
+                  <input
+                    className="form-control"
+                    type="text"
+                    name="speciality"
+                    value={input.speciality}
+                    onChange={(event) => handleInputName(event)}
+                    onBlur={(event) => handleErrors(event)}
+                  />
+                  {errors.speciality && (
+                    <p className="error">{errors.speciality}</p>
+                  )}
+                </Box>
+              </Box>
+            </Grid>
+            <Grid item lg={3}>
+              <Box>
+                <Box>
+                  <label>URL Image</label>
+                </Box>
+                <Box>
+                  <input
+                    className="form-control"
+                    type="text"
+                    name="img"
+                    value={input.img}
+                    onChange={(event) => handleInputName(event)}
+                    onBlur={(event) => handleErrors(event)}
+                  />
+                  {errors.img && <p className="error">{errors.img}</p>}
+                </Box>
+              </Box>
+            </Grid>
+            <Grid item lg={3}>
+              <Box>
+                <Box>
+                  <label>Telephone Number</label>
+                </Box>
+                <Box>
+                  <input
+                    className="form-control"
+                    type="text"
+                    name="tel"
+                    value={input.tel}
+                    onChange={(event) => handleInputName(event)}
+                    onBlur={(event) => handleErrors(event)}
+                  />
+                  {errors.tel && <p className="error">{errors.tel}</p>}
+                </Box>
+              </Box>
+            </Grid>
+            <Grid item lg={3}>
+              <Box>
+                <Box>
+                  <label>DNI</label>
+                </Box>
+                <Box>
+                  <input
+                    className="form-control"
+                    type="text"
+                    name="dni"
+                    value={input.dni}
+                    onChange={(event) => handleInputName(event)}
+                    onBlur={(event) => handleErrors(event)}
+                  />
+                  {errors.dni && <p className="error">{errors.dni}</p>}
+                </Box>
+              </Box>
+            </Grid>
+          </Grid>
+          <Box p="50px">
+            <button type="submit" className="btn btn-primary">
+              Sumbit
+            </button>
+          </Box>
+        </form>
       </Box>
-      <form onSubmit={(event)=>handleSubmit(event)}>
-        <Grid container spacing={2} alignItems="center" justifyContent="center">
-          <Grid item lg={3}>
-            <Box>
-              <Box>
-                <label>Name</label>
-              </Box>
-              <Box>
-                <input
-                  className="input-group-text"
-                  type="text"
-                  name="name"
-                  placeholder="Enter your name"
-                  value={input.name}
-                  onChange={(event) => handleInputName(event)}
-                  onBlur={(event) => handleErrors(event)}
-                />
-                {errors.name && <p className="error">{errors.name}</p>}
-              </Box>
-            </Box>
-          </Grid>
-          <Grid item lg={3}>
-            <Box>
-              <Box>
-                <label>Lastname</label>
-              </Box>
-              <Box>
-                <input
-                  className="input-group-text"
-                  type="text"
-                  name="lastname"
-                  value={input.lastname}
-                  onChange={(event) => handleInputName(event)}
-                  onBlur={(event) => handleErrors(event)}
-                />
-                {errors.lastname && <p className="error">{errors.lastname}</p>}
-              </Box>
-            </Box>
-          </Grid>
-          <Grid item lg={3}>
-            <Box>
-              <Box>
-                <label>Email</label>
-              </Box>
-              <Box>
-                <input
-                  className="input-group-text"
-                  type="email"
-                  name="email"
-                  value={input.email}
-                  onChange={(event) => handleInputName(event)}
-                  onBlur={(event) => handleErrors(event)}
-                />
-                {errors.email && <p className="error">{errors.email}</p>}
-              </Box>
-            </Box>
-          </Grid>
-          <Grid item lg={3}>
-            <Box>
-              <Box>
-                <label>Address</label>
-              </Box>
-              <Box>
-                <input
-                  className="input-group-text"
-                  type="text"
-                  name="address"
-                  value={input.address}
-                  onChange={(event) => handleInputName(event)}
-                  onBlur={(event) => handleErrors(event)}
-                />
-                {errors.address && <p className="error">{errors.address}</p>}
-              </Box>
-            </Box>
-          </Grid>
-          <Grid item lg={3}>
-            <Box>
-              <Box>
-                <label>Speciality</label>
-              </Box>
-              <Box>
-                <input
-                  className="input-group-text"
-                  type="text"
-                  name="speciality"
-                  value={input.speciality}
-                  onChange={(event) => handleInputName(event)}
-                  onBlur={(event) => handleErrors(event)}
-                />
-                {errors.speciality && (
-                  <p className="error">{errors.speciality}</p>
-                )}
-              </Box>
-            </Box>
-          </Grid>
-          <Grid item lg={3}>
-            <Box>
-              <Box>
-                <label>URL Image</label>
-              </Box>
-              <Box>
-                <input
-                  className="input-group-text"
-                  type="text"
-                  name="img"
-                  value={input.img}
-                  onChange={(event) => handleInputName(event)}
-                  onBlur={(event) => handleErrors(event)}
-                />
-                {errors.img && <p className="error">{errors.img}</p>}
-              </Box>
-            </Box>
-          </Grid>
-          <Grid item lg={3}>
-            <Box>
-              <Box>
-                <label>Telephone Number</label>
-              </Box>
-              <Box>
-                <input
-                  className="input-group-text"
-                  type="text"
-                  name="tel"
-                  value={input.tel}
-                  onChange={(event) => handleInputName(event)}
-                  onBlur={(event) => handleErrors(event)}
-                />
-                {errors.tel && <p className="error">{errors.tel}</p>}
-              </Box>
-            </Box>
-          </Grid>
-          <Grid item lg={3}>
-            <Box>
-              <Box>
-                <label>DNI</label>
-              </Box>
-              <Box>
-                <input
-                  className="input-group-text"
-                  type="text"
-                  name="dni"
-                  value={input.dni}
-                  onChange={(event) => handleInputName(event)}
-                  onBlur={(event) => handleErrors(event)}
-                />
-                {errors.dni && <p className="error">{errors.dni}</p>}
-              </Box>
-            </Box>
-          </Grid>
-        </Grid>
-        <Box p="50px">
-          <button type="submit" className="btn btn-primary">
-            Sumbit
-          </button>
-        </Box>
-      </form>
     </Box>
   );
 }
