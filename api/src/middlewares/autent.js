@@ -2,6 +2,7 @@ const { Router } = require("express");
 const { User } = require("../db");
 const passport = require("passport");
 const authController = require("../controllers/autentController.js");
+const jwt = require("jsonwebtoken");
 
 const router = Router();
 

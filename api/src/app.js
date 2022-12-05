@@ -5,6 +5,7 @@ const morgan = require("morgan");
 const routes = require("./routes/index.js");
 const dotenv = require("dotenv");
 const passport = require("passport");
+
 require("./db.js");
 require("./middlewares/passport");
 const server = express();
