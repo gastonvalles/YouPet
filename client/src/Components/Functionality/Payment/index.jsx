@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getPaymentMP } from "../../../Redux/actions";
 export default function Payment() {
@@ -32,9 +31,11 @@ export default function Payment() {
               Pay in Mercado Pago
             </button>
           ) : (
-            <form action={PaymentLink.init_point}>
-              <input type="submit" value="Pagar" />
-            </form>
+            <>
+              <a href={PaymentLink.init_point} className="btn btn-success">
+                Pagar
+              </a>
+            </>
           )}
           <h4>You will be redirected to home</h4>
         </>
