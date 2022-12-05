@@ -6,13 +6,18 @@ import logomp from "../../../img/logomp.png"
 export default function Payment() {
   const dispatch = useDispatch();
   const PaymentLink = useSelector((state) => state.paymentLink);
- // const Turn = useSelector(state => state.turn)
+  const Turns = useSelector(state => state.turn)
+  
+ const turnInfo = {
+  timelapse: Turns[0].service.name,
+  globalprice: Turns[0].service.price,
+};
   const handleClick = (e) => {
     dispatch(
       getPaymentMP([
         {
-          name: "Servicio",
-          price: 150,
+          name: turnInfo.name,
+          price: turnInfo.globalprice,
         },
       ])
     );
