@@ -10,7 +10,7 @@ const JsonVet = [
     isActive: true,
     speciality: "Healthcare Clinic",
     review: "",
-    average: 0,
+    average: 4,
     img: "https://i0.wp.com/revista.weepec.com/wp-content/uploads/2021/02/vet-and-pet-EESKSLX.jpg?fit=1200%2C800&ssl=1",
     inicialDate: new Date(2022, 1, 10, 9, 0, 0),
     finishDate: new Date(2022, 1, 10, 12, 0, 0),
