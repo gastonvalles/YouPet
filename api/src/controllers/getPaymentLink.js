@@ -1,4 +1,4 @@
-const getPaymentLink = async(services) => {
+const getPaymentLink = async(services,userId) => {
   const items = await services.map((e) => {
     return {
       title: e.name,
@@ -16,6 +16,7 @@ const getPaymentLink = async(services) => {
     },
     auto_return: "approved",
     binary_mode: true,
+    notification_url:`https://18b5-181-199-156-167.sa.ngrok.io/payment/notify/${userId}/` //Aqui poner link del back ya deployado sino, no funciona.
   };
   return preference;
 };
