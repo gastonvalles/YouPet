@@ -13,6 +13,7 @@ import FormUser from "./Components/Functionality/Forms/User";
 import FormVet from "./Components/Functionality/Forms/Vet";
 import NavBar from "./Components/Functionality/Navbar/index";
 import Payment from "./Components/Functionality/Payment";
+import ErrorPay from "./Components/Functionality/Payment/ErrorPay";
 import ChooseVetTurn from "./Components/Functionality/Turns/ChooseVetTurn";
 
 import Home from "./Components/View/HomeFake/HomeFake";
@@ -32,7 +33,8 @@ function App() {
         <Route exact path="/pet/register" element={<FormPet />} />
         <Route exact path="/vet/register" element={<FormVet />} />
         <Route exact path="/login" element={<Login />} />
-        <Route exact path="/mp" element={<Payment/> } />
+        <Route exact path="/mp" element={<Payment />} />
+        <Route exact path="/errorPay" element={<ErrorPay/> } />
       </Routes>
     </div>
   );
