@@ -27,7 +27,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-router.post("/create", async (req, res) => {
+router.post("/", async (req, res) => {
   try {
     const createAdmin = await dbCreateAdmin(req.body);
     res.status(200).json(createAdmin);

@@ -168,7 +168,7 @@ function rootReducer(state = initialState, action) {
     case CREATE_ADMIN:
       return {
         ...state,
-        adminCreate: [],
+        admins: [],
       };
     case DELETE_ADMIN:
       const deleteAdmin = state.allAdmins;
