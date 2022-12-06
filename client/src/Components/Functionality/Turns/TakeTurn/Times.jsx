@@ -10,6 +10,7 @@ import timeSlots from "./timeSlotsCalculator";
 import LoadingComponent from "./Loading";
 
 import "./turns.css";
+import Payment from "../../Payment";
 
 function Times(props) {
   const { vetSelect, updateCalendar, setUpdateCalendar } = props;
@@ -160,7 +161,7 @@ function Times(props) {
       </div>
 
       {isLoading && (
-        <LoadingComponent createdTur={createdTur} setIsLoading={setIsLoading} />
+        <Payment/>
       )}
 
       <div>

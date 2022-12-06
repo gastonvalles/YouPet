@@ -1,31 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation } from "react-router";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useNavigate} from "react-router"
 import logo from "../../../img/logo.png";
 import {
-  filterService,
-  // filterVets,
   getServiceByName,
-  getServices, getUserByName, getVetByName, getVetsDetail
+  getServices,
+  getVetByName,
 } from "../../../Redux/actions";
 import "./Navbar.css";
 
 export default function NavBar() {
   const dispatch = useDispatch();
-  const { search } = useLocation();
-  // const navigate = useNavigate();
-  const { id } = useParams()
-  let query = new URLSearchParams(search)
-  console.log(query)
-  const users = useSelector((state) => state.users);
+  const navigate = useNavigate()
+  const myuser = useSelector((state) => state.myuser);
+  console.log(myuser);
   const [name, setName] = useState("");
 
   useEffect(() => {
     dispatch(getServices());
-    //dispatch(getVetsDetail(id))
-  }, [dispatch, id]);
-
+  }, [dispatch]);
 
   function handleInputChange(event) {
     event.preventDefault();
@@ -35,10 +29,6 @@ export default function NavBar() {
     event.preventDefault();
     dispatch(getServiceByName(name));
     dispatch(getVetByName(name));
-    if (users.isAdmin === true) {
-      dispatch(getUserByName(name));
-    }
-    // navigate(`/vet/${id}`)
     setName("");
   }
 
@@ -70,7 +60,7 @@ export default function NavBar() {
                 </Link>
               </li> */}
 
-              <div className="dropdown">
+              {/* <div className="dropdown">
                 <span
                   className="nav-link dropdown-toggle me-3"
                   role="button"
@@ -102,7 +92,7 @@ export default function NavBar() {
                     </Link>
                   </li>
                 </ul>
-              </div>
+              </div> */}
               <div>
                   <Link to="/admin" type="button" className="text-decoration-none dropdown-item">
                     Admin
@@ -191,14 +181,29 @@ export default function NavBar() {
           </div> */}
           <div>
             <div className="d-flex">
-              <Link to={"/login"}>
-                <button className="btn"> Sign in</button>
-              </Link>
-              <Link to={"/reguser"}>
-                <button className="btn btn-outline-success me-4">
-                  Sign up
+              {!myuser?.id ? (
+                <>
+                  <Link to={"/login"}>
+                    <button className="btn"> Sign in</button>
+                  </Link>
+                  <Link to={"/reguser"}>
+                    <button className="btn btn-outline-success me-4">
+                      Sign up
+                    </button>
+                  </Link>
+                </>
+              ) : (
+                <button
+                  onClick={() => {
+                    localStorage.removeItem("jwt");
+                    navigate(0);
+                  }}
+                  className="btn"
+                >
+                  {" "}
+                  Sign out
                 </button>
-              </Link>
+              )}
             </div>
           </div>
         </div>

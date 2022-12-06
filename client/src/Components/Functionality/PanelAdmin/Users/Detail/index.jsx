@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { ColorModeContext, tokens, useMode } from "../../theme";
@@ -12,7 +12,6 @@ import {
 } from "@mui/material";
 import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
 import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
-
 import Header from "../../Header";
 import {
   clearDetails,
@@ -29,6 +28,16 @@ export default function AdminProfileDetail() {
   const user = useSelector((state) => state.userDetail);
   const admin = useSelector((state) => state.adminDetail);
   const [theme, colorMode] = useMode();
+
+  function handleStatus() {
+    if (user.isAdmin === true) {
+      let cambio = {isAdmin : false}
+      dispatch(updateUser(id,cambio));
+    }else {
+      let cambio = {isAdmin : true}
+      dispatch(updateUser(id,cambio));
+    };
+  }
 
   useEffect(() => {
     dispatch(getUserDetail(id));
@@ -50,13 +59,13 @@ export default function AdminProfileDetail() {
         <CssBaseline />
         <Box>
           <Box p="20px">
-          <Link
-            to="/admin/users"
-            type="button"
-            className="text-decoration-none"
-          >
-            Back to users
-          </Link>
+            <Link
+              to="/admin/users"
+              type="button"
+              className="text-decoration-none"
+            >
+              Back to users
+            </Link>
           </Box>
           <Box m="20px">
             <Header title="USER" subtitle="Managing user" />
@@ -72,7 +81,12 @@ export default function AdminProfileDetail() {
                     {user.name} {user.lastname}
                   </h3>
                 </Box>
-                <Grid container spacing={10} alignItems="center" justifyContent="center">
+                <Grid
+                  container
+                  spacing={10}
+                  alignItems="center"
+                  justifyContent="center"
+                >
                   <Grid item lg={3}>
                     <Box>
                       <h3>Username:</h3>
@@ -111,7 +125,7 @@ export default function AdminProfileDetail() {
                         }
                         borderRadius="4px"
                         type="button"
-                        onClick={(event)=>handleStatus(event)}
+                        // onClick={(event)=>handleStatus(event)}
                       >
                         {user.isActive === true && (
                           <AdminPanelSettingsOutlinedIcon />
@@ -138,6 +152,7 @@ export default function AdminProfileDetail() {
                         }
                         borderRadius="4px"
                         type="button"
+                        onClick={(event)=>handleStatus(event)}
                       >
                         {user.isAdmin === true && (
                           <AdminPanelSettingsOutlinedIcon />
@@ -162,7 +177,12 @@ export default function AdminProfileDetail() {
                     {admin.name} {admin.lastname}
                   </h3>
                 </Box>
-                <Grid container spacing={10} alignItems="center" justifyContent="center">
+                <Grid
+                  container
+                  spacing={10}
+                  alignItems="center"
+                  justifyContent="center"
+                >
                   <Grid item lg={3}>
                     <Box>
                       <h3>Username:</h3>

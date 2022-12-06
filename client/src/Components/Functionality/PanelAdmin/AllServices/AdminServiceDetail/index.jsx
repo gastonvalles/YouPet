@@ -1,31 +1,28 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import { ColorModeContext, tokens, useMode } from "../../theme";
+import { ColorModeContext, useMode } from "../../theme";
 import {
   Box,
   CssBaseline,
-  ThemeProvider,
   Typography,
-  useTheme,
+  ThemeProvider,
   Grid,
 } from "@mui/material";
-import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
-import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
-
 import Header from "../../Header";
-import { getServiceDetail } from "../../../../../Redux/actions";
+import { getServiceDetail, clearDetails } from "../../../../../Redux/actions";
 
 export default function AdminServiceDetail() {
-  const {id} = useParams();
-  const theeme = useTheme();
-  const colors = tokens(theeme.palette.mode);
+  const { id } = useParams();
   const dispatch = useDispatch();
   const service = useSelector((state) => state.serviceDetail);
   const [theme, colorMode] = useMode();
 
   useEffect(() => {
     dispatch(getServiceDetail(id));
+    return () => {
+      dispatch(clearDetails());
+    };
   }, [dispatch, id]);
 
   return (
@@ -35,22 +32,65 @@ export default function AdminServiceDetail() {
         <Box>
           <Box p="20px">
             <Link
-              to="/admin/users"
+              to="/admin/services"
               type="button"
               className="text-decoration-none"
             >
-              Back to users
+              Back to services
             </Link>
           </Box>
           <Header title="Services" subtitle="Managing the services" />
         </Box>
         <Box>
-          {service && (
-            <Box p="10px">
-            <img src={service.img} alt="service pic"/>
-            </Box>
-          )
-          }
+          <Box p="10px">
+            <img
+              src={service.img}
+              alt="service pic"
+              width="500px"
+              height="350px"
+            />
+            <Typography variant="h2" sx={{ m: "10px 0 5px 0" }}>
+              {service.name}
+            </Typography>
+          </Box>
+          <Grid
+            container
+            spacing={2}
+            justifyContent="center"
+            alignItems="center"
+          >
+            <Grid item lg={2}>
+              <Box p="10px">
+                <Typography variant="h3" sx={{ m: "10px 0 5px 0" }}>
+                Type: {service.type}
+                </Typography>
+              </Box>
+            </Grid>
+            <Grid item lg={2}>
+              <Box p="10px">
+                <Typography variant="h3" sx={{ m: "10px 0 5px 0" }}>
+                 Price: $ {service.price}
+                </Typography>
+              </Box>
+            </Grid>
+            <Grid item lg={2}>
+              <Box p="10px">
+                <Typography variant="h3" sx={{ m: "10px 0 5px 0" }}>
+                Timelapse: {service.timelapse} min
+                </Typography>
+              </Box>
+            </Grid>
+            <Grid item lg={8}>
+              <Box p="10px">
+              <Typography variant="h3" sx={{ m: "10px 0 5px 0" }}>
+                  Detail:
+                </Typography>
+                <Typography variant="h3" sx={{ m: "10px 0 5px 0" }}>
+                  {service.detail}
+                </Typography>
+              </Box>
+            </Grid>
+          </Grid>
         </Box>
       </ThemeProvider>
     </ColorModeContext.Provider>

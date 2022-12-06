@@ -13,13 +13,16 @@ export default function ServicesInfo() {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const columns = [
-    { field: "id", 
-    headerName: "ID",
-    renderCell: ({ row: { id } }) => {
-      return( 
-      <Link to={`/serv/${id}`} className="text-decoration-none">{id}</Link>
-      )
-    }, 
+    {
+      field: "id",
+      headerName: "ID",
+      renderCell: ({ row: { id } }) => {
+        return (
+          <Link to={`/serv/${id}`} className="text-decoration-none">
+            {id}
+          </Link>
+        );
+      },
     },
     {
       field: "name",
@@ -49,6 +52,25 @@ export default function ServicesInfo() {
       headerName: "Detail Number",
       flex: 1,
       cellClassName: "detail-column--cell",
+    },
+    {
+      headerName: "Delete",
+      renderCell: () => {
+        return (
+          <Box
+            type="button"
+            width="60%"
+            m="0 auto"
+            p="5px"
+            display="flex"
+            justifyContent="center"
+            backgroundColor={colors.redAccent[700]}
+            borderRadius="30px"
+          >
+            X
+          </Box>
+        );
+      },
     },
   ];
 

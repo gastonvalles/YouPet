@@ -90,7 +90,7 @@ export default function Home() {
       <h1>Services</h1>
       <div className="cardl-list">
         <div className="grid-fluid">
-          {allServices?.map((service) => {
+          {allServices ? allServices.map((service) => {
             return (
               <div key={service.id} className="m-2">
                 <Link
@@ -106,7 +106,7 @@ export default function Home() {
                 </Link>
               </div>
             );
-          })}
+          }) : "No found services"}
         </div>
       </div>
       <h1>Professionals</h1>
