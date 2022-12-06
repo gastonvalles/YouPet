@@ -35,6 +35,8 @@ router.use(
 router.use("/", autentController);
 
 async function userctualizado(req, res, next) {
+
+  console.log(req.body)
   const { id } = req.params;
   const {
     name,
@@ -59,8 +61,8 @@ async function userctualizado(req, res, next) {
     user.email = email ? email : user.email;
     user.address = address ? address : user.address;
     user.dni = dni ? dni : user.dni;
-    user.isAdmin = isAdmin ? isAdmin : user.isAdmin;
-    user.isActive = isActive ? isActive : user.isActive;
+    user.isAdmin = typeof(isAdmin) === 'boolean' ? isAdmin : user.isAdmin;
+    user.isActive = typeof(isActive) === 'boolean'? isActive : user.isActive;
 
     await user.save();
     res.send("usuario actualizado");
