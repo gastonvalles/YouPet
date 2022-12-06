@@ -266,9 +266,9 @@ export function createUser(payload) {
   };
 }
 
-export function updateUser(id) {
+export function updateUser(id, cambio) {
   return async function (dispatch) {
-    var json = await axios.put(`http://localhost:3001/user/${id}`);
+    var json = await axios.put(`http://localhost:3001/user/${id}`, cambio);
     return dispatch({
       type: UPDATE_USER,
       payload: json.data,

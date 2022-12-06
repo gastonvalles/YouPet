@@ -30,10 +30,14 @@ export default function AdminProfileDetail() {
   const [theme, colorMode] = useMode();
 
   function handleStatus() {
-    dispatch(updateUser(id));
-    if (user.isadmin === true) {
-      return user.isAdmin === false;
-    }else return user.isAdmin === true;
+    if (user.isAdmin === true) {
+      let cambio = {isAdmin : false}
+      dispatch(updateUser(id,cambio));
+      
+    }else {
+      let cambio = {isAdmin : true}
+      dispatch(updateUser(id,cambio));
+    };
   }
 
   useEffect(() => {
