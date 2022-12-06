@@ -29,9 +29,16 @@ export default function AdminProfileDetail() {
   const admin = useSelector((state) => state.adminDetail);
   const [theme, colorMode] = useMode();
 
-  function handleStatus() {
+  function handleStatusActive() {
     dispatch(updateUser(id));
-    if (user.isadmin === true) {
+    if (user.isActive === true) {
+      return user.isActive === false;
+    }else return user.isActive === true;
+  }
+
+  function handleStatusAdmin() {
+    dispatch(updateUser(id));
+    if (user.isAdmin === true) {
       return user.isAdmin === false;
     }else return user.isAdmin === true;
   }
@@ -116,7 +123,7 @@ export default function AdminProfileDetail() {
                         }
                         borderRadius="4px"
                         type="button"
-                        
+                        onClick={(event)=>handleStatusActive(event)}
                       >
                         {user.isActive === true && (
                           <AdminPanelSettingsOutlinedIcon />
@@ -143,7 +150,7 @@ export default function AdminProfileDetail() {
                         }
                         borderRadius="4px"
                         type="button"
-                        onClick={(event)=>handleStatus(event)}
+                        onClick={(event)=>handleStatusAdmin(event)}
                       >
                         {user.isAdmin === true && (
                           <AdminPanelSettingsOutlinedIcon />
