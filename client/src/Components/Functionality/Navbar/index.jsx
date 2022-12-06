@@ -1,18 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import { Link, useParams } from "react-router-dom";
 import logo from "../../../img/logo.png";
-import { useNavigate } from "react-router";
 import {
-  filterService,
   // filterVets,
   getServiceByName,
   getServices,
   getUserByName,
-  getVetByName,
-
-  //getVetsDetail,
+  getVetByName
 } from "../../../Redux/actions";
 import "./Navbar.css";
 
@@ -32,12 +28,6 @@ export default function NavBar() {
     dispatch(getServices());
     //dispatch(getVetsDetail(id))
   }, [dispatch, id]);
-
-  function handleFilter(event) {
-    event.preventDefault();
-    dispatch(filterService(event.target.value));
-    // dispatch(filterVets(event.target.value))
-  }
 
   function handleInputChange(event) {
     event.preventDefault();
@@ -74,52 +64,11 @@ export default function NavBar() {
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-1">
-              {/* <li className="nav-item">
-                <Link to={"/"}>
-                  <span className="nav-link active me-3" aria-current="page">
-                    Contact
-                  </span>
-                </Link>
-              </li> */}
-
-              <div className="dropdown">
-                <span
-                  className="nav-link dropdown-toggle me-3"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  Go to...
-                </span>
-                <ul className="dropdown-menu" aria-labelledby="dropdownMenu2">
-                  <li>
-                    <Link to={"/veterinario"}>
-                      <button className="dropdown-item" type="button">
-                        Veterinario
-                      </button>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to={"/nutricionista"}>
-                      <button className="dropdown-item" type="button">
-                        Nutricionista
-                      </button>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to={"/cirugias"}>
-                      <button className="dropdown-item" type="button">
-                        Cirugias
-                      </button>
-                    </Link>
-                  </li>
-                </ul>
-              </div>
               <div>
-                  <Link to="/admin" type="button" className="text-decoration-none dropdown-item">
-                    Admin
-                  </Link>
-                </div>
+                <Link to="/admin" type="button" className="text-decoration-none dropdown-item">
+                  Admin
+                </Link>
+              </div>
               {/* <li className="nav-item dropdown">
                 <span
                   className="nav-link dropdown-toggle me-3"
