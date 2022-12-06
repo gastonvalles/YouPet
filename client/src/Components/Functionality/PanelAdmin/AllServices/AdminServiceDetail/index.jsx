@@ -1,11 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import { ColorModeContext, tokens, useMode } from "../../theme";
-import { Box, CssBaseline, ThemeProvider, useTheme, Grid } from "@mui/material";
-import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
-import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
-
+import { ColorModeContext, useMode } from "../../theme";
+import { Box, CssBaseline, ThemeProvider, Grid } from "@mui/material";
 import Header from "../../Header";
 import { getServiceDetail } from "../../../../../Redux/actions";
 
@@ -47,19 +44,19 @@ export default function AdminServiceDetail() {
           </Box>
           <Grid container spacing={2} justifyContent="center" alignItems="center">
             <Box>
-              <Grid item lg={3}>
-                  <Box>
+              <Grid item xl={4}>
+                  <Box p="10px">
                     <h3>Type:</h3>
                     <h3>{service.type}</h3>
                   </Box>
               </Grid>
-              <Grid item lg={3}>
+              <Grid item xl={4}>
                 <Box>
                   <h3>Price:</h3>
                   <h3>{service.price}</h3>
                 </Box>
               </Grid>
-              <Grid item lg={3}>
+              <Grid item xl={3}>
                 <Box>
                   <h3>Timelapse:</h3>
                   <h3>{service.timelapse}</h3>

@@ -1,31 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useLocation } from "react-router";
-import { Link, useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import logo from "../../../img/logo.png";
 import {
-  filterService,
-  // filterVets,
   getServiceByName,
-  getServices, getUserByName, getVetByName, getVetsDetail
+  getServices,
+  getVetByName,
 } from "../../../Redux/actions";
 import "./Navbar.css";
 
 export default function NavBar() {
   const dispatch = useDispatch();
-  const { search } = useLocation();
-  // const navigate = useNavigate();
-  const { id } = useParams()
-  let query = new URLSearchParams(search)
-  console.log(query)
-  const users = useSelector((state) => state.users);
   const [name, setName] = useState("");
 
   useEffect(() => {
     dispatch(getServices());
-    //dispatch(getVetsDetail(id))
-  }, [dispatch, id]);
-
+  }, [dispatch]);
 
   function handleInputChange(event) {
     event.preventDefault();
@@ -35,10 +25,6 @@ export default function NavBar() {
     event.preventDefault();
     dispatch(getServiceByName(name));
     dispatch(getVetByName(name));
-    if (users.isAdmin === true) {
-      dispatch(getUserByName(name));
-    }
-    // navigate(`/vet/${id}`)
     setName("");
   }
 
@@ -70,7 +56,7 @@ export default function NavBar() {
                 </Link>
               </li> */}
 
-              <div className="dropdown">
+              {/* <div className="dropdown">
                 <span
                   className="nav-link dropdown-toggle me-3"
                   role="button"
@@ -102,12 +88,16 @@ export default function NavBar() {
                     </Link>
                   </li>
                 </ul>
-              </div>
+              </div> */}
               <div>
-                  <Link to="/admin" type="button" className="text-decoration-none dropdown-item">
-                    Admin
-                  </Link>
-                </div>
+                <Link
+                  to="/admin"
+                  type="button"
+                  className="text-decoration-none dropdown-item"
+                >
+                  Admin
+                </Link>
+              </div>
               {/* <li className="nav-item dropdown">
                 <span
                   className="nav-link dropdown-toggle me-3"

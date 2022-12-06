@@ -105,7 +105,7 @@ export default function VetForm() {
   return (
     <Box p="50px">
       <Box m="20px" p="50px">
-        <Box display="flex" justifycontent="space-between" alignItems="center">
+        <Box display="flex" justifyContent="space-between" alignItems="center">
           <Header title="Vet Register" subtitle="Form to register new vet" />
         </Box>
         <form onSubmit={(event) => handleSubmit(event)}>
@@ -113,10 +113,10 @@ export default function VetForm() {
             container
             spacing={2}
             alignItems="center"
-            justifycontent="center"
+            justifyContent="center"
           >
-            <Grid item lg={3}>
-              <Box>
+            <Grid item lg={2}>
+              <Box p="10px">
                 <Box>
                   <label>Name</label>
                 </Box>
@@ -134,8 +134,8 @@ export default function VetForm() {
                 </Box>
               </Box>
             </Grid>
-            <Grid item lg={3}>
-              <Box>
+            <Grid item lg={2}>
+              <Box p="10px">
                 <Box>
                   <label>Lastname</label>
                 </Box>
@@ -156,7 +156,7 @@ export default function VetForm() {
               </Box>
             </Grid>
             <Grid item lg={3}>
-              <Box>
+              <Box p="10px">
                 <Box>
                   <label>Email</label>
                 </Box>
@@ -165,6 +165,7 @@ export default function VetForm() {
                     className="form-control"
                     type="email"
                     name="email"
+                    placeholder="example@example.com"
                     value={input.email}
                     onChange={(event) => handleInputName(event)}
                     onBlur={(event) => handleErrors(event)}
@@ -173,8 +174,8 @@ export default function VetForm() {
                 </Box>
               </Box>
             </Grid>
-            <Grid item lg={3}>
-              <Box>
+            <Grid item lg={5}>
+              <Box p="10px">
                 <Box>
                   <label>Address</label>
                 </Box>
@@ -192,7 +193,7 @@ export default function VetForm() {
               </Box>
             </Grid>
             <Grid item lg={3}>
-              <Box>
+              <Box p="10px">
                 <Box>
                   <label>Speciality</label>
                 </Box>
@@ -212,7 +213,7 @@ export default function VetForm() {
               </Box>
             </Grid>
             <Grid item lg={3}>
-              <Box>
+              <Box p="10px">
                 <Box>
                   <label>URL Image</label>
                 </Box>
@@ -229,8 +230,8 @@ export default function VetForm() {
                 </Box>
               </Box>
             </Grid>
-            <Grid item lg={3}>
-              <Box>
+            <Grid item lg={2}>
+              <Box p="10px">
                 <Box>
                   <label>Telephone Number</label>
                 </Box>
@@ -247,8 +248,8 @@ export default function VetForm() {
                 </Box>
               </Box>
             </Grid>
-            <Grid item lg={3}>
-              <Box>
+            <Grid item lg={2}>
+              <Box p="10px">
                 <Box>
                   <label>DNI</label>
                 </Box>
