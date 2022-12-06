@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { useNavigate} from "react-router"
 import logo from "../../../img/logo.png";
 import {
   getServiceByName,
@@ -11,6 +12,9 @@ import "./Navbar.css";
 
 export default function NavBar() {
   const dispatch = useDispatch();
+  const navigate = useNavigate()
+  const myuser = useSelector((state) => state.myuser);
+  console.log(myuser);
   const [name, setName] = useState("");
 
   useEffect(() => {
@@ -56,7 +60,7 @@ export default function NavBar() {
                 </Link>
               </li> */}
 
-              <div className="dropdown">
+              {/* <div className="dropdown">
                 <span
                   className="nav-link dropdown-toggle me-3"
                   role="button"
@@ -88,7 +92,7 @@ export default function NavBar() {
                     </Link>
                   </li>
                 </ul>
-              </div>
+              </div> */}
               <div>
                   <Link to="/admin" type="button" className="text-decoration-none dropdown-item">
                     Admin

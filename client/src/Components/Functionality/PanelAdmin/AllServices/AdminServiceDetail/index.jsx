@@ -2,9 +2,15 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { ColorModeContext, useMode } from "../../theme";
-import { Box, CssBaseline, ThemeProvider, Grid } from "@mui/material";
+import {
+  Box,
+  CssBaseline,
+  Typography,
+  ThemeProvider,
+  Grid,
+} from "@mui/material";
 import Header from "../../Header";
-import { getServiceDetail } from "../../../../../Redux/actions";
+import { getServiceDetail, clearDetails } from "../../../../../Redux/actions";
 
 export default function AdminServiceDetail() {
   const { id } = useParams();
@@ -14,6 +20,9 @@ export default function AdminServiceDetail() {
 
   useEffect(() => {
     dispatch(getServiceDetail(id));
+    return () => {
+      dispatch(clearDetails());
+    };
   }, [dispatch, id]);
 
   return (
@@ -23,11 +32,11 @@ export default function AdminServiceDetail() {
         <Box>
           <Box p="20px">
             <Link
-              to="/admin/users"
+              to="/admin/services"
               type="button"
               className="text-decoration-none"
             >
-              Back to users
+              Back to services
             </Link>
           </Box>
           <Header title="Services" subtitle="Managing the services" />
@@ -40,35 +49,47 @@ export default function AdminServiceDetail() {
               width="500px"
               height="350px"
             />
-            <h3>{service.name}</h3>
+            <Typography variant="h2" sx={{ m: "10px 0 5px 0" }}>
+              {service.name}
+            </Typography>
           </Box>
-          <Grid container spacing={2} justifyContent="center" alignItems="center">
-            <Box>
-              <Grid item xl={4}>
-                  <Box p="10px">
-                    <h3>Type:</h3>
-                    <h3>{service.type}</h3>
-                  </Box>
-              </Grid>
-              <Grid item xl={4}>
-                <Box>
-                  <h3>Price:</h3>
-                  <h3>{service.price}</h3>
-                </Box>
-              </Grid>
-              <Grid item xl={3}>
-                <Box>
-                  <h3>Timelapse:</h3>
-                  <h3>{service.timelapse}</h3>
-                </Box>
-              </Grid>
-              <Grid item lg={8}>
-                <Box m="200px">
-                  <h3>Detail:</h3>
-                  <h3>{service.detail}</h3>
-                </Box>
-              </Grid>
-            </Box>
+          <Grid
+            container
+            spacing={2}
+            justifyContent="center"
+            alignItems="center"
+          >
+            <Grid item lg={2}>
+              <Box p="10px">
+                <Typography variant="h3" sx={{ m: "10px 0 5px 0" }}>
+                Type: {service.type}
+                </Typography>
+              </Box>
+            </Grid>
+            <Grid item lg={2}>
+              <Box p="10px">
+                <Typography variant="h3" sx={{ m: "10px 0 5px 0" }}>
+                 Price: $ {service.price}
+                </Typography>
+              </Box>
+            </Grid>
+            <Grid item lg={2}>
+              <Box p="10px">
+                <Typography variant="h3" sx={{ m: "10px 0 5px 0" }}>
+                Timelapse: {service.timelapse} min
+                </Typography>
+              </Box>
+            </Grid>
+            <Grid item lg={8}>
+              <Box p="10px">
+              <Typography variant="h3" sx={{ m: "10px 0 5px 0" }}>
+                  Detail:
+                </Typography>
+                <Typography variant="h3" sx={{ m: "10px 0 5px 0" }}>
+                  {service.detail}
+                </Typography>
+              </Box>
+            </Grid>
           </Grid>
         </Box>
       </ThemeProvider>

@@ -52,7 +52,7 @@ export default function Users() {
       field: "isAdmin",
       headerName: "Acces Level",
       flex: 1,
-      renderCell: ({ row: { isAdmin } }) => {
+      renderCell: ({ row: { isAdmin, id} }) => {
         return (
           <Box
             width="60%"
@@ -75,7 +75,7 @@ export default function Users() {
       field: "isActive",
       headerName: "Banner Status",
       flex: 1,
-      renderCell: ({ row: { isActive } }) => {
+      renderCell: ({ row: { isActive, id } }) => {
         return (
           <Box
             width="60%"
@@ -94,6 +94,27 @@ export default function Users() {
             {isActive === false && <LockOpenOutlinedIcon />}
           </Box>
         );
+      },
+    },
+    {
+      headerName: "Delete",
+      renderCell: () => {
+        if(allUsers.isAdmin === true){
+          return (
+            <Box
+              type="button"
+              width="60%"
+              m="0 auto"
+              p="5px"
+              display="flex"
+              justifyContent="center"
+              backgroundColor={colors.redAccent[700]}
+              borderRadius="30px"
+            >
+              X
+            </Box>
+          );
+        }
       },
     },
   ];

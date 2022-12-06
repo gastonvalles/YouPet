@@ -13,36 +13,20 @@ const userController = require("../middlewares/user.js");
 const paymentController = require("../middlewares/payments");
 const autentController = require("../middlewares/autent");
 
-router.use(
-  "/admin",
-  passport.authenticate("jwt", { session: false }),
-  admController
-);
-router.use(
-  "/service",
-  passport.authenticate("jwt", { session: false }),
-  serviceController
-);
+router.use("/admin", admController);
+router.use("/service", serviceController);
 router.use(
   "/pet",
   passport.authenticate("jwt", { session: false }),
   petController
 );
-router.use(
-  "/vet",
-  passport.authenticate("jwt", { session: false }),
-  vetController
-);
+router.use("/vet", vetController);
 router.use(
   "/turn",
   passport.authenticate("jwt", { session: false }),
   turnController
 );
-router.use(
-  "/user",
-  passport.authenticate("jwt", { session: false }),
-  userController
-);
+router.use("/user", userController);
 router.use(
   "/payment",
   passport.authenticate("jwt", { session: false }),
