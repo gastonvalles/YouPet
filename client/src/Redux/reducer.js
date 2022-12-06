@@ -20,23 +20,40 @@ import {
   GET_VET_BY_NAME,
   GET_VET_DETAIL,
   GET_MYUSER,
+  GET_All_TURN,
+  CREATE_SERVICE,
+  CREATE_ADMIN,
+  DELETE_PET,
+  DELETE_VET,
+  DELETE_ADMIN,
+  DELETE_SERVICE,
+  DELETE_TURN,
+  CREATE_VET,
+  UPDATE_ADMIN,
 } from "./const";
 
 const initialState = {
   pets: [],
-  vets: [],
-  medDiag: [],
-  vetDetail: [],
+  allPets: [],
   petDetail: [],
+  vets: [],
+  allVets: [],
+  vetDetail: [],
+  medDiag: [],
+  turns: [],
+  allTurns: [],
   turn: [],
   vetTurns: [],
   createdTurn: [],
   services: [],
   serviceDetail: [],
-  user: {},
+  createService: [],
+  user: [],
   users: [],
+  allUsers: [],
   userDetail: [],
   admins: [],
+  allAdmins: [],
   adminDetail: [],
   allServices: [],
 };
@@ -47,11 +64,18 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         pets: action.payload,
+        allPets: action.payload,
       };
     case GET_PET_DETAIL:
       return {
         ...state,
         petDetail: action.payload,
+      };
+    case DELETE_PET:
+      const deletePet = state.allPets;
+      return {
+        ...state,
+        pets: deletePet.filter((pet) => pet.id !== action.payload),
       };
     case GET_VETS:
       return {
@@ -68,6 +92,17 @@ function rootReducer(state = initialState, action) {
         ...state,
         vets: action.payload,
       };
+    case CREATE_VET:
+      return {
+        ...state,
+        vets: [],
+      };
+    case DELETE_VET:
+      const deleteVet = state.allVets;
+      return {
+        ...state,
+        vets: deleteVet.filter((vet) => vet.id !== action.payload),
+      };
     case GET_SERVICES:
       return {
         ...state,
@@ -83,6 +118,19 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         services: action.payload,
+      };
+    case CREATE_SERVICE:
+      return {
+        ...state,
+        services: [],
+      };
+    case DELETE_SERVICE:
+      const deleteService = state.allServices;
+      return {
+        ...state,
+        services: deleteService.filter(
+          (service) => service.id !== action.payload
+        ),
       };
     case GET_USERS:
       return {
@@ -119,6 +167,24 @@ function rootReducer(state = initialState, action) {
         ...state,
         admins: action.payload,
       };
+    case CREATE_ADMIN:
+      return {
+        ...state,
+        admins: [],
+      };
+    case DELETE_ADMIN:
+      const deleteAdmin = state.allAdmins;
+      return {
+        ...state,
+        admins: deleteAdmin.filter((admin) => admin.id !== action.payload),
+      };
+    case UPDATE_ADMIN:
+      return {
+        ...state,
+        adminDetail: state.adminDetail.map((admin) =>
+          admin.id === action.payload.id ? action.payload : admin
+        ),
+      };
     case FILTER_SERVICE:
       const allservices = state.allServices;
       const filter =
@@ -138,6 +204,7 @@ function rootReducer(state = initialState, action) {
         petDetail: [],
         serviceDetail: [],
         userDetail: [],
+        adminDetail: [],
       };
     case CREATE_TURN:
       return {
@@ -148,6 +215,18 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         turn: [action.payload],
+      };
+    case GET_All_TURN:
+      return {
+        ...state,
+        turns: action.payload,
+        allTurns: action.payload,
+      };
+    case DELETE_TURN:
+      const deleteTurn = state.allTurns;
+      return {
+        ...state,
+        turns: deleteTurn.filter((c) => c.id !== action.payload),
       };
     case CLEAR_TURN:
       return {

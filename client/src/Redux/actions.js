@@ -22,6 +22,22 @@ import {
   GET_VETS,
   GET_VET_BY_NAME,
   GET_VET_DETAIL,
+  GET_All_TURN,
+  CREATE_ADMIN,
+  CREATE_SERVICE,
+  CREATE_VET,
+  CREATE_USER,
+  CREATE_PET,
+  DELETE_PET,
+  DELETE_VET,
+  DELETE_SERVICE,
+  DELETE_ADMIN,
+  DELETE_TURN,
+  UPDATE_USER,
+  UPDATE_TURN,
+  UPDATE_ADMIN,
+  UPDATE_SERVICE,
+  UPDATE_VET,
 } from "./const";
 const instance = axios.create({
   baseURL: "http://localhost:3001",
@@ -47,6 +63,26 @@ export function getPetDetail(id) {
     let json = await instance.get(`/pet/${id}`);
     return dispatch({
       type: GET_PET_DETAIL,
+      payload: json.data,
+    });
+  };
+}
+
+export function createPet(payload) {
+  return async function (dispatch) {
+    let json = await axios.post("http://localhost:3001/admin", payload);
+    return dispatch({
+      type: CREATE_PET,
+      payload: json.data,
+    });
+  };
+}
+
+export function deletePet(id) {
+  return async function (dispatch) {
+    var json = await axios.delete(`http://localhost:3001/pet/${id}`);
+    return dispatch({
+      type: DELETE_PET,
       payload: json.data,
     });
   };
@@ -81,6 +117,36 @@ export function getVetByName(name) {
   };
 }
 
+export function createVet(payload) {
+  return async function (dispatch) {
+    let json = await axios.post("http://localhost:3001/vet", payload);
+    return dispatch({
+      type: CREATE_VET,
+      payload: json.data,
+    });
+  };
+}
+
+export function updateVet(id) {
+  return async function (dispatch) {
+    var json = await axios.put(`http://localhost:3001/vet/${id}`);
+    return dispatch({
+      type: UPDATE_VET,
+      payload: json.data,
+    });
+  };
+}
+
+export function deleteVet(id) {
+  return async function (dispatch) {
+    var json = await axios.delete(`http://localhost:3001/vet/${id}`);
+    return dispatch({
+      type: DELETE_VET,
+      payload: json.data,
+    });
+  };
+}
+
 export function getServices() {
   return async function (dispatch) {
     let json = await instance.get("/service");
@@ -106,6 +172,35 @@ export function getServiceDetail(id) {
     let json = await instance.get(`/service/${id}`);
     return dispatch({
       type: GET_SERVICE_DETAIL,
+      payload: json.data,
+    });
+  };
+}
+export function createService(payload) {
+  return async function (dispatch) {
+    let json = await axios.post("http://localhost:3001/service", payload);
+    return dispatch({
+      type: CREATE_SERVICE,
+      payload: json.data,
+    });
+  };
+}
+
+export function updateService(id) {
+  return async function (dispatch) {
+    var json = await axios.put(`http://localhost:3001/service/${id}`);
+    return dispatch({
+      type: UPDATE_SERVICE,
+      payload: json.data,
+    });
+  };
+}
+
+export function deleteService(id) {
+  return async function (dispatch) {
+    var json = await axios.delete(`http://localhost:3001/service/${id}`);
+    return dispatch({
+      type: DELETE_SERVICE,
       payload: json.data,
     });
   };
@@ -160,6 +255,26 @@ export function getUserByEmail(email) {
   };
 }
 
+export function createUser(payload) {
+  return async function (dispatch) {
+    let json = await axios.post("http://localhost:3001/admin", payload);
+    return dispatch({
+      type: CREATE_USER,
+      payload: json.data,
+    });
+  };
+}
+
+export function updateUser(id) {
+  return async function (dispatch) {
+    var json = await axios.put(`http://localhost:3001/user/${id}`);
+    return dispatch({
+      type: UPDATE_USER,
+      payload: json.data,
+    });
+  };
+}
+
 export function getAdmins() {
   return async function (dispatch) {
     let json = await instance.get("/admin");
@@ -189,6 +304,36 @@ export function getAdminByName(name) {
   };
 }
 
+export function createAdmin(payload) {
+  return async function (dispatch) {
+    let json = await axios.post("http://localhost:3001/admin", payload);
+    return dispatch({
+      type: CREATE_ADMIN,
+      payload: json.data,
+    });
+  };
+}
+
+export function updateAdmin(id) {
+  return async function (dispatch) {
+    var json = await axios.delete(`http://localhost:3001/admin/${id}`);
+    return dispatch({
+      type: UPDATE_ADMIN,
+      payload: json.data,
+    });
+  };
+}
+
+export function deleteAdmin(id) {
+  return async function (dispatch) {
+    var json = await axios.delete(`http://localhost:3001/admin/${id}`);
+    return dispatch({
+      type: DELETE_ADMIN,
+      payload: json.data,
+    });
+  };
+}
+
 export function createTurn(payload) {
   return async function (dispatch) {
     let json = await instance.post("/turn", payload);
@@ -203,8 +348,43 @@ export function getTurn(payload) {
   const { vetSelect, servId } = payload;
   return async function (dispatch) {
     let json = await instance.get(`/turn/${vetSelect}/${servId}`);
+
+    //let json = await axios.get(
+      //`http://localhost:3001/turn/${vetSelect}/${servId}`
+    //);
+
     return dispatch({
       type: GET_TURN,
+      payload: json.data,
+    });
+  };
+}
+
+export function getAllTurn(payload) {
+  return async function (dispatch) {
+    let json = await axios.get(`http://localhost:3001/turn/`);
+    return dispatch({
+      type: GET_All_TURN,
+      payload: json.data,
+    });
+  };
+}
+
+export function updateTurn(id) {
+  return async function (dispatch) {
+    var json = await axios.delete(`http://localhost:3001/turn/${id}`);
+    return dispatch({
+      type: UPDATE_TURN,
+      payload: json.data,
+    });
+  };
+}
+
+export function deleteTurn(id) {
+  return async function (dispatch) {
+    var json = await axios.delete(`http://localhost:3001/turn/${id}`);
+    return dispatch({
+      type: DELETE_TURN,
       payload: json.data,
     });
   };
@@ -230,10 +410,3 @@ export function filterService(payload) {
     payload,
   };
 }
-
-// export function filterVets(payload) {
-//   return {
-//     type: FILTER_VETS,
-//     payload
-//   };
-// }
