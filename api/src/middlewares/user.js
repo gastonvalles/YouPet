@@ -1,16 +1,21 @@
 const { Router } = require("express");
-const {
-  dbCreateUser
-} = require("../controllers/postUser");
+const { dbCreateUser } = require("../controllers/postUser");
 const {
   getAllUsers,
   getUserByPK,
   getUserByEmail,
-  deleteUser
+  deleteUser,
 } = require("../controllers/getAllUsers");
 const router = Router();
 
-router.get('/', async (req, res) => {
+router.get("/myuser", async (req, res) => {
+  if (req.user) {
+    return res.status(200).send(req.user);
+  }
+  return res.status(404).send("No esta logueado");
+});
+
+router.get("/", async (req, res) => {
   try {
     const user = await getAllUsers(req.query.name);
     res.status(200).send(user);
@@ -19,7 +24,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.get('/:id', async (req, res) => {
+router.get("/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const userId = await getUserByPK(id);
@@ -29,7 +34,7 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-router.get('/log/:email', async (req, res) => {
+router.get("/log/:email", async (req, res) => {
   try {
     const { email } = req.params;
     const userId = await getUserByEmail(email);
@@ -38,7 +43,6 @@ router.get('/log/:email', async (req, res) => {
     res.status(404).send(error);
   }
 });
-
 
 router.post("/", async (req, res) => {
   try {

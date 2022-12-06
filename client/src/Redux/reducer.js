@@ -19,6 +19,7 @@ import {
   GET_VETS,
   GET_VET_BY_NAME,
   GET_VET_DETAIL,
+  GET_MYUSER,
   GET_All_TURN,
   CREATE_SERVICE,
   CREATE_ADMIN,
@@ -232,6 +233,11 @@ function rootReducer(state = initialState, action) {
         ...state,
         turn: [],
         createdTurn: [],
+      };
+    case GET_MYUSER:
+      return {
+        ...state,
+        myuser: action.payload,
       };
     default:
       return state;

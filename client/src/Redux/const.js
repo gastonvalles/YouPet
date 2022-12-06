@@ -33,4 +33,6 @@ export const CREATE_ADMIN = "CREATE_ADMIN";
 export const UPDATE_ADMIN = "UPDATE_ADMIN";
 export const DELETE_ADMIN = "DELETE_ADMIN";
 export const FILTER_SERVICE = "FILTER_SERVICE";
+export const GET_MYUSER = "GET_MYUSER";
+// export const FILTER_VETS = "FILTER_VETS";
 export const CLEAR_DETAILS = "CLEAR_DETAILS";
