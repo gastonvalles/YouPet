@@ -6,7 +6,8 @@ const {
   getAllUsers,
   getUserByPK,
   getUserByEmail,
-  deleteUser
+  deleteUser,
+  editUser
 } = require("../controllers/getAllUsers");
 const router = Router();
 
@@ -56,6 +57,18 @@ router.delete("/delete", async (req, res) => {
     res.status(200).json({ msg: `User id: ${id} deleted successfully` });
   } catch (error) {
     res.status(404).send(error);
+  }
+});
+
+
+router.put('/:id', async (req, res)=>{
+  const data = req.body;
+  const {id: id} = req.params; 
+  try{
+      await editUser(id, data);
+      res.send("La reserva se edito exitosamente");
+  }catch(error){
+      res.status(404).send(error.message)
   }
 });
 

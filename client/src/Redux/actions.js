@@ -307,6 +307,7 @@ export function updateAdmin(id) {
   };
 }
 
+
 export function deleteAdmin(id) {
   return async function (dispatch) {
     var json = await axios.delete(`http://localhost:3001/admin/${id}`);

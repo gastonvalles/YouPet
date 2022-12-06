@@ -18,6 +18,7 @@ import {
   clearDetails,
   getAdminDetail,
   getUserDetail,
+  updateUser
 } from "../../../../../Redux/actions";
 
 export default function AdminProfileDetail() {
@@ -36,6 +37,12 @@ export default function AdminProfileDetail() {
       dispatch(clearDetails());
     };
   }, [dispatch, id]);
+
+  function handleStatus() {
+    dispatch(updateUser(id))
+           
+    }
+  }
 
   return (
     <ColorModeContext.Provider value={colorMode}>
@@ -104,6 +111,7 @@ export default function AdminProfileDetail() {
                         }
                         borderRadius="4px"
                         type="button"
+                        onClick={(event)=>handleStatus(event)}
                       >
                         {user.isActive === true && (
                           <AdminPanelSettingsOutlinedIcon />

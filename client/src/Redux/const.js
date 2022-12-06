@@ -34,3 +34,4 @@ export const UPDATE_ADMIN = "UPDATE_ADMIN";
 export const DELETE_ADMIN = "DELETE_ADMIN";
 export const FILTER_SERVICE = "FILTER_SERVICE";
 export const CLEAR_DETAILS = "CLEAR_DETAILS";
+
