@@ -1,17 +1,26 @@
 import {
-  GET_TURN,
-  CLEAR_TURN,
   CLEAR_DETAILS,
+  CLEAR_TURN,
+  CREATE_ADMIN,
+  CREATE_SERVICE,
   CREATE_TURN,
+  CREATE_VET,
+  DELETE_ADMIN,
+  DELETE_PET,
+  DELETE_SERVICE,
+  DELETE_TURN,
+  DELETE_VET,
   FILTER_SERVICE,
   GET_ADMINS,
   GET_ADMIN_BY_NAME,
   GET_ADMIN_DETAIL,
-  GET_PETS,
+  GET_All_TURN,
+  GET_MYUSER, GET_PAYMENT_MP, GET_PETS,
   GET_PET_DETAIL,
   GET_SERVICES,
   GET_SERVICE_BY_NAME,
   GET_SERVICE_DETAIL,
+  GET_TURN,
   GET_USERS,
   GET_USER_BY_EMAIL,
   GET_USER_BY_NAME,
@@ -19,16 +28,7 @@ import {
   GET_VETS,
   GET_VET_BY_NAME,
   GET_VET_DETAIL,
-  GET_All_TURN,
-  CREATE_SERVICE,
-  CREATE_ADMIN,
-  DELETE_PET,
-  DELETE_VET,
-  DELETE_ADMIN,
-  DELETE_SERVICE,
-  DELETE_TURN,
-  CREATE_VET,
-  UPDATE_ADMIN,
+  UPDATE_ADMIN
 } from "./const";
 
 const initialState = {
@@ -55,6 +55,7 @@ const initialState = {
   allAdmins: [],
   adminDetail: [],
   allServices: [],
+  paymentLink: {}
 };
 
 function rootReducer(state = initialState, action) {
@@ -190,8 +191,8 @@ function rootReducer(state = initialState, action) {
         action.payload === ""
           ? allservices
           : allservices.filter(
-              (r) => r.type.toLowerCase() === action.payload.toLowerCase()
-            );
+            (r) => r.type.toLowerCase() === action.payload.toLowerCase()
+          );
       return {
         ...state,
         services: filter,
@@ -232,6 +233,16 @@ function rootReducer(state = initialState, action) {
         ...state,
         turn: [],
         createdTurn: [],
+      };
+    case GET_PAYMENT_MP:
+      return {
+        ...state,
+        paymentLink: action.payload,
+      };
+    case GET_MYUSER:
+      return {
+        ...state,
+        myuser: action.payload,
       };
     default:
       return state;

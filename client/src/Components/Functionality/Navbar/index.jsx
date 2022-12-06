@@ -56,7 +56,7 @@ export default function NavBar() {
                 </Link>
               </li> */}
 
-              {/* <div className="dropdown">
+              <div className="dropdown">
                 <span
                   className="nav-link dropdown-toggle me-3"
                   role="button"
@@ -88,16 +88,12 @@ export default function NavBar() {
                     </Link>
                   </li>
                 </ul>
-              </div> */}
-              <div>
-                <Link
-                  to="/admin"
-                  type="button"
-                  className="text-decoration-none dropdown-item"
-                >
-                  Admin
-                </Link>
               </div>
+              <div>
+                  <Link to="/admin" type="button" className="text-decoration-none dropdown-item">
+                    Admin
+                  </Link>
+                </div>
               {/* <li className="nav-item dropdown">
                 <span
                   className="nav-link dropdown-toggle me-3"
@@ -181,14 +177,29 @@ export default function NavBar() {
           </div> */}
           <div>
             <div className="d-flex">
-              <Link to={"/login"}>
-                <button className="btn"> Sign in</button>
-              </Link>
-              <Link to={"/reguser"}>
-                <button className="btn btn-outline-success me-4">
-                  Sign up
+              {!myuser?.id ? (
+                <>
+                  <Link to={"/login"}>
+                    <button className="btn"> Sign in</button>
+                  </Link>
+                  <Link to={"/reguser"}>
+                    <button className="btn btn-outline-success me-4">
+                      Sign up
+                    </button>
+                  </Link>
+                </>
+              ) : (
+                <button
+                  onClick={() => {
+                    localStorage.removeItem("jwt");
+                    navigate(0);
+                  }}
+                  className="btn"
+                >
+                  {" "}
+                  Sign out
                 </button>
-              </Link>
+              )}
             </div>
           </div>
         </div>
