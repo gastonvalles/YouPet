@@ -33,7 +33,6 @@ export default function AdminProfileDetail() {
     if (user.isAdmin === true) {
       let cambio = {isAdmin : false}
       dispatch(updateUser(id,cambio));
-      
     }else {
       let cambio = {isAdmin : true}
       dispatch(updateUser(id,cambio));
@@ -120,7 +119,7 @@ export default function AdminProfileDetail() {
                         }
                         borderRadius="4px"
                         type="button"
-                        onClick={(event)=>handleStatusActive(event)}
+                        // onClick={(event)=>handleStatus(event)}
                       >
                         {user.isActive === true && (
                           <AdminPanelSettingsOutlinedIcon />
@@ -147,7 +146,7 @@ export default function AdminProfileDetail() {
                         }
                         borderRadius="4px"
                         type="button"
-                        onClick={(event)=>handleStatusAdmin(event)}
+                        onClick={(event)=>handleStatus(event)}
                       >
                         {user.isAdmin === true && (
                           <AdminPanelSettingsOutlinedIcon />
