@@ -21,10 +21,17 @@ import PanelAdmin from "./Components/Functionality/PanelAdmin/Body/PanelAdmin";
 import AdminProfileDetail from "./Components/Functionality/PanelAdmin/Users/Detail";
 
 import ChooseVetTurn from "./Components/Functionality/Turns/ChooseVetTurn";
-
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import Home from "./Components/View/HomeFake/HomeFake";
+import { getMyUser } from "./Redux/actions";
+
 
 function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getMyUser());
+  }, [dispatch]);
   return (
     <div className="App">
       <NavBar />

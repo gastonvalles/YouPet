@@ -5,16 +5,18 @@ const morgan = require("morgan");
 const routes = require("./routes/index.js");
 const dotenv = require("dotenv");
 const passport = require("passport");
+//const session = require("express-session");
 require("./db.js");
 require("./middlewares/passport");
 const server = express();
-//const cors = require("cors");
+const cors = require("cors");
 dotenv.config();
 
 server.name = "API";
 
-//server.use(cors());
-//server.use(cors({ credentials: true, origin: "http://localhost:3000" }));
+//server.use(session({ secret: "secret" }));
+server.use(cors());
+server.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 server.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 server.use(bodyParser.json({ limit: "50mb" }));
 server.use(cookieParser());

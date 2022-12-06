@@ -113,13 +113,25 @@ function FormUser() {
 
           return errors;
         }}
-        onSubmit={(values, { resetForm }) => {
-          axios.post()
-          resetForm();
-          setformSuccess(true);
-          setTimeout(() => {
-            setformSuccess(false);
-          }, 5000);
+        onSubmit={(values) => {
+          axios
+            .post("http://localhost:3001/register/", values, {})
+            .then((res) => {
+              Swal.fire({
+                //icon: "succes",
+                title: `Creado exitosamente`,
+                showConfirmButton: false,
+                timer: 1000,
+              });
+              navigate("/login");
+            })
+            .catch((error) =>
+              Swal.fire({
+                icon: "error",
+                title: "existe un error",
+                text: `${error}`,
+              })
+            );
         }}
       >
         {({ errors }) => (
