@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { useNavigate} from "react-router"
+import { useNavigate } from "react-router"
 import logo from "../../../img/logo.png";
 import {
   getServiceByName,

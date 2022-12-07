@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
+import { useNavigate } from "react-router"
 import { ColorModeContext, tokens, useMode } from "../../theme";
 import {
   Box,
@@ -17,10 +18,12 @@ import {
   clearDetails,
   getAdminDetail,
   getUserDetail,
-  updateUser
+  updateUser,
+  updateAdmin
 } from "../../../../../Redux/actions";
 
 export default function AdminProfileDetail() {
+  const navigate = useNavigate()
   const theeme = useTheme();
   const colors = tokens(theeme.palette.mode);
   const { id } = useParams();
@@ -29,7 +32,40 @@ export default function AdminProfileDetail() {
   const admin = useSelector((state) => state.adminDetail);
   const [theme, colorMode] = useMode();
 
-  function handleStatus() {
+  function handleAccessAdmin() {
+    if (admin.isAdmin === true) {
+      let cambio = {isAdmin : false}
+      dispatch(updateAdmin(id,cambio));
+    }else {
+      let cambio = {isAdmin : true}
+      dispatch(updateAdmin(id,cambio));
+    };
+    navigate(0)
+  }
+
+  function handleStatusAdmin(){
+    if (admin.isActive === true) {
+      let cambio = {isActive : false}
+      dispatch(updateAdmin(id,cambio));
+    }else {
+      let cambio = {isActive : true}
+      dispatch(updateAdmin(id,cambio));
+    };
+    navigate(0)
+  }
+
+  function handleStatusUser() {
+    if (user.isActive === true) {
+      let cambio = {isActive : false}
+      dispatch(updateUser(id,cambio));
+    }else {
+      let cambio = {isActive : true}
+      dispatch(updateUser(id,cambio));
+    };
+    navigate(0)
+  }
+  
+  function handleAccessUser() {
     if (user.isAdmin === true) {
       let cambio = {isAdmin : false}
       dispatch(updateUser(id,cambio));
@@ -37,6 +73,7 @@ export default function AdminProfileDetail() {
       let cambio = {isAdmin : true}
       dispatch(updateUser(id,cambio));
     };
+    navigate(0)
   }
 
   useEffect(() => {
@@ -119,7 +156,7 @@ export default function AdminProfileDetail() {
                         }
                         borderRadius="4px"
                         type="button"
-                        // onClick={(event)=>handleStatus(event)}
+                        onClick={(event)=>handleStatusUser(event)}
                       >
                         {user.isActive === true && (
                           <AdminPanelSettingsOutlinedIcon />
@@ -146,7 +183,7 @@ export default function AdminProfileDetail() {
                         }
                         borderRadius="4px"
                         type="button"
-                        onClick={(event)=>handleStatus(event)}
+                        onClick={(event)=>handleAccessUser(event)}
                       >
                         {user.isAdmin === true && (
                           <AdminPanelSettingsOutlinedIcon />
@@ -215,6 +252,7 @@ export default function AdminProfileDetail() {
                         }
                         borderRadius="4px"
                         type="button"
+                        onClick={(event)=>handleStatusAdmin(event)}
                       >
                         {admin.isActive === true && (
                           <AdminPanelSettingsOutlinedIcon />
@@ -241,6 +279,7 @@ export default function AdminProfileDetail() {
                         }
                         borderRadius="4px"
                         type="button"
+                        onClick={(event)=>handleAccessAdmin(event)}
                       >
                         {admin.isAdmin === true && (
                           <AdminPanelSettingsOutlinedIcon />

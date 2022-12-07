@@ -315,9 +315,9 @@ export function createAdmin(payload) {
   };
 }
 
-export function updateAdmin(id) {
+export function updateAdmin(id, cambio) {
   return async function (dispatch) {
-    var json = await axios.delete(`http://localhost:3001/admin/${id}`);
+    var json = await axios.put(`http://localhost:3001/admin/${id}`, cambio);
     return dispatch({
       type: UPDATE_ADMIN,
       payload: json.data,
