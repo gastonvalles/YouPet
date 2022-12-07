@@ -1,6 +1,6 @@
 const { Router, json } = require("express");
 const cualquiera = require("../middlewares/passport");
-const {User} = require("../db")
+const {User, Admin} = require("../db")
 const router = Router();
 router.use(json());
 const passport = require("passport");
@@ -34,9 +34,7 @@ router.use(
 );
 router.use("/", autentController);
 
-async function userctualizado(req, res, next) {
-
-  console.log(req.body)
+async function useractualizado(req, res, next) {
   const { id } = req.params;
   const {
     name,
@@ -70,5 +68,41 @@ async function userctualizado(req, res, next) {
     next(error);
   }
 }
-router.put("/user/:id", userctualizado);
+router.put("/user/:id", useractualizado);
+
+async function adminactualizado(req, res, next) {
+  const { id } = req.params;
+  const {
+    name,
+    lastname,
+    username,
+    password,
+    confirmationpass,
+    email,
+    address,
+    dni,
+    isAdmin,
+    isActive,
+  } = req.body;
+
+  try {
+    let admin = await Admin.findByPk(id);
+    admin.name = name ? name : admin.name;
+    admin.lastname = lastname ? lastname : admin.lastname;
+    admin.username = username ? username : admin.username;
+    admin.password = password ? password : admin.password;
+    admin.confirmationpass = confirmationpass ? confirmationpass : admin.confirmationpass;
+    admin.email = email ? email : admin.email;
+    admin.address = address ? address : admin.address;
+    admin.dni = dni ? dni : admin.dni;
+    admin.isAdmin = typeof(isAdmin) === 'boolean' ? isAdmin : admin.isAdmin;
+    admin.isActive = typeof(isActive) === 'boolean'? isActive : admin.isActive;
+
+    await admin.save();
+    res.send("admin actualizado");
+  } catch (error) {
+    next(error);
+  }
+}
+router.put("/admin/:id", adminactualizado);
 module.exports = router;

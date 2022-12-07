@@ -96,32 +96,11 @@ export default function Users() {
         );
       },
     },
-    {
-      headerName: "Delete",
-      renderCell: () => {
-        if(allUsers.isAdmin === true){
-          return (
-            <Box
-              type="button"
-              width="60%"
-              m="0 auto"
-              p="5px"
-              display="flex"
-              justifyContent="center"
-              backgroundColor={colors.redAccent[700]}
-              borderRadius="30px"
-            >
-              X
-            </Box>
-          );
-        }
-      },
-    },
   ];
 
   useEffect(() => {
     dispatch(getUsers());
-    dispatch(getAdmins())
+    dispatch(getAdmins());
   }, [dispatch]);
 
   return (

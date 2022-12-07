@@ -15,7 +15,9 @@ import {
   GET_ADMIN_BY_NAME,
   GET_ADMIN_DETAIL,
   GET_All_TURN,
-  GET_MYUSER, GET_PAYMENT_MP, GET_PETS,
+  GET_MYUSER,
+  GET_PAYMENT_MP,
+  GET_PETS,
   GET_PET_DETAIL,
   GET_SERVICES,
   GET_SERVICE_BY_NAME,
@@ -28,6 +30,7 @@ import {
   GET_VETS,
   GET_VET_BY_NAME,
   GET_VET_DETAIL,
+<<<<<<< HEAD
 <<<<<<< HEAD
   GET_All_TURN,
   CREATE_SERVICE,
@@ -42,6 +45,10 @@ import {
 =======
   UPDATE_ADMIN
 >>>>>>> 457024bac1ae71bd49a15f1bba228b4253349cb1
+=======
+  UPDATE_ADMIN,
+  UPDATE_USER,
+>>>>>>> d0796f373f58b35373f27e55dfef9ef02a864384
 } from "./const";
 
 const initialState = {
@@ -68,7 +75,7 @@ const initialState = {
   allAdmins: [],
   adminDetail: [],
   allServices: [],
-  paymentLink: {}
+  paymentLink: {},
 };
 
 function rootReducer(state = initialState, action) {
@@ -165,6 +172,7 @@ function rootReducer(state = initialState, action) {
         ...state,
         user: action.payload,
       };
+<<<<<<< HEAD
       case UPDATE_USER:
         return {
           ...state,
@@ -173,6 +181,15 @@ function rootReducer(state = initialState, action) {
           ),
         };
 
+=======
+    case UPDATE_USER:
+      return {
+        ...state,
+        users: state.users.map((user) =>
+          user.id === action.payload.id ? action.payload : user
+        ),
+      };
+>>>>>>> d0796f373f58b35373f27e55dfef9ef02a864384
     case GET_ADMINS:
       return {
         ...state,
@@ -212,8 +229,8 @@ function rootReducer(state = initialState, action) {
         action.payload === ""
           ? allservices
           : allservices.filter(
-            (r) => r.type.toLowerCase() === action.payload.toLowerCase()
-          );
+              (r) => r.type.toLowerCase() === action.payload.toLowerCase()
+            );
       return {
         ...state,
         services: filter,

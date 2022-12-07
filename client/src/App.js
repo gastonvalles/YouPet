@@ -25,6 +25,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import Home from "./Components/View/HomeFake/HomeFake";
 import { getMyUser } from "./Redux/actions";
+import AdminVetDetail from "./Components/Functionality/PanelAdmin/VetInformation/VetDetail";
 
 
 function App() {
@@ -51,6 +52,7 @@ function App() {
         <Route exact path="/errorPay" element={<ErrorPay/> } />
         <Route path="/user/:id" element={<AdminProfileDetail />} />
         <Route path="/serv/:id" element={<AdminServiceDetail/>}/>
+        <Route path="/adminvet/:id" element={<AdminVetDetail/>} />
         <Route path="/admin/*" element={<PanelAdmin/>}/>
 
       </Routes>
