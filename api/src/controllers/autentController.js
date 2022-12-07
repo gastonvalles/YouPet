@@ -56,7 +56,7 @@ const { transporter } = require("../../config/mailer");
 
 exports.register = async (req, res) => {
   const { name, lastname, username, password, email, dni, address } = req.body;
-  //console.log(name, lastname, username, password, email);
+  console.log(name, lastname, username, password, email);
   if (
     !name ||
     !lastname ||
@@ -75,6 +75,8 @@ exports.register = async (req, res) => {
       },
     });
     if (!dbSearch.length) {
+      //const token = jwt.sign({ email: req.body.email }, config.secret);
+      //console.log(config.secret);
       const newHash = await bcryptjs.hash(req.body.password, 8);
       const user = await User.create({
         name: req.body.name,
@@ -85,26 +87,61 @@ exports.register = async (req, res) => {
         password: newHash,
         email: req.body.email,
         address: req.body.address,
+        confirmationCode: req.body.token,
       });
-      //console.log(user);
-      sendEmail(req.body.email);
+      console.log(user);
+      nodemailer.sendEmail(
+        user.body.username,
+        user.body.email,
+        user.body.confirmationCode
+      );
       res.status(200).json(user);
     } else {
       res.status(302).json(dbSearch);
+    }
+    if (dbSearch.status !== "Active") {
+      return res
+        .status(401)
+        .send("Cuenta pendiente. Por favor verifique su Email");
     }
   } catch (error) {
     res.send(error);
   }
 };
 
-const sendEmail = async (email) => {
-  await transporter.sendMail({
-    from: '"YOUPET" <foo@example.com>', // sender address
-    to: email, // list of receivers
-    subject: "¡Bienvenido a YOUPET!", // Subject line
-    text: "¡Gracias por Registrarte", // plain text body
-    html: "<b>(BIENVENIDOS)</b>", // html body
-  });
+module.exports.sendEmail = async (name, email, confirmationCode) => {
+  await transporter
+    .sendMail({
+      from: '"YOUPET" <foo@example.com>', // sender address
+      to: email, // list of receivers
+      subject: "¡Bienvenido a YOUPET!", // Subject line
+      text: "¡Gracias por Registrarte", // plain text body
+      html: `<b>EMAIL DE CONFIRMACION</b>
+    <h2>Hello ${name}<h2>
+    <p>Gracias por suscribirte, confirmatu email haciendo click en el siguiente link</p>
+    <a href=http//locaclhost:3000/confirm/${confirmationCode}>Click here</a>
+    `,
+    })
+    .catch((err) => console.log(err));
+};
+
+exports.verifyUser = (req, res, next) => {
+  User.findOne({
+    confirmationCode: req.params.confirmationCode,
+  })
+    .then((user) => {
+      if (!user) {
+        return res.status(404).send("Usuario no encontrado");
+      }
+      user.status = "Active";
+      user.save((err) => {
+        if (err) {
+          res.status(500).send(err);
+          return;
+        }
+      });
+    })
+    .catch((e) => console.log("error", e));
 };
 
 exports.login = async (req, res) => {
