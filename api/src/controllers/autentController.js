@@ -6,6 +6,16 @@ const { User } = require("../db");
 //const {promisify}= require("")
 const { transporter } = require("../../config/mailer");
 
+
+require("dotenv").config()
+const cloudinary = require("cloudinary").v2;
+
+cloudinary.config({ 
+    cloud_name: process.env.CLOUDINARY_NAME ,
+    api_key: process.env.CLOUDINARY_APIKEY, 
+    api_secret: process.env.CLOUDINARY_APISECRET 
+  });
+
 /* exports.register = async (req, res) => {
   const { name, lastname, username, password, email, dni, address } = req.body;
   //console.log(name, lastname, username, password, email);
@@ -55,7 +65,7 @@ const { transporter } = require("../../config/mailer");
 }; */
 
 exports.register = async (req, res) => {
-  const { name, lastname, username, password, email, dni, address } = req.body;
+  const { name, lastname, username, password, email, dni, address, img } = req.body;
   //console.log(name, lastname, username, password, email);
   if (
     !name ||
@@ -75,6 +85,25 @@ exports.register = async (req, res) => {
       },
     });
     if (!dbSearch.length) {
+      try {
+        if (img) {
+
+          const uploadRes = await cloudinary.uploader.upload(img, {
+            upload_preset: "youpet",
+            allowed_formats: ["png", "jpg", "jpeg", "svg"],
+          });
+
+          console.log(uploadRes);
+
+          if (uploadRes) {
+            req.body.img = uploadRes.url;
+          }
+
+        }
+        
+      } catch (error) {
+        res.status(500).json({ error: error });
+      }
       const newHash = await bcryptjs.hash(req.body.password, 8);
       const user = await User.create({
         name: req.body.name,
@@ -85,9 +114,10 @@ exports.register = async (req, res) => {
         password: newHash,
         email: req.body.email,
         address: req.body.address,
+        img: req.body.img,
       });
       //console.log(user);
-      sendEmail(req.body.email);
+      // sendEmail(req.body.email);
       res.status(200).json(user);
     } else {
       res.status(302).json(dbSearch);
