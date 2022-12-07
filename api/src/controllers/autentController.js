@@ -117,7 +117,7 @@ exports.register = async (req, res) => {
         img: req.body.img,
       });
       //console.log(user);
-      // sendEmail(req.body.email);
+       sendEmail(req.body.email);
       res.status(200).json(user);
     } else {
       res.status(302).json(dbSearch);
