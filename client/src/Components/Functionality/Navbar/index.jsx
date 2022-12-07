@@ -12,7 +12,7 @@ import "./Navbar.css";
 
 export default function NavBar() {
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const myuser = useSelector((state) => state.myuser);
   console.log(myuser);
   const [name, setName] = useState("");

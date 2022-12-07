@@ -128,9 +128,9 @@ export function createVet(payload) {
   };
 }
 
-export function updateVet(id) {
+export function updateVet(id, payload) {
   return async function (dispatch) {
-    var json = await axios.put(`http://localhost:3001/vet/${id}`);
+    var json = await axios.put(`http://localhost:3001/vet/${id}`,payload);
     return dispatch({
       type: UPDATE_VET,
       payload: json.data,
@@ -266,9 +266,9 @@ export function createUser(payload) {
   };
 }
 
-export function updateUser(id, cambio) {
+export function updateUser(id, payload) {
   return async function (dispatch) {
-    var json = await axios.put(`http://localhost:3001/user/${id}`, cambio);
+    var json = await axios.put(`http://localhost:3001/user/${id}`, payload);
     return dispatch({
       type: UPDATE_USER,
       payload: json.data,
@@ -315,9 +315,9 @@ export function createAdmin(payload) {
   };
 }
 
-export function updateAdmin(id, cambio) {
+export function updateAdmin(id, payload) {
   return async function (dispatch) {
-    var json = await axios.put(`http://localhost:3001/admin/${id}`, cambio);
+    var json = await axios.put(`http://localhost:3001/admin/${id}`, payload);
     return dispatch({
       type: UPDATE_ADMIN,
       payload: json.data,
@@ -349,11 +349,6 @@ export function getTurn(payload) {
   const { vetSelect, servId } = payload;
   return async function (dispatch) {
     let json = await instance.get(`/turn/${vetSelect}/${servId}`);
-
-    //let json = await axios.get(
-      //`http://localhost:3001/turn/${vetSelect}/${servId}`
-    //);
-
     return dispatch({
       type: GET_TURN,
       payload: json.data,
@@ -361,7 +356,7 @@ export function getTurn(payload) {
   };
 }
 
-export function getAllTurn(payload) {
+export function getAllTurn() {
   return async function (dispatch) {
     let json = await axios.get(`http://localhost:3001/turn/`);
     return dispatch({
@@ -411,14 +406,6 @@ export function filterService(payload) {
     payload,
   };
 }
-
-
-// export function filterVets(payload) {
-//   return {
-//     type: FILTER_VETS,
-//     payload
-//   };
-// }
 
 export function getPaymentMP(service) {
   return async function (dispatch) {

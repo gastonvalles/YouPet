@@ -61,7 +61,7 @@ export default function ServicesInfo() {
 
   return (
     <Box m="20px">
-      <Header title="Contacts" subtitle="List of contacts" />
+      <Header title="Services" subtitle="List of services" />
       <Box
         m="40px 0 0 0"
         height="75vh"

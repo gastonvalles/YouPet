@@ -167,8 +167,36 @@ const getDBVetByPK = async (id) => {
 
 const dbCreateVet = async (body) => {
   try {
-    const { name, lastname, isActive, speciality, review, average, inicialDate, finishDate, tel, img, fav, email, address, dni } = body;
-    if (!name && !lastname && !isActive && !speciality && review && average && !inicialDate && !finishDate && !tel && !email && !address && !dni) {
+    const {
+      name,
+      lastname,
+      isActive,
+      speciality,
+      review,
+      average,
+      inicialDate,
+      finishDate,
+      tel,
+      img,
+      fav,
+      email,
+      address,
+      dni,
+    } = body;
+    if (
+      !name &&
+      !lastname &&
+      !isActive &&
+      !speciality &&
+      review &&
+      average &&
+      !inicialDate &&
+      !finishDate &&
+      !tel &&
+      !email &&
+      !address &&
+      !dni
+    ) {
       throw new Error("missing query");
     } else {
       await Vet.create(body);

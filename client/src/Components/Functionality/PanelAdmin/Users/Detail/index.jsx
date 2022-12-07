@@ -34,44 +34,44 @@ export default function AdminProfileDetail() {
 
   function handleAccessAdmin() {
     if (admin.isAdmin === true) {
-      let cambio = {isAdmin : false}
-      dispatch(updateAdmin(id,cambio));
+      let payload = {isAdmin : false}
+      dispatch(updateAdmin(id,payload));
     }else {
-      let cambio = {isAdmin : true}
-      dispatch(updateAdmin(id,cambio));
+      let payload = {isAdmin : true}
+      dispatch(updateAdmin(id,payload));
     };
     navigate(0)
   }
 
   function handleStatusAdmin(){
     if (admin.isActive === true) {
-      let cambio = {isActive : false}
-      dispatch(updateAdmin(id,cambio));
+      let payload = {isActive : false}
+      dispatch(updateAdmin(id,payload));
     }else {
-      let cambio = {isActive : true}
-      dispatch(updateAdmin(id,cambio));
+      let payload = {isActive : true}
+      dispatch(updateAdmin(id,payload));
     };
     navigate(0)
   }
 
   function handleStatusUser() {
     if (user.isActive === true) {
-      let cambio = {isActive : false}
-      dispatch(updateUser(id,cambio));
+      let payload = {isActive : false}
+      dispatch(updateUser(id,payload));
     }else {
-      let cambio = {isActive : true}
-      dispatch(updateUser(id,cambio));
+      let payload = {isActive : true}
+      dispatch(updateUser(id,payload));
     };
     navigate(0)
   }
   
   function handleAccessUser() {
     if (user.isAdmin === true) {
-      let cambio = {isAdmin : false}
-      dispatch(updateUser(id,cambio));
+      let payload = {isAdmin : false}
+      dispatch(updateUser(id,payload));
     }else {
-      let cambio = {isAdmin : true}
-      dispatch(updateUser(id,cambio));
+      let payload = {isAdmin : true}
+      dispatch(updateUser(id,payload));
     };
     navigate(0)
   }

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Box, useTheme } from "@mui/material";
@@ -14,11 +14,6 @@ export default function VetInformation() {
   const allVets = useSelector(state=> state.vets)
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-
-  function handleStatus() {
-    
-  }
-
   const columns = [
     {
       field: "id",
@@ -114,7 +109,7 @@ export default function VetInformation() {
 
   return (
     <Box m="20px">
-      <Header title="Contacts" subtitle="List of contacts" />
+      <Header title="All vets" subtitle="List of vets" />
       <Box
         m="40px 0 0 0"
         height="75vh"

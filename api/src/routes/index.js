@@ -1,6 +1,6 @@
 const { Router, json } = require("express");
 const cualquiera = require("../middlewares/passport");
-const {User, Admin} = require("../db")
+const {User, Admin, Vet} = require("../db")
 const router = Router();
 router.use(json());
 const passport = require("passport");
@@ -34,7 +34,7 @@ router.use(
 );
 router.use("/", autentController);
 
-async function useractualizado(req, res, next) {
+async function userActualizado(req, res, next) {
   const { id } = req.params;
   const {
     name,
@@ -68,9 +68,9 @@ async function useractualizado(req, res, next) {
     next(error);
   }
 }
-router.put("/user/:id", useractualizado);
+router.put("/user/:id", userActualizado);
 
-async function adminactualizado(req, res, next) {
+async function adminActualizado(req, res, next) {
   const { id } = req.params;
   const {
     name,
@@ -104,5 +104,41 @@ async function adminactualizado(req, res, next) {
     next(error);
   }
 }
-router.put("/admin/:id", adminactualizado);
+router.put("/admin/:id", adminActualizado);
+
+async function vetActualizado(req, res) {
+  const { id } = req.params;
+  const {
+    name,
+    lastname,
+    speciality,
+    email,
+    address,
+    img,
+    dni,
+    inicialDate,
+    finishDate,
+    isActive,
+  } = req.body;
+
+  try {
+    let vet = await Vet.findByPk(id);
+    vet.name = name ? name : vet.name;
+    vet.lastname = lastname ? lastname : vet.lastname;
+    vet.speciality = speciality ? speciality : vet.speciality;
+    vet.email = email ? email : vet.email;
+    vet.address = address ? address : vet.address;
+    vet.img = img ? img : vet.img;
+    vet.dni = dni ? dni : vet.dni;
+    vet.inicialDate = inicialDate ? inicialDate : vet.inicialDate;
+    vet.finishDate = finishDate ? finishDate : vet.finishDate;
+    vet.isActive = typeof(isActive) === 'boolean'? isActive : vet.isActive;
+
+    await vet.save();
+    res.status(200).send("vet actualizado");
+  } catch (error) {
+    res.send(error.message);
+  }
+}
+router.put("/vet/:id", vetActualizado);
 module.exports = router;

@@ -16,7 +16,7 @@ import {
   useTheme,
 } from "@mui/material";
 import Header from "../../Header";
-import { clearDetails, getVetsDetail } from "../../../../../Redux/actions";
+import { clearDetails, deleteVet, getVetsDetail, updateVet } from "../../../../../Redux/actions";
 
 export default function AdminVetDetail() {
   const { id } = useParams();
@@ -27,7 +27,24 @@ export default function AdminVetDetail() {
   const colors = tokens(theeme.palette.mode);
   const [theme, colorMode] = useMode();
 
-  function delVet() {}
+  function delVet() {
+    dispatch(deleteVet(id));
+    var respuesta = window.confirm("Confirm delete?");
+    if (respuesta) alert("Vet deleted");
+    else alert("You are not allowed to delete");
+    navigate("/admin/allvets");
+  }
+
+  function handleStatusVet(){
+    if (vet.isActive === true) {
+      let payload = {isActive : false}
+      dispatch(updateVet(id,payload));
+    }else {
+      let payload = {isActive : true}
+      dispatch(updateVet(id,payload));
+    };
+    navigate(0)
+  }
 
   useEffect(() => {
     dispatch(getVetsDetail(id));
@@ -49,8 +66,6 @@ export default function AdminVetDetail() {
             >
               Back to all vets
             </Link>
-          </Box>
-          <Box p="20px">
             <Button
               variant="contained"
               color="error"
@@ -58,7 +73,9 @@ export default function AdminVetDetail() {
             >
               Delete Vet
             </Button>
-            <Box p="20px">
+          </Box>
+          <Box p="20px">
+            <Box>
               <Header title="Vet" subtitle="Managing Vets" />
             </Box>
           </Box>
@@ -96,11 +113,12 @@ export default function AdminVetDetail() {
                   }
                   borderRadius="4px"
                   type="button"
+                  onClick={(event)=>handleStatusVet(event)}
                 >
                   {vet.isActive === true && <AdminPanelSettingsOutlinedIcon />}
                   {vet.isActive === false && <LockOpenOutlinedIcon />}
                 </Box>
-                <Typography variant="h2" sx={{ m: "10px 0 5px 0" }}>
+                <Typography variant="h3" sx={{ m: "10px 0 5px 0" }}>
                   Is Active
                 </Typography>
               </Box>

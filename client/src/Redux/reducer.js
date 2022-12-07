@@ -32,6 +32,7 @@ import {
   GET_VET_DETAIL,
   UPDATE_ADMIN,
   UPDATE_USER,
+  UPDATE_VET,
 } from "./const";
 
 const initialState = {
@@ -99,6 +100,13 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         vets: [],
+      };
+    case UPDATE_VET:
+      return {
+        ...state,
+        vets: state.vets.map((vet) =>
+          vet.id === action.payload.id ? action.payload : vet
+        ),
       };
     case DELETE_VET:
       const deleteVet = state.allVets;
