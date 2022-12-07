@@ -5,10 +5,6 @@ const {
   getUserByPK,
   getUserByEmail,
   deleteUser,
-<<<<<<< HEAD
-  editUser
-=======
->>>>>>> 457024bac1ae71bd49a15f1bba228b4253349cb1
 } = require("../controllers/getAllUsers");
 const router = Router();
 
