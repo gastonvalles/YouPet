@@ -1,12 +1,24 @@
-import React from "react";
-import Service from "../../Services/auth.service";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import axios from "axios";
+import { Link, useParams } from "react-router-dom";
+import { useEffect } from "react";
 
-const Welcome = (props) => {
-  if (props.match.path === "/confirm/:confirmation/confirmationCode") {
-    Service.verifUser(props.match.params.confirmationCode);
-  }
-
+const Welcome = () => {
+  const [verify, setVerify] = useState(null);
+  const { confirmationCode } = useParams();
+  useEffect(() => {
+    if (confirmationCode)
+      axios
+        .get(`http://localhost:3000/confirm/${confirmationCode}`)
+        .then((response) => {
+          setVerify(true);
+        })
+        .catch(() => {
+          setVerify(false);
+        });
+  }, [confirmationCode]);
+  if (verify === null) return <div>estamos verificando tu cuenta</div>;
+  if (!verify) return <div>No pudimos confirmar tu cuenta</div>;
   return (
     <div>
       <header>

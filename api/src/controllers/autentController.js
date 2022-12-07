@@ -75,7 +75,7 @@ exports.register = async (req, res) => {
       },
     });
     if (!dbSearch.length) {
-      //const token = jwt.sign({ email: req.body.email }, config.secret);
+      const token = jwt.sign({ email: req.body.email }, config.secret);
       //console.log(config.secret);
       const newHash = await bcryptjs.hash(req.body.password, 8);
       const user = await User.create({
@@ -87,10 +87,10 @@ exports.register = async (req, res) => {
         password: newHash,
         email: req.body.email,
         address: req.body.address,
-        confirmationCode: req.body.token,
+        confirmationCode: token,
       });
-      console.log(user);
-      nodemailer.sendEmail(
+      //console.log(user);
+      await sendEmail(
         user.body.username,
         user.body.email,
         user.body.confirmationCode
@@ -109,8 +109,9 @@ exports.register = async (req, res) => {
   }
 };
 
-module.exports.sendEmail = async (name, email, confirmationCode) => {
-  await transporter
+const sendEmail = async (name, email, confirmationCode) => {
+  console.log(name, email, confirmationCode);
+  return transporter
     .sendMail({
       from: '"YOUPET" <foo@example.com>', // sender address
       to: email, // list of receivers
@@ -119,13 +120,21 @@ module.exports.sendEmail = async (name, email, confirmationCode) => {
       html: `<b>EMAIL DE CONFIRMACION</b>
     <h2>Hello ${name}<h2>
     <p>Gracias por suscribirte, confirmatu email haciendo click en el siguiente link</p>
-    <a href=http//locaclhost:3000/confirm/${confirmationCode}>Click here</a>
+    <a href="http//localhost:3000/confirm/${confirmationCode}">Click here</a>
     `,
     })
+    .then(() => console.log("se mando el email"))
     .catch((err) => console.log(err));
 };
 
 exports.verifyUser = (req, res, next) => {
+  let decode;
+  try {
+    decode = jwt.verify(req.params.confirmationCode, "userKey");
+  } catch (error) {
+    return res.status(404).send(error);
+  }
+
   User.findOne({
     confirmationCode: req.params.confirmationCode,
   })
@@ -140,6 +149,7 @@ exports.verifyUser = (req, res, next) => {
           return;
         }
       });
+      return res.status(200).send("confirmado");
     })
     .catch((e) => console.log("error", e));
 };
