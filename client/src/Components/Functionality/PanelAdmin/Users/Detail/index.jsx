@@ -47,11 +47,7 @@ export default function AdminProfileDetail() {
     };
   }, [dispatch, id]);
 
-  function handleStatus() {
-    dispatch(updateUser(id))
-           
-    }
-  }
+  
 
   return (
     <ColorModeContext.Provider value={colorMode}>
@@ -125,7 +121,7 @@ export default function AdminProfileDetail() {
                         }
                         borderRadius="4px"
                         type="button"
-                        // onClick={(event)=>handleStatus(event)}
+                        onClick={(event)=>handleStatus(event)}
                       >
                         {user.isActive === true && (
                           <AdminPanelSettingsOutlinedIcon />
@@ -267,3 +263,4 @@ export default function AdminProfileDetail() {
     </ColorModeContext.Provider>
   );
 }
+
