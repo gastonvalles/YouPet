@@ -3,13 +3,13 @@ import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import { useEffect } from "react";
 
-const Welcome = () => {
+const Confirm = () => {
   const [verify, setVerify] = useState(null);
   const { confirmationCode } = useParams();
   useEffect(() => {
     if (confirmationCode)
       axios
-        .get(`http://localhost:3000/confirm/${confirmationCode}`)
+        .get(`http://localhost:3001/confirm/${confirmationCode}`)
         .then((response) => {
           setVerify(true);
         })
@@ -30,4 +30,4 @@ const Welcome = () => {
     </div>
   );
 };
-export default Welcome;
+export default Confirm;

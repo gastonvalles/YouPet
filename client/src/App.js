@@ -25,6 +25,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import Home from "./Components/View/HomeFake/HomeFake";
 import { getMyUser } from "./Redux/actions";
+import Confirm from "./Components/Functionality/AuthService";
 
 function App() {
   const dispatch = useDispatch();
@@ -51,7 +52,7 @@ function App() {
         <Route path="/user/:id" element={<AdminProfileDetail />} />
         <Route path="/serv/:id" element={<AdminServiceDetail />} />
         <Route path="/admin/*" element={<PanelAdmin />} />
-        <Route path="/confirm/:confirmationCode" element={<div></div>} />
+        <Route path="/confirm/:confirmationCode" element={<Confirm />} />
       </Routes>
     </div>
   );
