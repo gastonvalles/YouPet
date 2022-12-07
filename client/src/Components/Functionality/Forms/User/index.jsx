@@ -67,7 +67,7 @@ function FormUser() {
           }
           if (!values.address) {
             errors.adress = "Por favor ingresa una direccion";
-          } else if (values.address.length<10 && values.address.length>30) {
+          } else if (values.address.length < 10 && values.address.length > 30) {
             errors.adress = "Ingresa una direccion correcta";
           }
           /* if (!values.address.street) {
@@ -123,7 +123,7 @@ function FormUser() {
                 showConfirmButton: false,
                 timer: 1000,
               });
-              navigate("/login");
+              /* navigate("/login"); */
             })
             .catch((error) =>
               Swal.fire({
