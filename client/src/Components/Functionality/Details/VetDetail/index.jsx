@@ -13,7 +13,7 @@ export default function VetDetail() {
   const addFav = (id) => {
     //if (no esta logeado) {
     //return navigate("/login");
-    alert(id)
+    alert(id);
   }
 
 
