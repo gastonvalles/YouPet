@@ -122,7 +122,7 @@ exports.register = async (req, res) => {
       });
       //console.log(user);
       console.log(user.username, user.email, user.confirmationCode);
-      sendEmail(user.username, user.email, user.confirmationCode);
+      //sendEmail(user.username, user.email, user.confirmationCode);
       return res.status(200).json(user);
     } else {
       return res.status(302).json(dbSearch);
