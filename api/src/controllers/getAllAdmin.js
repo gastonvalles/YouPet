@@ -1,3 +1,6 @@
+const jwt = require("jsonwebtoken");
+const bcryptjs = require("bcryptjs");
+// const { transporter } = require("../../config/mailer");
 const { Admin } = require("../db");
 const { Op } = require("sequelize");
 
@@ -19,7 +22,7 @@ const FirstAdmin = [
     name: "Gaston",
     lastname: "Valles",
     username: "AppGas",
-    password: "12345",
+    password: "12345678",
     tel: 2619584318,
     img: "",
     dni: 40558498,
@@ -32,7 +35,7 @@ const FirstAdmin = [
     name: "Luis",
     lastname: "Goytia",
     username: "AppLuis",
-    password: "12345",
+    password: "12345678",
     tel: 2619694318,
     img: "",
     dni: 41987456,
@@ -45,7 +48,7 @@ const FirstAdmin = [
     name: "Ernesto",
     lastname: "Velazquez",
     username: "AppErnesto",
-    password: "123456",
+    password: "12345678",
     tel: 2619994318,
     img: "",
     dni: 32987456,
@@ -89,17 +92,65 @@ const getDBAdminByPK = async (id) => {
   }
 };
 
-const dbCreateAdmin = async (body) => {
+const getAdminByEmail = async (email) => {
+  if (email) {
+    let admin = await Admin.findOne({
+      where: {
+        email,
+      },
+    });
+    if (!admin) {
+      throw new Error("Admin not found");
+    }
+    return admin;
+  } else {
+    throw new Error("Admin not found");
+  }
+};
+
+const createAdmin = async (req, res) => {
+  const { name, lastname, username, password, email, dni, tel, img, address } = req.body;
+  if (
+    !name ||
+    !lastname ||
+    !username ||
+    !password ||
+    !email ||
+    !dni ||
+    !tel ||
+    !address
+  ) {
+    return res.status(404).send("Debes completar los todos los archivos");
+  }
   try {
-    const { name, lastname, username, password, email, address, tel, img, dni, isAdmin, isActive } = body;
-    if (!name && !lastname && !username && !password && !tel && !dni && !isAdmin && !isActive && !email && !address) {
-      throw new Error("Missing params");
+    const dbSearch = await Admin.findAll({
+      where: {
+        email: req.body.email,
+      },
+    });
+    if (!dbSearch.length) {
+      const newHash = await bcryptjs.hash(req.body.password, 8);
+      const token = jwt.sign({ email: req.body.email }, "adminKey");
+      const admin = await Admin.create({
+        name: req.body.name,
+        address: req.body.address,
+        dni: req.body.dni,
+        tel: req.body.tel,
+        lastname: req.body.lastname,
+        username: req.body.username,
+        password: newHash,
+        email: req.body.email,
+        img: req.body.img,
+        address: req.body.address,
+        confirmationCode: token,
+      });
+      sendEmail(admin.username, admin.email, admin.confirmationCode);
+      return res.status(200).json(admin);
     } else {
-      await Admin.create(body);
-      return `Admin ${body.name} created successfully`;
+      return res.status(302).json(dbSearch);
     }
   } catch (error) {
-    throw error;
+    res.send(error.message);
   }
 };
 
@@ -113,6 +164,7 @@ const deleteAdmin = async (id) => {
 module.exports = {
   getDBAdmin,
   getDBAdminByPK,
-  dbCreateAdmin,
-  deleteAdmin
+  deleteAdmin,
+  getAdminByEmail,
+  createAdmin,
 };

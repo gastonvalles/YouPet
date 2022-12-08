@@ -21,7 +21,6 @@ export default function Home() {
   function handleFilter(event) {
     event.preventDefault();
     dispatch(filterService(event.target.value));
-    // dispatch(filterVets(event.target.value))
   }
   return (
     <div>

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import { useNavigate } from "react-router"
+import { useNavigate } from "react-router";
 import { ColorModeContext, tokens, useMode } from "../../theme";
 import {
   Box,
@@ -10,6 +10,7 @@ import {
   Typography,
   useTheme,
   Grid,
+  Button,
 } from "@mui/material";
 import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
 import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
@@ -19,11 +20,12 @@ import {
   getAdminDetail,
   getUserDetail,
   updateUser,
-  updateAdmin
+  updateAdmin,
+  deleteAdmin,
 } from "../../../../../Redux/actions";
 
 export default function AdminProfileDetail() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const theeme = useTheme();
   const colors = tokens(theeme.palette.mode);
   const { id } = useParams();
@@ -34,46 +36,53 @@ export default function AdminProfileDetail() {
 
   function handleAccessAdmin() {
     if (admin.isAdmin === true) {
-      let payload = {isAdmin : false}
-      dispatch(updateAdmin(id,payload));
-    }else {
-      let payload = {isAdmin : true}
-      dispatch(updateAdmin(id,payload));
-    };
-    navigate(0)
+      let payload = { isAdmin: false };
+      dispatch(updateAdmin(id, payload));
+    } else {
+      let payload = { isAdmin: true };
+      dispatch(updateAdmin(id, payload));
+    }
+    navigate(0);
   }
 
-  function handleStatusAdmin(){
+  function handleStatusAdmin() {
     if (admin.isActive === true) {
-      let payload = {isActive : false}
-      dispatch(updateAdmin(id,payload));
-    }else {
-      let payload = {isActive : true}
-      dispatch(updateAdmin(id,payload));
-    };
-    navigate(0)
+      let payload = { isActive: false };
+      dispatch(updateAdmin(id, payload));
+    } else {
+      let payload = { isActive: true };
+      dispatch(updateAdmin(id, payload));
+    }
+    navigate(0);
   }
 
   function handleStatusUser() {
     if (user.isActive === true) {
-      let payload = {isActive : false}
-      dispatch(updateUser(id,payload));
-    }else {
-      let payload = {isActive : true}
-      dispatch(updateUser(id,payload));
-    };
-    navigate(0)
+      let payload = { isActive: false };
+      dispatch(updateUser(id, payload));
+    } else {
+      let payload = { isActive: true };
+      dispatch(updateUser(id, payload));
+    }
+    navigate(0);
   }
-  
+
   function handleAccessUser() {
     if (user.isAdmin === true) {
-      let payload = {isAdmin : false}
-      dispatch(updateUser(id,payload));
-    }else {
-      let payload = {isAdmin : true}
-      dispatch(updateUser(id,payload));
-    };
-    navigate(0)
+      let payload = { isAdmin: false };
+      dispatch(updateUser(id, payload));
+    } else {
+      let payload = { isAdmin: true };
+      dispatch(updateUser(id, payload));
+    }
+    navigate(0);
+  }
+  function delAdmin() {
+    dispatch(deleteAdmin(id));
+    var respuesta = window.confirm("Confirm delete?");
+    if (respuesta) alert("Vet deleted");
+    else alert("You are not allowed to delete");
+    navigate("/admin/users");
   }
 
   useEffect(() => {
@@ -93,7 +102,7 @@ export default function AdminProfileDetail() {
             <Link
               to="/admin/users"
               type="button"
-              className="text-decoration-none"
+              className="text-decoration-none btn btn-primary"
             >
               Back to users
             </Link>
@@ -104,8 +113,8 @@ export default function AdminProfileDetail() {
           <Box>
             {user.id && (
               <Box m="20px">
-                <Box p="60px">
-                  <img src={user.img} alt="user pic" />
+                <Box p="20px">
+                  <img src={user.img} alt="user pic" width="200px" height="200px"/>
                 </Box>
                 <Box p="30px">
                   <h3>
@@ -156,7 +165,7 @@ export default function AdminProfileDetail() {
                         }
                         borderRadius="4px"
                         type="button"
-                        onClick={(event)=>handleStatusUser(event)}
+                        onClick={(event) => handleStatusUser(event)}
                       >
                         {user.isActive === true && (
                           <AdminPanelSettingsOutlinedIcon />
@@ -183,7 +192,7 @@ export default function AdminProfileDetail() {
                         }
                         borderRadius="4px"
                         type="button"
-                        onClick={(event)=>handleAccessUser(event)}
+                        onClick={(event) => handleAccessUser(event)}
                       >
                         {user.isAdmin === true && (
                           <AdminPanelSettingsOutlinedIcon />
@@ -200,8 +209,8 @@ export default function AdminProfileDetail() {
             )}
             {admin.id && (
               <Box m="20px">
-                <Box p="60px">
-                  <img src={admin.img} alt="user pic" />
+                <Box p="20px">
+                  <img src={admin.img} alt="user pic" width="200px" height="200px"/>
                 </Box>
                 <Box p="30px">
                   <h3>
@@ -252,7 +261,7 @@ export default function AdminProfileDetail() {
                         }
                         borderRadius="4px"
                         type="button"
-                        onClick={(event)=>handleStatusAdmin(event)}
+                        onClick={(event) => handleStatusAdmin(event)}
                       >
                         {admin.isActive === true && (
                           <AdminPanelSettingsOutlinedIcon />
@@ -279,7 +288,7 @@ export default function AdminProfileDetail() {
                         }
                         borderRadius="4px"
                         type="button"
-                        onClick={(event)=>handleAccessAdmin(event)}
+                        onClick={(event) => handleAccessAdmin(event)}
                       >
                         {admin.isAdmin === true && (
                           <AdminPanelSettingsOutlinedIcon />
@@ -290,6 +299,11 @@ export default function AdminProfileDetail() {
                         Is Admin
                       </Typography>
                     </Box>
+                  </Grid>
+                  <Grid item lg={3}>
+                  <Button variant="contained" color="error" onClick={(event)=>delAdmin(event)}>
+                    Delete Admin
+                  </Button>
                   </Grid>
                 </Grid>
               </Box>
