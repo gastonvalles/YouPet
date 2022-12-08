@@ -7,29 +7,30 @@ const path = require("path");
 let sequelize =
   process.env.NODE_ENV === "production"
     ? new Sequelize({
-      database: PG_DATABASE,
-      dialect: "postgres",
-      host: PG_HOST,
-      port: PG_PORT,
-      username: PG_USER,
-      password: PG_PASSWORD,
-      pool: {
-        max: 3,
-        min: 1,
-        idle: 10000
-      },
-      dialectOptions: {
-        ssl: {
-          require: true,
-          rejectUnauthorized: false,
+        database: PG_DATABASE,
+        dialect: "postgres",
+        host: PG_HOST,
+        port: PG_PORT,
+        username: PG_USER,
+        password: PG_PASSWORD,
+        pool: {
+          max: 3,
+          min: 1,
+          idle: 10000,
         },
-        keepAlive: true,
-      },
-      ssl: true,
-    }) : new Sequelize(
-      `postgres:${PG_USER}:${PG_PASSWORD}@${PG_HOST}/${PG_DATABASE}`,
-      { logging: false, native: false }
-    )
+        dialectOptions: {
+          ssl: {
+            require: true,
+            rejectUnauthorized: false,
+          },
+          keepAlive: true,
+        },
+        ssl: true,
+      })
+    : new Sequelize(
+        `postgres:${PG_USER}:${PG_PASSWORD}@${PG_HOST}/${PG_DATABASE}`,
+        { logging: false, native: false }
+      );
 const basename = path.basename(__filename);
 
 const modelDefiners = [];
@@ -56,8 +57,18 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { User, Pet, Admin, MedicalDiagnostic, Score, Service, Turn, Vet,Payments } =
-  sequelize.models;
+const {
+  User,
+  Pet,
+  Admin,
+  MedicalDiagnostic,
+  Score,
+  Service,
+  Turn,
+  Vet,
+  Payments,
+  Favoritos,
+} = sequelize.models;
 
 // Aca vendrian las relaciones
 User.hasMany(Pet);
@@ -72,11 +83,11 @@ Turn.belongsTo(Pet);
 Vet.hasMany(Turn);
 Turn.belongsTo(Vet);
 
-Payments.hasMany(User)
-User.belongsTo(Payments)
+Payments.hasMany(User);
+User.belongsTo(Payments);
 
-Payments.hasMany(Turn)
-Turn.belongsTo(Payments)
+Payments.hasMany(Turn);
+Turn.belongsTo(Payments);
 
 Pet.hasMany(MedicalDiagnostic);
 MedicalDiagnostic.belongsTo(Pet);
@@ -99,7 +110,8 @@ Vet.belongsToMany(Score, { through: "Vet-Score" });
 Score.belongsToMany(Service, { through: "Service-Score" });
 Service.belongsToMany(Score, { through: "Service-Score" });
 
-
+User.belongsToMany(Service, { through: "User-Service-Favoritos" });
+Service.belongsTo(User, { throught: "User-Service-Favoritos" });
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
