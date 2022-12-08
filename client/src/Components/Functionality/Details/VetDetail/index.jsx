@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { clearDetails, getVetsDetail } from "../../../../Redux/actions";
 import './vetDetail.css';
 
@@ -8,7 +8,15 @@ export default function VetDetail() {
   let { id } = useParams();
   const dispatch = useDispatch();
   const vet = useSelector((state) => state.vetDetail);
- 
+  const [, navigate] = useLocation();
+
+  const addFav = (id) => {
+    //if (no esta logeado) {
+    //return navigate("/login");
+    alert(id)
+  }
+
+
   useEffect(() => {
     dispatch(getVetsDetail(id));
     return () => {
@@ -28,6 +36,8 @@ export default function VetDetail() {
         </div>
         <h3>Average: {vet.average}</h3>
         <div>
+          <button onClick={() => { addFav(id) }}> ❤️</button>
+          <span>{vet.fav}</span>
         </div>
       </div>
 

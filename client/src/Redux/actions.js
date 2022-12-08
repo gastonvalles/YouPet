@@ -409,7 +409,8 @@ export function filterService(payload) {
 
 export function getPaymentMP(service) {
   return async function (dispatch) {
-    let json = await axios.post(`http://localhost:3001/payment/mp/552525`,service);
+    //let json = await axios.post(`http://localhost:3001/payment/mp/552525`,service);
+    let json = await instance.post(`http://localhost:3001/payment/mp/552525`,service);
     return dispatch({
       type: GET_PAYMENT_MP,
       payload: json.data,
