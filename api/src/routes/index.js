@@ -1,6 +1,6 @@
 const { Router, json } = require("express");
 const cualquiera = require("../middlewares/passport");
-const {User} = require("../db")
+const { User } = require("../db")
 const router = Router();
 router.use(json());
 const passport = require("passport");
@@ -20,7 +20,6 @@ router.use(
 );
 router.use(
   "/service",
-  passport.authenticate("jwt", { session: false }),
   serviceController
 );
 router.use(
@@ -30,7 +29,6 @@ router.use(
 );
 router.use(
   "/vet",
-  passport.authenticate("jwt", { session: false }),
   vetController
 );
 router.use(
