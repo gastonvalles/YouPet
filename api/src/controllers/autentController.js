@@ -2,67 +2,17 @@ const jwt = require("jsonwebtoken");
 const bcryptjs = require("bcryptjs");
 const { promisify } = require("util");
 const { User } = require("../db");
-//const User = require("../models/User");
-//const {promisify}= require("")
 const { transporter } = require("../../config/mailer");
 
 
 require("dotenv").config()
 const cloudinary = require("cloudinary").v2;
 
-cloudinary.config({ 
-    cloud_name: process.env.CLOUDINARY_NAME ,
-    api_key: process.env.CLOUDINARY_APIKEY, 
-    api_secret: process.env.CLOUDINARY_APISECRET 
-  });
-
-/* exports.register = async (req, res) => {
-  const { name, lastname, username, password, email, dni, address } = req.body;
-  //console.log(name, lastname, username, password, email);
-  if (
-    !name ||
-    !lastname ||
-    !username ||
-    !password ||
-    !email ||
-    !dni ||
-    !address
-  ) {
-    return res.status(404).send("Debes completar los todos los archivos");
-  }
-  let existe = await User.findAll({
-    where: { email },
-  });
-  if (existe.length !== 0) {
-    return res.status(404).json("Usuario ya creado");
-  }
-  let newHash = await bcryptjs.hash(req.body.password, 8);
-  User.create({
-    name: req.body.name,
-    address: req.body.address,
-    dni: req.body.dni,
-    lastname: req.body.lastname,
-    username: req.body.username,
-    password: newHash,
-    email: req.body.email,
-  })
-    .then((user) => {
-      sendEmail(req.body.email);
-      console.log(user);
-      res.json({
-        success: true,
-        message: "Gracias por registrarse",
-        user: {
-          id: user.id,
-          username: user.username,
-          email: user.email,
-        },
-      });
-    })
-    .catch((error) => {
-      res.send(error);
-    });
-}; */
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_NAME,
+  api_key: process.env.CLOUDINARY_APIKEY,
+  api_secret: process.env.CLOUDINARY_APISECRET
+});
 
 exports.register = async (req, res) => {
   const { name, lastname, username, password, email, dni, address, img } = req.body;
@@ -101,7 +51,7 @@ exports.register = async (req, res) => {
           }
 
         }
-        
+
       } catch (error) {
         res.status(500).json({ error: error });
       }
@@ -120,9 +70,8 @@ exports.register = async (req, res) => {
         img: req.body.img,
         confirmationCode: token,
       });
-      //console.log(user);
       console.log(user.username, user.email, user.confirmationCode);
-      //sendEmail(user.username, user.email, user.confirmationCode);
+      sendEmail(user.username, user.email, user.confirmationCode);
       return res.status(200).json(user);
     } else {
       return res.status(302).json(dbSearch);
@@ -138,7 +87,6 @@ exports.register = async (req, res) => {
 } */
 
 const sendEmail = async (name, email, confirmationCode) => {
-  //console.log(name, email, confirmationCode);
   await transporter.sendMail({
     from: '"YOUPET" <foo@example.com>', // sender address
     to: email, // list of receivers
@@ -149,11 +97,11 @@ const sendEmail = async (name, email, confirmationCode) => {
     <p>Gracias por suscribirte, confirmatu email haciendo click en el siguiente link</p>
     <a href="http://localhost:3000/confirm/${confirmationCode}">Click here</a>
     `,
-  });
-  /*  .then(() => console.log("se mando el email"))
+  })
+    .then(() => console.log("se mando el email"))
     .catch((err) => console.log(err));
-}; */
-};
+}
+
 exports.verifyUser = (req, res, next) => {
   let decode;
   try {
@@ -183,7 +131,6 @@ exports.verifyUser = (req, res, next) => {
 
 exports.login = async (req, res) => {
   const { email, password } = req.body;
-  //console.log(email, password);
   try {
     if (!email || !password) {
       return res.status(404).send("Debe completar todos los campos");
@@ -191,7 +138,6 @@ exports.login = async (req, res) => {
     const findUser = await User.findOne({
       where: { email },
     });
-    //console.log(findUser);
     if (
       findUser === null ||
       !(await bcryptjs.compare(password, findUser.password))
