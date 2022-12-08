@@ -1,6 +1,6 @@
 const { Router, json } = require("express");
 const cualquiera = require("../middlewares/passport");
-const {User, Admin} = require("../db")
+const { User } = require("../db")
 const router = Router();
 router.use(json());
 const passport = require("passport");
@@ -13,14 +13,24 @@ const userController = require("../middlewares/user.js");
 const paymentController = require("../middlewares/payments");
 const autentController = require("../middlewares/autent");
 
-router.use("/admin", admController);
-router.use("/service", serviceController);
+router.use(
+  "/admin",
+  passport.authenticate("jwt", { session: false }),
+  admController
+);
+router.use(
+  "/service",
+  serviceController
+);
 router.use(
   "/pet",
   passport.authenticate("jwt", { session: false }),
   petController
 );
-router.use("/vet", vetController);
+router.use(
+  "/vet",
+  vetController
+);
 router.use(
   "/turn",
   passport.authenticate("jwt", { session: false }),
