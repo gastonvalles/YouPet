@@ -25,7 +25,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import Home from "./Components/View/HomeFake/HomeFake";
 import { getMyUser } from "./Redux/actions";
-
+import Confirm from "./Components/Functionality/AuthService";
 
 function App() {
   const dispatch = useDispatch();
@@ -48,11 +48,11 @@ function App() {
         <Route exact path="/vet/register" element={<FormVet />} />
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/mp" element={<Payment />} />
-        <Route exact path="/errorPay" element={<ErrorPay/> } />
+        <Route exact path="/errorPay" element={<ErrorPay />} />
         <Route path="/user/:id" element={<AdminProfileDetail />} />
-        <Route path="/serv/:id" element={<AdminServiceDetail/>}/>
-        <Route path="/admin/*" element={<PanelAdmin/>}/>
-
+        <Route path="/serv/:id" element={<AdminServiceDetail />} />
+        <Route path="/admin/*" element={<PanelAdmin />} />
+        <Route path="/confirm/:confirmationCode" element={<Confirm />} />
       </Routes>
     </div>
   );
