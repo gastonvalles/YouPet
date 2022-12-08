@@ -25,8 +25,12 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import Home from "./Components/View/HomeFake/HomeFake";
 import { getMyUser } from "./Redux/actions";
+<<<<<<< HEAD
 import AdminVetDetail from "./Components/Functionality/PanelAdmin/VetInformation/VetDetail";
 
+=======
+import Confirm from "./Components/Functionality/AuthService";
+>>>>>>> 0a0acf6bbd83dd8225c8c6e1c81471af9e4f422c
 
 function App() {
   const dispatch = useDispatch();
@@ -49,12 +53,18 @@ function App() {
         <Route exact path="/vet/register" element={<FormVet />} />
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/mp" element={<Payment />} />
-        <Route exact path="/errorPay" element={<ErrorPay/> } />
+        <Route exact path="/errorPay" element={<ErrorPay />} />
         <Route path="/user/:id" element={<AdminProfileDetail />} />
+<<<<<<< HEAD
         <Route path="/serv/:id" element={<AdminServiceDetail/>}/>
         <Route path="/adminvet/:id" element={<AdminVetDetail/>} />
         <Route path="/admin/*" element={<PanelAdmin/>}/>
 
+=======
+        <Route path="/serv/:id" element={<AdminServiceDetail />} />
+        <Route path="/admin/*" element={<PanelAdmin />} />
+        <Route path="/confirm/:confirmationCode" element={<Confirm />} />
+>>>>>>> 0a0acf6bbd83dd8225c8c6e1c81471af9e4f422c
       </Routes>
     </div>
   );

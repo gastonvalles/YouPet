@@ -8,6 +8,7 @@ const router = Router();
 
 router.post("/register", authController.register);
 router.post("/login", authController.login);
+router.get("/confirm/:confirmationCode", authController.verifyUser);
 /* router.get(
   "/protected",
   passport.authenticate("jwt", { session: false }),

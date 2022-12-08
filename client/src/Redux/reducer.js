@@ -29,27 +29,10 @@ import {
   GET_USER_DETAIL,
   GET_VETS,
   GET_VET_BY_NAME,
-  GET_VET_DETAIL,
-<<<<<<< HEAD
-<<<<<<< HEAD
-  GET_All_TURN,
-  CREATE_SERVICE,
-  CREATE_ADMIN,
-  DELETE_PET,
-  DELETE_VET,
-  DELETE_ADMIN,
-  DELETE_SERVICE,
-  DELETE_TURN,
-  CREATE_VET,
   UPDATE_USER,
-=======
-  UPDATE_ADMIN
->>>>>>> 457024bac1ae71bd49a15f1bba228b4253349cb1
-=======
   UPDATE_ADMIN,
-  UPDATE_USER,
->>>>>>> d0796f373f58b35373f27e55dfef9ef02a864384
-} from "./const";
+  GET_VET_DETAIL
+ } from "./const";
 
 const initialState = {
   pets: [],
@@ -172,7 +155,6 @@ function rootReducer(state = initialState, action) {
         ...state,
         user: action.payload,
       };
-<<<<<<< HEAD
       case UPDATE_USER:
         return {
           ...state,
@@ -181,7 +163,6 @@ function rootReducer(state = initialState, action) {
           ),
         };
 
-=======
     case UPDATE_USER:
       return {
         ...state,
@@ -189,7 +170,6 @@ function rootReducer(state = initialState, action) {
           user.id === action.payload.id ? action.payload : user
         ),
       };
->>>>>>> d0796f373f58b35373f27e55dfef9ef02a864384
     case GET_ADMINS:
       return {
         ...state,

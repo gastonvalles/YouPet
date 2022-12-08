@@ -56,7 +56,7 @@ const { transporter } = require("../../config/mailer");
 
 exports.register = async (req, res) => {
   const { name, lastname, username, password, email, dni, address } = req.body;
-  //console.log(name, lastname, username, password, email);
+  console.log(name, lastname, username, password, email);
   if (
     !name ||
     !lastname ||
@@ -74,8 +74,11 @@ exports.register = async (req, res) => {
         email: req.body.email,
       },
     });
+    console.log(dbSearch);
     if (!dbSearch.length) {
       const newHash = await bcryptjs.hash(req.body.password, 8);
+      const token = jwt.sign({ email: req.body.email }, "userKey");
+      console.log(token);
       const user = await User.create({
         name: req.body.name,
         address: req.body.address,
@@ -85,26 +88,67 @@ exports.register = async (req, res) => {
         password: newHash,
         email: req.body.email,
         address: req.body.address,
+        confirmationCode: token,
       });
       //console.log(user);
-      sendEmail(req.body.email);
-      res.status(200).json(user);
+      console.log(user.username, user.email, user.confirmationCode);
+      sendEmail(user.username, user.email, user.confirmationCode);
+      return res.status(200).json(user);
     } else {
-      res.status(302).json(dbSearch);
+      return res.status(302).json(dbSearch);
     }
   } catch (error) {
     res.send(error);
   }
 };
+/* if (dbSearch.status !== "Active") {
+  return res
+    .status(401)
+    .send("Cuenta pendiente. Por favor verifique su Email");
+} */
 
-const sendEmail = async (email) => {
+const sendEmail = async (name, email, confirmationCode) => {
+  //console.log(name, email, confirmationCode);
   await transporter.sendMail({
     from: '"YOUPET" <foo@example.com>', // sender address
     to: email, // list of receivers
     subject: "¡Bienvenido a YOUPET!", // Subject line
     text: "¡Gracias por Registrarte", // plain text body
-    html: "<b>(BIENVENIDOS)</b>", // html body
+    html: `<b>EMAIL DE CONFIRMACION</b>
+    <h2>Hello ${name}<h2>
+    <p>Gracias por suscribirte, confirmatu email haciendo click en el siguiente link</p>
+    <a href="http://localhost:3000/confirm/${confirmationCode}">Click here</a>
+    `,
   });
+  /*  .then(() => console.log("se mando el email"))
+    .catch((err) => console.log(err));
+}; */
+};
+exports.verifyUser = (req, res, next) => {
+  let decode;
+  try {
+    decode = jwt.verify(req.params.confirmationCode, "userKey");
+  } catch (error) {
+    return res.status(404).send(error);
+  }
+
+  User.findOne({
+    confirmationCode: req.params.confirmationCode,
+  })
+    .then((user) => {
+      if (!user) {
+        return res.status(404).send("Usuario no encontrado");
+      }
+      user.status = "Active";
+      user.save((err) => {
+        if (err) {
+          res.status(500).send(err);
+          return;
+        }
+      });
+      return res.status(200).send("confirmado");
+    })
+    .catch((e) => console.log("error", e));
 };
 
 exports.login = async (req, res) => {

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useDispatch, useSelector } from "react-redux";
-import { getUserByEmail } from "../../../../Redux/actions";
+import { getMyUser, getUserByEmail } from "../../../../Redux/actions";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import logo from "../../../../img/logo.png";
@@ -52,6 +52,7 @@ export default function Login() {
           onSubmit={(value) => {
             axios.post("http://localhost:3001/login/", value).then((res) => {
               localStorage.setItem("jwt", res.data.data);
+              dispatch(getMyUser());
               navigate("/");
             }, 3000);
           }}
