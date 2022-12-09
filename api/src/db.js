@@ -67,7 +67,6 @@ const {
   Turn,
   Vet,
   Payments,
-  Favoritos,
 } = sequelize.models;
 
 // Aca vendrian las relaciones
@@ -110,8 +109,9 @@ Vet.belongsToMany(Score, { through: "Vet-Score" });
 Score.belongsToMany(Service, { through: "Service-Score" });
 Service.belongsToMany(Score, { through: "Service-Score" });
 
-User.belongsToMany(Service, { through: "User-Service-Favoritos" });
-Service.belongsTo(User, { throught: "User-Service-Favoritos" });
+const Favoritos = sequelize.define("Favoritos", {}, { timestamps: false });
+User.belongsToMany(Vet, { through: Favoritos });
+Vet.belongsToMany(User, { through: Favoritos });
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
