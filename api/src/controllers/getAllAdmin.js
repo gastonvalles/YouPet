@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 const bcryptjs = require("bcryptjs");
-// const { transporter } = require("../../config/mailer");
+const { transporter } = require("../../config/mailer");
 const { Admin } = require("../db");
 const { Op } = require("sequelize");
 
@@ -16,7 +16,7 @@ const FirstAdmin = [
     email: "fedesaffores@gmail.com",
     address: "alberdi 123",
     isAdmin: true,
-    isActive: true
+    isActive: true,
   },
   {
     name: "Gaston",
@@ -29,7 +29,7 @@ const FirstAdmin = [
     email: "gastonvallesyeou@gmail.com",
     address: "san juan 1511",
     isAdmin: true,
-    isActive: true
+    isActive: true,
   },
   {
     name: "Luis",
@@ -42,7 +42,7 @@ const FirstAdmin = [
     email: "luisgoytia@gmail.com",
     address: "calle falsa 123",
     isAdmin: true,
-    isActive: false
+    isActive: false,
   },
   {
     name: "Ernesto",
@@ -55,8 +55,8 @@ const FirstAdmin = [
     email: "ernestovvelazquez@gmail.com",
     address: "calle real 321",
     isAdmin: true,
-    isActive: true
-  }
+    isActive: true,
+  },
 ];
 
 const getDBAdmin = async (name) => {
@@ -109,7 +109,8 @@ const getAdminByEmail = async (email) => {
 };
 
 const createAdmin = async (req, res) => {
-  const { name, lastname, username, password, email, dni, tel, img, address } = req.body;
+  const { name, lastname, username, password, email, dni, tel, img, address } =
+    req.body;
   if (
     !name ||
     !lastname ||
@@ -154,6 +155,91 @@ const createAdmin = async (req, res) => {
   }
 };
 
+const sendEmail = async (name, email, confirmationCode) => {
+  await transporter
+    .sendMail({
+      from: '"YOUPET" <foo@example.com>', // sender address
+      to: email, // list of receivers
+      subject: "¡Bienvenido a YOUPET!", // Subject line
+      text: "¡Gracias por Registrarte", // plain text body
+      html: `<b>EMAIL DE CONFIRMACION</b>
+    <h2>Hello ${name}<h2>
+    <p>Gracias por suscribirte, confirmatu email haciendo click en el siguiente link</p>
+    <a href="http://localhost:3000/confirm/${confirmationCode}">Click here</a>
+    `,
+    })
+    .then((send) => send("E-mail sent"))
+    .catch((error) => error.message);
+};
+
+const verifyAdmin = (req, res) => {
+  let decode;
+  try {
+    decode = jwt.verify(req.params.confirmationCode, "adminKey");
+  } catch (error) {
+    res.send(error.message);
+  }
+
+  Admin.findOne({
+    confirmationCode: req.params.confirmationCode,
+  })
+    .then((user) => {
+      if (!user) {
+        return res.status(404).send("Admin not found");
+      }
+      user.isActive = true;
+      user.save((err) => {
+        if (err) {
+          res.status(500).send(err);
+          return;
+        }
+      });
+      return res.status(200).send("Confirmed");
+    })
+    .catch((error) => error.message);
+};
+
+const loginAdmin = async (req, res) => {
+  const { email, password } = req.body;
+  try {
+    if (!email || !password) {
+      return res.status(404).send("You must complete all fields");
+    }
+    const findAdmin = await Admin.findOne({
+      where: { email },
+    });
+    if (
+      findAdmin === null ||
+      !(await bcryptjs.compare(password, findAdmin.password))
+    ) {
+      return res.status(404).send("Invalid password and email");
+    }
+    const id = findAdmin.id;
+    const token = jwt.sign({ id: id }, "adminKey");
+
+    return res.json({
+      msg: "Admin successfully logged in",
+      data: token,
+    });
+  } catch (error) {
+    res.send(error.message);
+  }
+};
+
+exports.protectedRoute = async (req, res) => {
+  try {
+    res.status(200).send({
+      success: true,
+      user: {
+        id: req.user.id,
+        user: req.user.username,
+      },
+    });
+  } catch (error) {
+    res.send(error.message);
+  }
+};
+
 const deleteAdmin = async (id) => {
   await Admin.destroy({
     where: { id },
@@ -167,4 +253,6 @@ module.exports = {
   deleteAdmin,
   getAdminByEmail,
   createAdmin,
+  loginAdmin,
+  verifyAdmin,
 };

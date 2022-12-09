@@ -4,7 +4,9 @@ const {
   getDBAdminByPK,
   deleteAdmin,
   getAdminByEmail,
-  createAdmin
+  createAdmin,
+  loginAdmin,
+  verifyAdmin,
 } = require("../controllers/getAllAdmin");
 const router = Router();
 
@@ -39,6 +41,8 @@ router.get("/log/:email", async (req, res) => {
 });
 
 router.post("/", createAdmin);
+router.post("/loginadmin", loginAdmin);
+router.get("/login/:confirmationCode", verifyAdmin); 
 
 router.delete("/:id", async (req, res) => {
   try {
