@@ -30,6 +30,17 @@
     <title>React App</title>
   </head>
   <body>
+    <script>
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId            : '843495506890971',
+          autoLogAppEvents : true,
+          xfbml            : true,
+          version          : 'v15.0'
+        });
+      };
+    </script>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
     <!--

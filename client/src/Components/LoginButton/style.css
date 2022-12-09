@@ -1,0 +1,27 @@
+.loginWrapper{
+    width: 100%;
+    min-height: 88vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.login{
+    border-radius: 4px;
+    box-shadow: none;
+    font-size: 16px;
+    font-weight: 400;
+    margin: 5px;
+    padding: 0.75rem;
+    text-align: center;
+    text-shadow: none;
+    cursor: pointer;
+    width: 250px;
+    color: white!important;
+
+    background: #3b5998;
+    border-color:#3b5998 ;
+}
+
+.login:hover{
+    color: #ccc;
+}

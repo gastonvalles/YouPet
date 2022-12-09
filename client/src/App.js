@@ -21,22 +21,63 @@ import PanelAdmin from "./Components/Functionality/PanelAdmin/Body/PanelAdmin";
 import AdminProfileDetail from "./Components/Functionality/PanelAdmin/Users/Detail";
 
 import ChooseVetTurn from "./Components/Functionality/Turns/ChooseVetTurn";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import Home from "./Components/View/HomeFake/HomeFake";
 import { getMyUser } from "./Redux/actions";
-<<<<<<< HEAD
 import AdminVetDetail from "./Components/Functionality/PanelAdmin/VetInformation/VetDetail";
 
-=======
-import Confirm from "./Components/Functionality/AuthService";
->>>>>>> 0a0acf6bbd83dd8225c8c6e1c81471af9e4f422c
+import Headerl from "./Components/layout/Headerl";
+import * as storage from "./utils/storage"
+import UserLogued from "./Components/UserLogued/index"
+import LoginButton from "./Components/LoginButton/index"
+import GoogleLogin from 'react-google-login';
+import {gapi} from 'gapi-script';
+
+
 
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getMyUser());
   }, [dispatch]);
+
+  const [user, setUser]= useState (null);
+
+  const onLogin = (user) => {
+    //almacenar localStorage
+    storage.setUser(user)
+    setUser(user);
+  }
+
+  const onLogout = () => {
+    storage.clear();
+    setUser(null);
+  };
+
+  const clientID="1039930117494-6e72hj0uf19lm0aloue7asbr3gpspeo1.apps.googleusercontent.com";
+
+ 
+  const onSuccess = (response) =>{
+    console.log(response)
+    console.log(response.profileObj)
+  }
+
+  const onFailure = () =>{
+    console.log("Something went wrong")
+  }
+
+
+  useEffect(()=>{
+    const checkSession = () =>{
+      const user = storage.getUser();//leer el user de storage
+      if(user){
+        setUser(user)
+      }
+    }
+    checkSession();
+  },[])
+
   return (
     <div className="App">
       <NavBar />
@@ -55,17 +96,32 @@ function App() {
         <Route exact path="/mp" element={<Payment />} />
         <Route exact path="/errorPay" element={<ErrorPay />} />
         <Route path="/user/:id" element={<AdminProfileDetail />} />
-<<<<<<< HEAD
-        <Route path="/serv/:id" element={<AdminServiceDetail/>}/>
-        <Route path="/adminvet/:id" element={<AdminVetDetail/>} />
-        <Route path="/admin/*" element={<PanelAdmin/>}/>
-
-=======
         <Route path="/serv/:id" element={<AdminServiceDetail />} />
         <Route path="/admin/*" element={<PanelAdmin />} />
-        <Route path="/confirm/:confirmationCode" element={<Confirm />} />
->>>>>>> 0a0acf6bbd83dd8225c8c6e1c81471af9e4f422c
+        {/* <Route path="/confirm/:confirmationCode" element={<Confirm />} /> */}
       </Routes>
+     
+     <div className="container-fuild">
+     <Headerl>
+      {user && <UserLogued user ={ user} onLogout={onLogout} />}
+
+     </Headerl>
+    <div className="row" style={{padding: '24px 16px'}}>
+     {!user && <LoginButton onLogin={onLogin}/>}
+     {user &&  <Profile />  } 
+     </div>
+
+
+     <GoogleLogin
+    clientId={clientID}
+    buttonText="Start section with Google"
+    onSuccess={onSuccess} 
+    onFailure={onFailure}
+    cookiePolicy={'single_host_origin'}
+  />
+
+
+     </div>
     </div>
   );
 }
