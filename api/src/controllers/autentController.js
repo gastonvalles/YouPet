@@ -2,8 +2,6 @@ const jwt = require("jsonwebtoken");
 const bcryptjs = require("bcryptjs");
 const { promisify } = require("util");
 const { User } = require("../db");
-//const User = require("../models/User");
-//const {promisify}= require("")
 const { transporter } = require("../../config/mailer");
 
 require("dotenv").config();
@@ -87,7 +85,6 @@ exports.register = async (req, res) => {
 } */
 
 const sendEmail = async (name, email, confirmationCode) => {
-  //console.log(name, email, confirmationCode);
   await transporter
     .sendMail({
       from: '"YOUPET" <foo@example.com>', // sender address
@@ -132,7 +129,6 @@ exports.verifyUser = (req, res, next) => {
 
 exports.login = async (req, res) => {
   const { email, password } = req.body;
-  //console.log(email, password);
   try {
     if (!email || !password) {
       return res.status(404).send("Debe completar todos los campos");
@@ -140,7 +136,6 @@ exports.login = async (req, res) => {
     const findUser = await User.findOne({
       where: { email },
     });
-    //console.log(findUser);
     if (
       findUser === null ||
       !(await bcryptjs.compare(password, findUser.password))
