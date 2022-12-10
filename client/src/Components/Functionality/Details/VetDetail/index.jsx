@@ -1,21 +1,17 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useParams } from "react-router-dom";
-import { clearDetails, getVetsDetail } from "../../../../Redux/actions";
+import { useParams } from "react-router-dom";
+import { addFavorites, clearDetails, getVetsDetail } from "../../../../Redux/actions";
 import './vetDetail.css';
 
 export default function VetDetail() {
   let { id } = useParams();
   const dispatch = useDispatch();
   const vet = useSelector((state) => state.vetDetail);
-  const [, navigate] = useLocation();
 
   const addFav = (id) => {
-    //if (no esta logeado) {
-    //return navigate("/login");
-    alert(id)
+    dispatch(addFavorites(id))
   }
-
 
   useEffect(() => {
     dispatch(getVetsDetail(id));
@@ -40,7 +36,6 @@ export default function VetDetail() {
           <span>{vet.fav}</span>
         </div>
       </div>
-
       <div className="vet-comments">
         <div className="input-container">
           <div className="input-card comment-cards">
@@ -48,21 +43,17 @@ export default function VetDetail() {
             <textarea className="vet-form-comment" type="text" />
           </div>
         </div>
-
         <div className="user-comments">
           <div className="comment-cards">
             <h2 className="client-name">Nicolas Villareal:</h2>
             <h3 className="client-comment">Excelente!</h3>
           </div>
-
           <div className="comment-cards">
             <h2 className="client-name">Lucas Pantana:</h2>
             <h3 className="client-comment">Muy buena atencion xd</h3>
           </div>
         </div>
-
       </div>
-
     </div>
-  );
-}
+  )
+};
