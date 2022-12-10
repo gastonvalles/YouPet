@@ -1,6 +1,6 @@
 const { Router, json } = require("express");
 const cualquiera = require("../middlewares/passport");
-const { User } = require("../db")
+const { User } = require("../db");
 const router = Router();
 router.use(json());
 const passport = require("passport");
@@ -12,7 +12,9 @@ const turnController = require("../middlewares/turn.js");
 const userController = require("../middlewares/user.js");
 const paymentController = require("../middlewares/payments");
 const autentController = require("../middlewares/autent");
+const favoriteMeddleware = require("../middlewares/favor");
 
+router.use("/favoriote", favoriteMeddleware);
 router.use(
   "/admin",
   passport.authenticate("jwt", { session: false }),
@@ -69,7 +71,9 @@ async function userctualizado(req, res, next) {
     user.lastname = lastname ? lastname : user.lastname;
     user.username = username ? username : user.username;
     user.password = password ? password : user.password;
-    user.confirmationpass = confirmationpass ? confirmationpass : user.confirmationpass;
+    user.confirmationpass = confirmationpass
+      ? confirmationpass
+      : user.confirmationpass;
     user.email = email ? email : user.email;
     user.address = address ? address : user.address;
     user.dni = dni ? dni : user.dni;
