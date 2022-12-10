@@ -18,6 +18,7 @@ import ErrorPay from "./Components/Functionality/Payment/ErrorPay";
 
 import AdminServiceDetail from "./Components/Functionality/PanelAdmin/AllServices/AdminServiceDetail";
 import PanelAdmin from "./Components/Functionality/PanelAdmin/Body/PanelAdmin";
+import UserProfile from "./Components/Functionality/PanelAdmin/Body/PanelAdmin";
 import AdminProfileDetail from "./Components/Functionality/PanelAdmin/Users/Detail";
 
 import ChooseVetTurn from "./Components/Functionality/Turns/ChooseVetTurn";
@@ -53,6 +54,7 @@ function App() {
         <Route path="/serv/:id" element={<AdminServiceDetail />} />
         <Route path="/admin/*" element={<PanelAdmin />} />
         <Route path="/confirm/:confirmationCode" element={<Confirm />} />
+        <Route path="/userprofile" element={<UserProfile />} />
       </Routes>
     </div>
   );
