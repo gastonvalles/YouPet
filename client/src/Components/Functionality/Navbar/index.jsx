@@ -13,10 +13,6 @@ import "./Navbar.css";
 export default function NavBar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // const { id } = useParams();
-  let query = new URLSearchParams(search);
-  console.log(query);
-  const users = useSelector((state) => state.users);
   const myuser = useSelector((state) => state.myuser);
   
   const [name, setName] = useState("");
