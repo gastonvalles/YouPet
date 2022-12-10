@@ -14,7 +14,7 @@ export default function NavBar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const myuser = useSelector((state) => state.myuser);
-  console.log(myuser);
+  
   const [name, setName] = useState("");
 
   useEffect(() => {
@@ -31,7 +31,7 @@ export default function NavBar() {
     dispatch(getVetByName(name));
     setName("");
   }
-
+  console.log(myuser);
   return (
     <>
       <nav className="navbar navbar-expand-md bg-info">
