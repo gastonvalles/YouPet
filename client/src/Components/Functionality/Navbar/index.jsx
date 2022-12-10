@@ -1,27 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useNavigate } from "react-router";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router";
 import logo from "../../../img/logo.png";
 import {
-  // filterVets,
   getServiceByName,
   getServices,
-  getUserByName,
-  getVetByName
+  getVetByName,
 } from "../../../Redux/actions";
 import "./Navbar.css";
 
 export default function NavBar() {
   const dispatch = useDispatch();
-  const { search } = useLocation();
   const navigate = useNavigate();
   // const { id } = useParams();
   let query = new URLSearchParams(search);
   console.log(query);
   const users = useSelector((state) => state.users);
   const myuser = useSelector((state) => state.myuser);
-  console.log(myuser);
+  
   const [name, setName] = useState("");
 
   useEffect(() => {
@@ -36,13 +33,9 @@ export default function NavBar() {
     event.preventDefault();
     dispatch(getServiceByName(name));
     dispatch(getVetByName(name));
-    if (users.isAdmin === true) {
-      dispatch(getUserByName(name));
-    }
-    // navigate(`/vet/${id}`)
     setName("");
   }
-
+  console.log(myuser);
   return (
     <>
       <nav className="navbar navbar-expand-md bg-info">
@@ -64,42 +57,16 @@ export default function NavBar() {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-1">
               <div>
-                <Link to="/admin" type="button" className="text-decoration-none dropdown-item">
-                  Admin
-                </Link>
+                <button className="btn">
+                  <Link
+                    to="/admin"
+                    type="button"
+                    className="text-decoration-none dropdown-item"
+                  >
+                    Admin
+                  </Link>
+                </button>
               </div>
-              {/* <li className="nav-item dropdown">
-                <span
-                  className="nav-link dropdown-toggle me-3"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  Dropdown
-                </span>
-                <ul className="dropdown-menu">
-                  <li>
-                    <Link to={"/veterinario"}>
-                      <span className="dropdown-item" />1 Option
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to={"/nutricionista"}>
-                      <span className="dropdown-item" />2 Option
-                    </Link>
-                  </li>
-                  <li></li>
-                  <li>
-                    <Link to={"/cirugias"}>
-                      <span className="dropdown-item" />3 Option
-                    </Link>
-                  </li>
-                </ul>
-              </li> */}
-
-              {/* <li className="nav-item">
-                <span className="nav-link">Disabled</span>
-              </li> */}
             </ul>
             <form className="d-flex" role="search">
               <input
@@ -163,16 +130,21 @@ export default function NavBar() {
                   </Link>
                 </>
               ) : (
-                <button
-                  onClick={() => {
-                    localStorage.removeItem("jwt");
-                    navigate(0);
-                  }}
-                  className="btn"
-                >
-                  {" "}
-                  Sign out
-                </button>
+                <div>
+                  <button
+                    onClick={() => {
+                      localStorage.removeItem("jwt");
+                      navigate(0);
+                    }}
+                    className="btn"
+                  >
+                    {" "}
+                    Sign out
+                  </button>
+                  <button>
+                    <Link>Profile</Link>
+                  </button>
+                </div>
               )}
             </div>
           </div>

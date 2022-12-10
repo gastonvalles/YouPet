@@ -51,7 +51,7 @@ import { createAdmin } from "../../../../Redux/actions";
       if (!input.password.trim()) {
         errors.password = "Please enter a password";
       } else if (!regexPassword.test(input.password.trim())) {
-        errors.password = "The password must have between 8 and 16 characters, at least one digit, at least one lower case and at least one upper case. It can NOT have other symbols.";
+        errors.password = "The password must have between 8 and 16 characters, at least two digit, at least two lower case and at least two upper case. It can NOT have other symbols.";
       }
 
       if(input.password !== input.passwordCopy){
@@ -165,6 +165,7 @@ import { createAdmin } from "../../../../Redux/actions";
                   className="form-control"
                   type="text"
                   name="lastname"
+                  placeholder="Enter your lastname"
                   value={input.lastname}
                   onChange={(event) => handleInputName(event)}
                   onBlur={(event) => handleErrors(event)}
@@ -184,6 +185,7 @@ import { createAdmin } from "../../../../Redux/actions";
                   type="text"
                   name="username"
                   value={input.username}
+                  placeholder="Enter a username"
                   onChange={(event) => handleInputName(event)}
                   onBlur={(event) => handleErrors(event)}
                 />
@@ -202,6 +204,7 @@ import { createAdmin } from "../../../../Redux/actions";
                   type="password"
                   name="password"
                   value={input.password}
+                  placeholder="Enter a password"
                   onChange={(event) => handleInputName(event)}
                   onBlur={(event) => handleErrors(event)}
                 />
@@ -220,6 +223,7 @@ import { createAdmin } from "../../../../Redux/actions";
                   className="form-control"
                   type="password"
                   name="passwordCopy"
+                  placeholder="Confirm the password"
                   value={input.passwordCopy}
                   onChange={(event) => handleInputName(event)}
                   onBlur={(event) => handleErrors(event)}
@@ -240,6 +244,7 @@ import { createAdmin } from "../../../../Redux/actions";
                   type="text"
                   name="address"
                   value={input.address}
+                  placeholder="Enter your address"
                   onChange={(event) => handleInputName(event)}
                   onBlur={(event) => handleErrors(event)}
                 />
@@ -258,6 +263,7 @@ import { createAdmin } from "../../../../Redux/actions";
                   className="form-control"
                   type="text"
                   name="img"
+                  placeholder="Enter a URL image"
                   value={input.img}
                   onChange={(event) => handleInputName(event)}
                   onBlur={(event) => handleErrors(event)}
@@ -277,6 +283,7 @@ import { createAdmin } from "../../../../Redux/actions";
                   className="form-control"
                   type="email"
                   name="email"
+                  placeholder="example@example.com"
                   value={input.email}
                   onChange={(event) => handleInputName(event)}
                   onBlur={(event) => handleErrors(event)}
@@ -297,6 +304,7 @@ import { createAdmin } from "../../../../Redux/actions";
                   className="form-control"
                   type="text"
                   name="tel"
+                  placeholder="Enter your phone number"
                   value={input.tel}
                   onChange={(event) => handleInputName(event)}
                   onBlur={(event) => handleErrors(event)}
@@ -315,6 +323,7 @@ import { createAdmin } from "../../../../Redux/actions";
                   className="form-control"
                   type="text"
                   name="dni"
+                  placeholder="Enter your DNI"
                   value={input.dni}
                   onChange={(event) => handleInputName(event)}
                   onBlur={(event) => handleErrors(event)}

@@ -13,13 +13,16 @@ export default function ServicesInfo() {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const columns = [
-    { field: "id", 
-    headerName: "ID",
-    renderCell: ({ row: { id } }) => {
-      return( 
-      <Link to={`/serv/${id}`} className="text-decoration-none">{id}</Link>
-      )
-    }, 
+    {
+      field: "id",
+      headerName: "ID",
+      renderCell: ({ row: { id } }) => {
+        return (
+          <Link to={`/serv/${id}`} className="text-decoration-none">
+            {id}
+          </Link>
+        );
+      },
     },
     {
       field: "name",
@@ -58,7 +61,7 @@ export default function ServicesInfo() {
 
   return (
     <Box m="20px">
-      <Header title="Contacts" subtitle="List of contacts" />
+      <Header title="Services" subtitle="List of services" />
       <Box
         m="40px 0 0 0"
         height="75vh"

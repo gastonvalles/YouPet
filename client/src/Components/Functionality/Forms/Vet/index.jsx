@@ -1,11 +1,12 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Box, Grid } from "@mui/material";
 import Header from "../../PanelAdmin/Header";
-import { createVet } from "../../../../Redux/actions";
+import { createVet, getVets } from "../../../../Redux/actions";
 
 export default function VetForm() {
   const dispatch = useDispatch();
+  const vets = useSelector((state) => state.vets);
   const [errors, setErrors] = useState({});
   const [input, setInput] = useState({
     name: "",
@@ -16,7 +17,13 @@ export default function VetForm() {
     img: "",
     tel: "",
     dni: "",
+    inicialDate: "",
+    finishDate: "",
   });
+
+  useEffect(() => {
+    dispatch(getVets());
+  }, [dispatch]);
 
   function validate(input) {
     let errors = {};
@@ -45,9 +52,7 @@ export default function VetForm() {
       errors.address = "Please enter a valid address";
     }
     if (!input.speciality.trim()) {
-      errors.speciality = "Please enter a speciality";
-    } else if (!regexName.test(input.speciality.trim())) {
-      errors.speciality = "Can only enter letters";
+      errors.speciality = "Please select a speciality";
     }
     if (!input.img.trim()) {
       errors.img = "Please enter an image";
@@ -70,6 +75,12 @@ export default function VetForm() {
     } else if (!regexNumber.test(input.dni)) {
       errors.dni = "Can only enter numbers";
     }
+    if (!input.inicialDate) {
+      errors.inicialDate = "Please enter a date";
+    }
+    if (!input.finishDate) {
+      errors.finishDate = "Please enter a date";
+    }
 
     return errors;
   }
@@ -78,6 +89,12 @@ export default function VetForm() {
     setInput({
       ...input,
       [event.target.name]: event.target.value,
+    });
+  }
+  function handleSelect(event) {
+    setInput({
+      ...input,
+      speciality: event.target.value,
     });
   }
   function handleErrors(event) {
@@ -99,13 +116,15 @@ export default function VetForm() {
         img: "",
         tel: "",
         dni: "",
+        inicialDate: "",
+        finishDate: "",
       });
     }
   }
   return (
     <Box p="50px">
       <Box m="20px" p="50px">
-        <Box display="flex" justifycontent="space-between" alignItems="center">
+        <Box display="flex" justifyContent="space-between" alignItems="center">
           <Header title="Vet Register" subtitle="Form to register new vet" />
         </Box>
         <form onSubmit={(event) => handleSubmit(event)}>
@@ -113,10 +132,10 @@ export default function VetForm() {
             container
             spacing={2}
             alignItems="center"
-            justifycontent="center"
+            justifyContent="center"
           >
-            <Grid item lg={3}>
-              <Box>
+            <Grid item lg={2}>
+              <Box p="10px">
                 <Box>
                   <label>Name</label>
                 </Box>
@@ -134,8 +153,8 @@ export default function VetForm() {
                 </Box>
               </Box>
             </Grid>
-            <Grid item lg={3}>
-              <Box>
+            <Grid item lg={2}>
+              <Box p="10px">
                 <Box>
                   <label>Lastname</label>
                 </Box>
@@ -156,7 +175,7 @@ export default function VetForm() {
               </Box>
             </Grid>
             <Grid item lg={3}>
-              <Box>
+              <Box p="10px">
                 <Box>
                   <label>Email</label>
                 </Box>
@@ -165,6 +184,7 @@ export default function VetForm() {
                     className="form-control"
                     type="email"
                     name="email"
+                    placeholder="example@example.com"
                     value={input.email}
                     onChange={(event) => handleInputName(event)}
                     onBlur={(event) => handleErrors(event)}
@@ -173,8 +193,8 @@ export default function VetForm() {
                 </Box>
               </Box>
             </Grid>
-            <Grid item lg={3}>
-              <Box>
+            <Grid item lg={5}>
+              <Box p="10px">
                 <Box>
                   <label>Address</label>
                 </Box>
@@ -183,6 +203,7 @@ export default function VetForm() {
                     className="form-control"
                     type="text"
                     name="address"
+                    placeholder="Enter your address"
                     value={input.address}
                     onChange={(event) => handleInputName(event)}
                     onBlur={(event) => handleErrors(event)}
@@ -192,19 +213,23 @@ export default function VetForm() {
               </Box>
             </Grid>
             <Grid item lg={3}>
-              <Box>
+              <Box p="10px">
                 <Box>
                   <label>Speciality</label>
                 </Box>
                 <Box>
-                  <input
-                    className="form-control"
-                    type="text"
+                  <select
+                    className="form-select"
                     name="speciality"
                     value={input.speciality}
-                    onChange={(event) => handleInputName(event)}
+                    onChange={(event) => handleSelect(event)}
                     onBlur={(event) => handleErrors(event)}
-                  />
+                  >
+                    <option hidden>Select a speciality</option>
+                    {vets?.map((vet) => (
+                      <option value={vet.speciality}>{vet.speciality}</option>
+                    ))}
+                  </select>
                   {errors.speciality && (
                     <p className="error">{errors.speciality}</p>
                   )}
@@ -212,7 +237,7 @@ export default function VetForm() {
               </Box>
             </Grid>
             <Grid item lg={3}>
-              <Box>
+              <Box p="10px">
                 <Box>
                   <label>URL Image</label>
                 </Box>
@@ -222,6 +247,7 @@ export default function VetForm() {
                     type="text"
                     name="img"
                     value={input.img}
+                    placeholder="Enter a URL image"
                     onChange={(event) => handleInputName(event)}
                     onBlur={(event) => handleErrors(event)}
                   />
@@ -230,7 +256,7 @@ export default function VetForm() {
               </Box>
             </Grid>
             <Grid item lg={3}>
-              <Box>
+              <Box p="10px">
                 <Box>
                   <label>Telephone Number</label>
                 </Box>
@@ -240,6 +266,7 @@ export default function VetForm() {
                     type="text"
                     name="tel"
                     value={input.tel}
+                    placeholder="Enter your phone number"
                     onChange={(event) => handleInputName(event)}
                     onBlur={(event) => handleErrors(event)}
                   />
@@ -247,8 +274,8 @@ export default function VetForm() {
                 </Box>
               </Box>
             </Grid>
-            <Grid item lg={3}>
-              <Box>
+            <Grid item lg={2}>
+              <Box p="10px">
                 <Box>
                   <label>DNI</label>
                 </Box>
@@ -258,10 +285,51 @@ export default function VetForm() {
                     type="text"
                     name="dni"
                     value={input.dni}
+                    placeholder="Enter your DNI"
                     onChange={(event) => handleInputName(event)}
                     onBlur={(event) => handleErrors(event)}
                   />
                   {errors.dni && <p className="error">{errors.dni}</p>}
+                </Box>
+              </Box>
+            </Grid>
+            <Grid item lg={2}>
+              <Box p="10px">
+                <Box>
+                  <label>Initial date</label>
+                </Box>
+                <Box>
+                  <input
+                    className="form-control"
+                    type="date"
+                    name="inicialDate"
+                    value={input.inicialDate}
+                    onChange={(event) => handleInputName(event)}
+                    onBlur={(event) => handleErrors(event)}
+                  />
+                  {errors.inicialDate && (
+                    <p className="error">{errors.inicialDate}</p>
+                  )}
+                </Box>
+              </Box>
+            </Grid>
+            <Grid item lg={2}>
+              <Box p="10px">
+                <Box>
+                  <label>Finish date</label>
+                </Box>
+                <Box>
+                  <input
+                    className="form-control"
+                    type="date"
+                    name="finishDate"
+                    value={input.finishDate}
+                    onChange={(event) => handleInputName(event)}
+                    onBlur={(event) => handleErrors(event)}
+                  />
+                  {errors.finishDate && (
+                    <p className="error">{errors.finishDate}</p>
+                  )}
                 </Box>
               </Box>
             </Grid>

@@ -55,6 +55,10 @@ module.exports = (sequelize) => {
       defaultValue: true,
       allowNull: false
     },
+    confirmationCode: {
+      type: DataTypes.STRING,
+      unique: true,
+    },
   }, {
     timestamp: false,
     createdAt: false,

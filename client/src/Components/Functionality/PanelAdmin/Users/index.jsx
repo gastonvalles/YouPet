@@ -52,7 +52,7 @@ export default function Users() {
       field: "isAdmin",
       headerName: "Acces Level",
       flex: 1,
-      renderCell: ({ row: { isAdmin } }) => {
+      renderCell: ({ row: { isAdmin, id} }) => {
         return (
           <Box
             width="60%"
@@ -75,7 +75,7 @@ export default function Users() {
       field: "isActive",
       headerName: "Banner Status",
       flex: 1,
-      renderCell: ({ row: { isActive } }) => {
+      renderCell: ({ row: { isActive, id } }) => {
         return (
           <Box
             width="60%"
@@ -100,7 +100,7 @@ export default function Users() {
 
   useEffect(() => {
     dispatch(getUsers());
-    dispatch(getAdmins())
+    dispatch(getAdmins());
   }, [dispatch]);
 
   return (

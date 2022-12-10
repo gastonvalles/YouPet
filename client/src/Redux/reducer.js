@@ -15,7 +15,9 @@ import {
   GET_ADMIN_BY_NAME,
   GET_ADMIN_DETAIL,
   GET_All_TURN,
-  GET_MYUSER, GET_PAYMENT_MP, GET_PETS,
+  GET_MYUSER,
+  GET_PAYMENT_MP,
+  GET_PETS,
   GET_PET_DETAIL,
   GET_SERVICES,
   GET_SERVICE_BY_NAME,
@@ -28,7 +30,9 @@ import {
   GET_VETS,
   GET_VET_BY_NAME,
   GET_VET_DETAIL,
-  UPDATE_ADMIN
+  UPDATE_ADMIN,
+  UPDATE_USER,
+  UPDATE_VET,
 } from "./const";
 
 const initialState = {
@@ -55,7 +59,7 @@ const initialState = {
   allAdmins: [],
   adminDetail: [],
   allServices: [],
-  paymentLink: {}
+  paymentLink: {},
 };
 
 function rootReducer(state = initialState, action) {
@@ -96,6 +100,13 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         vets: [],
+      };
+    case UPDATE_VET:
+      return {
+        ...state,
+        vets: state.vets.map((vet) =>
+          vet.id === action.payload.id ? action.payload : vet
+        ),
       };
     case DELETE_VET:
       const deleteVet = state.allVets;
@@ -152,6 +163,13 @@ function rootReducer(state = initialState, action) {
         ...state,
         user: action.payload,
       };
+    case UPDATE_USER:
+      return {
+        ...state,
+        users: state.users.map((user) =>
+          user.id === action.payload.id ? action.payload : user
+        ),
+      };
     case GET_ADMINS:
       return {
         ...state,
@@ -181,7 +199,7 @@ function rootReducer(state = initialState, action) {
     case UPDATE_ADMIN:
       return {
         ...state,
-        adminDetail: state.adminDetail.map((admin) =>
+        admins: state.admins.map((admin) =>
           admin.id === action.payload.id ? action.payload : admin
         ),
       };
@@ -191,8 +209,8 @@ function rootReducer(state = initialState, action) {
         action.payload === ""
           ? allservices
           : allservices.filter(
-            (r) => r.type.toLowerCase() === action.payload.toLowerCase()
-          );
+              (r) => r.type.toLowerCase() === action.payload.toLowerCase()
+            );
       return {
         ...state,
         services: filter,
