@@ -16,7 +16,7 @@ export default function NavBar() {
   const dispatch = useDispatch();
   const { search } = useLocation();
   const navigate = useNavigate();
-  const { id } = useParams();
+  // const { id } = useParams();
   let query = new URLSearchParams(search);
   console.log(query);
   const users = useSelector((state) => state.users);
@@ -26,8 +26,7 @@ export default function NavBar() {
 
   useEffect(() => {
     dispatch(getServices());
-    //dispatch(getVetsDetail(id))
-  }, [dispatch, id]);
+  }, [dispatch, ]);
 
   function handleInputChange(event) {
     event.preventDefault();
