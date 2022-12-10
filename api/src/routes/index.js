@@ -12,7 +12,9 @@ const turnController = require("../middlewares/turn.js");
 const userController = require("../middlewares/user.js");
 const paymentController = require("../middlewares/payments");
 const autentController = require("../middlewares/autent");
+const favoriteMeddleware = require("../middlewares/favor");
 
+router.use("/favoriote", favoriteMeddleware);
 router.use("/admin", admController);
 router.use("/service", serviceController);
 router.use(
@@ -55,7 +57,9 @@ async function userActualizado(req, res, next) {
     user.lastname = lastname ? lastname : user.lastname;
     user.username = username ? username : user.username;
     user.password = password ? password : user.password;
-    user.confirmationpass = confirmationpass ? confirmationpass : user.confirmationpass;
+    user.confirmationpass = confirmationpass
+      ? confirmationpass
+      : user.confirmationpass;
     user.email = email ? email : user.email;
     user.address = address ? address : user.address;
     user.dni = dni ? dni : user.dni;
