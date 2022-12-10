@@ -22,7 +22,6 @@ router.use(
 );
 router.use(
   "/service",
-  passport.authenticate("jwt", { session: false }),
   serviceController
 );
 router.use(
@@ -32,7 +31,6 @@ router.use(
 );
 router.use(
   "/vet",
-  passport.authenticate("jwt", { session: false }),
   vetController
 );
 router.use(
