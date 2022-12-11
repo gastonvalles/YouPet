@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate} from "react-router";
 import { Link, useParams } from "react-router-dom";
 import { ColorModeContext, tokens, useMode } from "../../theme";
 import {
@@ -22,17 +23,33 @@ import {
 
 export default function AdminProfileDetail() {
   const theeme = useTheme();
+  const navigate = useNavigate()
   const colors = tokens(theeme.palette.mode);
   const { id } = useParams();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.userDetail);
   const [theme, colorMode] = useMode();
 
-  function handleStatus() {
-    dispatch(updateUser(id))
-    if (user.isAdmin === true){
-       return user.isAdmin === false
+  function handleStatusUser() {
+    if (user.isActive === true) {
+      let payload = { isActive: false };
+      dispatch(updateUser(id, payload));
+    } else {
+      let payload = { isActive: true };
+      dispatch(updateUser(id, payload));
     }
+    navigate(0);
+  }
+
+  function handleAccessUser() {
+    if (user.isAdmin === true) {
+      let payload = { isAdmin: false };
+      dispatch(updateUser(id, payload));
+    } else {
+      let payload = { isAdmin: true };
+      dispatch(updateUser(id, payload));
+    }
+    navigate(0);
   }
 
   useEffect(() => {
@@ -109,7 +126,7 @@ export default function AdminProfileDetail() {
                         }
                         borderRadius="4px"
                         type="button"
-                        onClick={(event)=>handleStatus(event)}
+                        onClick={(event)=> handleStatusUser(event)}
                       >
                         {user.isActive === true && (
                           <AdminPanelSettingsOutlinedIcon />
@@ -136,6 +153,7 @@ export default function AdminProfileDetail() {
                         }
                         borderRadius="4px"
                         type="button"
+                        onClick={(event)=> handleAccessUser(event)}
                       >
                         {user.isAdmin === true && (
                           <AdminPanelSettingsOutlinedIcon />

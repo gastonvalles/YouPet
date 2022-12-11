@@ -14,28 +14,19 @@ const autentController = require("../middlewares/autent");
 const favoriteMeddleware = require("../middlewares/favor");
 
 router.use("/favoriote", favoriteMeddleware);
-router.use(
-  "/service",
-  serviceController
-);
+router.use("/service", serviceController);
 router.use(
   "/pet",
   passport.authenticate("jwt", { session: false }),
   petController
 );
-router.use(
-  "/vet",
-  vetController
-);
+router.use("/vet", vetController);
 router.use(
   "/turn",
   passport.authenticate("jwt", { session: false }),
   turnController
 );
-router.use(
-  "/user",
-  userController
-);
+router.use("/user", userController);
 router.use(
   "/payment",
   passport.authenticate("jwt", { session: false }),
@@ -43,7 +34,7 @@ router.use(
 );
 router.use("/", autentController);
 
-async function userctualizado(req, res, next) {
+async function userActualizado(req, res, next) {
   const { id } = req.params;
   const {
     name,
@@ -70,8 +61,8 @@ async function userctualizado(req, res, next) {
     user.email = email ? email : user.email;
     user.address = address ? address : user.address;
     user.dni = dni ? dni : user.dni;
-    user.isAdmin = isAdmin ? isAdmin : user.isAdmin;
-    user.isActive = isActive ? isActive : user.isActive;
+    user.isAdmin = typeof isAdmin === "boolean" ? isAdmin : user.isAdmin;
+    user.isActive = typeof isActive === "boolean" ? isActive : user.isActive;
 
     await user.save();
     res.send("usuario actualizado");
@@ -79,7 +70,7 @@ async function userctualizado(req, res, next) {
     next(error);
   }
 }
-router.put("/user/:id", userctualizado);
+router.put("/user/:id", userActualizado);
 
 async function vetActualizado(req, res) {
   const { id } = req.params;
@@ -107,7 +98,7 @@ async function vetActualizado(req, res) {
     vet.dni = dni ? dni : vet.dni;
     vet.inicialDate = inicialDate ? inicialDate : vet.inicialDate;
     vet.finishDate = finishDate ? finishDate : vet.finishDate;
-    vet.isActive = typeof(isActive) === 'boolean'? isActive : vet.isActive;
+    vet.isActive = typeof isActive === "boolean" ? isActive : vet.isActive;
 
     await vet.save();
     res.status(200).send("vet actualizado");
