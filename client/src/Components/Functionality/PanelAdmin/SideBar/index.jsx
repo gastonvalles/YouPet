@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
 import { ProSidebarProvider, Menu, MenuItem } from "react-pro-sidebar";
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
@@ -12,7 +11,7 @@ import ReceiptOutlinedIcon from "@mui/icons-material/ReceiptOutlined";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
-import { getUserDetail } from "../../../../Redux/actions";
+import { getMyUser } from "../../../../Redux/actions";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -35,16 +34,15 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
 
 export default function SideBar() {
   const theme = useTheme();
-  const {id} = useParams();
   const dispatch = useDispatch();
-  const user = useSelector(state=> state.userDetail);
+  const myuser = useSelector(state=> state.myuser);
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Dashboard");
 
   useEffect(()=> {
-    dispatch(getUserDetail(id))
-  }, [dispatch, id])
+    dispatch(getMyUser())
+  }, [dispatch])
 
   return (
     <Box
@@ -101,7 +99,7 @@ export default function SideBar() {
                   alt="profile-user"
                   width="100px"
                   height="100px"
-                  src={user.img}
+                  src={myuser.img}
                   style={{ cursor: "pointer", borderRadius: "50%" }}
                 />
               </Box>
@@ -112,7 +110,7 @@ export default function SideBar() {
                   fontWeight="bold"
                   sx={{ m: "10px 0 0 0" }}
                 >
-                  {user.name} {user.lastname}
+                  {myuser.name} {myuser.lastname}
                 </Typography>
                 <Typography variant="h5" color={colors.greenAccent[500]}>
                   VP Fancy Admin

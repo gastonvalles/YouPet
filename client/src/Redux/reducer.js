@@ -49,6 +49,7 @@ const initialState = {
   users: [],
   allUsers: [],
   userDetail: [],
+  myuser: [],
   allServices: [],
   paymentLink: {},
 };
