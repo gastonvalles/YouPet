@@ -15,7 +15,9 @@ import {
   GET_ADMIN_BY_NAME,
   GET_ADMIN_DETAIL,
   GET_All_TURN,
-  GET_MYUSER, GET_PAYMENT_MP, GET_PETS,
+  GET_MYUSER,
+  GET_PAYMENT_MP,
+  GET_PETS,
   GET_PET_DETAIL,
   GET_SERVICES,
   GET_SERVICE_BY_NAME,
@@ -28,7 +30,11 @@ import {
   GET_VETS,
   GET_VET_BY_NAME,
   GET_VET_DETAIL,
-  UPDATE_ADMIN
+  UPDATE_ADMIN,
+  UPDATE_SERVICE,
+  UPDATE_TURN,
+  UPDATE_USER,
+  UPDATE_VET,
 } from "./const";
 
 const initialState = {
@@ -55,7 +61,7 @@ const initialState = {
   allAdmins: [],
   adminDetail: [],
   allServices: [],
-  paymentLink: {}
+  paymentLink: {},
 };
 
 function rootReducer(state = initialState, action) {
@@ -103,6 +109,13 @@ function rootReducer(state = initialState, action) {
         ...state,
         vets: deleteVet.filter((vet) => vet.id !== action.payload),
       };
+    case UPDATE_VET:
+      return {
+        ...state,
+        vets: state.vets.map((vet) =>
+          vet.id === action.payload.id ? action.payload : vet
+        ),
+      };
     case GET_SERVICES:
       return {
         ...state,
@@ -123,6 +136,13 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         services: [],
+      };
+    case UPDATE_SERVICE:
+      return {
+        ...state,
+        services: state.services.map((service) =>
+          service.id === action.payload.id ? action.payload : service
+        ),
       };
     case DELETE_SERVICE:
       const deleteService = state.allServices;
@@ -152,14 +172,21 @@ function rootReducer(state = initialState, action) {
         ...state,
         user: action.payload,
       };
+    case UPDATE_USER:
+      return {
+        ...state,
+        users: state.users.map((user) =>
+          user.id === action.payload.id ? action.payload : user
+        ),
+      };
     case FILTER_SERVICE:
       const allservices = state.allServices;
       const filter =
         action.payload === ""
           ? allservices
           : allservices.filter(
-            (r) => r.type.toLowerCase() === action.payload.toLowerCase()
-          );
+              (r) => r.type.toLowerCase() === action.payload.toLowerCase()
+            );
       return {
         ...state,
         services: filter,
@@ -188,6 +215,13 @@ function rootReducer(state = initialState, action) {
         ...state,
         turns: action.payload,
         allTurns: action.payload,
+      };
+    case UPDATE_TURN:
+      return {
+        ...state,
+        turns: state.turns.map((turnTaked) =>
+          turnTaked.id === action.payload.id ? action.payload : turnTaked
+        ),
       };
     case DELETE_TURN:
       const deleteTurn = state.allTurns;
