@@ -53,6 +53,7 @@ const initialState = {
   createService: [],
   user: [],
   users: [],
+  myuser: [],
   allUsers: [],
   userDetail: [],
   admins: [],
