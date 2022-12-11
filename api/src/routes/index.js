@@ -1,6 +1,6 @@
 const { Router, json } = require("express");
 const cualquiera = require("../middlewares/passport");
-const { User } = require("../db");
+const { User,Vet,Admin } = require("../db");
 const router = Router();
 router.use(json());
 const passport = require("passport");
