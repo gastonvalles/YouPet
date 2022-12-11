@@ -120,9 +120,9 @@ export function createVet(payload) {
   };
 }
 
-export function updateVet(id) {
+export function updateVet(id, payload) {
   return async function (dispatch) {
-    var json = await axios.put(`http://localhost:3001/vet/${id}`);
+    var json = await axios.put(`http://localhost:3001/vet/${id}`, payload);
     return dispatch({
       type: UPDATE_VET,
       payload: json.data,
