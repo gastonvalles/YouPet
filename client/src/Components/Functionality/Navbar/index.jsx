@@ -4,10 +4,9 @@ import { useNavigate } from "react-router";
 import { Link, useParams } from "react-router-dom";
 import logo from "../../../img/logo.png";
 import {
-  // filterVets,
+  getMyUser,
   getServiceByName,
   getServices,
-  getUserByName,
   getVetByName
 } from "../../../Redux/actions";
 import "./Navbar.css";
@@ -15,15 +14,13 @@ import "./Navbar.css";
 export default function NavBar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { id } = useParams();
-  const users = useSelector((state) => state.users);
   const myuser = useSelector((state) => state.myuser);
   const [name, setName] = useState("");
 
   useEffect(() => {
     dispatch(getServices());
-    //dispatch(getVetsDetail(id))
-  }, [dispatch, id]);
+    dispatch(getMyUser())
+  }, [dispatch]);
 
   function handleInputChange(event) {
     event.preventDefault();
@@ -33,10 +30,6 @@ export default function NavBar() {
     event.preventDefault();
     dispatch(getServiceByName(name));
     dispatch(getVetByName(name));
-    if (users.isAdmin === true) {
-      dispatch(getUserByName(name));
-    }
-    // navigate(`/vet/${id}`)
     setName("");
   }
 
