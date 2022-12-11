@@ -409,9 +409,9 @@ export function getPaymentMP(service) {
   };
 }
 
-export function addFavorites(id) {
+export function addFavorites(id, userid) {
   return async function (dispatch) {
-    let json = await axios.post(`http://localhost:3001/vet/${id}`)
+    let json = await axios.post(`http://localhost:3001/vet/addFavorite`, { id, userid })
     return dispatch({
       type: ADD_FAVORITES,
       payload: json.data
