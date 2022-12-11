@@ -1,17 +1,27 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
+import { useNavigate } from "react-router"
 import { ColorModeContext, useMode } from "../../theme";
 import { Box, CssBaseline, ThemeProvider, Grid } from "@mui/material";
 
 import Header from "../../Header";
-import { getServiceDetail } from "../../../../../Redux/actions";
+import { deleteService, getServiceDetail } from "../../../../../Redux/actions";
 
 export default function AdminServiceDetail() {
   const { id } = useParams();
+  const navigate = useNavigate()
   const dispatch = useDispatch();
   const service = useSelector((state) => state.serviceDetail);
   const [theme, colorMode] = useMode();
+
+  function delService() {
+    dispatch(deleteService(id));
+    var respuesta = window.confirm("Confirm delete?");
+    if (respuesta) alert("Service deleted");
+    else alert("You are not allowed to delete");
+    navigate("/admin/services");
+  }
 
   useEffect(() => {
     dispatch(getServiceDetail(id));
