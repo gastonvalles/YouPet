@@ -17,7 +17,6 @@ const favoriteMeddleware = require("../middlewares/favor");
 router.use("/favoriote", favoriteMeddleware);
 router.use(
   "/admin",
-  passport.authenticate("jwt", { session: false }),
   admController
 );
 router.use(
@@ -40,7 +39,6 @@ router.use(
 );
 router.use(
   "/user",
-  passport.authenticate("jwt", { session: false }),
   userController
 );
 router.use(
