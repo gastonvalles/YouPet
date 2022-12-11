@@ -93,7 +93,7 @@ const sendEmail = async (name, email, confirmationCode) => {
       text: "¡Gracias por Registrarte", // plain text body
       html: `<b>EMAIL DE CONFIRMACION</b>
     <h2>Hello ${name}<h2>
-    <p>Gracias por suscribirte, confirmatu email haciendo click en el siguiente link</p>
+    <p>Thank you for subscribing, confirm your email by clicking on the following link</p>
     <a href="http://localhost:3000/confirm/${confirmationCode}">Click here</a>
     `,
     })
