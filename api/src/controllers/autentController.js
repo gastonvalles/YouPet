@@ -117,7 +117,7 @@ exports.verifyUser = (req, res, next) => {
       if (!user) {
         return res.status(404).send("Usuario no encontrado");
       }
-      user.status = "Active";
+      user.isActive = true;
       user.save((err) => {
         if (err) {
           res.status(500).send(err);

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { clearDetails, getVetsDetail } from "../../../../Redux/actions";
 import './vetDetail.css';
 
@@ -8,7 +8,6 @@ export default function VetDetail() {
   let { id } = useParams();
   const dispatch = useDispatch();
   const vet = useSelector((state) => state.vetDetail);
-  const [, navigate] = useLocation();
 
   const addFav = (id) => {
     //if (no esta logeado) {

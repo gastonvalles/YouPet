@@ -5,7 +5,6 @@ const router = Router();
 router.use(json());
 const passport = require("passport");
 const serviceController = require("../middlewares/service");
-const admController = require("../middlewares/admin");
 const petController = require("../middlewares/pet");
 const vetController = require("../middlewares/vet");
 const turnController = require("../middlewares/turn.js");
@@ -15,11 +14,6 @@ const autentController = require("../middlewares/autent");
 const favoriteMeddleware = require("../middlewares/favor");
 
 router.use("/favoriote", favoriteMeddleware);
-router.use(
-  "/admin",
-  passport.authenticate("jwt", { session: false }),
-  admController
-);
 router.use(
   "/service",
   serviceController
