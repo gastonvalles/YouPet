@@ -19,7 +19,7 @@ export default function NavBar() {
 
   useEffect(() => {
     dispatch(getServices());
-  }, [dispatch, ]);
+  }, [dispatch]);
 
   function handleInputChange(event) {
     event.preventDefault();
