@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import { ColorModeContext, tokens, useMode } from "../../theme";
-import { Box, CssBaseline, ThemeProvider, useTheme, Grid } from "@mui/material";
-import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
-import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
+import { ColorModeContext, useMode } from "../../theme";
+import { Box, CssBaseline, ThemeProvider, Grid } from "@mui/material";
 
 import Header from "../../Header";
 import { getServiceDetail } from "../../../../../Redux/actions";
