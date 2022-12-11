@@ -48,7 +48,7 @@ router.use(
 );
 router.use("/", autentController);
 
-async function userctualizado(req, res, next) {
+async function userActualizado(req, res, next) {
   const { id } = req.params;
   const {
     name,
@@ -75,8 +75,8 @@ async function userctualizado(req, res, next) {
     user.email = email ? email : user.email;
     user.address = address ? address : user.address;
     user.dni = dni ? dni : user.dni;
-    user.isAdmin = isAdmin ? isAdmin : user.isAdmin;
-    user.isActive = isActive ? isActive : user.isActive;
+    user.isAdmin = typeof(isAdmin) === 'boolean' ? isAdmin : user.isAdmin;
+    user.isActive = typeof(isActive) === 'boolean'? isActive : user.isActive;
 
     await user.save();
     res.send("usuario actualizado");
@@ -84,5 +84,78 @@ async function userctualizado(req, res, next) {
     next(error);
   }
 }
-router.put("/user/:id", userctualizado);
+router.put("/user/:id", userActualizado);
+
+async function adminActualizado(req, res, next) {
+  const { id } = req.params;
+  const {
+    name,
+    lastname,
+    username,
+    password,
+    confirmationpass,
+    email,
+    address,
+    dni,
+    isAdmin,
+    isActive,
+  } = req.body;
+
+  try {
+    let admin = await Admin.findByPk(id);
+    admin.name = name ? name : admin.name;
+    admin.lastname = lastname ? lastname : admin.lastname;
+    admin.username = username ? username : admin.username;
+    admin.password = password ? password : admin.password;
+    admin.confirmationpass = confirmationpass ? confirmationpass : admin.confirmationpass;
+    admin.email = email ? email : admin.email;
+    admin.address = address ? address : admin.address;
+    admin.dni = dni ? dni : admin.dni;
+    admin.isAdmin = typeof(isAdmin) === 'boolean' ? isAdmin : admin.isAdmin;
+    admin.isActive = typeof(isActive) === 'boolean'? isActive : admin.isActive;
+
+    await admin.save();
+    res.send("admin actualizado");
+  } catch (error) {
+    next(error);
+  }
+}
+router.put("/admin/:id", adminActualizado);
+
+async function vetActualizado(req, res) {
+  const { id } = req.params;
+  const {
+    name,
+    lastname,
+    speciality,
+    email,
+    address,
+    img,
+    dni,
+    inicialDate,
+    finishDate,
+    isActive,
+  } = req.body;
+
+  try {
+    let vet = await Vet.findByPk(id);
+    vet.name = name ? name : vet.name;
+    vet.lastname = lastname ? lastname : vet.lastname;
+    vet.speciality = speciality ? speciality : vet.speciality;
+    vet.email = email ? email : vet.email;
+    vet.address = address ? address : vet.address;
+    vet.img = img ? img : vet.img;
+    vet.dni = dni ? dni : vet.dni;
+    vet.inicialDate = inicialDate ? inicialDate : vet.inicialDate;
+    vet.finishDate = finishDate ? finishDate : vet.finishDate;
+    vet.isActive = typeof(isActive) === 'boolean'? isActive : vet.isActive;
+
+    await vet.save();
+    res.status(200).send("vet actualizado");
+  } catch (error) {
+    res.send(error.message);
+  }
+}
+router.put("/vet/:id", vetActualizado);
+
 module.exports = router;
