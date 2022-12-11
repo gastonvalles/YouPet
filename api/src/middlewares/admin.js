@@ -39,6 +39,10 @@ router.post("/", async (req, res) => {
   }
 });
 
+router.post("/", createAdmin);
+router.post("/loginadmin", loginAdmin);
+router.get("/login/:confirmationCode", verifyAdmin);
+
 router.delete("/delete", async (req, res) => {
   try {
     const { id } = req.params;
