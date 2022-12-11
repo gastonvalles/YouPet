@@ -1,15 +1,9 @@
 import axios from "axios";
-
 import {
-  CLEAR_DETAILS,
-  CLEAR_TURN,
-  CREATE_TURN,
-  FILTER_SERVICE,
-  GET_MYUSER,
-  GET_ADMINS,
+  ADD_FAVORITES, CLEAR_DETAILS,
+  CLEAR_TURN, CREATE_ADMIN, CREATE_PET, CREATE_SERVICE, CREATE_TURN, CREATE_USER, CREATE_VET, DELETE_ADMIN, DELETE_PET, DELETE_SERVICE, DELETE_TURN, DELETE_VET, FILTER_SERVICE, GET_ADMINS,
   GET_ADMIN_BY_NAME,
-  GET_ADMIN_DETAIL,
-  GET_PAYMENT_MP,
+  GET_ADMIN_DETAIL, GET_All_TURN, GET_MYUSER, GET_PAYMENT_MP,
   GET_PETS,
   GET_PET_DETAIL,
   GET_SERVICES,
@@ -22,23 +16,8 @@ import {
   GET_USER_DETAIL,
   GET_VETS,
   GET_VET_BY_NAME,
-  GET_VET_DETAIL,
-  GET_All_TURN,
-  CREATE_ADMIN,
-  CREATE_SERVICE,
-  CREATE_VET,
-  CREATE_USER,
-  CREATE_PET,
-  DELETE_PET,
-  DELETE_VET,
-  DELETE_SERVICE,
-  DELETE_ADMIN,
-  DELETE_TURN,
-  UPDATE_USER,
-  UPDATE_TURN,
-  UPDATE_ADMIN,
-  UPDATE_SERVICE,
-  UPDATE_VET,
+  GET_VET_DETAIL, UPDATE_ADMIN,
+  UPDATE_SERVICE, UPDATE_TURN, UPDATE_USER, UPDATE_VET
 } from "./const";
 const instance = axios.create({
   baseURL: "http://localhost:3001",
@@ -351,7 +330,7 @@ export function getTurn(payload) {
     let json = await instance.get(`/turn/${vetSelect}/${servId}`);
 
     //let json = await axios.get(
-      //`http://localhost:3001/turn/${vetSelect}/${servId}`
+    //`http://localhost:3001/turn/${vetSelect}/${servId}`
     //);
 
     return dispatch({
@@ -412,7 +391,6 @@ export function filterService(payload) {
   };
 }
 
-
 // export function filterVets(payload) {
 //   return {
 //     type: FILTER_VETS,
@@ -423,7 +401,7 @@ export function filterService(payload) {
 export function getPaymentMP(service) {
   return async function (dispatch) {
     //let json = await axios.post(`http://localhost:3001/payment/mp/552525`,service);
-    let json = await instance.post(`http://localhost:3001/payment/mp/552525`,service);
+    let json = await instance.post(`http://localhost:3001/payment/mp/552525`, service);
     return dispatch({
       type: GET_PAYMENT_MP,
       payload: json.data,
@@ -431,3 +409,12 @@ export function getPaymentMP(service) {
   };
 }
 
+export function addFavorites(id, userid) {
+  return async function (dispatch) {
+    let json = await axios.post(`http://localhost:3001/vet/addFavorite`, { id, userid })
+    return dispatch({
+      type: ADD_FAVORITES,
+      payload: json.data
+    })
+  }
+}
