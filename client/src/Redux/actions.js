@@ -30,7 +30,6 @@ import {
   GET_VET_BY_NAME,
   GET_VET_DETAIL,
   UPDATE_SERVICE,
-  UPDATE_TURN,
   UPDATE_USER,
   UPDATE_VET,
 } from "./const";
@@ -260,9 +259,9 @@ export function createUser(payload) {
   };
 }
 
-export function updateUser(id) {
+export function updateUser(id, payload) {
   return async function (dispatch) {
-    var json = await axios.put(`http://localhost:3001/user/${id}`);
+    var json = await axios.put(`http://localhost:3001/user/${id}`, payload);
     return dispatch({
       type: UPDATE_USER,
       payload: json.data,
@@ -296,16 +295,6 @@ export function getAllTurn(payload) {
     let json = await axios.get(`http://localhost:3001/turn/`);
     return dispatch({
       type: GET_All_TURN,
-      payload: json.data,
-    });
-  };
-}
-
-export function updateTurn(id, payload) {
-  return async function (dispatch) {
-    var json = await axios.delete(`http://localhost:3001/turn/${id}`, payload);
-    return dispatch({
-      type: UPDATE_TURN,
       payload: json.data,
     });
   };

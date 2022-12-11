@@ -57,9 +57,6 @@ const initialState = {
   users: [],
   allUsers: [],
   userDetail: [],
-  admins: [],
-  allAdmins: [],
-  adminDetail: [],
   allServices: [],
   paymentLink: {},
 };
@@ -215,13 +212,6 @@ function rootReducer(state = initialState, action) {
         ...state,
         turns: action.payload,
         allTurns: action.payload,
-      };
-    case UPDATE_TURN:
-      return {
-        ...state,
-        turns: state.turns.map((turnTaked) =>
-          turnTaked.id === action.payload.id ? action.payload : turnTaked
-        ),
       };
     case DELETE_TURN:
       const deleteTurn = state.allTurns;
