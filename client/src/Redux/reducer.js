@@ -199,7 +199,7 @@ function rootReducer(state = initialState, action) {
     case UPDATE_ADMIN:
       return {
         ...state,
-        adminDetail: state.adminDetail.map((admin) =>
+        admins: state.admins.map((admin) =>
           admin.id === action.payload.id ? action.payload : admin
         ),
       };

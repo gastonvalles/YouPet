@@ -10,6 +10,7 @@ import {
   Typography,
   useTheme,
   Grid,
+  Button
 } from "@mui/material";
 import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
 import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
@@ -289,6 +290,11 @@ export default function AdminProfileDetail() {
                         Is Admin
                       </Typography>
                     </Box>
+                  </Grid>
+                  <Grid item lg={3}>
+                  <Button variant="contained" color="error" onClick={(event)=>delAdmin(event)}>
+                    Delete Admin
+                  </Button>
                   </Grid>
                 </Grid>
               </Box>
