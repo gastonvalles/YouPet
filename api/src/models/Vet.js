@@ -24,7 +24,7 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     fav: {
-      type: DataTypes.STRING
+      type: DataTypes.BIGINT,
     },
     review: {
       type: DataTypes.TEXT,
