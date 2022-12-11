@@ -1,11 +1,10 @@
 const { Router, json } = require("express");
 const cualquiera = require("../middlewares/passport");
-const {User, Admin, Vet} = require("../db")
+const {User, Vet} = require("../db")
 const router = Router();
 router.use(json());
 const passport = require("passport");
 const serviceController = require("../middlewares/service");
-const admController = require("../middlewares/admin");
 const petController = require("../middlewares/pet");
 const vetController = require("../middlewares/vet");
 const turnController = require("../middlewares/turn.js");
@@ -15,7 +14,6 @@ const autentController = require("../middlewares/autent");
 const favoriteMeddleware = require("../middlewares/favor");
 
 router.use("/favoriote", favoriteMeddleware);
-router.use("/admin", admController);
 router.use("/service", serviceController);
 router.use(
   "/pet",
@@ -74,41 +72,6 @@ async function userActualizado(req, res, next) {
 }
 router.put("/user/:id", userActualizado);
 
-async function adminActualizado(req, res, next) {
-  const { id } = req.params;
-  const {
-    name,
-    lastname,
-    username,
-    password,
-    confirmationpass,
-    email,
-    address,
-    dni,
-    isAdmin,
-    isActive,
-  } = req.body;
-
-  try {
-    let admin = await Admin.findByPk(id);
-    admin.name = name ? name : admin.name;
-    admin.lastname = lastname ? lastname : admin.lastname;
-    admin.username = username ? username : admin.username;
-    admin.password = password ? password : admin.password;
-    admin.confirmationpass = confirmationpass ? confirmationpass : admin.confirmationpass;
-    admin.email = email ? email : admin.email;
-    admin.address = address ? address : admin.address;
-    admin.dni = dni ? dni : admin.dni;
-    admin.isAdmin = typeof(isAdmin) === 'boolean' ? isAdmin : admin.isAdmin;
-    admin.isActive = typeof(isActive) === 'boolean'? isActive : admin.isActive;
-
-    await admin.save();
-    res.send("admin actualizado");
-  } catch (error) {
-    next(error);
-  }
-}
-router.put("/admin/:id", adminActualizado);
 
 async function vetActualizado(req, res) {
   const { id } = req.params;
@@ -145,4 +108,5 @@ async function vetActualizado(req, res) {
   }
 }
 router.put("/vet/:id", vetActualizado);
+
 module.exports = router;
