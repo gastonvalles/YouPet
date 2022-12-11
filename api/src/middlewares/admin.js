@@ -3,6 +3,9 @@ const {
   getDBAdmin,
   getDBAdminByPK,
   dbCreateAdmin,
+  createAdmin,
+  loginAdmin,
+  verifyAdmin,
   deleteAdmin
 } = require("../controllers/getAllAdmin");
 const router = Router();
