@@ -152,39 +152,6 @@ function rootReducer(state = initialState, action) {
         ...state,
         user: action.payload,
       };
-    case GET_ADMINS:
-      return {
-        ...state,
-        admins: action.payload,
-      };
-    case GET_ADMIN_DETAIL:
-      return {
-        ...state,
-        adminDetail: action.payload,
-      };
-    case GET_ADMIN_BY_NAME:
-      return {
-        ...state,
-        admins: action.payload,
-      };
-    case CREATE_ADMIN:
-      return {
-        ...state,
-        admins: [],
-      };
-    case DELETE_ADMIN:
-      const deleteAdmin = state.allAdmins;
-      return {
-        ...state,
-        admins: deleteAdmin.filter((admin) => admin.id !== action.payload),
-      };
-    case UPDATE_ADMIN:
-      return {
-        ...state,
-        adminDetail: state.adminDetail.map((admin) =>
-          admin.id === action.payload.id ? action.payload : admin
-        ),
-      };
     case FILTER_SERVICE:
       const allservices = state.allServices;
       const filter =

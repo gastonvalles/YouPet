@@ -1,6 +1,6 @@
 const { Router, json } = require("express");
 const cualquiera = require("../middlewares/passport");
-const { User } = require("../db");
+const { User, Vet } = require("../db");
 const router = Router();
 router.use(json());
 const passport = require("passport");
@@ -34,7 +34,6 @@ router.use(
 );
 router.use(
   "/user",
-  passport.authenticate("jwt", { session: false }),
   userController
 );
 router.use(
@@ -81,5 +80,41 @@ async function userctualizado(req, res, next) {
   }
 }
 router.put("/user/:id", userctualizado);
+
+async function vetActualizado(req, res) {
+  const { id } = req.params;
+  const {
+    name,
+    lastname,
+    speciality,
+    email,
+    address,
+    img,
+    dni,
+    inicialDate,
+    finishDate,
+    isActive,
+  } = req.body;
+
+  try {
+    let vet = await Vet.findByPk(id);
+    vet.name = name ? name : vet.name;
+    vet.lastname = lastname ? lastname : vet.lastname;
+    vet.speciality = speciality ? speciality : vet.speciality;
+    vet.email = email ? email : vet.email;
+    vet.address = address ? address : vet.address;
+    vet.img = img ? img : vet.img;
+    vet.dni = dni ? dni : vet.dni;
+    vet.inicialDate = inicialDate ? inicialDate : vet.inicialDate;
+    vet.finishDate = finishDate ? finishDate : vet.finishDate;
+    vet.isActive = typeof(isActive) === 'boolean'? isActive : vet.isActive;
+
+    await vet.save();
+    res.status(200).send("vet actualizado");
+  } catch (error) {
+    res.send(error.message);
+  }
+}
+router.put("/vet/:id", vetActualizado);
 
 module.exports = router;

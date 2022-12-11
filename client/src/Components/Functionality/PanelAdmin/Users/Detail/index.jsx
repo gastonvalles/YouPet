@@ -16,7 +16,6 @@ import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
 import Header from "../../Header";
 import {
   clearDetails,
-  getAdminDetail,
   getUserDetail,
   updateUser
 } from "../../../../../Redux/actions";
@@ -27,7 +26,6 @@ export default function AdminProfileDetail() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.userDetail);
-  const admin = useSelector((state) => state.adminDetail);
   const [theme, colorMode] = useMode();
 
   function handleStatus() {
@@ -39,7 +37,6 @@ export default function AdminProfileDetail() {
 
   useEffect(() => {
     dispatch(getUserDetail(id));
-    dispatch(getAdminDetail(id));
     return () => {
       dispatch(clearDetails());
     };
@@ -153,96 +150,7 @@ export default function AdminProfileDetail() {
                 </Grid>
               </Box>
             )}
-            {admin.id && (
-              <Box m="20px">
-                <Box p="60px">
-                  <img src={admin.img} alt="user pic" />
-                </Box>
-                <Box p="30px">
-                  <h3>
-                    {admin.name} {admin.lastname}
-                  </h3>
-                </Box>
-                <Grid container spacing={10} alignItems="center" justifyContent="center">
-                  <Grid item lg={3}>
-                    <Box>
-                      <h3>Username:</h3>
-                      <h3>{admin.username}</h3>
-                    </Box>
-                  </Grid>
-                  <Grid item lg={3}>
-                    <Box>
-                      <h3>Telephone Number:</h3>
-                      <h3>{admin.tel}</h3>
-                    </Box>
-                  </Grid>
-                  <Grid item lg={3}>
-                    <Box>
-                      <h3>Email:</h3>
-                      <h3>{admin.email}</h3>
-                    </Box>
-                  </Grid>
-                  <Grid item lg={3}>
-                    <Box>
-                      <h3>DNI: {admin.dni}</h3>
-                    </Box>
-                  </Grid>
-                  <Grid item lg={3}>
-                    <Box>
-                      <Box
-                        width="15%"
-                        m="0 auto"
-                        p="5px"
-                        display="flex"
-                        justifyContent="center"
-                        backgroundColor={
-                          admin.isActive === true
-                            ? colors.greenAccent[600]
-                            : colors.redAccent[700]
-                        }
-                        borderRadius="4px"
-                        type="button"
-                      >
-                        {admin.isActive === true && (
-                          <AdminPanelSettingsOutlinedIcon />
-                        )}
-                        {admin.isActive === false && <LockOpenOutlinedIcon />}
-                      </Box>
-                      <Typography variant="h4" sx={{ m: "10px 0 5px 0" }}>
-                        Is Active
-                      </Typography>
-                    </Box>
-                  </Grid>
-                  <Grid item lg={3}>
-                    <Box>
-                      <Box
-                        width="15%"
-                        m="0 auto"
-                        p="5px"
-                        display="flex"
-                        justifyContent="center"
-                        backgroundColor={
-                          admin.isAdmin === true
-                            ? colors.greenAccent[600]
-                            : colors.redAccent[700]
-                        }
-                        borderRadius="4px"
-                        type="button"
-                      >
-                        {admin.isAdmin === true && (
-                          <AdminPanelSettingsOutlinedIcon />
-                        )}
-                        {admin.isAdmin === false && <LockOpenOutlinedIcon />}
-                      </Box>
-                      <Typography variant="h4" sx={{ m: "10px 0 5px 0" }}>
-                        Is Admin
-                      </Typography>
-                    </Box>
-                  </Grid>
-                </Grid>
-              </Box>
-            )}
-          </Box>
+           </Box>
         </Box>
       </ThemeProvider>
     </ColorModeContext.Provider>
