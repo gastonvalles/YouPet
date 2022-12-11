@@ -1,5 +1,8 @@
+const jwt = require("jsonwebtoken");
+const bcryptjs = require("bcryptjs");
 const { Admin } = require("../db");
 const { Op } = require("sequelize");
+const { transporter } = require("../../config/mailer");
 
 const FirstAdmin = [
   {
