@@ -256,16 +256,6 @@ export function getUserByEmail(email) {
   };
 }
 
-export function createUser(payload) {
-  return async function (dispatch) {
-    let json = await axios.post("http://localhost:3001/admin", payload);
-    return dispatch({
-      type: CREATE_USER,
-      payload: json.data,
-    });
-  };
-}
-
 export function updateUser(id, payload) {
   return async function (dispatch) {
     var json = await axios.put(`http://localhost:3001/user/${id}`, payload);

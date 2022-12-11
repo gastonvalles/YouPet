@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { ColorModeContext, tokens, useMode } from "../../theme";
 import {
   Box,
@@ -16,13 +17,16 @@ import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
 import Header from "../../Header";
 import {
   clearDetails,
+  deleteAdmin,
   getAdminDetail,
   getUserDetail,
+  updateAdmin,
   updateUser
 } from "../../../../../Redux/actions";
 
 export default function AdminProfileDetail() {
   const theeme = useTheme();
+  const navigate = useNavigate();
   const colors = tokens(theeme.palette.mode);
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -30,11 +34,55 @@ export default function AdminProfileDetail() {
   const admin = useSelector((state) => state.adminDetail);
   const [theme, colorMode] = useMode();
 
-  function handleStatus() {
-    dispatch(updateUser(id))
-    if (user.isAdmin === true){
-       return user.isAdmin === false
+  function handleAccessAdmin() {
+    if (admin.isAdmin === true) {
+      let payload = { isAdmin: false };
+      dispatch(updateAdmin(id, payload));
+    } else {
+      let payload = { isAdmin: true };
+      dispatch(updateAdmin(id, payload));
     }
+    navigate(0);
+  }
+
+  function handleStatusAdmin() {
+    if (admin.isActive === true) {
+      let payload = { isActive: false };
+      dispatch(updateAdmin(id, payload));
+    } else {
+      let payload = { isActive: true };
+      dispatch(updateAdmin(id, payload));
+    }
+    navigate(0);
+  }
+
+  function handleStatusUser() {
+    if (user.isActive === true) {
+      let payload = { isActive: false };
+      dispatch(updateUser(id, payload));
+    } else {
+      let payload = { isActive: true };
+      dispatch(updateUser(id, payload));
+    }
+    navigate(0);
+  }
+
+  function handleAccessUser() {
+    if (user.isAdmin === true) {
+      let payload = { isAdmin: false };
+      dispatch(updateUser(id, payload));
+    } else {
+      let payload = { isAdmin: true };
+      dispatch(updateUser(id, payload));
+    }
+    navigate(0);
+  }
+  function delAdmin() {
+    dispatch(deleteAdmin(id));
+    var respuesta = window.confirm("Confirm delete?");
+    if (respuesta) alert("Vet deleted");
+    else alert("You are not allowed to delete");
+    navigate("/admin/users");
   }
 
   useEffect(() => {
@@ -112,7 +160,7 @@ export default function AdminProfileDetail() {
                         }
                         borderRadius="4px"
                         type="button"
-                        onClick={(event)=>handleStatus(event)}
+                        onClick={(event)=>handleStatusUser(event)}
                       >
                         {user.isActive === true && (
                           <AdminPanelSettingsOutlinedIcon />
@@ -139,6 +187,7 @@ export default function AdminProfileDetail() {
                         }
                         borderRadius="4px"
                         type="button"
+                        onClick={(event)=>handleAccessUser(event)}
                       >
                         {user.isAdmin === true && (
                           <AdminPanelSettingsOutlinedIcon />
@@ -202,6 +251,7 @@ export default function AdminProfileDetail() {
                         }
                         borderRadius="4px"
                         type="button"
+                        onClick={(event)=>handleStatusAdmin(event)}
                       >
                         {admin.isActive === true && (
                           <AdminPanelSettingsOutlinedIcon />
@@ -228,6 +278,7 @@ export default function AdminProfileDetail() {
                         }
                         borderRadius="4px"
                         type="button"
+                        onClick={(event)=>handleAccessAdmin(event)}
                       >
                         {admin.isAdmin === true && (
                           <AdminPanelSettingsOutlinedIcon />
