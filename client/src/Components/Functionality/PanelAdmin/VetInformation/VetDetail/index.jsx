@@ -16,7 +16,9 @@ import {
   useTheme,
 } from "@mui/material";
 import Header from "../../Header";
-import { clearDetails, deleteVet, getVetsDetail, updateVet } from "../../../../../Redux/actions";
+import { clearDetails, deleteVet, getVetsDetail, 
+  updateVet 
+} from "../../../../../Redux/actions";
 
 export default function AdminVetDetail() {
   const { id } = useParams();

@@ -1,14 +1,11 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
-import { createUser } from "../../../../Redux/actions";
 import userPlaceholder from "./user-placeholder.png"
 import userStyle from "./user.module.css"
 function FormUser() {
-  const dispatch = useDispatch();
   const [formSuccess, setformSuccess] = useState(false);
   const navigate = useNavigate();
 

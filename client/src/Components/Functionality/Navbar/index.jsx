@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import logo from "../../../img/logo.png";
 import {
-  getMyUser,
   getServiceByName,
   getServices,
   getVetByName
@@ -19,7 +18,6 @@ export default function NavBar() {
 
   useEffect(() => {
     dispatch(getServices());
-    dispatch(getMyUser())
   }, [dispatch]);
 
   function handleInputChange(event) {
@@ -58,38 +56,6 @@ export default function NavBar() {
                   Admin
                 </Link>
               </div>
-              {/* <li className="nav-item dropdown">
-                <span
-                  className="nav-link dropdown-toggle me-3"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  Dropdown
-                </span>
-                <ul className="dropdown-menu">
-                  <li>
-                    <Link to={"/veterinario"}>
-                      <span className="dropdown-item" />1 Option
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to={"/nutricionista"}>
-                      <span className="dropdown-item" />2 Option
-                    </Link>
-                  </li>
-                  <li></li>
-                  <li>
-                    <Link to={"/cirugias"}>
-                      <span className="dropdown-item" />3 Option
-                    </Link>
-                  </li>
-                </ul>
-              </li> */}
-
-              {/* <li className="nav-item">
-                <span className="nav-link">Disabled</span>
-              </li> */}
             </ul>
             <form className="d-flex" role="search">
               <input
@@ -109,36 +75,6 @@ export default function NavBar() {
             </form>
             {/* preguntar si esta logueado o no */}
           </div>
-          {/* <div>
-            <select
-              defaultValue={""}
-              className="selectorFiltros"
-              onChange={(event) => handleFilter(event)}
-            >
-              <option value={""}>All Vets</option>
-              <option value={"Clinic"}>Healthcare Clinic</option>
-              <option value={"Anesthesia"}>
-                Surgery and Anesthesia
-              </option>
-              <option value={"Diagnostics"}>Diagnostics</option>
-              <option value={"Aesthetics"}>Aesthetics</option>
-            </select>
-          </div> */}
-          {/* <div>
-            <select
-              defaultValue={""}
-              className="selectorFiltros"
-              onChange={(event) => handleFilter(event)}
-            >
-              <option value={""}>All Services</option>
-              <option value={"Healthcare Clinic"}>Healthcare Clinic</option>
-              <option value={"Surgery and Anesthesia"}>
-                Surgery and Anesthesia
-              </option>
-              <option value={"Diagnostics"}>Diagnostics</option>
-              <option value={"Aesthetics"}>Aesthetics</option>
-            </select>
-          </div> */}
           <div>
             <div className="d-flex">
               {!myuser?.id ? (
