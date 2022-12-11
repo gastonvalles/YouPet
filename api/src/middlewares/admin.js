@@ -2,7 +2,6 @@ const { Router } = require("express");
 const {
   getDBAdmin,
   getDBAdminByPK,
-  dbCreateAdmin,
   createAdmin,
   loginAdmin,
   verifyAdmin,
@@ -30,26 +29,18 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
-  try {
-    const createAdmin = await dbCreateAdmin(req.body);
-    res.status(200).json(createAdmin);
-  } catch (error) {
-    res.status(404).send(error);
-  }
-});
-
 router.post("/", createAdmin);
 router.post("/loginadmin", loginAdmin);
 router.get("/login/:confirmationCode", verifyAdmin);
 
-router.delete("/delete", async (req, res) => {
+router.delete("/:id", async (req, res) => {
   try {
-    const { id } = req.params;
-    await deleteAdmin(id);
-    res.status(200).json({ msg: `Admin id: ${id} deleted successfully` });
+    const admin = await deleteAdmin(req.params.id);
+    if (admin) await deleteAdmin(req.params.id, admin);
+    const deletedAdmin = await deleteAdmin(req.params.id);
+    res.status(200).send(deletedAdmin);
   } catch (error) {
-    res.status(404).send(error);
+    res.status(404).send(error.message);
   }
 });
 
