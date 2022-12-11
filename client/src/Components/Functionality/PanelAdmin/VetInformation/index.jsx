@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router";
-import { Box, useTheme, Button } from "@mui/material";
+import { Link } from "react-router-dom";
+import { Box, useTheme } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { tokens } from "../theme";
 import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
@@ -14,7 +14,6 @@ export default function VetInformation() {
   const allVets = useSelector((state) => state.vets);
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);  
-
   const columns = [
     {
       field: "id",
