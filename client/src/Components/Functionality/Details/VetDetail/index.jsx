@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { clearDetails, getVetsDetail } from "../../../../Redux/actions";
+import { addFavorites, clearDetails, getVetsDetail } from "../../../../Redux/actions";
 import './vetDetail.css';
 
 export default function VetDetail() {
   let { id } = useParams();
   const dispatch = useDispatch();
   const vet = useSelector((state) => state.vetDetail);
+  const myuser = useSelector((state) => state.myuser);
 
   const addFav = () => {
     dispatch(addFavorites(id, myuser.id));
