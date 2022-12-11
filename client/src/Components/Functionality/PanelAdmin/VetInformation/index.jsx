@@ -13,11 +13,20 @@ export default function VetInformation() {
   const dispatch = useDispatch();
   const allVets = useSelector((state) => state.vets);
   const theme = useTheme();
-  const colors = tokens(theme.palette.mode);
-
-  
+  const colors = tokens(theme.palette.mode);  
 
   const columns = [
+    {
+      field: "id",
+      headerName: "ID",
+      renderCell: ({ row: { id } }) => {
+        return (
+          <Link to={`/adminvet/${id}`} className="text-decoration-none">
+            {id}
+          </Link>
+        );
+      },
+    },
     {
       field: "name",
       headerName: "Name",
