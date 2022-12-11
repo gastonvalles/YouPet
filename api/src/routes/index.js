@@ -12,7 +12,9 @@ const turnController = require("../middlewares/turn.js");
 const userController = require("../middlewares/user.js");
 const paymentController = require("../middlewares/payments");
 const autentController = require("../middlewares/autent");
+const favoriteMeddleware = require("../middlewares/favor");
 
+router.use("/favoriote", favoriteMeddleware);
 router.use(
   "/admin",
   passport.authenticate("jwt", { session: false }),
@@ -79,4 +81,5 @@ async function userctualizado(req, res, next) {
   }
 }
 router.put("/user/:id", userctualizado);
+
 module.exports = router;
