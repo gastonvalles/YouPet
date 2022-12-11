@@ -12,6 +12,13 @@ export default function VetDetail() {
   let { id } = useParams();
   const dispatch = useDispatch();
   const vet = useSelector((state) => state.vetDetail);
+  const myuser = useSelector((state) => state.myuser);
+  const fav = useSelector((state) => state.fav);
+
+  const addFav = () => {
+    dispatch(addFavorites(id, myuser.id));
+    console.log(id, myuser.id);
+  };
 
   useEffect(() => {
     dispatch(getVetsDetail(id));
@@ -31,6 +38,10 @@ export default function VetDetail() {
           <h2 className="vet-speciality">{vet.speciality}</h2>
         </div>
         <h3>Average: {vet.average}</h3>
+        <div>
+          <button onClick={addFav}>❤️</button>
+          <span>{fav}</span>
+        </div>
       </div>
       <div className="vet-comments">
         <div className="input-container">
