@@ -7,30 +7,30 @@ const path = require("path");
 let sequelize =
   process.env.NODE_ENV === "production"
     ? new Sequelize({
-        database: PG_DATABASE,
-        dialect: "postgres",
-        host: PG_HOST,
-        port: PG_PORT,
-        username: PG_USER,
-        password: PG_PASSWORD,
-        pool: {
-          max: 3,
-          min: 1,
-          idle: 10000,
+      database: PG_DATABASE,
+      dialect: "postgres",
+      host: PG_HOST,
+      port: PG_PORT,
+      username: PG_USER,
+      password: PG_PASSWORD,
+      pool: {
+        max: 3,
+        min: 1,
+        idle: 10000,
+      },
+      dialectOptions: {
+        ssl: {
+          require: true,
+          rejectUnauthorized: false,
         },
-        dialectOptions: {
-          ssl: {
-            require: true,
-            rejectUnauthorized: false,
-          },
-          keepAlive: true,
-        },
-        ssl: true,
-      })
+        keepAlive: true,
+      },
+      ssl: true,
+    })
     : new Sequelize(
-        `postgres:${PG_USER}:${PG_PASSWORD}@${PG_HOST}/${PG_DATABASE}`,
-        { logging: false, native: false }
-      );
+      `postgres:${PG_USER}:${PG_PASSWORD}@${PG_HOST}/${PG_DATABASE}`,
+      { logging: false, native: false }
+    );
 const basename = path.basename(__filename);
 
 const modelDefiners = [];
@@ -109,9 +109,8 @@ Vet.belongsToMany(Score, { through: "Vet-Score" });
 Score.belongsToMany(Service, { through: "Service-Score" });
 Service.belongsToMany(Score, { through: "Service-Score" });
 
-const Favoritos = sequelize.define("Favoritos", {}, { timestamps: false });
-User.belongsToMany(Vet, { through: Favoritos });
-Vet.belongsToMany(User, { through: Favoritos });
+User.belongsToMany(Vet, { through: "Likes" });
+Vet.belongsToMany(User, { through: "Favorites" });
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
