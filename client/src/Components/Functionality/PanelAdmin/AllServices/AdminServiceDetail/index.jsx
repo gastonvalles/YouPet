@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { useNavigate } from "react-router"
 import { ColorModeContext, useMode } from "../../theme";
-import { Box, CssBaseline, ThemeProvider, Grid } from "@mui/material";
+import { Box, CssBaseline, ThemeProvider, Grid, Button } from "@mui/material";
 
 import Header from "../../Header";
 import { deleteService, getServiceDetail } from "../../../../../Redux/actions";
@@ -40,6 +40,11 @@ export default function AdminServiceDetail() {
             >
               Back to users
             </Link>
+          </Box>
+          <Box p="20px">
+            <Button variant="contained" color="error" onClick={(event)=>delService(event)}>
+              Delete Service
+            </Button>
           </Box>
           <Header title="Services" subtitle="Managing the services" />
         </Box>
