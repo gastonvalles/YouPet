@@ -26,7 +26,7 @@ router.use(
   passport.authenticate("jwt", { session: false }),
   turnController
 );
-router.use("/user", userController);
+router.use("/user", passport.authenticate("jwt", { session: false }), userController);
 router.use(
   "/payment",
   passport.authenticate("jwt", { session: false }),
