@@ -12,6 +12,7 @@ import {
   DELETE_VET,
   FILTER_SERVICE,
   GET_ADMINS,
+  GET_ADMIN_BY_EMAIL,
   GET_ADMIN_BY_NAME,
   GET_ADMIN_DETAIL,
   GET_All_TURN,
@@ -58,6 +59,7 @@ const initialState = {
   admins: [],
   allAdmins: [],
   adminDetail: [],
+  adminByEmail: [],
   allServices: [],
   paymentLink: {},
 };
@@ -185,6 +187,11 @@ function rootReducer(state = initialState, action) {
         ...state,
         admins: action.payload,
       };
+      case GET_ADMIN_BY_EMAIL:
+        return {
+          ...state,
+          adminByEmail: action.payload,
+        };
     case CREATE_ADMIN:
       return {
         ...state,

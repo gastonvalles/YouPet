@@ -39,6 +39,7 @@ import {
   UPDATE_ADMIN,
   UPDATE_SERVICE,
   UPDATE_VET,
+  GET_ADMIN_BY_EMAIL,
 } from "./const";
 const instance = axios.create({
   baseURL: "http://localhost:3001",
@@ -130,7 +131,7 @@ export function createVet(payload) {
 
 export function updateVet(id, payload) {
   return async function (dispatch) {
-    var json = await axios.put(`http://localhost:3001/vet/${id}`,payload);
+    var json = await axios.put(`http://localhost:3001/vet/${id}`, payload);
     return dispatch({
       type: UPDATE_VET,
       payload: json.data,
@@ -305,6 +306,16 @@ export function getAdminByName(name) {
   };
 }
 
+export function getAdminByEmail(email) {
+  return async function (dispatch) {
+    let json = await instance.get(`/admin/log/${email}`);
+    return dispatch({
+      type: GET_ADMIN_BY_EMAIL,
+      payload: json.data,
+    });
+  };
+}
+
 export function createAdmin(payload) {
   return async function (dispatch) {
     let json = await axios.post("http://localhost:3001/admin", payload);
@@ -410,11 +421,13 @@ export function filterService(payload) {
 export function getPaymentMP(service) {
   return async function (dispatch) {
     //let json = await axios.post(`http://localhost:3001/payment/mp/552525`,service);
-    let json = await instance.post(`http://localhost:3001/payment/mp/552525`,service);
+    let json = await instance.post(
+      `http://localhost:3001/payment/mp/552525`,
+      service
+    );
     return dispatch({
       type: GET_PAYMENT_MP,
       payload: json.data,
     });
   };
 }
-

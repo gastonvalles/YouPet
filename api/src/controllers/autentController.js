@@ -34,7 +34,6 @@ exports.register = async (req, res) => {
         email: req.body.email,
       },
     });
-    console.log(dbSearch);
     if (!dbSearch.length) {
       try {
         if (img) {
@@ -43,9 +42,6 @@ exports.register = async (req, res) => {
             upload_preset: "youpet",
             allowed_formats: ["png", "jpg", "jpeg", "svg"],
           });
-
-          console.log(uploadRes);
-
           if (uploadRes) {
             req.body.img = uploadRes.url;
           }
@@ -70,7 +66,6 @@ exports.register = async (req, res) => {
         img: req.body.img,
         confirmationCode: token,
       });
-      console.log(user.username, user.email, user.confirmationCode);
       sendEmail(user.username, user.email, user.confirmationCode);
       return res.status(200).json(user);
     } else {

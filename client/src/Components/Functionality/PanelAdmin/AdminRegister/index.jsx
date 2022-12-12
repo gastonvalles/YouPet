@@ -31,7 +31,6 @@ import { createAdmin } from "../../../../Redux/actions";
       let regexUsername = /^[A-Za-z0-9\s]+$/g;
       let regexEmail = /^[^@]+@[^@]+\.[a-zA-Z]{2,}$/;
       let regexNumber = /^[0-9]+$/;
-      let regexPassword = /(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/;
   
       if (!input.name.trim()) {
         errors.name = "Please enter a name";
@@ -50,8 +49,8 @@ import { createAdmin } from "../../../../Redux/actions";
       }
       if (!input.password.trim()) {
         errors.password = "Please enter a password";
-      } else if (!regexPassword.test(input.password.trim())) {
-        errors.password = "The password must have between 8 and 16 characters, at least two digit, at least two lower case and at least two upper case. It can NOT have other symbols.";
+      } else if (input.address.length < 8 || input.address.lenght > 16) {
+        errors.address = "8 at less or max 16 characters";
       }
 
       if(input.password !== input.passwordCopy){

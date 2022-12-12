@@ -29,6 +29,7 @@ export const UPDATE_USER = "UPDATE_USER";
 export const GET_ADMINS = "GET_ADMINS";
 export const GET_ADMIN_DETAIL = "GET_ADMIN_DETAIL";
 export const GET_ADMIN_BY_NAME = "GET_ADMIN_BY_NAME";
+export const GET_ADMIN_BY_EMAIL = "GET_ADMIN_BY_EMAIL"
 export const CREATE_ADMIN = "CREATE_ADMIN";
 export const UPDATE_ADMIN = "UPDATE_ADMIN";
 export const DELETE_ADMIN = "DELETE_ADMIN";
