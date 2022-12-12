@@ -5,6 +5,7 @@ import {
   addFavorites,
   clearDetails,
   getVetsDetail,
+  removeFav,
 } from "../../../../Redux/actions";
 import "./vetDetail.css";
 
@@ -12,6 +13,18 @@ export default function VetDetail() {
   let { id } = useParams();
   const dispatch = useDispatch();
   const vet = useSelector((state) => state.vetDetail);
+  const myuser = useSelector((state) => state.myuser);
+  //const fav = useSelector((state) => state.fav);
+
+  const remfav = () => {
+    dispatch(removeFav(id, myuser.id));
+  };
+
+  const addFav = () => {
+    dispatch(addFavorites(id, myuser.id));
+
+    console.log(id, myuser.id);
+  };
 
   useEffect(() => {
     dispatch(getVetsDetail(id));
@@ -19,7 +32,7 @@ export default function VetDetail() {
       dispatch(clearDetails());
     };
   }, [dispatch, id]);
-
+  console.log(vet);
   return (
     <div className="vet-cards">
       <div className="vet-card-detail">
@@ -31,6 +44,14 @@ export default function VetDetail() {
           <h2 className="vet-speciality">{vet.speciality}</h2>
         </div>
         <h3>Average: {vet.average}</h3>
+        <div>
+          {vet.isFavorite ? (
+            <button onClick={remfav}>❤️</button>
+          ) : (
+            <button onClick={addFav}>🖤</button>
+          )}
+          <span>{vet.totalfav}</span>
+        </div>
       </div>
       <div className="vet-comments">
         <div className="input-container">
