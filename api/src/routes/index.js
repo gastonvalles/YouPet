@@ -1,6 +1,6 @@
 const { Router, json } = require("express");
 const cualquiera = require("../middlewares/passport");
-const {User, Admin, Vet} = require("../db")
+const { User, Admin, Vet } = require("../db");
 const router = Router();
 router.use(json());
 const passport = require("passport");
@@ -13,9 +13,14 @@ const userController = require("../middlewares/user.js");
 const paymentController = require("../middlewares/payments");
 const autentController = require("../middlewares/autent");
 const favoriteMeddleware = require("../middlewares/favor");
+const autAdmin = require("../middlewares/autAdmin.js");
 
 router.use("/favoriote", favoriteMeddleware);
-router.use("/admin", admController);
+router.use(
+  "/admin",
+  passport.authenticate("jwt", { session: false }),
+  admController
+);
 router.use("/service", serviceController);
 router.use(
   "/pet",
@@ -28,13 +33,18 @@ router.use(
   passport.authenticate("jwt", { session: false }),
   turnController
 );
-router.use("/user", passport.authenticate("jwt", { session: false }), userController);
+router.use(
+  "/user",
+  passport.authenticate("jwt", { session: false }),
+  userController
+);
 router.use(
   "/payment",
   passport.authenticate("jwt", { session: false }),
   paymentController
 );
 router.use("/", autentController);
+router.use("/autadmin", autAdmin);
 
 async function userActualizado(req, res, next) {
   const { id } = req.params;
@@ -63,8 +73,8 @@ async function userActualizado(req, res, next) {
     user.email = email ? email : user.email;
     user.address = address ? address : user.address;
     user.dni = dni ? dni : user.dni;
-    user.isAdmin = typeof(isAdmin) === 'boolean' ? isAdmin : user.isAdmin;
-    user.isActive = typeof(isActive) === 'boolean'? isActive : user.isActive;
+    user.isAdmin = typeof isAdmin === "boolean" ? isAdmin : user.isAdmin;
+    user.isActive = typeof isActive === "boolean" ? isActive : user.isActive;
 
     await user.save();
     res.send("usuario actualizado");
@@ -72,7 +82,11 @@ async function userActualizado(req, res, next) {
     next(error);
   }
 }
-router.put("/user/:id", passport.authenticate("jwt", { session: false }), userActualizado);
+router.put(
+  "/user/:id",
+  passport.authenticate("jwt", { session: false }),
+  userActualizado
+);
 
 async function adminActualizado(req, res, next) {
   const { id } = req.params;
@@ -95,12 +109,14 @@ async function adminActualizado(req, res, next) {
     admin.lastname = lastname ? lastname : admin.lastname;
     admin.username = username ? username : admin.username;
     admin.password = password ? password : admin.password;
-    admin.confirmationpass = confirmationpass ? confirmationpass : admin.confirmationpass;
+    admin.confirmationpass = confirmationpass
+      ? confirmationpass
+      : admin.confirmationpass;
     admin.email = email ? email : admin.email;
     admin.address = address ? address : admin.address;
     admin.dni = dni ? dni : admin.dni;
-    admin.isAdmin = typeof(isAdmin) === 'boolean' ? isAdmin : admin.isAdmin;
-    admin.isActive = typeof(isActive) === 'boolean'? isActive : admin.isActive;
+    admin.isAdmin = typeof isAdmin === "boolean" ? isAdmin : admin.isAdmin;
+    admin.isActive = typeof isActive === "boolean" ? isActive : admin.isActive;
 
     await admin.save();
     res.send("admin actualizado");
@@ -136,7 +152,7 @@ async function vetActualizado(req, res) {
     vet.dni = dni ? dni : vet.dni;
     vet.inicialDate = inicialDate ? inicialDate : vet.inicialDate;
     vet.finishDate = finishDate ? finishDate : vet.finishDate;
-    vet.isActive = typeof(isActive) === 'boolean'? isActive : vet.isActive;
+    vet.isActive = typeof isActive === "boolean" ? isActive : vet.isActive;
 
     await vet.save();
     res.status(200).send("vet actualizado");

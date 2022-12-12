@@ -3,12 +3,16 @@ const {
   getDBAdmin,
   getDBAdminByPK,
   deleteAdmin,
-  getAdminByEmail,
-  createAdmin,
-  loginAdmin,
-  verifyAdmin,
+  getAdminByEmail
 } = require("../controllers/getAllAdmin");
 const router = Router();
+
+router.get("/myadmin", async (req, res) => {
+  if (req.admin) {
+    return res.status(200).send(req.admin);
+  }
+  return res.status(404).send("No esta logueado");
+});
 
 router.get("/", async (req, res) => {
   try {
@@ -39,10 +43,6 @@ router.get("/log/:email", async (req, res) => {
     res.status(404).send(error);
   }
 });
-
-router.post("/", createAdmin);
-router.post("/loginadmin", loginAdmin);
-router.get("/login/:confirmationCode", verifyAdmin); 
 
 router.delete("/:id", async (req, res) => {
   try {

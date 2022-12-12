@@ -1,27 +1,28 @@
 import React, { useEffect, useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useDispatch, useSelector } from "react-redux";
-import { getMyUser, getUserByEmail } from "../../../../Redux/actions";
-import { useNavigate, Link } from "react-router-dom";
+import { getMyAdmin, getAdminByEmail } from "../../../../Redux/actions";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import logo from "../../../../img/logo.png";
 import "./index.css";
 
-export default function Login() {
+export default function LoginAdmin() {
   const [formSuccess, setFormSuccess] = useState(false);
 
   const [email, setEmail] = useState(" ");
   const dispatch = useDispatch();
-  let user = useSelector((state) => state.user);
+  let adminByEmail = useSelector((state) => state.adminByEmail);
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (user.length < 1) dispatch(getUserByEmail(email));
-  }, [dispatch, user, email]);
+    if (adminByEmail.length < 1) dispatch(getAdminByEmail(email));
+  }, [dispatch, adminByEmail, email]);
 
   return (
     <div className="backgroud">
+      <h1>This is only for admin access</h1>
       <div className="containerlogin">
         <Formik
           initialValues={{
@@ -42,17 +43,17 @@ export default function Login() {
             if (!values.password) {
               errors.password = "Por favor ingresa una contraseña";
             } else if (
-              values.password.length < 5 ||
+              values.password.length < 8 ||
               values.password.length > 16
             ) {
-              errors.password = "Debe tener al menos 5 digitos";
+              errors.password = "Debe tener al menos 8 digitos";
             }
             return errors;
           }}
           onSubmit={(value) => {
-            axios.post("http://localhost:3001/login/", value).then((res) => {
+            axios.post("http://localhost:3001/autadmin/loginadmin/", value).then((res) => {
               localStorage.setItem("jwt", res.data.data);
-              dispatch(getMyUser());
+              dispatch(getMyAdmin());
               navigate("/");
             }, 3000);
           }}
@@ -101,12 +102,11 @@ export default function Login() {
                     )}
                   />
                 </div>
-                <button type="submit" className="btn btn-primary">
+                <button type="submit" className="btn btn-primary ">
                   Submit
                 </button>
-                  <Link to="/loginadmin" type="button" className="text-decoration-none btn btn-primary">For admin</Link>
                 {formSuccess && (
-                  <p className="text-success">¡Bienvenido {user.name}!</p>
+                  <p className="text-success">¡Wellcome {adminByEmail.name}!</p>
                 )}
               </Form>
             </div>

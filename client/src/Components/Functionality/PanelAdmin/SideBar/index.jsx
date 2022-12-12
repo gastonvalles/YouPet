@@ -37,7 +37,7 @@ export default function SideBar() {
   const theme = useTheme();
   const {id} = useParams();
   const dispatch = useDispatch();
-  const admin = useSelector(state=> state.adminDetail);
+  const myAdmin = useSelector(state=> state.myAdmin);
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Dashboard");
@@ -101,7 +101,7 @@ export default function SideBar() {
                   alt="profile-user"
                   width="100px"
                   height="100px"
-                  src={admin.img}
+                  src={myAdmin.img}
                   style={{ cursor: "pointer", borderRadius: "50%" }}
                 />
               </Box>
@@ -112,7 +112,7 @@ export default function SideBar() {
                   fontWeight="bold"
                   sx={{ m: "10px 0 0 0" }}
                 >
-                  {admin.name} {admin.lastname}
+                  {myAdmin.name} {myAdmin.lastname}
                 </Typography>
                 <Typography variant="h5" color={colors.greenAccent[500]}>
                   VP Fancy Admin

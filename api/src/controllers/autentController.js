@@ -97,7 +97,7 @@ const sendEmail = async (name, email, confirmationCode) => {
     .catch((err) => console.log(err));
 }
 
-exports.verifyUser = (req, res, next) => {
+exports.verifyUser = (req, res) => {
   let decode;
   try {
     decode = jwt.verify(req.params.confirmationCode, "userKey");

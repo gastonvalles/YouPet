@@ -107,7 +107,7 @@ import { createAdmin } from "../../../../Redux/actions";
       setErrors(validate(input));
       if (Object.keys(errors).length === 0) {
         dispatch(createAdmin(input));
-        alert("Admin register successfully");
+        alert("Admin register successfully. Please, check your email");
         setInput({
           name: "",
           lastname: "",

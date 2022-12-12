@@ -27,7 +27,6 @@ import {
   CREATE_ADMIN,
   CREATE_SERVICE,
   CREATE_VET,
-  CREATE_USER,
   CREATE_PET,
   DELETE_PET,
   DELETE_VET,
@@ -40,6 +39,7 @@ import {
   UPDATE_SERVICE,
   UPDATE_VET,
   GET_ADMIN_BY_EMAIL,
+  GET_MY_ADMIN,
 } from "./const";
 const instance = axios.create({
   baseURL: "http://localhost:3001",
@@ -306,9 +306,19 @@ export function getAdminByEmail(email) {
   };
 }
 
+export function getMyAdmin() {
+  return async function (dispatch) {
+    let json = await instance.get("/admin/myadmin");
+    return dispatch({
+      type: GET_MY_ADMIN,
+      payload: json.data,
+    });
+  };
+}
+
 export function createAdmin(payload) {
   return async function (dispatch) {
-    let json = await instance.post("/admin", payload);
+    let json = await instance.post("/autadmin/registeradmin", payload);
     return dispatch({
       type: CREATE_ADMIN,
       payload: json.data,

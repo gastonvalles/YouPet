@@ -17,6 +17,7 @@ import {
   GET_ADMIN_DETAIL,
   GET_All_TURN,
   GET_MYUSER,
+  GET_MY_ADMIN,
   GET_PAYMENT_MP,
   GET_PETS,
   GET_PET_DETAIL,
@@ -53,6 +54,7 @@ const initialState = {
   serviceDetail: [],
   createService: [],
   user: [],
+  myuser: [],
   users: [],
   allUsers: [],
   userDetail: [],
@@ -61,6 +63,7 @@ const initialState = {
   adminDetail: [],
   adminByEmail: [],
   allServices: [],
+  myAdmin: [],
   paymentLink: {},
 };
 
@@ -187,11 +190,16 @@ function rootReducer(state = initialState, action) {
         ...state,
         admins: action.payload,
       };
-      case GET_ADMIN_BY_EMAIL:
-        return {
-          ...state,
-          adminByEmail: action.payload,
-        };
+    case GET_ADMIN_BY_EMAIL:
+      return {
+        ...state,
+        adminByEmail: action.payload,
+      };
+    case GET_MY_ADMIN:
+      return {
+        ...state,
+        myAdmin: action.payload,
+      };
     case CREATE_ADMIN:
       return {
         ...state,

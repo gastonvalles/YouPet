@@ -21,14 +21,17 @@ import ChooseVetTurn from "./Components/Functionality/Turns/ChooseVetTurn";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import Home from "./Components/View/HomeFake/HomeFake";
-import { getMyUser } from "./Redux/actions";
+import { getMyUser, getMyAdmin } from "./Redux/actions";
 import AdminVetDetail from "./Components/Functionality/PanelAdmin/VetInformation/VetDetail";
 import Confirm from "./Components/Functionality/AuthService";
+import LoginAdmin from "./Components/Functionality/Forms/LoginAdmin";
+import ConfirmAdmin from "./Components/Functionality/PanelAdmin/AdminAuth";
 
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getMyUser());
+    dispatch(getMyAdmin());
   }, [dispatch]);
   return (
     <div className="App">
@@ -45,6 +48,7 @@ function App() {
         <Route exact path="/pet/register" element={<FormPet />} />
         <Route exact path="/vet/register" element={<FormVet />} />
         <Route exact path="/login" element={<Login />} />
+        <Route exact path="/loginadmin" element={<LoginAdmin/>} />
         <Route exact path="/mp" element={<Payment />} />
         <Route exact path="/errorPay" element={<ErrorPay />} />
         <Route path="/user/:id" element={<AdminProfileDetail />} />
@@ -52,6 +56,7 @@ function App() {
         <Route path="/adminvet/:id" element={<AdminVetDetail/>} />
         <Route path="/admin/*" element={<PanelAdmin/>}/>
         <Route path="/confirm/:confirmationCode" element={<Confirm />} />
+        <Route path="/adminconfirm/:confirmationCode" element={<ConfirmAdmin/>} />
       </Routes>
     </div>
   );
