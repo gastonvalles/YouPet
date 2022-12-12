@@ -28,7 +28,7 @@ router.use(
   passport.authenticate("jwt", { session: false }),
   turnController
 );
-router.use("/user", userController);
+router.use("/user", passport.authenticate("jwt", { session: false }), userController);
 router.use(
   "/payment",
   passport.authenticate("jwt", { session: false }),
@@ -72,7 +72,7 @@ async function userActualizado(req, res, next) {
     next(error);
   }
 }
-router.put("/user/:id", userActualizado);
+router.put("/user/:id", passport.authenticate("jwt", { session: false }), userActualizado);
 
 async function adminActualizado(req, res, next) {
   const { id } = req.params;
