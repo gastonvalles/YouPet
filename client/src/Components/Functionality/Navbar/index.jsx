@@ -52,9 +52,12 @@ export default function NavBar() {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-1">
               <div>
+              {
+                myuser?.isAdmin === true ? (
                 <Link to="/admin" type="button" className="text-decoration-none dropdown-item">
                   Admin
-                </Link>
+                </Link>) : null
+              }
               </div>
             </ul>
             <form className="d-flex" role="search">
