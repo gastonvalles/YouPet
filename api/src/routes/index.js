@@ -22,17 +22,11 @@ router.use(
 );
 router.use(
   "/service",
+
+  /* passport.authenticate("jwt", { session: false }), */
   serviceController
 );
-router.use(
-  "/pet",
-  passport.authenticate("jwt", { session: false }),
-  petController
-);
-router.use(
-  "/vet",
-  vetController
-);
+router.use("/vet", vetController);
 router.use(
   "/turn",
   passport.authenticate("jwt", { session: false }),

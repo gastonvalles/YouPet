@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { clearDetails, getServiceDetail } from "../../../../Redux/actions";
-import './serviceDetail.css';
+import "./serviceDetail.css";
 
 export default function ServiceDetail() {
   let { id } = useParams();
@@ -16,6 +16,7 @@ export default function ServiceDetail() {
     };
   }, [dispatch, id]);
 
+  console.log(service);
   return (
     <div className="service-detail-card">
       <h1>{service.name}</h1>
