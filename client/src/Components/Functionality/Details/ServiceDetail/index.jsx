@@ -8,6 +8,7 @@ export default function ServiceDetail() {
   let { id } = useParams();
   const dispatch = useDispatch();
   const service = useSelector((state) => state.serviceDetail);
+  const myuser = useSelector((state) => state.myuser);
 
   useEffect(() => {
     dispatch(getServiceDetail(id));
@@ -24,13 +25,21 @@ export default function ServiceDetail() {
       <h2>{service.detail}</h2>
       <p>Timelapse: {service.timelapse} min</p>
       <p>Price: ${service.price}</p>
-      <Link
-        to="turn"
-        type="button"
-        className="text-decoration-none btn btn-dark"
-      >
-        Take turn
-      </Link>
+      <div>
+        {!myuser?.id ? (
+          <Link to={"/login"}>
+            <span>Sign in to take a turn</span>
+          </Link>
+        ) : (
+          <Link
+            to="turn"
+            type="button"
+            className="text-decoration-none btn btn-dark"
+          >
+            Take turn
+          </Link>
+        )}
+      </div>
     </div>
   );
 }
