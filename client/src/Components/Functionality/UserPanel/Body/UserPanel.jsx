@@ -2,18 +2,15 @@ import React from "react";
 import { Route, Routes } from "react-router-dom"
 import { ColorModeContext, useMode } from "../theme";
 import { CssBaseline, ThemeProvider } from "@mui/material";
-import "./UserProfile.css";
-// import TopBar from "../TopBar/index.jsx";
+import bodyPanelStyle from "./UserPanel.module.css";
+
 import SideBar from "../SideBar/index.jsx";
-import Dashboard from "../Dashboard/index.jsx";
-import Users from "../Users/index.jsx";
-import Contacts from "../Contacts";
-import VetInformation from "../VetInformation";
-import CalendarAdmin from "../Calendar";
-import AdminRegister from "../AdminRegister";
-import VetForm from "../../Forms/Vet";
-import ServiceRegister from "../AllServices/ServiceRegister";
-import ServicesInfo from "../AllServices/ServicesInfo";
+import Info from "../Info/index.jsx";
+
+import AddPet from "../Pets/AddPet/index.jsx";
+import MyPets from "../Pets/MyPets/index.jsx";
+import UpdateInfo from "../Profile/UpdateInfo/index.jsx";
+
 
 export default function PanelAdmin() {
   const [theme, colorMode] = useMode();
@@ -21,20 +18,14 @@ export default function PanelAdmin() {
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <div className="app">
+        <div className={bodyPanelStyle.app}>
           <SideBar/>
-          <main className="content">
-            {/* <TopBar /> */}
+          <main className={bodyPanelStyle.content}>
             <Routes>
-              <Route path="/" element={<Dashboard />} />
-              <Route path="/users" element={<Users />} />
-              <Route path="/contacts" element={<Contacts/>} />
-              <Route path="/allvets" element={<VetInformation/>}/>
-              <Route path="/services" element={<ServicesInfo/>} />
-              <Route path="/adminregister" element={<AdminRegister/>} />
-              <Route path="/vetregister" element={<VetForm/>}/>
-              <Route path="/servregister" element={<ServiceRegister/>} />
-              <Route path="/calendar" element={<CalendarAdmin/>} />
+              <Route path="/" element={<Info />} />              
+              <Route path="/addpet" element={<AddPet/>} />
+              <Route path="/MyPets" element={<MyPets/>} />
+              <Route path="/update" element={<UpdateInfo/>} />
             </Routes>
           </main>
         </div>

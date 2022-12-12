@@ -3,16 +3,10 @@ const bcryptjs = require("bcryptjs");
 const { promisify } = require("util");
 const { User } = require("../db");
 const { transporter } = require("../../config/mailer");
+const imgUpload = require("./imgUpload");
 
 
-require("dotenv").config()
-const cloudinary = require("cloudinary").v2;
 
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_NAME,
-  api_key: process.env.CLOUDINARY_APIKEY,
-  api_secret: process.env.CLOUDINARY_APISECRET
-});
 
 exports.register = async (req, res) => {
   const { name, lastname, username, password, email, dni, address, img } = req.body;
@@ -36,25 +30,19 @@ exports.register = async (req, res) => {
     });
     console.log(dbSearch);
     if (!dbSearch.length) {
-      try {
-        if (img) {
-
-          const uploadRes = await cloudinary.uploader.upload(img, {
-            upload_preset: "youpet",
-            allowed_formats: ["png", "jpg", "jpeg", "svg"],
-          });
-
-          console.log(uploadRes);
-
-          if (uploadRes) {
-            req.body.img = uploadRes.url;
+      
+      //Cloudinary IMG Upload
+        try {
+          if (img) {
+            const uploadRes = await imgUpload(img);
+            if (uploadRes) {
+              req.body.img = uploadRes;
+            }
           }
-
+        } catch (error) {
+          console.log(error.message);
         }
 
-      } catch (error) {
-        res.status(500).json({ error: error });
-      }
       const newHash = await bcryptjs.hash(req.body.password, 8);
       const token = jwt.sign({ email: req.body.email }, "userKey");
       console.log(token);

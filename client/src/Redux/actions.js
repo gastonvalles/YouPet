@@ -48,12 +48,31 @@ export function getPetDetail(id) {
   };
 }
 
-export function createPet(payload) {
+
+export function clearCreatePet() {
   return async function (dispatch) {
-    let json = await axios.post("http://localhost:3001/admin", payload);
+    let json = "nada" ;
     return dispatch({
       type: CREATE_PET,
-      payload: json.data,
+      payload: json,
+    });
+  };
+}
+
+export function createPet(payload) {
+  return async function (dispatch) {
+    let json = "" ;
+    try {
+      await instance.post("http://localhost:3001/pet", payload);
+      json = "ok"
+    } catch (error) {
+      json = "error"
+    }
+
+    
+    return dispatch({
+      type: CREATE_PET,
+      payload: json,
     });
   };
 }

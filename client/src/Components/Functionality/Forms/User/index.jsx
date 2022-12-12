@@ -177,7 +177,7 @@ function FormUser() {
               </div>
 
             <div>
-            <label htmlFor="files" class={"btn " + userStyle.selectLabel}>Select Image</label>
+            <label htmlFor="files" className={"btn " + userStyle.selectLabel}>Select Image</label>
 
               <input
                   className={userStyle.selectButton}

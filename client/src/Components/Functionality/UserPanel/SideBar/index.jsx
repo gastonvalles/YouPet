@@ -1,20 +1,16 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import { ProSidebarProvider, Menu, MenuItem } from "react-pro-sidebar";
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
 import { tokens } from "../theme";
-import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
-import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
-import ContactsOutlinedIcon from "@mui/icons-material/ContactsOutlined";
-import ReceiptOutlinedIcon from "@mui/icons-material/ReceiptOutlined";
-import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
-import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
-// import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
-// import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
-// import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutlined";
-// import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
+import userPlaceholder from "../../../../img/user-placeholder.png";
+
+import AddCircleIcon from "@mui/icons-material/AddCircle";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
-// import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
+import PetsIcon from "@mui/icons-material/Pets";
+import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -39,6 +35,9 @@ export default function SideBar() {
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Dashboard");
+  const myuser = useSelector((state) => state.myuser);
+
+  const ruta = "/userpanel";
 
   return (
     <Box
@@ -79,7 +78,7 @@ export default function SideBar() {
                 ml="15px"
               >
                 <Typography variant="h3" color={colors.grey[400]}>
-                  ADMIN
+                  PANEL
                 </Typography>
                 <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
                   <MenuOutlinedIcon />
@@ -95,7 +94,7 @@ export default function SideBar() {
                   alt="profile-user"
                   width="100px"
                   height="100px"
-                  src="https://imagenes.elpais.com/resizer/aLxnjXn1RbFWOtS0HMQVpP8hfTo=/1960x1470/cloudfront-eu-central-1.images.arcpublishing.com/prisa/Y5A4MAGE3BDDDIP7MD5SFEPZJY.jpg"
+                  src={myuser?.img ? myuser.img : userPlaceholder}
                   style={{ cursor: "pointer", borderRadius: "50%" }}
                 />
               </Box>
@@ -106,138 +105,62 @@ export default function SideBar() {
                   fontWeight="bold"
                   sx={{ m: "10px 0 0 0" }}
                 >
-                  Federico Saffores
-                </Typography>
-                <Typography variant="h5" color={colors.greenAccent[500]}>
-                  VP Fancy Admin
+                  {myuser?.name
+                    ? `${myuser.name} ${myuser.lastname}`
+                    : "No data"}
                 </Typography>
               </Box>
             </Box>
           )}
 
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
+
+
+            <hr />
+            <Typography variant="h6" >
+              Info
+            </Typography>
             <Item
-              title="Dashboard"
-              to="/admin"
-              icon={<HomeOutlinedIcon />}
+              title="Profile"
+              to={ruta}
+              icon={<AccountCircleIcon />}
               selected={selected}
               setSelected={setSelected}
             />
 
-            <Typography
-              variant="h6"
-              color={colors.grey[300]}
-              sx={{ m: "15px 0 5px 20px" }}
-            >
-              Data
+
+
+            <hr />
+            <Typography variant="h6" >
+              Pets
             </Typography>
             <Item
-              title="Users"
-              to="/admin/users"
-              icon={<PeopleOutlinedIcon />}
+              title="My pets"
+              to={ruta + "/MyPets"}
+              icon={<PetsIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
-              title="Contacts Information"
-              to="/admin/contacts"
-              icon={<ContactsOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Vet Information"
-              to="/admin/allvets"
-              icon={<ReceiptOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Service Information"
-              to="/admin/services"
-              icon={<ReceiptOutlinedIcon />}
+              title="Add new pet"
+              to={ruta + "/addpet"}
+              icon={<AddCircleIcon />}
               selected={selected}
               setSelected={setSelected}
             />
 
-            <Typography
-              variant="h6"
-              color={colors.grey[300]}
-              sx={{ m: "15px 0 5px 20px" }}
-            >
-              Pages
-            </Typography>
-            <Item
-              title="Admin Register"
-              to="/admin/adminregister"
-              icon={<PersonOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Vet Register"
-              to="/admin/vetregister"
-              icon={<PersonOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Service Register"
-              to="/admin/servregister"
-              icon={<PersonOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Calendar"
-              to="/admin/calendar"
-              icon={<CalendarTodayOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            {/* <Item
-              title="FAQ Page"
-              to="/faq"
-              icon={<HelpOutlineOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
 
-            <Typography
-              variant="h6"
-              color={colors.grey[300]}
-              sx={{ m: "15px 0 5px 20px" }}
-            >
-              Charts
+            <hr />
+            <Typography variant="h6" >
+              Settings
             </Typography>
             <Item
-              title="Bar Chart"
-              to="/bar"
-              icon={<BarChartOutlinedIcon />}
+              title="Update info"
+              to={ruta + "/update"}
+              icon={<ManageAccountsIcon />}
               selected={selected}
               setSelected={setSelected}
             />
-            <Item
-              title="Pie Chart"
-              to="/pie"
-              icon={<PieChartOutlineOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Line Chart"
-              to="/line"
-              icon={<TimelineOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Geography Chart"
-              to="/geography"
-              icon={<MapOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            /> */}
           </Box>
         </Menu>
       </ProSidebarProvider>
