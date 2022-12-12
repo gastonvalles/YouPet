@@ -1,4 +1,5 @@
 const { Router } = require("express");
+const { User, Vet } = require(".././db");
 const {
   getDBVet,
   getDBVetByPK,
@@ -17,13 +18,64 @@ router.get("/", async (req, res) => {
     res.status(404).send(error.message);
   }
 });
+
 router.get("/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const vetPk = await getDBVetByPK(id);
+    const vetPk = await getDBVetByPK(id, req.user);
     res.status(200).json(vetPk);
   } catch (error) {
     res.status(404).send(error.message);
+  }
+});
+
+router.post("/addFavorite", async (req, res) => {
+  const { id, userid } = req.body;
+  try {
+    const vet = await Vet.findOne({
+      where: { id },
+    });
+    const user = await User.findOne({
+      where: { id: userid },
+    });
+    await user.addVets(vet);
+    await vet.addUsers(user);
+    const updateVet = await getDBVetByPK(id, user);
+    res.status(200).json(updateVet);
+  } catch (error) {
+    res.status(404).send(error.message);
+  }
+});
+router.post("/removeFavorite", async (req, res) => {
+  const { id, userid } = req.body;
+  try {
+    const vet = await Vet.findOne({
+      where: { id },
+    });
+    const user = await User.findOne({
+      where: { id: userid },
+    });
+    await user.removeVets(vet);
+    await vet.removeUsers(user);
+    const updateVet = await getDBVetByPK(id, user);
+    res.status(200).json(updateVet);
+  } catch (error) {
+    res.status(404).send(error.message);
+  }
+});
+
+router.get(`/favorites/:userid`, async (req, res) => {
+  const { userid } = req.params;
+  try {
+    const user = await User.findOne({
+      where: {
+        id: userid,
+      },
+    });
+    const getVets = await user.getVets();
+    return res.json(getVets);
+  } catch (error) {
+    res.status(404).send(error);
   }
 });
 

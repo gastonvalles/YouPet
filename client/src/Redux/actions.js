@@ -1,14 +1,24 @@
 import axios from "axios";
-
 import {
   CLEAR_DETAILS,
   CLEAR_TURN,
+  CREATE_ADMIN,
+  CREATE_PET,
+  CREATE_SERVICE,
   CREATE_TURN,
+  CREATE_USER,
+  CREATE_VET,
+  DELETE_ADMIN,
+  DELETE_PET,
+  DELETE_SERVICE,
+  DELETE_TURN,
+  DELETE_VET,
   FILTER_SERVICE,
-  GET_MYUSER,
   GET_ADMINS,
   GET_ADMIN_BY_NAME,
   GET_ADMIN_DETAIL,
+  GET_All_TURN,
+  GET_MYUSER,
   GET_PAYMENT_MP,
   GET_PETS,
   GET_PET_DETAIL,
@@ -37,6 +47,8 @@ import {
   UPDATE_TURN,
   UPDATE_ADMIN,
   UPDATE_SERVICE,
+  UPDATE_TURN,
+  UPDATE_USER,
   UPDATE_VET,
   GET_ADMIN_BY_EMAIL,
   GET_MY_ADMIN,
@@ -152,6 +164,7 @@ export function deleteVet(id) {
 export function getServices() {
   return async function (dispatch) {
     let json = await instance.get("/service");
+    console.log(json);
     return dispatch({
       type: GET_SERVICES,
       payload: json.data,
@@ -420,13 +433,12 @@ export function filterService(payload) {
 
 export function getPaymentMP(service) {
   return async function (dispatch) {
-    let json = await instance.post(
-      `http://localhost:3001/payment/mp/552525`,
-      service
-    );
+    //let json = await axios.post(`http://localhost:3001/payment/mp/552525`,service);
+    let json = await instance.post(`http://localhost:3001/payment/mp/552525`,service);
     return dispatch({
       type: GET_PAYMENT_MP,
       payload: json.data,
     });
   };
 }
+

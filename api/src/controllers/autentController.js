@@ -4,18 +4,18 @@ const { promisify } = require("util");
 const { User } = require("../db");
 const { transporter } = require("../../config/mailer");
 
-
-require("dotenv").config()
+require("dotenv").config();
 const cloudinary = require("cloudinary").v2;
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_NAME,
   api_key: process.env.CLOUDINARY_APIKEY,
-  api_secret: process.env.CLOUDINARY_APISECRET
+  api_secret: process.env.CLOUDINARY_APISECRET,
 });
 
 exports.register = async (req, res) => {
-  const { name, lastname, username, password, email, dni, address, img } = req.body;
+  const { name, lastname, username, password, email, dni, address, img } =
+    req.body;
   console.log(name, lastname, username, password, email);
   if (
     !name ||
@@ -37,7 +37,6 @@ exports.register = async (req, res) => {
     if (!dbSearch.length) {
       try {
         if (img) {
-
           const uploadRes = await cloudinary.uploader.upload(img, {
             upload_preset: "youpet",
             allowed_formats: ["png", "jpg", "jpeg", "svg"],
@@ -45,9 +44,7 @@ exports.register = async (req, res) => {
           if (uploadRes) {
             req.body.img = uploadRes.url;
           }
-
         }
-
       } catch (error) {
         res.status(500).json({ error: error });
       }
@@ -82,17 +79,18 @@ exports.register = async (req, res) => {
 } */
 
 const sendEmail = async (name, email, confirmationCode) => {
-  await transporter.sendMail({
-    from: '"YOUPET" <foo@example.com>', // sender address
-    to: email, // list of receivers
-    subject: "¡Bienvenido a YOUPET!", // Subject line
-    text: "¡Gracias por Registrarte", // plain text body
-    html: `<b>EMAIL DE CONFIRMACION</b>
+  await transporter
+    .sendMail({
+      from: '"YOUPET" <foo@example.com>', // sender address
+      to: email, // list of receivers
+      subject: "¡Bienvenido a YOUPET!", // Subject line
+      text: "¡Gracias por Registrarte", // plain text body
+      html: `<b>EMAIL DE CONFIRMACION</b>
     <h2>Hello ${name}<h2>
-    <p>Gracias por suscribirte, confirmatu email haciendo click en el siguiente link</p>
+    <p>Thank you for subscribing, confirm your email by clicking on the following link</p>
     <a href="http://localhost:3000/confirm/${confirmationCode}">Click here</a>
     `,
-  })
+    })
     .then(() => console.log("se mando el email"))
     .catch((err) => console.log(err));
 }

@@ -1,5 +1,6 @@
 const { Op } = require("sequelize");
-const { Vet } = require("../db");
+const { Vet, User, Favorites } = require("../db");
+const { Sequelize } = require("sequelize");
 
 const JsonVet = [
   {
@@ -149,17 +150,39 @@ const getDBVet = async (name) => {
   }
 };
 
-const getDBVetByPK = async (id) => {
+const getDBVetByPK = async (id, user) => {
+  //console.log(user);
   if (id) {
-    let vet = await Vet.findOne({
+    const vet = await Vet.findOne({
       where: {
         id,
       },
+      raw: true,
     });
+    const favoritos = await Favorites.count({
+      where: {
+        VetId: id,
+      },
+    });
+    let userinfo = undefined;
+    if (user) {
+      userinfo = await Favorites.count({
+        where: {
+          UserId: user.id,
+          VetId: id,
+        },
+      });
+    }
     if (!vet) {
       throw new Error("vet not found");
     }
-    return vet;
+    console.log(userinfo);
+    console.log(vet);
+    /*    if (userinfo !== undefined) vet["isFavorite"] = userinfo === 1; */
+    return Object.assign({}, vet, {
+      isFavorite: userinfo === 1,
+      totalfav: favoritos,
+    });
   } else {
     throw new Error("missing Id");
   }
