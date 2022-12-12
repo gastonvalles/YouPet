@@ -26,7 +26,12 @@ router.use(
   /* passport.authenticate("jwt", { session: false }), */
   serviceController
 );
-router.use("/vet", vetController);
+router.use(
+  "/vet",
+  passport.authenticate(["jwt", "anonymous"], { session: false }),
+  vetController
+);
+
 router.use(
   "/turn",
   passport.authenticate("jwt", { session: false }),
