@@ -72,7 +72,7 @@ export function getPetDetail(id) {
 
 export function createPet(payload) {
   return async function (dispatch) {
-    let json = await axios.post("http://localhost:3001/admin", payload);
+    let json = await instance.post("/pet", payload);
     return dispatch({
       type: CREATE_PET,
       payload: json.data,
@@ -82,7 +82,7 @@ export function createPet(payload) {
 
 export function deletePet(id) {
   return async function (dispatch) {
-    var json = await axios.delete(`http://localhost:3001/pet/${id}`);
+    var json = await instance.delete(`/pet/${id}`);
     return dispatch({
       type: DELETE_PET,
       payload: json.data,
@@ -121,7 +121,7 @@ export function getVetByName(name) {
 
 export function createVet(payload) {
   return async function (dispatch) {
-    let json = await axios.post("http://localhost:3001/vet", payload);
+    let json = await instance.post("/vet", payload);
     return dispatch({
       type: CREATE_VET,
       payload: json.data,
@@ -131,7 +131,7 @@ export function createVet(payload) {
 
 export function updateVet(id, payload) {
   return async function (dispatch) {
-    var json = await axios.put(`http://localhost:3001/vet/${id}`, payload);
+    var json = await instance.put(`/vet/${id}`, payload);
     return dispatch({
       type: UPDATE_VET,
       payload: json.data,
@@ -141,7 +141,7 @@ export function updateVet(id, payload) {
 
 export function deleteVet(id) {
   return async function (dispatch) {
-    var json = await axios.delete(`http://localhost:3001/vet/${id}`);
+    var json = await instance.delete(`/vet/${id}`);
     return dispatch({
       type: DELETE_VET,
       payload: json.data,
@@ -180,7 +180,7 @@ export function getServiceDetail(id) {
 }
 export function createService(payload) {
   return async function (dispatch) {
-    let json = await axios.post("http://localhost:3001/service", payload);
+    let json = await instance.post("/service", payload);
     return dispatch({
       type: CREATE_SERVICE,
       payload: json.data,
@@ -190,7 +190,7 @@ export function createService(payload) {
 
 export function updateService(id) {
   return async function (dispatch) {
-    var json = await axios.put(`http://localhost:3001/service/${id}`);
+    var json = await instance.put(`/service/${id}`);
     return dispatch({
       type: UPDATE_SERVICE,
       payload: json.data,
@@ -200,7 +200,7 @@ export function updateService(id) {
 
 export function deleteService(id) {
   return async function (dispatch) {
-    var json = await axios.delete(`http://localhost:3001/service/${id}`);
+    var json = await instance.delete(`/service/${id}`);
     return dispatch({
       type: DELETE_SERVICE,
       payload: json.data,
@@ -257,19 +257,9 @@ export function getUserByEmail(email) {
   };
 }
 
-export function createUser(payload) {
-  return async function (dispatch) {
-    let json = await axios.post("http://localhost:3001/admin", payload);
-    return dispatch({
-      type: CREATE_USER,
-      payload: json.data,
-    });
-  };
-}
-
 export function updateUser(id, payload) {
   return async function (dispatch) {
-    var json = await axios.put(`http://localhost:3001/user/${id}`, payload);
+    var json = await instance.put(`/user/${id}`, payload);
     return dispatch({
       type: UPDATE_USER,
       payload: json.data,
@@ -318,7 +308,7 @@ export function getAdminByEmail(email) {
 
 export function createAdmin(payload) {
   return async function (dispatch) {
-    let json = await axios.post("http://localhost:3001/admin", payload);
+    let json = await instance.post("/admin", payload);
     return dispatch({
       type: CREATE_ADMIN,
       payload: json.data,
@@ -328,7 +318,7 @@ export function createAdmin(payload) {
 
 export function updateAdmin(id, payload) {
   return async function (dispatch) {
-    var json = await axios.put(`http://localhost:3001/admin/${id}`, payload);
+    var json = await instance.put(`/admin/${id}`, payload);
     return dispatch({
       type: UPDATE_ADMIN,
       payload: json.data,
@@ -338,7 +328,7 @@ export function updateAdmin(id, payload) {
 
 export function deleteAdmin(id) {
   return async function (dispatch) {
-    var json = await axios.delete(`http://localhost:3001/admin/${id}`);
+    var json = await instance.delete(`/admin/${id}`);
     return dispatch({
       type: DELETE_ADMIN,
       payload: json.data,
@@ -369,7 +359,7 @@ export function getTurn(payload) {
 
 export function getAllTurn() {
   return async function (dispatch) {
-    let json = await axios.get(`http://localhost:3001/turn/`);
+    let json = await instance.get(`/turn/`);
     return dispatch({
       type: GET_All_TURN,
       payload: json.data,
@@ -379,7 +369,7 @@ export function getAllTurn() {
 
 export function updateTurn(id) {
   return async function (dispatch) {
-    var json = await axios.delete(`http://localhost:3001/turn/${id}`);
+    var json = await instance.delete(`/turn/${id}`);
     return dispatch({
       type: UPDATE_TURN,
       payload: json.data,
@@ -389,7 +379,7 @@ export function updateTurn(id) {
 
 export function deleteTurn(id) {
   return async function (dispatch) {
-    var json = await axios.delete(`http://localhost:3001/turn/${id}`);
+    var json = await instance.delete(`/turn/${id}`);
     return dispatch({
       type: DELETE_TURN,
       payload: json.data,
@@ -420,7 +410,6 @@ export function filterService(payload) {
 
 export function getPaymentMP(service) {
   return async function (dispatch) {
-    //let json = await axios.post(`http://localhost:3001/payment/mp/552525`,service);
     let json = await instance.post(
       `http://localhost:3001/payment/mp/552525`,
       service
