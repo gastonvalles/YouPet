@@ -37,7 +37,7 @@ import {
   UPDATE_ADMIN,
   UPDATE_SERVICE,
   UPDATE_TURN,
-  UPDATE_USER,
+  UPDATE_USER_BYPANEL,
   UPDATE_VET,
   GET_USER_PETS,
   REMOVE_PET
@@ -297,17 +297,17 @@ export function createUser(payload) {
   };
 }
 
-export function clearUpdateUser() {
+export function clearUpdateUserByPanel() {
   return async function (dispatch) {
     let json = "nada" ;
     return dispatch({
-      type: UPDATE_USER,
+      type: UPDATE_USER_BYPANEL,
       payload: json,
     });
   };
 }
 
-export function updateUser(payload, id) {
+export function updateUserByPanel(payload, id) {
   return async function (dispatch) {
     let json = "" ;
     try {
@@ -317,7 +317,7 @@ export function updateUser(payload, id) {
       json = "error"
     }
     return dispatch({
-      type: UPDATE_USER,
+      type: UPDATE_USER_BYPANEL,
       payload: json,
     });
   };

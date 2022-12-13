@@ -34,7 +34,7 @@ import {
   GET_VET_BY_NAME,
   GET_VET_DETAIL,
   UPDATE_ADMIN,
-  UPDATE_USER,
+  UPDATE_USER_BYPANEL,
   REMOVE_PET
 } from "./const";
 
@@ -43,7 +43,7 @@ const initialState = {
   allPets: [],
   petDetail: [],
   createPet:["nada"],
-  updateUser:["nada"],
+  updateUserByPanel:["nada"],
   removePet:["nada"],
   userPets:[],
   turnsUser:[],
@@ -261,10 +261,10 @@ function rootReducer(state = initialState, action) {
           ...state,
           createPet: [action.payload],
         };
-    case UPDATE_USER:
+    case UPDATE_USER_BYPANEL:
         return {
           ...state,
-          updateUser: [action.payload],
+          updateUserByPanel: [action.payload],
         };
     case GET_USER_PETS:
         return {

@@ -4,7 +4,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import userPlaceholder from "../../../../../img/user-placeholder.png";
 import loadingSvg from "../../../../../img/loading_dualring.svg";
 import { useSelector, useDispatch } from "react-redux";
-import { updateUser, clearUpdateUser, getMyUser } from "../../../../../Redux/actions";
+import { updateUserByPanel, clearUpdateUserByPanel, getMyUser } from "../../../../../Redux/actions";
 import { Box } from "@mui/material";
 import Header from "../../Header";
 import Swal from "sweetalert2";
@@ -13,7 +13,7 @@ const UpdateInfo = () => {
   const [userImg, setUserImg] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const myuser = useSelector((state) => state.myuser);
-  const updateUserState = useSelector((state) => state.updateUser);
+  const updateUserState = useSelector((state) => state.updateUserByPanel);
   const dispatch = useDispatch();
 
   const handleImageUpload = (e, setFieldValue) => {
@@ -78,8 +78,8 @@ const UpdateInfo = () => {
 
   const handleSubmit = (value) => {
     setIsLoading(true);
-    dispatch(clearUpdateUser());
-    dispatch(updateUser(value, value.UserId));
+    dispatch(clearUpdateUserByPanel());
+    dispatch(updateUserByPanel(value, value.UserId));
   };
 
   return (
