@@ -87,11 +87,12 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.delete("/:vetId", async (req, res) => {
+
+router.delete("/:id", async (req, res) => {
   try {
-    const vet = await dbDeleteVet(req.params.vetId);
-    if (vet) await dbDeleteVet(req.params.vetId, vet);
-    const deletedVet = await dbDeleteVet(req.params.vetId);
+    const vet = await dbDeleteVet(req.params.id);
+    if (vet) await dbDeleteVet(req.params.id, vet);
+    const deletedVet = await dbDeleteVet(req.params.id);
     res.status(200).send(deletedVet);
   } catch (error) {
     res.status(404).send(error.message);

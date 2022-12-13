@@ -5,13 +5,8 @@ const { User } = require("../db");
 const { transporter } = require("../../config/mailer");
 const imgUpload = require("./imgUpload");
 
-
-
-
 exports.register = async (req, res) => {
-  const { name, lastname, username, password, email, dni, address, img } =
-    req.body;
-  console.log(name, lastname, username, password, email);
+  const { name, lastname, username, password, email, dni, address, img, isAdmin } = req.body;
   if (
     !name ||
     !lastname ||
@@ -29,10 +24,7 @@ exports.register = async (req, res) => {
         email: req.body.email,
       },
     });
-    //console.log(dbSearch);
     if (!dbSearch.length) {
-      
-      //Cloudinary IMG Upload
         try {
           if (img) {
             const uploadRes = await imgUpload(img);
@@ -46,7 +38,6 @@ exports.register = async (req, res) => {
 
       const newHash = await bcryptjs.hash(req.body.password, 8);
       const token = jwt.sign({ email: req.body.email }, "userKey");
-      console.log(token);
       const user = await User.create({
         name: req.body.name,
         address: req.body.address,
@@ -57,10 +48,9 @@ exports.register = async (req, res) => {
         email: req.body.email,
         address: req.body.address,
         img: req.body.img,
+        isAdmin: req.body.isAdmin,
         confirmationCode: token,
       });
-      //console.log(user);
-      //console.log(user.username, user.email, user.confirmationCode);
       sendEmail(user.username, user.email, user.confirmationCode);
       return res.status(200).json(user);
     } else {
@@ -70,11 +60,6 @@ exports.register = async (req, res) => {
     res.send(error);
   }
 };
-/* if (dbSearch.status !== "Active") {
-  return res
-    .status(401)
-    .send("Cuenta pendiente. Por favor verifique su Email");
-} */
 
 const sendEmail = async (name, email, confirmationCode) => {
   await transporter
@@ -88,10 +73,11 @@ const sendEmail = async (name, email, confirmationCode) => {
     <p>Thank you for subscribing, confirm your email by clicking on the following link</p>
     <a href="http://localhost:3000/confirm/${confirmationCode}">Click here</a>
     `,
-    })
-    .then(() => console.log("se mando el email"))
-    .catch((err) => console.log(err));
-};
+  })
+    .then((res) => res("se mando el email"))
+    .catch((error) => error.message);
+}
+
 exports.verifyUser = (req, res, next) => {
   let decode;
   try {
@@ -107,7 +93,7 @@ exports.verifyUser = (req, res, next) => {
       if (!user) {
         return res.status(404).send("Usuario no encontrado");
       }
-      user.status = "Active";
+      user.isActive = true;
       user.save((err) => {
         if (err) {
           res.status(500).send(err);
@@ -162,29 +148,3 @@ exports.protectedRoute = async (req, res) => {
     res.send(error);
   }
 };
-
-/* exports.isautent = async (req, res, next) => {
-  if (req.cookie.jwt)
-    try {
-      const decodificada = await promisify(jwt.verify)(
-        req.cookies.jwt,
-        "userKey"
-      );
-      const verifUser = await User.findOne({
-        where: {
-          id: [decodificada.id],
-        },
-      });
-      if (!verifUser) {
-        return next();
-      }
-      req.user = verifUser;
-      return next();
-    } catch (error) {
-      console.log(error);
-    }
-  else {
-    res.redirect("/login");
-    next();
-  }
-}; */

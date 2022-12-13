@@ -1,34 +1,28 @@
-import React, { useEffect, useState } from "react";
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import LogoutIcon from '@mui/icons-material/Logout';
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import logo from "../../../img/logo.png";
-import userPlaceholder from "../../../img/user-placeholder.png"
-import LogoutIcon from '@mui/icons-material/Logout';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import userPlaceholder from "../../../img/user-placeholder.png";
 import {
-  // filterVets,
   getServiceByName,
   getServices,
-  getUserByName,
-  getVetByName,
+  getVetByName
 } from "../../../Redux/actions";
-import "./Navbar.css";
 import dropMenu from "./dropMenu.module.css";
-import { useRef } from "react";
+import "./Navbar.css";
 
 export default function NavBar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { id } = useParams();
-  const users = useSelector((state) => state.users);
   const myuser = useSelector((state) => state.myuser);
   const [name, setName] = useState("");
 
   useEffect(() => {
     dispatch(getServices());
-    //dispatch(getVetsDetail(id))
-  }, [dispatch, id]);
+  }, [dispatch]);
 
   function handleInputChange(event) {
     event.preventDefault();
@@ -38,10 +32,6 @@ export default function NavBar() {
     event.preventDefault();
     dispatch(getServiceByName(name));
     dispatch(getVetByName(name));
-    if (users.isAdmin === true) {
-      dispatch(getUserByName(name));
-    }
-    // navigate(`/vet/${id}`)
     setName("");
   }
 
@@ -66,46 +56,13 @@ export default function NavBar() {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-1">
               <div>
-                <Link
-                  to="/admin"
-                  type="button"
-                  className="text-decoration-none dropdown-item"
-                >
+              {
+                myuser?.isAdmin === true ? (
+                <Link to="/admin" type="button" className="text-decoration-none btn btn-primary">
                   Admin
-                </Link>
+                </Link>) : null
+              }
               </div>
-              {/* <li className="nav-item dropdown">
-                <span
-                  className="nav-link dropdown-toggle me-3"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  Dropdown
-                </span>
-                <ul className="dropdown-menu">
-                  <li>
-                    <Link to={"/veterinario"}>
-                      <span className="dropdown-item" />1 Option
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to={"/nutricionista"}>
-                      <span className="dropdown-item" />2 Option
-                    </Link>
-                  </li>
-                  <li></li>
-                  <li>
-                    <Link to={"/cirugias"}>
-                      <span className="dropdown-item" />3 Option
-                    </Link>
-                  </li>
-                </ul>
-              </li> */}
-
-              {/* <li className="nav-item">
-                <span className="nav-link">Disabled</span>
-              </li> */}
             </ul>
             <form className="d-flex" role="search">
               <input
@@ -120,41 +77,11 @@ export default function NavBar() {
                 type="submit"
                 onClick={(event) => handleSubmit(event)}
               >
-                Search
+                🔎
               </button>
             </form>
             {/* preguntar si esta logueado o no */}
           </div>
-          {/* <div>
-            <select
-              defaultValue={""}
-              className="selectorFiltros"
-              onChange={(event) => handleFilter(event)}
-            >
-              <option value={""}>All Vets</option>
-              <option value={"Clinic"}>Healthcare Clinic</option>
-              <option value={"Anesthesia"}>
-                Surgery and Anesthesia
-              </option>
-              <option value={"Diagnostics"}>Diagnostics</option>
-              <option value={"Aesthetics"}>Aesthetics</option>
-            </select>
-          </div> */}
-          {/* <div>
-            <select
-              defaultValue={""}
-              className="selectorFiltros"
-              onChange={(event) => handleFilter(event)}
-            >
-              <option value={""}>All Services</option>
-              <option value={"Healthcare Clinic"}>Healthcare Clinic</option>
-              <option value={"Surgery and Anesthesia"}>
-                Surgery and Anesthesia
-              </option>
-              <option value={"Diagnostics"}>Diagnostics</option>
-              <option value={"Aesthetics"}>Aesthetics</option>
-            </select>
-          </div> */}
           <div>
             <div className="d-flex">
               {!myuser?.id ? (
@@ -169,7 +96,7 @@ export default function NavBar() {
                   </Link>
                 </>
               ) : (
-                
+
                 <>
                   <NavItem img={myuser?.img ? myuser.img : userPlaceholder} navigate={navigate}>
                   </NavItem>
@@ -221,7 +148,7 @@ function DropdownMenu(props) {
     <>
       <Link to="/userpanel" className={dropMenu.menu_item}>
         Panel
-      <AccountCircleIcon/>
+        <AccountCircleIcon />
       </Link>
       <hr />
       <Link to={"#"}
@@ -231,8 +158,8 @@ function DropdownMenu(props) {
         }}
         className={dropMenu.menu_item}
       >
-        Sign out 
-        <LogoutIcon/>
+        Sign out
+        <LogoutIcon />
       </Link>
     </>
   );

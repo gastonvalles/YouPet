@@ -109,26 +109,19 @@ function rootReducer(state = initialState, action) {
         ...state,
         vets: deleteVet.filter((vet) => vet.id !== action.payload),
       };
-      case UPDATE_VET:
-        return {
-          ...state,
-          vets: state.vets.map((vet) =>
-            vet.id === action.payload.id ? action.payload : vet
-          ),
-        };
+    case UPDATE_VET:
+      return {
+        ...state,
+        vets: state.vets.map((vet) =>
+          vet.id === action.payload.id ? action.payload : vet
+        ),
+      };
     case GET_SERVICES:
       return {
         ...state,
         services: action.payload,
         allServices: action.payload,
       };
-      case UPDATE_SERVICE:
-        return {
-          ...state,
-          services: state.services.map((service) =>
-            service.id === action.payload.id ? action.payload : service
-          ),
-        };
     case GET_SERVICE_DETAIL:
       return {
         ...state,
@@ -143,6 +136,13 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         services: [],
+      };
+    case UPDATE_SERVICE:
+      return {
+        ...state,
+        services: state.services.map((service) =>
+          service.id === action.payload.id ? action.payload : service
+        ),
       };
     case DELETE_SERVICE:
       const deleteService = state.allServices;
@@ -172,11 +172,6 @@ function rootReducer(state = initialState, action) {
         ...state,
         user: action.payload,
       };
-
-
-
-
-
     case UPDATE_USER:
       return {
         ...state,
@@ -203,7 +198,6 @@ function rootReducer(state = initialState, action) {
         petDetail: [],
         serviceDetail: [],
         userDetail: [],
-        adminDetail: [],
       };
     case CREATE_TURN:
       return {
