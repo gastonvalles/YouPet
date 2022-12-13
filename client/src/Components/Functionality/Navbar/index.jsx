@@ -1,21 +1,20 @@
-import React, { useEffect, useState } from "react";
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import LogoutIcon from '@mui/icons-material/Logout';
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { Link, useParams } from "react-router-dom";
 import logo from "../../../img/logo.png";
-import userPlaceholder from "../../../img/user-placeholder.png"
-import LogoutIcon from '@mui/icons-material/Logout';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import userPlaceholder from "../../../img/user-placeholder.png";
 import {
   // filterVets,
   getServiceByName,
   getServices,
   getUserByName,
-  getVetByName,
+  getVetByName
 } from "../../../Redux/actions";
-import "./Navbar.css";
 import dropMenu from "./dropMenu.module.css";
-import { useRef } from "react";
+import "./Navbar.css";
 
 export default function NavBar() {
   const dispatch = useDispatch();
@@ -120,7 +119,7 @@ export default function NavBar() {
                 type="submit"
                 onClick={(event) => handleSubmit(event)}
               >
-                Search
+                🔎
               </button>
             </form>
             {/* preguntar si esta logueado o no */}
@@ -169,7 +168,7 @@ export default function NavBar() {
                   </Link>
                 </>
               ) : (
-                
+
                 <>
                   <NavItem img={myuser?.img ? myuser.img : userPlaceholder} navigate={navigate}>
                   </NavItem>
@@ -221,7 +220,7 @@ function DropdownMenu(props) {
     <>
       <Link to="/userpanel" className={dropMenu.menu_item}>
         Panel
-      <AccountCircleIcon/>
+        <AccountCircleIcon />
       </Link>
       <hr />
       <Link to={"#"}
@@ -231,8 +230,8 @@ function DropdownMenu(props) {
         }}
         className={dropMenu.menu_item}
       >
-        Sign out 
-        <LogoutIcon/>
+        Sign out
+        <LogoutIcon />
       </Link>
     </>
   );
