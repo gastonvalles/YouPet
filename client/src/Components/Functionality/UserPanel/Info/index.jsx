@@ -4,13 +4,26 @@ import Header from "../Header";
 import userPlaceholder from "../../../../img/user-placeholder.png";
 import loadingSvg from "../../../../img/loading_dualring.svg";
 import petPlaceholder from "../../../../img/pets.png";
-
+import { getUserTurns } from "../../../../Redux/actions";
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
 import infoStyle from "./info.module.css";
-import { useSelector } from "react-redux";
+
 
 export default function Info() {
   const myuser = useSelector((state) => state.myuser);
-  const myturns = useSelector((state) => state.turns);
+  const myturns = useSelector((state) => state.turnsUser);
+
+  const [cargarTurns, setCargarTurns] = useState(true)
+
+  const dispatch = useDispatch()
+
+  useEffect(()=>{
+    if (myuser?.id && cargarTurns) {
+      setCargarTurns(false)
+      dispatch(getUserTurns(myuser.id))
+    }
+  }, [myuser, dispatch, cargarTurns])
 
   return (
     <Box m="20px">
@@ -98,52 +111,64 @@ export default function Info() {
                   <table className="table align-middle mb-0 bg-white">
                     <thead className="bg-light">
                       <tr>
-                        <th>Id</th>
-                        <th>Pet</th>
+                        <th>Service</th>
                         <th>Vet</th>
                         <th>Date</th>
                         <th>Action</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>
-                          <div className="d-flex align-items-center">
-                            <img
-                              src={petPlaceholder}
-                              alt="petImg"
-                              className={"rounded-circle " + infoStyle.tableImg}
-                            />
-                            <div className="ms-3">
-                              <p className="fw-bold mb-1">John Doe</p>
-                            </div>
-                          </div>
-                        </td>
+              {
+                myturns.map(turn => {
+                  let dateTurn = ""
+                  if (turn.inicialDate){
+                    let date = new Date(turn.inicialDate)
+                    
+                    dateTurn = date.toLocaleString("en-US", {
+                      year: "numeric",
+                      day: "2-digit",
+                      month: "short",
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    })
+                  } 
+                  
+                  return (
+                    <tr key={turn.id}>
+                    <td>
+                      <div className="d-flex align-items-center">
+                        <img
+                          src={petPlaceholder}
+                          alt="petImg"
+                          className={"rounded-circle " + infoStyle.tableImg}
+                        />
+                        <div className="ms-3">
+                          <p className="fw-bold mb-1">{turn.Service?.name || ""}</p>
+                        </div>
+                      </div>
+                    </td>
 
-                        <td>
-                          <p>Especie</p>
-                        </td>
 
-                        <td>
-                          <p>detalle</p>
-                        </td>
+                    <td>
+                      <p>{`${turn.Vet?.name} ${turn.Vet?.lastname}`|| ""}</p>
+                    </td>
+                    
+                    <td>
+                      <p>{dateTurn}</p>
+                    </td>
 
-                        <td>
-                          <button
-                            type="button"
-                            className="btn btn-sm btn-rounded"
-                          >
-                            Edit
-                          </button>
-
-                          <button
-                            type="button"
-                            className="btn btn-sm btn-rounded btn-danger"
-                          >
-                            Remove
-                          </button>
-                        </td>
-                      </tr>
+                    <td>
+                      <button
+                        type="button"
+                        className="btn btn-sm btn-rounded"
+                      >
+                        Cancel
+                      </button>
+                    </td>
+                  </tr>
+                  )
+                })
+              }
                     </tbody>
                   </table>
                 </div>
@@ -157,8 +182,7 @@ export default function Info() {
                   <table className="table align-middle mb-0 bg-white">
                     <thead className="bg-light">
                       <tr>
-                        <th>Id</th>
-                        <th>Pet</th>
+                      <th>Service</th>
                         <th>Vet</th>
                         <th>Date</th>
                         <th>Action</th>
@@ -166,9 +190,6 @@ export default function Info() {
                     </thead>
                     <tbody>
                       <tr>
-                        <td>
-                          <p>0</p>
-                        </td>
                         <td>
                           <div className="d-flex align-items-center">
                             <img

@@ -24,15 +24,18 @@ import {
   GET_SERVICE_BY_NAME,
   GET_SERVICE_DETAIL,
   GET_TURN,
+  GET_USER_TURN,
   GET_USERS,
   GET_USER_BY_EMAIL,
   GET_USER_BY_NAME,
   GET_USER_DETAIL,
+  GET_USER_PETS,
   GET_VETS,
   GET_VET_BY_NAME,
   GET_VET_DETAIL,
   UPDATE_ADMIN,
-  UPDATE_USER
+  UPDATE_USER,
+  REMOVE_PET
 } from "./const";
 
 const initialState = {
@@ -41,6 +44,9 @@ const initialState = {
   petDetail: [],
   createPet:["nada"],
   updateUser:["nada"],
+  removePet:["nada"],
+  userPets:[],
+  turnsUser:[],
   vets: [],
   allVets: [],
   vetDetail: [],
@@ -259,6 +265,21 @@ function rootReducer(state = initialState, action) {
         return {
           ...state,
           updateUser: [action.payload],
+        };
+    case GET_USER_PETS:
+        return {
+          ...state,
+          userPets: action.payload,
+        };
+    case GET_USER_TURN:
+        return {
+          ...state,
+          turnsUser: action.payload,
+        };
+    case REMOVE_PET:
+        return {
+          ...state,
+          removePet: [action.payload],
         };
     default:
       return state;

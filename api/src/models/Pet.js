@@ -25,11 +25,14 @@ module.exports = (sequelize) => {
       },
       detail: {
         type: DataTypes.STRING,
-        allowNull: false
       },
       img: {
         type: DataTypes.STRING,
-      }
+      },
+      species: {
+        type: DataTypes.STRING,
+        allowNull: false
+      },
     }, {
     timestamps: false,
     createdAt: false,

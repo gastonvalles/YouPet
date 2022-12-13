@@ -20,7 +20,7 @@ const UpdateInfo = () => {
     const file = e.target.files[0];
     transformFile(file, setFieldValue);
   };
-  console.log(updateUserState);
+  
   const transformFile = (file, setFieldValue) => {
     const reader = new FileReader();
     if (file) {
@@ -40,7 +40,7 @@ const UpdateInfo = () => {
       if (updateUserState[0] === "nada") {
         Swal.fire({
           iconHtml: `<img src=${loadingSvg} alt="Loading"/>`,
-          title: `Cargando`,
+          title: `Loading`,
           showConfirmButton: false,
         });
       } else if (updateUserState[0] === "ok") {

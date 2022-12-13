@@ -40,7 +40,7 @@ const AddPet = () => {
       if (createPetState[0] === "nada") {
         Swal.fire({
           iconHtml: `<img src=${loadingSvg} alt="Loading"/>`,
-          title: `Cargando`,
+          title: `Loading`,
           showConfirmButton: false,
         });
       } else if (createPetState[0] === "ok") {
@@ -51,7 +51,7 @@ const AddPet = () => {
         setTimeout(() => {
           Swal.fire({
             icon: "success",
-            title: `Creado exitosamente`,
+            title: `Created sucessfully`,
             showConfirmButton: false,
             timer: 1000,
           });

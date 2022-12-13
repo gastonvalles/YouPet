@@ -52,20 +52,31 @@ const getPetByPK = async (id) => {
   }
 };
 
-// const getByPetOwner = async (UserId) => {
-//   const petOwner = await Pet.findAll({
-//     where: {
-//       UserId: {
-//         [Op.iLike]: `%${UserId}%`,
-//       },
-//     },
-//   });
-//   if (!petOwner) {
-//     throw new Error(" Pet not found");
-//   } else {
-//     return petOwner;
-//   }
-// };
+const getByPetOwner = async (UserId) => {
+  const petOwner = await Pet.findAll({
+    where: {
+      UserId: UserId
+    },
+  });
+  if (!petOwner) {
+    throw new Error(" Pet not found");
+  } else {
+    return petOwner;
+  }
+};
+const dbRemovePet = async (params) => {
+    const {id} = params;
+  const removePet = await Pet.destroy({
+    where: {
+      id: id
+    },
+  });
+  if (!removePet) {
+    throw new Error(" Pet not found");
+  } else {
+    return removePet;
+  }
+};
 
 const dbCreatePet = async (body) => {
   
@@ -96,6 +107,7 @@ const dbCreatePet = async (body) => {
 module.exports = {
   getAllPets,
   getPetByPK,
-  //getByPetOwner,
+  getByPetOwner,
   dbCreatePet,
+  dbRemovePet
 };

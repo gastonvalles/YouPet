@@ -26,6 +26,7 @@ import {
   GET_SERVICE_BY_NAME,
   GET_SERVICE_DETAIL,
   GET_TURN,
+  GET_USER_TURN,
   GET_USERS,
   GET_USER_BY_EMAIL,
   GET_USER_BY_NAME,
@@ -38,6 +39,8 @@ import {
   UPDATE_TURN,
   UPDATE_USER,
   UPDATE_VET,
+  GET_USER_PETS,
+  REMOVE_PET
 } from "./const";
 const instance = axios.create({
   baseURL: "http://localhost:3001",
@@ -53,6 +56,15 @@ export function getPets() {
     let json = await instance.get("/pet");
     return dispatch({
       type: GET_PETS,
+      payload: json.data,
+    });
+  };
+}
+export function getUserPets(UserId) {
+  return async function (dispatch) {
+    let json = await instance.get(`/pet/user/${UserId}`);
+    return dispatch({
+      type: GET_USER_PETS,
       payload: json.data,
     });
   };
@@ -310,6 +322,31 @@ export function updateUser(payload, id) {
     });
   };
 }
+export function clearRemovePet() {
+  return async function (dispatch) {
+    let json = "nada" ;
+    return dispatch({
+      type: REMOVE_PET,
+      payload: json,
+    });
+  };
+}
+
+export function removePetUser(id) {
+  return async function (dispatch) {
+    let json = "" ;
+    try {
+      await instance.delete(`http://localhost:3001/pet/${id}`);
+      json = "ok"
+    } catch (error) {
+      json = "error"
+    }
+    return dispatch({
+      type: REMOVE_PET,
+      payload: json,
+    });
+  };
+}
 
 
 export function getAdmins() {
@@ -392,6 +429,15 @@ export function getTurn(payload) {
 
     return dispatch({
       type: GET_TURN,
+      payload: json.data,
+    });
+  };
+}
+export function getUserTurns(id) {
+  return async function (dispatch) {
+    let json = await instance.get(`/turn/user/${id}`);
+    return dispatch({
+      type: GET_USER_TURN,
       payload: json.data,
     });
   };

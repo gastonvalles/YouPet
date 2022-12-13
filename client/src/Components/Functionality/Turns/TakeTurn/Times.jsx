@@ -31,6 +31,7 @@ function Times(props) {
 
   const Turns = useSelector((state) => state.turn);
   const createdTur = useSelector((state) => state.createdTurn);
+  const myuser = useSelector((state) => state.myuser);
 
   useEffect(() => {
     if (updateCalendar && vetSelect !== "none") {
@@ -119,7 +120,8 @@ function Times(props) {
         inicialDate: startDate.toUTCString(),
         finishDate: finishDate.toUTCString(),
         VetId: vetSelect,
-        ServiceId: servId
+        ServiceId: servId,
+        UserId: myuser?.id || ""
       };
 
       dispatch(createTurn(turnInfo));

@@ -1,7 +1,9 @@
 export const GET_PETS = "GET_PETS";
+export const GET_USER_PETS = "GET_USER_PETS";
 export const GET_PET_DETAIL = "GET_PET_DETAIL";
 export const CREATE_PET = "CREATE_PET";
 export const DELETE_PET = "DELETE_PET";
+export const REMOVE_PET = "REMOVE_PET";
 export const GET_VETS = "GET_VETS";
 export const GET_VET_DETAIL = "GET_VET_DETAIL";
 export const GET_VET_BY_NAME = "GET_VET_BY_NAME";
@@ -21,6 +23,7 @@ export const CREATE_SERVICE = "CREATE_SERVICE";
 export const UPDATE_SERVICE = "UPDATE_SERVICE";
 export const DELETE_SERVICE = "DELETE_SERVICE";
 export const GET_USERS = "GET_USERS";
+export const GET_USER_TURN = "GET_USER_TURN";
 export const GET_USER_DETAIL = "GET_USER_DETAIL";
 export const GET_USER_BY_NAME = "GET_USER_BY_NAME";
 export const GET_USER_BY_EMAIL = "GET_USER_BY_EMAIL";
