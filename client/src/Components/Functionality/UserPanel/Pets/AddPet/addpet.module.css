@@ -1,4 +1,6 @@
-
+.container{
+	margin-bottom: 40px;
+}
 .contenedor {
 	
 	display: flex;

@@ -68,7 +68,7 @@ const AddPet = () => {
   };
 
   return (
-    <Box>
+    <Box className={addPetStyle.container}>
       <Box m="20px">
         <Header title="Add new pet" subtitle="Here you can add your pets" />
       </Box>

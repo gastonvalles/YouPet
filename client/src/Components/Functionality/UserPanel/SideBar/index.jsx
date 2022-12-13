@@ -121,7 +121,7 @@ export default function SideBar() {
               Info
             </Typography>
             <Item
-              title="Profile"
+              title="Info"
               to={ruta}
               icon={<AccountCircleIcon />}
               selected={selected}

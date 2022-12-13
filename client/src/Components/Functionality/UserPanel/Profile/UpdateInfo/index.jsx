@@ -68,7 +68,7 @@ const UpdateInfo = () => {
   };
 
   return (
-    <Box>
+    <Box className={upInfoStyle.container}>
       <Box m="20px">
         <Header title="Update info" subtitle="Here you can edit your info" />
       </Box>
