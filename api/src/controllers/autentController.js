@@ -9,7 +9,8 @@ const imgUpload = require("./imgUpload");
 
 
 exports.register = async (req, res) => {
-  const { name, lastname, username, password, email, dni, address, img } = req.body;
+  const { name, lastname, username, password, email, dni, address, img } =
+    req.body;
   console.log(name, lastname, username, password, email);
   if (
     !name ||
@@ -28,7 +29,7 @@ exports.register = async (req, res) => {
         email: req.body.email,
       },
     });
-    console.log(dbSearch);
+    //console.log(dbSearch);
     if (!dbSearch.length) {
       
       //Cloudinary IMG Upload
@@ -58,7 +59,8 @@ exports.register = async (req, res) => {
         img: req.body.img,
         confirmationCode: token,
       });
-      console.log(user.username, user.email, user.confirmationCode);
+      //console.log(user);
+      //console.log(user.username, user.email, user.confirmationCode);
       sendEmail(user.username, user.email, user.confirmationCode);
       return res.status(200).json(user);
     } else {
@@ -75,21 +77,21 @@ exports.register = async (req, res) => {
 } */
 
 const sendEmail = async (name, email, confirmationCode) => {
-  await transporter.sendMail({
-    from: '"YOUPET" <foo@example.com>', // sender address
-    to: email, // list of receivers
-    subject: "¡Bienvenido a YOUPET!", // Subject line
-    text: "¡Gracias por Registrarte", // plain text body
-    html: `<b>EMAIL DE CONFIRMACION</b>
+  await transporter
+    .sendMail({
+      from: '"YOUPET" <foo@example.com>', // sender address
+      to: email, // list of receivers
+      subject: "¡Bienvenido a YOUPET!", // Subject line
+      text: "¡Gracias por Registrarte", // plain text body
+      html: `<b>EMAIL DE CONFIRMACION</b>
     <h2>Hello ${name}<h2>
-    <p>Gracias por suscribirte, confirmatu email haciendo click en el siguiente link</p>
+    <p>Thank you for subscribing, confirm your email by clicking on the following link</p>
     <a href="http://localhost:3000/confirm/${confirmationCode}">Click here</a>
     `,
-  })
+    })
     .then(() => console.log("se mando el email"))
     .catch((err) => console.log(err));
-}
-
+};
 exports.verifyUser = (req, res, next) => {
   let decode;
   try {

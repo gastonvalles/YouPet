@@ -16,7 +16,9 @@ import {
   GET_ADMIN_BY_NAME,
   GET_ADMIN_DETAIL,
   GET_All_TURN,
-  GET_MYUSER, GET_PAYMENT_MP, GET_PETS,
+  GET_MYUSER,
+  GET_PAYMENT_MP,
+  GET_PETS,
   GET_PET_DETAIL,
   GET_SERVICES,
   GET_SERVICE_BY_NAME,
@@ -29,7 +31,7 @@ import {
   GET_VETS,
   GET_VET_BY_NAME,
   GET_VET_DETAIL,
-  UPDATE_ADMIN
+  UPDATE_ADMIN,
 } from "./const";
 
 const initialState = {
@@ -57,7 +59,7 @@ const initialState = {
   allAdmins: [],
   adminDetail: [],
   allServices: [],
-  paymentLink: {}
+  paymentLink: {},
 };
 
 function rootReducer(state = initialState, action) {
@@ -193,8 +195,8 @@ function rootReducer(state = initialState, action) {
         action.payload === ""
           ? allservices
           : allservices.filter(
-            (r) => r.type.toLowerCase() === action.payload.toLowerCase()
-          );
+              (r) => r.type.toLowerCase() === action.payload.toLowerCase()
+            );
       return {
         ...state,
         services: filter,

@@ -11,7 +11,7 @@ import {
   getServiceByName,
   getServices,
   getUserByName,
-  getVetByName
+  getVetByName,
 } from "../../../Redux/actions";
 import "./Navbar.css";
 import dropMenu from "./dropMenu.module.css";
@@ -66,7 +66,11 @@ export default function NavBar() {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-1">
               <div>
-                <Link to="/admin" type="button" className="text-decoration-none dropdown-item">
+                <Link
+                  to="/admin"
+                  type="button"
+                  className="text-decoration-none dropdown-item"
+                >
                   Admin
                 </Link>
               </div>

@@ -5,14 +5,12 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import { createUser } from "../../../../Redux/actions";
-import userPlaceholder from "./user-placeholder.png"
-import userStyle from "./user.module.css"
+import userPlaceholder from "./user-placeholder.png";
+import userStyle from "./user.module.css";
 function FormUser() {
   const dispatch = useDispatch();
   const [formSuccess, setformSuccess] = useState(false);
   const navigate = useNavigate();
-
-  
 
   const [userImg, setUserImg] = useState("");
 
@@ -20,21 +18,20 @@ function FormUser() {
     const file = e.target.files[0];
     transformFile(file, setFieldValue);
   };
-  
-  const transformFile = (file, setFieldValue)=>{
-    const reader = new FileReader()
+
+  const transformFile = (file, setFieldValue) => {
+    const reader = new FileReader();
     if (file) {
       reader.readAsDataURL(file);
       reader.onloadend = () => {
         setUserImg(reader.result);
-        setFieldValue("img", reader.result)
+        setFieldValue("img", reader.result);
       };
     } else {
       setUserImg("");
-      setFieldValue("img", "")
+      setFieldValue("img", "");
     }
-    
-  }
+  };
 
   return (
     <div className="container-md">
@@ -48,8 +45,7 @@ function FormUser() {
           password: "",
           passwordCopy: "",
           address: "",
-          img:""
-          
+          img: "",
         }}
         validate={(values) => {
           let errors = {};
@@ -140,18 +136,16 @@ function FormUser() {
 
           return errors;
         }}
-        onSubmit={
-          
-          (values) => {
-        
+        onSubmit={(values) => {
           axios
             .post("http://localhost:3001/register/", values, {})
             .then((res) => {
               Swal.fire({
                 //icon: "succes",
-                title: `Creado exitosamente`,
+                title: `Done!
+                Check your inbox to verify your account`,
                 showConfirmButton: false,
-                timer: 1000,
+                timer: 5000,
               });
               /* navigate("/login"); */
             })
@@ -162,24 +156,25 @@ function FormUser() {
                 text: `${error}`,
               })
             );
-        }
-      
-      }
+        }}
       >
         {({ errors, setFieldValue }) => (
           <div className="contenedor">
             <Form className="row g-3">
-
               <div className={userStyle.back_container}>
-              <div className={ "rounded-circle " + userStyle.img_container}>
-              <img className={userStyle.img_user} src={userImg ? userImg : userPlaceholder} alt="userImg"/>
-              </div>
+                <div className={"rounded-circle " + userStyle.img_container}>
+                  <img
+                    className={userStyle.img_user}
+                    src={userImg ? userImg : userPlaceholder}
+                    alt="userImg"
+                  />
+                </div>
               </div>
 
             <div>
             <label htmlFor="files" className={"btn " + userStyle.selectLabel}>Select Image</label>
 
-              <input
+                <input
                   className={userStyle.selectButton}
                   id="files"
                   type="file"
@@ -187,8 +182,7 @@ function FormUser() {
                   accept=".png, .jpg, .jpeg, .svg"
                   onChange={(e) => handleImageUpload(e, setFieldValue)}
                 />
-
-            </div>
+              </div>
               <div>
                 <label htmlFor="name">Name</label>
                 <Field

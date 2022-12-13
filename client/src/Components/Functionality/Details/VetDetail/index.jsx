@@ -1,22 +1,30 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
-import { addFavorites, clearDetails, getVetsDetail } from "../../../../Redux/actions";
-import './vetDetail.css';
+import { useParams } from "react-router-dom";
+import {
+  addFavorites,
+  clearDetails,
+  getVetsDetail,
+  removeFav,
+} from "../../../../Redux/actions";
+import "./vetDetail.css";
 
 export default function VetDetail() {
   let { id } = useParams();
   const dispatch = useDispatch();
   const vet = useSelector((state) => state.vetDetail);
   const myuser = useSelector((state) => state.myuser);
+  //const fav = useSelector((state) => state.fav);
+
+  const remfav = () => {
+    dispatch(removeFav(id, myuser.id));
+  };
 
   const addFav = () => {
     dispatch(addFavorites(id, myuser.id));
-  }
 
-  useEffect(() => {
-    console.log(myuser);
-  }, [myuser]);
+    console.log(id, myuser.id);
+  };
 
   useEffect(() => {
     dispatch(getVetsDetail(id));
@@ -24,11 +32,11 @@ export default function VetDetail() {
       dispatch(clearDetails());
     };
   }, [dispatch, id]);
-
+  console.log(vet);
   return (
     <div className="vet-cards">
-      <div className='vet-card-detail'>
-        <img className='vet-profile-photo' src={vet.img} alt="Not found" />
+      <div className="vet-card-detail">
+        <img className="vet-profile-photo" src={vet.img} alt="Not found" />
         <div>
           <h1 className="vet-profile-name">
             {vet.name} {vet.lastname}
@@ -37,8 +45,12 @@ export default function VetDetail() {
         </div>
         <h3>Average: {vet.average}</h3>
         <div>
-          <button onClick={addFav}>❤️</button>
-          <span>{vet.fav}</span>
+          {vet.isFavorite ? (
+            <button onClick={remfav}>❤️</button>
+          ) : (
+            <button onClick={addFav}>🖤</button>
+          )}
+          <span>{vet.totalfav}</span>
         </div>
       </div>
       <div className="vet-comments">
@@ -60,5 +72,5 @@ export default function VetDetail() {
         </div>
       </div>
     </div>
-  )
-};
+  );
+}
