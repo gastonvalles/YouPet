@@ -12,7 +12,6 @@ export default function Info() {
   const myuser = useSelector((state) => state.myuser);
   const myturns = useSelector((state) => state.turns);
 
-
   return (
     <Box m="20px">
       <Box>
@@ -22,21 +21,19 @@ export default function Info() {
         {myuser?.id ? (
           <div className={infoStyle.container}>
             <div className={infoStyle.card}>
-              <img
-                src={myuser.img ? myuser.img : userPlaceholder}
-                alt="User"
-                className="rounded-circle"
-                width="150"
-              />
+              <div className={infoStyle.img_container}>
+                <img
+                  src={myuser.img ? myuser.img : userPlaceholder}
+                  alt="User"
+                  className={infoStyle.img_user}
+                />
+              </div>
               <div className="mt-3">
                 <h4>
                   {myuser.name ? myuser.name : "none"}{" "}
                   {myuser.lastname ? myuser.lastname : ""}
                 </h4>
                 <p className="text-secondary mb-1">Youpet user</p>
-               
-
-
               </div>
             </div>
 
@@ -86,8 +83,6 @@ export default function Info() {
                   {myuser.address ? myuser.address : "none"}
                 </div>
               </div>
-              
-
             </div>
           </div>
         ) : (
@@ -103,7 +98,7 @@ export default function Info() {
                   <table className="table align-middle mb-0 bg-white">
                     <thead className="bg-light">
                       <tr>
-                      <th>Id</th>
+                        <th>Id</th>
                         <th>Pet</th>
                         <th>Vet</th>
                         <th>Date</th>
@@ -155,7 +150,7 @@ export default function Info() {
               </div>
             </div>
           ) : (
-            <div>
+            <div className={infoStyle.turnsContainer}>
               <div className="container my-5">
                 <h4>Turns</h4>
                 <div className="shadow-4 rounded-5 overflow-hidden">
@@ -205,7 +200,6 @@ export default function Info() {
               </div>
             </div>
           )}
-
         </Box>
       </Box>
     </Box>

@@ -90,13 +90,22 @@ export default function SideBar() {
           {!isCollapsed && (
             <Box mb="25px">
               <Box display="flex" justifyContent="center" alignItems="center">
-                <img
-                  alt="profile-user"
-                  width="100px"
+                <Box
+                  display="flex"
+                  justifyContent="center"
+                  alignItems="center"
                   height="100px"
-                  src={myuser?.img ? myuser.img : userPlaceholder}
-                  style={{ cursor: "pointer", borderRadius: "50%" }}
-                />
+                  width="100px"
+                  overflow="hidden"
+                  borderRadius="50%"
+                >
+                  <img
+                    alt="profile-user"
+                    height="100%"
+                    src={myuser?.img ? myuser.img : userPlaceholder}
+                    style={{ cursor: "pointer" }}
+                  />
+                </Box>
               </Box>
               <Box textAlign="center">
                 <Typography
@@ -114,12 +123,8 @@ export default function SideBar() {
           )}
 
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
-
-
             <hr />
-            <Typography variant="h6" >
-              Info
-            </Typography>
+            <Typography variant="h6">Info</Typography>
             <Item
               title="Info"
               to={ruta}
@@ -128,12 +133,8 @@ export default function SideBar() {
               setSelected={setSelected}
             />
 
-
-
             <hr />
-            <Typography variant="h6" >
-              Pets
-            </Typography>
+            <Typography variant="h6">Pets</Typography>
             <Item
               title="My pets"
               to={ruta + "/MyPets"}
@@ -149,11 +150,8 @@ export default function SideBar() {
               setSelected={setSelected}
             />
 
-
             <hr />
-            <Typography variant="h6" >
-              Settings
-            </Typography>
+            <Typography variant="h6">Settings</Typography>
             <Item
               title="Update info"
               to={ruta + "/update"}
