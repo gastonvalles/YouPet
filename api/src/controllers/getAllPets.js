@@ -1,6 +1,7 @@
 const { Sequelize } = require("sequelize");
 const { Pet, MedicalDiagnostic } = require("../db.js");
 const { Op } = require("sequelize");
+const imgUpload = require("./imgUpload")
 
 const petJson = [
   {
@@ -67,13 +68,25 @@ const getPetByPK = async (id) => {
 // };
 
 const dbCreatePet = async (body) => {
+  
   try {
-    const { name, detail, date } = body;
-    if (!name || !detail || !date) {
+    const { name, detail, UserId, img } = body;
+      body.date = new Date();
+    if (!name || !detail  || !UserId) {
       throw new Error("missing query");
     } else {
+      
+
+      if (img) {
+        
+        const uploadRes = await imgUpload(img)
+        if (uploadRes) {
+          body.img = uploadRes;
+        }
+      }
+
       await Pet.create(body);
-      return `service ${body.name} created successfully`;
+      return `Pet ${body.name} created successfully`;
     }
   } catch (error) {
     throw error;

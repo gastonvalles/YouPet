@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+import Swal from "sweetalert2";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { getMyUser, getUserByEmail } from "../../../../Redux/actions";
@@ -54,7 +54,14 @@ export default function Login() {
               localStorage.setItem("jwt", res.data.data);
               dispatch(getMyUser());
               navigate("/");
-            }, 3000);
+            }).catch((error) => {
+            Swal.fire({
+              icon: "error",
+              title: "existe un error",
+              text: `${error.response.data}`,
+            })
+          }
+          );
           }}
         >
           {({ errors }) => (
