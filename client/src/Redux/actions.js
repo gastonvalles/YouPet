@@ -285,15 +285,32 @@ export function createUser(payload) {
   };
 }
 
-export function updateUser(id) {
+export function clearUpdateUser() {
   return async function (dispatch) {
-    var json = await axios.put(`http://localhost:3001/user/${id}`);
+    let json = "nada" ;
     return dispatch({
       type: UPDATE_USER,
-      payload: json.data,
+      payload: json,
     });
   };
 }
+
+export function updateUser(payload, id) {
+  return async function (dispatch) {
+    let json = "" ;
+    try {
+      await instance.put(`http://localhost:3001/user/${id}`, payload);
+      json = "ok"
+    } catch (error) {
+      json = "error"
+    }
+    return dispatch({
+      type: UPDATE_USER,
+      payload: json,
+    });
+  };
+}
+
 
 export function getAdmins() {
   return async function (dispatch) {

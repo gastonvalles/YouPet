@@ -57,6 +57,20 @@ const AddPet = () => {
           });
         }, "600");
         setIsLoading(false);
+      } else if (createPetState[0] === "error") {
+        setTimeout(() => {
+          Swal.close();
+        }, "400");
+
+        setTimeout(() => {
+          Swal.fire({
+            icon: "error",
+            title: `error`,
+            showConfirmButton: false,
+            timer: 1000,
+          });
+        }, "600");
+        setIsLoading(false);
       }
     }
   }, [isLoading, createPetState]);

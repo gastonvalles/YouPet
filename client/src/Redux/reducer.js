@@ -32,6 +32,7 @@ import {
   GET_VET_BY_NAME,
   GET_VET_DETAIL,
   UPDATE_ADMIN,
+  UPDATE_USER
 } from "./const";
 
 const initialState = {
@@ -39,6 +40,7 @@ const initialState = {
   allPets: [],
   petDetail: [],
   createPet:["nada"],
+  updateUser:["nada"],
   vets: [],
   allVets: [],
   vetDetail: [],
@@ -252,6 +254,11 @@ function rootReducer(state = initialState, action) {
         return {
           ...state,
           createPet: [action.payload],
+        };
+    case UPDATE_USER:
+        return {
+          ...state,
+          updateUser: [action.payload],
         };
     default:
       return state;

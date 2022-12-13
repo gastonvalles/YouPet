@@ -3,6 +3,7 @@ const cualquiera = require("../middlewares/passport");
 const { User } = require("../db");
 const router = Router();
 router.use(json());
+const bcryptjs = require("bcryptjs");
 const passport = require("passport");
 const serviceController = require("../middlewares/service");
 const admController = require("../middlewares/admin");
@@ -13,6 +14,7 @@ const userController = require("../middlewares/user.js");
 const paymentController = require("../middlewares/payments");
 const autentController = require("../middlewares/autent");
 const favoriteMeddleware = require("../middlewares/favor");
+const imgUpload = require("../controllers/imgUpload");
 
 router.use("/favoriote", favoriteMeddleware);
 router.use(
@@ -68,6 +70,7 @@ async function userctualizado(req, res, next) {
     dni,
     isAdmin,
     isActive,
+    img
   } = req.body;
 
   try {
@@ -75,7 +78,31 @@ async function userctualizado(req, res, next) {
     user.name = name ? name : user.name;
     user.lastname = lastname ? lastname : user.lastname;
     user.username = username ? username : user.username;
-    user.password = password ? password : user.password;
+
+    if ( password && password !== user.password) { 
+      if (!(await bcryptjs.compare(password, user.password))) {
+        const newHash = await bcryptjs.hash(password, 8);
+        user.password = newHash;
+      }
+    }
+
+    if (img !== user.img) {
+      console.log("la imagen no es la misma")
+      try {
+        if (img) {
+          const uploadRes = await imgUpload(img);
+          if (uploadRes) {
+            user.img = uploadRes;
+          }
+        }
+      } catch (error) {
+        console.log(error.message);
+      }
+
+    }
+
+
+
     user.confirmationpass = confirmationpass
       ? confirmationpass
       : user.confirmationpass;
