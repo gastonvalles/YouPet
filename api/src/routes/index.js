@@ -33,6 +33,12 @@ router.use(
 );
 
 router.use(
+  "/pet",
+  passport.authenticate(["jwt"], { session: false }),
+  petController
+);
+
+router.use(
   "/turn",
   passport.authenticate("jwt", { session: false }),
   turnController

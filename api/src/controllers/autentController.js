@@ -134,6 +134,9 @@ exports.login = async (req, res) => {
     ) {
       return res.status(404).send("Contraseña e email invalido");
     }
+    if(!findUser.isActive) {
+      return res.status(401).send("Comunicarse con soporte")
+    }
     const id = findUser.id;
     const token = jwt.sign({ id: id }, "userKey");
 

@@ -68,15 +68,17 @@ const getPetByPK = async (id) => {
 // };
 
 const dbCreatePet = async (body) => {
+  
   try {
     const { name, detail, UserId, img } = body;
       body.date = new Date();
     if (!name || !detail  || !UserId) {
       throw new Error("missing query");
     } else {
-
+      
 
       if (img) {
+        
         const uploadRes = await imgUpload(img)
         if (uploadRes) {
           body.img = uploadRes;
