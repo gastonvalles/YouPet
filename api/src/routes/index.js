@@ -18,7 +18,7 @@ const autAdmin = require("../middlewares/autAdmin.js");
 router.use("/favoriote", favoriteMeddleware);
 router.use(
   "/admin",
-  passport.authenticate("jwt", { session: false }),
+  // passport.authenticate("jwt", { session: false }),
   admController
 );
 router.use("/service", serviceController);
