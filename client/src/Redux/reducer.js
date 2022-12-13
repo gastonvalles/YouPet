@@ -1,20 +1,15 @@
 import {
   CLEAR_DETAILS,
   CLEAR_TURN,
-  CREATE_ADMIN,
   CREATE_SERVICE,
   CREATE_TURN,
   CREATE_VET,
   CREATE_PET,
-  DELETE_ADMIN,
   DELETE_PET,
   DELETE_SERVICE,
   DELETE_TURN,
   DELETE_VET,
   FILTER_SERVICE,
-  GET_ADMINS,
-  GET_ADMIN_BY_NAME,
-  GET_ADMIN_DETAIL,
   GET_All_TURN,
   GET_MYUSER,
   GET_PAYMENT_MP,
@@ -29,13 +24,15 @@ import {
   GET_USER_BY_EMAIL,
   GET_USER_BY_NAME,
   GET_USER_DETAIL,
-  GET_USER_PETS,
   GET_VETS,
   GET_VET_BY_NAME,
   GET_VET_DETAIL,
-  UPDATE_ADMIN,
+  UPDATE_SERVICE,
+  UPDATE_USER,
+  UPDATE_VET,
   UPDATE_USER_BYPANEL,
-  REMOVE_PET
+  REMOVE_PET,
+  GET_USER_PETS,
 } from "./const";
 
 const initialState = {
@@ -58,16 +55,13 @@ const initialState = {
   createdTurn: [],
   services: [],
   serviceDetail: [],
-  createService: [],
   user: [],
   users: [],
   allUsers: [],
   userDetail: [],
-  admins: [],
-  allAdmins: [],
-  adminDetail: [],
   allServices: [],
   paymentLink: {},
+  myuser: [],
 };
 
 function rootReducer(state = initialState, action) {
@@ -115,12 +109,26 @@ function rootReducer(state = initialState, action) {
         ...state,
         vets: deleteVet.filter((vet) => vet.id !== action.payload),
       };
+      case UPDATE_VET:
+        return {
+          ...state,
+          vets: state.vets.map((vet) =>
+            vet.id === action.payload.id ? action.payload : vet
+          ),
+        };
     case GET_SERVICES:
       return {
         ...state,
         services: action.payload,
         allServices: action.payload,
       };
+      case UPDATE_SERVICE:
+        return {
+          ...state,
+          services: state.services.map((service) =>
+            service.id === action.payload.id ? action.payload : service
+          ),
+        };
     case GET_SERVICE_DETAIL:
       return {
         ...state,
@@ -164,37 +172,16 @@ function rootReducer(state = initialState, action) {
         ...state,
         user: action.payload,
       };
-    case GET_ADMINS:
+
+
+
+
+
+    case UPDATE_USER:
       return {
         ...state,
-        admins: action.payload,
-      };
-    case GET_ADMIN_DETAIL:
-      return {
-        ...state,
-        adminDetail: action.payload,
-      };
-    case GET_ADMIN_BY_NAME:
-      return {
-        ...state,
-        admins: action.payload,
-      };
-    case CREATE_ADMIN:
-      return {
-        ...state,
-        admins: [],
-      };
-    case DELETE_ADMIN:
-      const deleteAdmin = state.allAdmins;
-      return {
-        ...state,
-        admins: deleteAdmin.filter((admin) => admin.id !== action.payload),
-      };
-    case UPDATE_ADMIN:
-      return {
-        ...state,
-        adminDetail: state.adminDetail.map((admin) =>
-          admin.id === action.payload.id ? action.payload : admin
+        users: state.users.map((user) =>
+          user.id === action.payload.id ? action.payload : user
         ),
       };
     case FILTER_SERVICE:
