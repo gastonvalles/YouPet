@@ -3,7 +3,7 @@ import { Route, Routes } from "react-router-dom"
 import { ColorModeContext, useMode } from "../theme";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import "./PanelAdmin.css";
-// import TopBar from "../TopBar/index.jsx";
+import TopBar from "../TopBar/index.jsx";
 import SideBar from "../SideBar/index.jsx";
 import Dashboard from "../Dashboard/index.jsx";
 import Users from "../Users/index.jsx";
@@ -23,7 +23,7 @@ export default function PanelAdmin() {
         <div className="app">
           <SideBar/>
           <main className="content">
-            {/* <TopBar /> */}
+            <TopBar />
             <Routes>
               <Route path="/" element={<Dashboard />} />
               <Route path="/users" element={<Users />} />
