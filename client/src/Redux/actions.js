@@ -6,7 +6,6 @@ import {
   CREATE_PET,
   CREATE_SERVICE,
   CREATE_TURN,
-  CREATE_USER,
   CREATE_VET,
   DELETE_ADMIN,
   DELETE_PET,
@@ -33,22 +32,10 @@ import {
   GET_VETS,
   GET_VET_BY_NAME,
   GET_VET_DETAIL,
-  GET_All_TURN,
-  CREATE_ADMIN,
-  CREATE_SERVICE,
-  CREATE_VET,
-  CREATE_PET,
-  DELETE_PET,
-  DELETE_VET,
-  DELETE_SERVICE,
-  DELETE_ADMIN,
-  DELETE_TURN,
   UPDATE_USER,
   UPDATE_TURN,
   UPDATE_ADMIN,
   UPDATE_SERVICE,
-  UPDATE_TURN,
-  UPDATE_USER,
   UPDATE_VET,
   GET_ADMIN_BY_EMAIL,
   GET_MY_ADMIN,
@@ -433,7 +420,6 @@ export function filterService(payload) {
 
 export function getPaymentMP(service) {
   return async function (dispatch) {
-    //let json = await axios.post(`http://localhost:3001/payment/mp/552525`,service);
     let json = await instance.post(`http://localhost:3001/payment/mp/552525`,service);
     return dispatch({
       type: GET_PAYMENT_MP,
