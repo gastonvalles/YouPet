@@ -16,6 +16,7 @@ import Payment from "./Components/Functionality/Payment";
 import ErrorPay from "./Components/Functionality/Payment/ErrorPay";
 import AdminServiceDetail from "./Components/Functionality/PanelAdmin/AllServices/AdminServiceDetail";
 import PanelAdmin from "./Components/Functionality/PanelAdmin/Body/PanelAdmin";
+import UserPanel from "./Components/Functionality/UserPanel/Body/UserPanel";
 import AdminProfileDetail from "./Components/Functionality/PanelAdmin/Users/Detail";
 import ChooseVetTurn from "./Components/Functionality/Turns/ChooseVetTurn";
 import { useEffect } from "react";
@@ -52,6 +53,7 @@ function App() {
         <Route path="/adminvet/:id" element={<AdminVetDetail/>} />
         <Route path="/admin/*" element={<PanelAdmin />} />
         <Route path="/confirm/:confirmationCode" element={<Confirm />} />
+        <Route path="/userpanel/*" element={<UserPanel />} />
       </Routes>
     </div>
   );

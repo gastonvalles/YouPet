@@ -1,13 +1,17 @@
-import React, { useEffect, useState } from "react";
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import LogoutIcon from '@mui/icons-material/Logout';
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import logo from "../../../img/logo.png";
+import userPlaceholder from "../../../img/user-placeholder.png";
 import {
   getServiceByName,
   getServices,
   getVetByName
 } from "../../../Redux/actions";
+import dropMenu from "./dropMenu.module.css";
 import "./Navbar.css";
 
 export default function NavBar() {
@@ -73,7 +77,7 @@ export default function NavBar() {
                 type="submit"
                 onClick={(event) => handleSubmit(event)}
               >
-                Search
+                🔎
               </button>
             </form>
             {/* preguntar si esta logueado o no */}
@@ -92,21 +96,71 @@ export default function NavBar() {
                   </Link>
                 </>
               ) : (
-                <button
-                  onClick={() => {
-                    localStorage.removeItem("jwt");
-                    navigate(0);
-                  }}
-                  className="btn"
-                >
-                  {" "}
-                  Sign out
-                </button>
+
+                <>
+                  <NavItem img={myuser?.img ? myuser.img : userPlaceholder} navigate={navigate}>
+                  </NavItem>
+                </>
               )}
             </div>
           </div>
         </div>
       </nav>
+    </>
+  );
+}
+
+
+function NavItem(props) {
+  const [open, setOpen] = useState(false);
+
+  const menuRef = useRef();
+  const imgRef = useRef();
+
+  window.addEventListener("click", (e) => {
+    if (e.target !== menuRef.current && e.target !== imgRef.current) {
+      setOpen(false);
+    }
+  });
+  return (
+    <li className={dropMenu.nav_item}>
+      <img
+        src={props.img}
+        alt="profilePhoto"
+        className={dropMenu.icon_button}
+        onClick={() => setOpen(!open)}
+        ref={imgRef}
+      />
+
+      {open && (
+        <div ref={menuRef} className={dropMenu.dropdown}>
+          <DropdownMenu navigate={props.navigate} />
+        </div>
+      )}
+    </li>
+  );
+}
+
+function DropdownMenu(props) {
+  const { navigate } = props;
+
+  return (
+    <>
+      <Link to="/userpanel" className={dropMenu.menu_item}>
+        Panel
+        <AccountCircleIcon />
+      </Link>
+      <hr />
+      <Link to={"#"}
+        onClick={() => {
+          localStorage.removeItem("jwt");
+          navigate(0);
+        }}
+        className={dropMenu.menu_item}
+      >
+        Sign out
+        <LogoutIcon />
+      </Link>
     </>
   );
 }

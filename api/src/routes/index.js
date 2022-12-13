@@ -22,6 +22,12 @@ router.use(
 );
 router.use("/vet", vetController);
 router.use(
+  "/pet",
+  passport.authenticate(["jwt"], { session: false }),
+  petController
+);
+
+router.use(
   "/turn",
   passport.authenticate("jwt", { session: false }),
   turnController

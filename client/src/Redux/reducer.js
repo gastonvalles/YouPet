@@ -4,6 +4,7 @@ import {
   CREATE_SERVICE,
   CREATE_TURN,
   CREATE_VET,
+  CREATE_PET,
   DELETE_PET,
   DELETE_SERVICE,
   DELETE_TURN,
@@ -34,6 +35,7 @@ const initialState = {
   pets: [],
   allPets: [],
   petDetail: [],
+  createPet:["nada"],
   vets: [],
   allVets: [],
   vetDetail: [],
@@ -227,6 +229,11 @@ function rootReducer(state = initialState, action) {
         ...state,
         myuser: action.payload,
       };
+    case CREATE_PET:
+        return {
+          ...state,
+          createPet: [action.payload],
+        };
     default:
       return state;
   }
