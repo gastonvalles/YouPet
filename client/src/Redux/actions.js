@@ -143,6 +143,7 @@ export function deleteVet(id) {
 export function getServices() {
   return async function (dispatch) {
     let json = await instance.get("/service");
+    console.log(json);
     return dispatch({
       type: GET_SERVICES,
       payload: json.data,
@@ -341,7 +342,7 @@ export function addFavorites(id, userid) {
     });
     return dispatch({
       type: ADD_FAVORITES,
-      payload: json.data,
-    });
-  };
+      payload: json.data
+    })
+  }
 }

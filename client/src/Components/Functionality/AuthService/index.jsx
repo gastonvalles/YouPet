@@ -23,7 +23,7 @@ const Confirm = () => {
     <div>
       <header>
         <h3>
-          <strong>Cuenta confirmada</strong>
+          <strong>Confirmed account</strong>
         </h3>
       </header>
       <Link to={"/login"}>PLEASE LOGIN</Link>
