@@ -1,20 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router"
 import logo from "../../../img/logo.png";
 import {
   getServiceByName,
   getServices,
   getVetByName,
 } from "../../../Redux/actions";
+
 import "./Navbar.css";
+
 
 export default function NavBar() {
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  
   const myuser = useSelector((state) => state.myuser);
-  console.log(myuser);
   const [name, setName] = useState("");
 
   useEffect(() => {
@@ -31,6 +33,10 @@ export default function NavBar() {
     dispatch(getVetByName(name));
     setName("");
   }
+
+  
+  
+  
 
   return (
     <>
@@ -52,84 +58,13 @@ export default function NavBar() {
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-1">
-              {/* <li className="nav-item">
-                <Link to={"/"}>
-                  <span className="nav-link active me-3" aria-current="page">
-                    Contact
-                  </span>
-                </Link>
-              </li> */}
-
-              {/* <div className="dropdown">
-                <span
-                  className="nav-link dropdown-toggle me-3"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  Go to...
-                </span>
-                <ul className="dropdown-menu" aria-labelledby="dropdownMenu2">
-                  <li>
-                    <Link to={"/veterinario"}>
-                      <button className="dropdown-item" type="button">
-                        Veterinario
-                      </button>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to={"/nutricionista"}>
-                      <button className="dropdown-item" type="button">
-                        Nutricionista
-                      </button>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to={"/cirugias"}>
-                      <button className="dropdown-item" type="button">
-                        Cirugias
-                      </button>
-                    </Link>
-                  </li>
-                </ul>
-              </div> */}
+              
               <div>
                   <Link to="/admin" type="button" className="text-decoration-none dropdown-item">
                     Admin
                   </Link>
                 </div>
-              {/* <li className="nav-item dropdown">
-                <span
-                  className="nav-link dropdown-toggle me-3"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  Dropdown
-                </span>
-                <ul className="dropdown-menu">
-                  <li>
-                    <Link to={"/veterinario"}>
-                      <span className="dropdown-item" />1 Option
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to={"/nutricionista"}>
-                      <span className="dropdown-item" />2 Option
-                    </Link>
-                  </li>
-                  <li></li>
-                  <li>
-                    <Link to={"/cirugias"}>
-                      <span className="dropdown-item" />3 Option
-                    </Link>
-                  </li>
-                </ul>
-              </li> */}
-
-              {/* <li className="nav-item">
-                <span className="nav-link">Disabled</span>
-              </li> */}
+              
             </ul>
             <form className="d-flex" role="search">
               <input
@@ -147,38 +82,9 @@ export default function NavBar() {
                 Search
               </button>
             </form>
-            {/* preguntar si esta logueado o no */}
+            
           </div>
-          {/* <div>
-            <select
-              defaultValue={""}
-              className="selectorFiltros"
-              onChange={(event) => handleFilter(event)}
-            >
-              <option value={""}>All Vets</option>
-              <option value={"Clinic"}>Healthcare Clinic</option>
-              <option value={"Anesthesia"}>
-                Surgery and Anesthesia
-              </option>
-              <option value={"Diagnostics"}>Diagnostics</option>
-              <option value={"Aesthetics"}>Aesthetics</option>
-            </select>
-          </div> */}
-          {/* <div>
-            <select
-              defaultValue={""}
-              className="selectorFiltros"
-              onChange={(event) => handleFilter(event)}
-            >
-              <option value={""}>All Services</option>
-              <option value={"Healthcare Clinic"}>Healthcare Clinic</option>
-              <option value={"Surgery and Anesthesia"}>
-                Surgery and Anesthesia
-              </option>
-              <option value={"Diagnostics"}>Diagnostics</option>
-              <option value={"Aesthetics"}>Aesthetics</option>
-            </select>
-          </div> */}
+          
           <div>
             <div className="d-flex">
               {!myuser?.id ? (
@@ -202,11 +108,14 @@ export default function NavBar() {
                 >
                   {" "}
                   Sign out
-                </button>
+                </button>                
               )}
             </div>
           </div>
         </div>
+        <div>     
+        
+          </div>            
       </nav>
     </>
   );

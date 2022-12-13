@@ -26,13 +26,9 @@ import { useDispatch } from "react-redux";
 import Home from "./Components/View/HomeFake/HomeFake";
 import { getMyUser } from "./Redux/actions";
 import AdminVetDetail from "./Components/Functionality/PanelAdmin/VetInformation/VetDetail";
+import Confirm from "./Components/Functionality/AuthService";
 
-import Headerl from "./Components/layout/Headerl";
-import * as storage from "./utils/storage"
-import UserLogued from "./Components/UserLogued/index"
-import LoginButton from "./Components/LoginButton/index"
-import GoogleLogin from 'react-google-login';
-import {gapi} from 'gapi-script';
+
 
 
 
@@ -42,41 +38,12 @@ function App() {
     dispatch(getMyUser());
   }, [dispatch]);
 
-  const [user, setUser]= useState (null);
-
-  const onLogin = (user) => {
-    //almacenar localStorage
-    storage.setUser(user)
-    setUser(user);
-  }
-
-  const onLogout = () => {
-    storage.clear();
-    setUser(null);
-  };
-
-  const clientID="1039930117494-6e72hj0uf19lm0aloue7asbr3gpspeo1.apps.googleusercontent.com";
+ 
 
  
-  const onSuccess = (response) =>{
-    console.log(response)
-    console.log(response.profileObj)
-  }
-
-  const onFailure = () =>{
-    console.log("Something went wrong")
-  }
 
 
-  useEffect(()=>{
-    const checkSession = () =>{
-      const user = storage.getUser();//leer el user de storage
-      if(user){
-        setUser(user)
-      }
-    }
-    checkSession();
-  },[])
+ 
 
   return (
     <div className="App">
@@ -97,31 +64,18 @@ function App() {
         <Route exact path="/errorPay" element={<ErrorPay />} />
         <Route path="/user/:id" element={<AdminProfileDetail />} />
         <Route path="/serv/:id" element={<AdminServiceDetail />} />
+        <Route path="/adminvet/:id" elemente={<AdminVetDetail/>}/>
         <Route path="/admin/*" element={<PanelAdmin />} />
-        {/* <Route path="/confirm/:confirmationCode" element={<Confirm />} /> */}
+        <Route path="/confirm/:confirmationCode" element={<Confirm />} /> 
+
       </Routes>
      
-     <div className="container-fuild">
-     <Headerl>
-      {user && <UserLogued user ={ user} onLogout={onLogout} />}
+    
 
-     </Headerl>
-    <div className="row" style={{padding: '24px 16px'}}>
-     {!user && <LoginButton onLogin={onLogin}/>}
-     {user &&  <Profile />  } 
-     </div>
+    
 
 
-     <GoogleLogin
-    clientId={clientID}
-    buttonText="Start section with Google"
-    onSuccess={onSuccess} 
-    onFailure={onFailure}
-    cookiePolicy={'single_host_origin'}
-  />
-
-
-     </div>
+     
     </div>
   );
 }

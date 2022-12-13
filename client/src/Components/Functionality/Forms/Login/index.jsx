@@ -2,11 +2,14 @@ import React, { useEffect, useState } from "react";
 
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useDispatch, useSelector } from "react-redux";
-import { getMyUser, getUserByEmail } from "../../../../Redux/actions";
+import { createUser, getMyUser, getUserByEmail } from "../../../../Redux/actions";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import logo from "../../../../img/logo.png";
 import "./index.css";
+import FacebookLogin from 'react-facebook-login';
+
+
 export default function Login() {
   const [formSuccess, setFormSuccess] = useState(false);
 
@@ -17,8 +20,36 @@ export default function Login() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    dispatch(getMyUser());
+  }, [dispatch]);
+
+  useEffect(() => {
     if (user.length < 1) dispatch(getUserByEmail(email));
   }, [dispatch, user, email]);
+
+ 
+
+  const responseFacebook = (response) => {
+    let username= response.name.split(' ')
+    
+    const datef= ({
+      
+      name: username[0],
+      lastname: username[1],
+      password:response.id,
+      img: response.picture.data.url,
+      email: response.email,
+      address: "",
+      tel:"",
+      dni:"",
+
+    });
+       
+    console.log("datos",datef);
+    console.log(response);
+
+  
+  }
 
   return (
     <div className="backgroud">
@@ -103,11 +134,32 @@ export default function Login() {
                 </div>
                 <button type="submit" className="btn btn-primary ">
                   Submit
-                </button>
+                </button> 
                 {formSuccess && (
                   <p className="text-success">¡Bienvenido {user.name}!</p>
                 )}
+
+                
+              <div>
+                <br></br>
+                <br></br>
+
+              <FacebookLogin
+                  appId="2698472476949930"
+                  autoLoad={false}
+                  fields="name,email,picture"
+                  callback={responseFacebook} 
+                  icon= "fa-facebook"/>
+
+                   </div>
+
+
+
+                   
+
               </Form>
+
+              
             </div>
           )}
         </Formik>

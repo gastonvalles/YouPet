@@ -11,12 +11,12 @@ const getItem = (key) =>{
     return undefined;
 }
 
-export function setUser (user){
-    setItem('user', user);
+export function setUser (userf){
+    setItem('userf', userf);
 }
 
 export function getUser (){
-    getItem('user');
+    getItem('userf');
 }
 
 export function clear (){
