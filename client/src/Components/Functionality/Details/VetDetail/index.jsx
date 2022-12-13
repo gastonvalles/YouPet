@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { addFavorites, clearDetails, getVetsDetail } from "../../../../Redux/actions";
+import { addFavorites, clearDetails, getVetsDetail, removeFav } from "../../../../Redux/actions";
 import './vetDetail.css';
 
 export default function VetDetail() {
