@@ -54,7 +54,7 @@ export default function NavBar() {
               <div>
               {
                 myuser?.isAdmin === true ? (
-                <Link to="/admin" type="button" className="text-decoration-none dropdown-item">
+                <Link to="/admin" type="button" className="text-decoration-none btn btn-primary">
                   Admin
                 </Link>) : null
               }

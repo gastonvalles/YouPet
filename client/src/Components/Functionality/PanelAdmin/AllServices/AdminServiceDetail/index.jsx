@@ -34,11 +34,11 @@ export default function AdminServiceDetail() {
         <Box>
           <Box p="20px">
             <Link
-              to="/admin/users"
+              to="/admin/services"
               type="button"
-              className="text-decoration-none"
+              className="text-decoration-none btn btn-primary"
             >
-              Back to users
+              Back to services
             </Link>
           </Box>
           <Box p="20px">
@@ -59,7 +59,6 @@ export default function AdminServiceDetail() {
             <h3>{service.name}</h3>
           </Box>
           <Grid container spacing={2} justifyContent="center" alignItems="center">
-            <Box>
               <Grid item lg={3}>
                   <Box>
                     <h3>Type:</h3>
@@ -79,12 +78,11 @@ export default function AdminServiceDetail() {
                 </Box>
               </Grid>
               <Grid item lg={8}>
-                <Box m="200px">
+                <Box m="20px">
                   <h3>Detail:</h3>
                   <h3>{service.detail}</h3>
                 </Box>
               </Grid>
-            </Box>
           </Grid>
         </Box>
       </ThemeProvider>

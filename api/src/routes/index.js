@@ -70,7 +70,7 @@ async function userActualizado(req, res, next) {
     next(error);
   }
 }
-router.put("/user/:id", userActualizado);
+router.put("/user/:id", passport.authenticate("jwt", { session: false }), userActualizado);
 
 async function vetActualizado(req, res) {
   const { id } = req.params;
