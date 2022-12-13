@@ -1,12 +1,15 @@
+import React, { useState } from "react";
+import { Formik, Form, Field, ErrorMessage } from "formik";
 import axios from "axios";
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import React, { useState } from "react";
 import Swal from "sweetalert2";
-import userPlaceholder from "./user-placeholder.png";
-import userStyle from "./user.module.css";
+import { useNavigate } from "react-router-dom";
+import userPlaceholder from "./user-placeholder.png"
+import userStyle from "./user.module.css"
 
 function FormUser() {
-  const [formSuccess] = useState(false);
+  const [formSuccess, setformSuccess] = useState(false);
+  const navigate = useNavigate();
   const [userImg, setUserImg] = useState("");
   const handleImageUpload = (e, setFieldValue) => {
     const file = e.target.files[0];

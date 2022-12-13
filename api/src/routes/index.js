@@ -1,11 +1,10 @@
 const { Router, json } = require("express");
 const cualquiera = require("../middlewares/passport");
-const { User } = require("../db");
+const { User, Vet } = require("../db");
 const router = Router();
 router.use(json());
 const passport = require("passport");
 const serviceController = require("../middlewares/service");
-const admController = require("../middlewares/admin");
 const petController = require("../middlewares/pet");
 const vetController = require("../middlewares/vet");
 const turnController = require("../middlewares/turn.js");
@@ -15,23 +14,13 @@ const autentController = require("../middlewares/autent");
 const favoriteMeddleware = require("../middlewares/favor");
 
 router.use("/favoriote", favoriteMeddleware);
+router.use("/service", serviceController);
 router.use(
-  "/admin",
+  "/pet",
   passport.authenticate("jwt", { session: false }),
-  admController
+  petController
 );
-router.use(
-  "/service",
-
-  /* passport.authenticate("jwt", { session: false }), */
-  serviceController
-);
-router.use(
-  "/vet",
-  passport.authenticate(["jwt", "anonymous"], { session: false }),
-  vetController
-);
-
+router.use("/vet", vetController);
 router.use(
   "/pet",
   passport.authenticate(["jwt"], { session: false }),
@@ -43,11 +32,7 @@ router.use(
   passport.authenticate("jwt", { session: false }),
   turnController
 );
-router.use(
-  "/user",
-  passport.authenticate("jwt", { session: false }),
-  userController
-);
+router.use("/user", passport.authenticate("jwt", { session: false }), userController);
 router.use(
   "/payment",
   passport.authenticate("jwt", { session: false }),
@@ -55,7 +40,7 @@ router.use(
 );
 router.use("/", autentController);
 
-async function userctualizado(req, res, next) {
+async function userActualizado(req, res, next) {
   const { id } = req.params;
   const {
     name,
@@ -82,8 +67,8 @@ async function userctualizado(req, res, next) {
     user.email = email ? email : user.email;
     user.address = address ? address : user.address;
     user.dni = dni ? dni : user.dni;
-    user.isAdmin = isAdmin ? isAdmin : user.isAdmin;
-    user.isActive = isActive ? isActive : user.isActive;
+    user.isAdmin = typeof isAdmin === "boolean" ? isAdmin : user.isAdmin;
+    user.isActive = typeof isActive === "boolean" ? isActive : user.isActive;
 
     await user.save();
     res.send("usuario actualizado");
@@ -91,6 +76,42 @@ async function userctualizado(req, res, next) {
     next(error);
   }
 }
-router.put("/user/:id", userctualizado);
+router.put("/user/:id", passport.authenticate("jwt", { session: false }), userActualizado);
+
+async function vetActualizado(req, res) {
+  const { id } = req.params;
+  const {
+    name,
+    lastname,
+    speciality,
+    email,
+    address,
+    img,
+    dni,
+    inicialDate,
+    finishDate,
+    isActive,
+  } = req.body;
+
+  try {
+    let vet = await Vet.findByPk(id);
+    vet.name = name ? name : vet.name;
+    vet.lastname = lastname ? lastname : vet.lastname;
+    vet.speciality = speciality ? speciality : vet.speciality;
+    vet.email = email ? email : vet.email;
+    vet.address = address ? address : vet.address;
+    vet.img = img ? img : vet.img;
+    vet.dni = dni ? dni : vet.dni;
+    vet.inicialDate = inicialDate ? inicialDate : vet.inicialDate;
+    vet.finishDate = finishDate ? finishDate : vet.finishDate;
+    vet.isActive = typeof isActive === "boolean" ? isActive : vet.isActive;
+
+    await vet.save();
+    res.status(200).send("vet actualizado");
+  } catch (error) {
+    res.send(error.message);
+  }
+}
+router.put("/vet/:id", vetActualizado);
 
 module.exports = router;

@@ -60,7 +60,6 @@ sequelize.models = Object.fromEntries(capsEntries);
 const {
   User,
   Pet,
-  Admin,
   MedicalDiagnostic,
   Score,
   Service,
@@ -90,15 +89,6 @@ Turn.belongsTo(Payments);
 
 Pet.hasMany(MedicalDiagnostic);
 MedicalDiagnostic.belongsTo(Pet);
-
-Admin.belongsToMany(Service, { through: "Admin_Service" });
-Service.belongsToMany(Admin, { through: "Admin_Service" });
-
-Admin.belongsToMany(Turn, { through: "Admin_Turn" });
-Turn.belongsToMany(Admin, { through: "Admin_Turn" });
-
-Admin.belongsToMany(Vet, { through: "Admin-Vet" });
-Vet.belongsToMany(Admin, { through: "Admin-Vet" });
 
 Service.belongsToMany(Vet, { through: "Service-Vet" });
 Vet.belongsToMany(Service, { through: "Service-Vet" });
