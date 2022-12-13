@@ -9,7 +9,6 @@ export default function VetDetail() {
   const dispatch = useDispatch();
   const vet = useSelector((state) => state.vetDetail);
   const myuser = useSelector((state) => state.myuser);
-  //const fav = useSelector((state) => state.fav);
 
   const remfav = () => {
     dispatch(removeFav(id, myuser.id));
