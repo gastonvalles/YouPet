@@ -428,3 +428,28 @@ export function getPaymentMP(service) {
   };
 }
 
+export function addFavorites(id, userid) {
+  return async function (dispatch) {
+    let json = await axios.post(`http://localhost:3001/vet/addFavorite`, {
+      id,
+      userid,
+    });
+    return dispatch({
+      type: GET_VET_DETAIL,
+      payload: json.data,
+    });
+  };
+}
+export function removeFav(id, userid) {
+  return async function (dispatch) {
+    let json = await axios.post(`http://localhost:3001/vet/removeFavorite`, {
+      id,
+      userid,
+    });
+    return dispatch({
+      type: GET_VET_DETAIL,
+      payload: json.data,
+    });
+  };
+}
+
