@@ -34,7 +34,8 @@ import {
   UPDATE_USER_BYPANEL,
   UPDATE_VET,
   GET_USER_PETS,
-  REMOVE_PET
+  REMOVE_PET,
+  CANCEL_TURN
 } from "./const";
 const instance = axios.create({
   baseURL: "http://localhost:3001",
@@ -175,7 +176,6 @@ export function deleteVet(id) {
 export function getServices() {
   return async function (dispatch) {
     let json = await instance.get("/service");
-    console.log(json);
     return dispatch({
       type: GET_SERVICES,
       payload: json.data,
@@ -447,12 +447,40 @@ export function removePetUser(id) {
   };
 }
 
+
 export function getUserTurns(id) {
   return async function (dispatch) {
     let json = await instance.get(`/turn/user/${id}`);
     return dispatch({
       type: GET_USER_TURN,
       payload: json.data,
+    });
+  };
+}
+
+
+export function clearCancelTurnUser() {
+  return async function (dispatch) {
+    let json = "nada" ;
+    return dispatch({
+      type: CANCEL_TURN,
+      payload: json,
+    });
+  };
+}
+
+export function cancelTurnUser(id) {
+  return async function (dispatch) {
+    let json = "" ;
+    try {
+      await instance.delete(`http://localhost:3001/turn/${id}`);
+      json = "ok"
+    } catch (error) {
+      json = "error"
+    }
+    return dispatch({
+      type: CANCEL_TURN,
+      payload: json,
     });
   };
 }

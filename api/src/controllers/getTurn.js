@@ -95,7 +95,23 @@ const getAllTurns = async () => {
   }
 };
 
+
+const deleteTurnByPK = async (params) => {
+  const {id} = params;
+const deletedTurn = await Turn.destroy({
+  where: {
+    id: id
+  },
+});
+if (!deletedTurn) {
+  throw new Error(" Pet not found");
+} else {
+  return deletedTurn;
+}
+};
+
 module.exports = {
+  deleteTurnByPK,
   getUserTurnByPK,
   getAllTurns,
   getTurnByVetPK,

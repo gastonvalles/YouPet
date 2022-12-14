@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const { dbCreateTurn } = require("../controllers/postTurn");
-const {getTurnByVetPK, getTurnForVet, getAllTurns, getUserTurnByPK} = require("../controllers/getTurn")
+const {getTurnByVetPK, getTurnForVet, getAllTurns, getUserTurnByPK, deleteTurnByPK} = require("../controllers/getTurn")
 
 const router = Router();
 
@@ -40,6 +40,14 @@ router.get("/:vetId/:servId", async (req, res) => {
   try {
     const getTurn = await getTurnByVetPK(req.params);
     res.status(200).json(getTurn);
+  } catch (error) {
+    res.status(404).send(error.message);
+  }
+});
+router.delete("/:id", async (req, res) => {
+  try {
+    const deletedTurn = await deleteTurnByPK(req.params);
+    res.status(200).json(deletedTurn);
   } catch (error) {
     res.status(404).send(error.message);
   }

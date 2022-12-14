@@ -77,9 +77,26 @@ const UpdateInfo = () => {
   }, [isLoading, updateUserState, dispatch]);
 
   const handleSubmit = (value) => {
-    setIsLoading(true);
-    dispatch(clearUpdateUserByPanel());
-    dispatch(updateUserByPanel(value, value.UserId));
+
+
+    Swal.fire({
+      title: 'Are you sure?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, update it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setIsLoading(true);
+        dispatch(clearUpdateUserByPanel());
+        dispatch(updateUserByPanel(value, value.UserId));
+      }
+    })
+
+
+
+
   };
 
   return (
@@ -118,10 +135,18 @@ const UpdateInfo = () => {
                   "The lastname can only be alphabetical characters";
               }
 
+                if (!/^[0-9]*$/.test(values.tel)) {
+                errors.tel =
+                  "The Tel can only contain numbers";
+              }
+
               if (!values.password) {
                 errors.password = "Please insert a password";
               } else if (values.password.length < 8) {
                 errors.password = "Password needs to be 8 or longer";
+              }
+               else if (values.password !== values.conpass) {
+                errors.password = "The passwords needs to match";
               }
 
               if (values.conpass !== values.password) {

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { ProSidebarProvider, Menu, MenuItem } from "react-pro-sidebar";
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { tokens } from "../theme";
 import userPlaceholder from "../../../../img/user-placeholder.png";
 
@@ -11,6 +11,7 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import PetsIcon from "@mui/icons-material/Pets";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
+import { useEffect } from "react";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -36,6 +37,16 @@ export default function SideBar() {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Dashboard");
   const myuser = useSelector((state) => state.myuser);
+  const navigate = useNavigate();
+
+  
+
+ useEffect(()=>{
+  const path = `/`;
+  if (!(myuser?.id)){
+        navigate(path)
+  }
+ }, [myuser, navigate])
 
   const ruta = "/userpanel";
 

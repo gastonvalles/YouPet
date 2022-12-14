@@ -45,7 +45,7 @@ function MyPets() {
         setTimeout(() => {
           Swal.fire({
             icon: "success",
-            title: `Pet deleted sucessfully`,
+            title: `Pet removed sucessfully`,
             showConfirmButton: false,
             timer: 1000,
           });
@@ -73,9 +73,23 @@ function MyPets() {
   
 
   const handleRemoveButton =(id)=>{
-    setIsLoading(true);
-     dispatch(clearRemovePet());
-     dispatch(removePetUser(id));
+
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, remove it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setIsLoading(true);
+        dispatch(clearRemovePet());
+        dispatch(removePetUser(id));
+      }
+    })
+
   }
  
   return (
@@ -85,7 +99,7 @@ function MyPets() {
       </Box>
       {mypets?.length ? (
         
-          <div>
+          <div className={petStyle.container}>
             <div className="container my-5">
               <div className="shadow-4 rounded-5 overflow-hidden">
                 <table className="table align-middle mb-0 bg-white">

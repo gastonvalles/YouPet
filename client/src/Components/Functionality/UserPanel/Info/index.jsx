@@ -4,17 +4,21 @@ import Header from "../Header";
 import userPlaceholder from "../../../../img/user-placeholder.png";
 import loadingSvg from "../../../../img/loading_dualring.svg";
 import petPlaceholder from "../../../../img/pets.png";
-import { getUserTurns } from "../../../../Redux/actions";
+import { getUserTurns, clearCancelTurnUser, cancelTurnUser } from "../../../../Redux/actions";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import infoStyle from "./info.module.css";
+import Swal from "sweetalert2";
 
 
 export default function Info() {
   const myuser = useSelector((state) => state.myuser);
   const myturns = useSelector((state) => state.turnsUser);
+  const cancelTurnState = useSelector((state) => state.cancelTurn);
 
+  const [isLoading, setIsLoading] = useState(false);
   const [cargarTurns, setCargarTurns] = useState(true)
+
 
   const dispatch = useDispatch()
 
@@ -24,6 +28,73 @@ export default function Info() {
       dispatch(getUserTurns(myuser.id))
     }
   }, [myuser, dispatch, cargarTurns])
+
+
+
+  useEffect(()=>{
+    if (isLoading) {
+      
+      if (cancelTurnState[0] === "nada") {
+        Swal.fire({
+          iconHtml: `<img src=${loadingSvg} alt="Loading"/>`,
+          title: `Loading`,
+          showConfirmButton: false,
+        });
+      } else if (cancelTurnState[0] === "ok") {
+        setTimeout(() => {
+          Swal.close();
+        }, "400");
+
+        setTimeout(() => {
+          Swal.fire({
+            icon: "success",
+            title: `Turn canceled`,
+            showConfirmButton: false,
+            timer: 1000,
+          });
+        }, "600");
+        setIsLoading(false);
+        setCargarTurns(true)
+      } else if (cancelTurnState[0] === "error") {
+        setTimeout(() => {
+          Swal.close();
+        }, "400");
+
+        setTimeout(() => {
+          Swal.fire({
+            icon: "error",
+            title: `error`,
+            showConfirmButton: false,
+            timer: 1000,
+          });
+        }, "600");
+        setIsLoading(false);
+      }
+    }
+  }, [isLoading, cancelTurnState])
+
+
+
+
+  const handleCancelButton = (id) => {
+
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, do it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setIsLoading(true);
+        dispatch(clearCancelTurnUser());
+        dispatch(cancelTurnUser(id));
+      }
+    })
+
+  }
 
   return (
     <Box m="20px">
@@ -161,6 +232,7 @@ export default function Info() {
                       <button
                         type="button"
                         className="btn btn-sm btn-rounded"
+                        onClick={()=>handleCancelButton(turn.id)}
                       >
                         Cancel
                       </button>

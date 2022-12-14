@@ -55,7 +55,8 @@ async function userActualizado(req, res, next) {
     dni,
     isAdmin,
     isActive,
-    img
+    img,
+    tel
   } = req.body;
 
   try {
@@ -92,6 +93,7 @@ async function userActualizado(req, res, next) {
       ? confirmationpass
       : user.confirmationpass;
     user.email = email ? email : user.email;
+    user.tel = tel ? tel : user.tel;
     user.address = address ? address : user.address;
     user.dni = dni ? dni : user.dni;
     user.isAdmin = typeof isAdmin === "boolean" ? isAdmin : user.isAdmin;

@@ -102,11 +102,8 @@ function Times(props) {
 
   const handleClickTakeTurn = (e) => {
     if (prevButton === null) {
-      console.log("Debes de elegir al menos 1 hora");
+
     } else {
-      // const formDate =
-      //   props.date.toDateString() + " " + event.substring(0, 5) + ":00";
-      // let myDate = new Date(formDate);
 
       let startDate = new Date(slotSelected);
 

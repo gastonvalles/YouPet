@@ -33,6 +33,7 @@ import {
   UPDATE_USER_BYPANEL,
   REMOVE_PET,
   GET_USER_PETS,
+  CANCEL_TURN
 } from "./const";
 
 const initialState = {
@@ -42,6 +43,7 @@ const initialState = {
   createPet:["nada"],
   updateUserByPanel:["nada"],
   removePet:["nada"],
+  cancelTurn:["nada"],
   userPets:[],
   turnsUser:[],
   vets: [],
@@ -256,6 +258,11 @@ function rootReducer(state = initialState, action) {
         return {
           ...state,
           turnsUser: action.payload,
+        };
+    case CANCEL_TURN:
+        return {
+          ...state,
+          cancelTurn: [action.payload],
         };
     case REMOVE_PET:
         return {

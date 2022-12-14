@@ -43,3 +43,4 @@ export const GET_MYUSER = "GET_MYUSER";
 export const CLEAR_DETAILS = "CLEAR_DETAILS";
 export const ADD_FAVORITES = "ADD_FAVORITES";
 export const REMOVE_FAVORITE = "REMOVE_FAVORITE";
+export const CANCEL_TURN = "CANCEL_TURN";

@@ -8,6 +8,7 @@ import { createPet, clearCreatePet } from "../../../../../Redux/actions";
 import { Box } from "@mui/material";
 import Header from "../../Header";
 import Swal from "sweetalert2";
+import { useRef } from "react";
 
 const AddPet = () => {
   const [petImg, setPetImg] = useState("");
@@ -15,6 +16,7 @@ const AddPet = () => {
   const myuser = useSelector((state) => state.myuser);
   const createPetState = useSelector((state) => state.createPet);
   const dispatch = useDispatch();
+  const formikRef = useRef();
 
   const handleImageUpload = (e, setFieldValue) => {
     const file = e.target.files[0];
@@ -34,6 +36,7 @@ const AddPet = () => {
       setFieldValue("img", "");
     }
   };
+
 
   useEffect(() => {
     if (isLoading) {
@@ -55,7 +58,9 @@ const AddPet = () => {
             showConfirmButton: false,
             timer: 1000,
           });
+          formikRef.current?.resetForm();
         }, "600");
+        
         setIsLoading(false);
       } else if (createPetState[0] === "error") {
         setTimeout(() => {
@@ -90,6 +95,7 @@ const AddPet = () => {
       <Box>
         {myuser?.id ? (
           <Formik
+            innerRef={formikRef}
             initialValues={{
               name: "",
               species: "",
