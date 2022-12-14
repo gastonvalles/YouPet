@@ -17,7 +17,6 @@ export default function VetDetail() {
   const addFav = () => {
     dispatch(addFavorites(id, myuser.id));
 
-    console.log(id, myuser.id);
   };
 
   useEffect(() => {
@@ -26,7 +25,7 @@ export default function VetDetail() {
       dispatch(clearDetails());
     };
   }, [dispatch, id]);
-  console.log(vet);
+
   return (
     <div className="vet-cards">
       <div className="vet-card-detail">

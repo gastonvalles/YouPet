@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const { dbCreateTurn } = require("../controllers/postTurn");
-const {getTurnByVetPK, getTurnForVet, getAllTurns} = require("../controllers/getTurn")
+const {getTurnByVetPK, getTurnForVet, getAllTurns, getUserTurnByPK, deleteTurnByPK} = require("../controllers/getTurn")
 
 const router = Router();
 
@@ -26,6 +26,16 @@ router.get("/vet/:vetId", async (req, res)=>{
   }
 });
 
+router.get("/user/:id", async (req, res) => {
+  console.log("pasa por aqui")
+  try {
+    const getUserTurn = await getUserTurnByPK(req.params);
+    res.status(200).json(getUserTurn);
+  } catch (error) {
+    res.status(404).send(error.message);
+  }
+});
+
 router.get("/:vetId/:servId", async (req, res) => {
   try {
     const getTurn = await getTurnByVetPK(req.params);
@@ -34,5 +44,15 @@ router.get("/:vetId/:servId", async (req, res) => {
     res.status(404).send(error.message);
   }
 });
+router.delete("/:id", async (req, res) => {
+  try {
+    const deletedTurn = await deleteTurnByPK(req.params);
+    res.status(200).json(deletedTurn);
+  } catch (error) {
+    res.status(404).send(error.message);
+  }
+});
+
+
 
 module.exports = router;

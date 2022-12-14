@@ -19,6 +19,7 @@ import {
   GET_SERVICE_BY_NAME,
   GET_SERVICE_DETAIL,
   GET_TURN,
+  GET_USER_TURN,
   GET_USERS,
   GET_USER_BY_EMAIL,
   GET_USER_BY_NAME,
@@ -29,6 +30,10 @@ import {
   UPDATE_SERVICE,
   UPDATE_USER,
   UPDATE_VET,
+  UPDATE_USER_BYPANEL,
+  REMOVE_PET,
+  GET_USER_PETS,
+  CANCEL_TURN
 } from "./const";
 
 const initialState = {
@@ -36,6 +41,11 @@ const initialState = {
   allPets: [],
   petDetail: [],
   createPet:["nada"],
+  updateUserByPanel:["nada"],
+  removePet:["nada"],
+  cancelTurn:["nada"],
+  userPets:[],
+  turnsUser:[],
   vets: [],
   allVets: [],
   vetDetail: [],
@@ -51,9 +61,9 @@ const initialState = {
   users: [],
   allUsers: [],
   userDetail: [],
-  myuser: [],
   allServices: [],
   paymentLink: {},
+  myuser: [],
 };
 
 function rootReducer(state = initialState, action) {
@@ -233,6 +243,31 @@ function rootReducer(state = initialState, action) {
         return {
           ...state,
           createPet: [action.payload],
+        };
+    case UPDATE_USER_BYPANEL:
+        return {
+          ...state,
+          updateUserByPanel: [action.payload],
+        };
+    case GET_USER_PETS:
+        return {
+          ...state,
+          userPets: action.payload,
+        };
+    case GET_USER_TURN:
+        return {
+          ...state,
+          turnsUser: action.payload,
+        };
+    case CANCEL_TURN:
+        return {
+          ...state,
+          cancelTurn: [action.payload],
+        };
+    case REMOVE_PET:
+        return {
+          ...state,
+          removePet: [action.payload],
         };
     default:
       return state;

@@ -88,46 +88,6 @@ function FormUser() {
           } else if (values.address.length < 10 && values.address.length > 30) {
             errors.adress = "Ingresa una direccion correcta";
           }
-          /* if (!values.address.street) {
-            errors.street = "Por favor ingresa una calle";
-          } else if (!/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(values.address.street)) {
-            errors.street = "Debe tener al menos 3 digitos";
-          }
-          if (!values.address.numStreet) {
-            errors.numStreet = "Por favor ingresa numero de la calle";
-          } else if (!/^\d{0,9999}$/.test(values.address.numStreet) || values.address.numStreet<0) {
-            errors.numStreet = "Por favor ingresa numero de la calle";
-          }
-          if (!values.address.neigborhood) {
-            errors.neigborhood = "Por favor ingresa nombre de tu barrio";
-          } else if (
-            !/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(values.address.neigborhood)
-          ) {
-            errors.neigborhood = "Solo puedes ingresar Letras";
-          }
-
-          //ver de agregar opciones de provincias
-          if (!values.address.province) {
-            errors.province = "Por favor ingresa nombre de tu provincia";
-          } else if (!/^[a-zA-ZÀ-ÿ\s]{1,20}$/.test(values.address.province)) {
-            errors.province = "Solo puedes ingresar Letras";
-          }
-
-          if (!values.address.location) {
-            errors.location = "Por favor ingresa tu location";
-          } else if (!/^[a-zA-ZÀ-ÿ\s]{1,20}$/.test(values.address.location)) {
-            errors.location = "Solo puedes ingresar Letras";
-          }
-          if (!values.address.postalCode) {
-            errors.postalCode = "Por favor ingresa codigo postal";
-          } else if (
-            !/^\d{2,4}$/.test(values.address.postalCode) ||
-            values.address.postalCode > 9999 ||  values.address.postalCode<0
-          ) {
-            //excluir +
-            //console.log(values.address.postalCode);
-            errors.postalCode = "Codigo postal invalido";
-          } */
 
           return errors;
         }}
@@ -306,87 +266,6 @@ function FormUser() {
                   render={(msg) => <p className="text-danger">{msg}</p>}
                 />
               </div>
-              {/* <div>
-                <label htmlFor="adress">Address</label>
-                <div>
-                  <label htmlFor="street">Street</label>
-                  <Field
-                    type="text"
-                    name="address.street"
-                    className="form-control"
-                    placeholder="Siempreviva"
-                  />
-                  <ErrorMessage
-                    name="address.street"
-                    render={(msg) => <p className="text-danger">{msg}</p>}
-                  />
-                  <label htmlFor="numbrStreet">Number</label>
-                  <Field
-                    type="number"
-                    name="address.numStreet"
-                    className="form-control"
-                    placeholder="123"
-                  />
-                  <ErrorMessage
-                    name="address.numStreet"
-                    render={(msg) => <p className="text-danger">{msg}</p>}
-                  />
-                </div>
-                <div>
-                  <label htmlFor="neighborhood">Neighborhood</label>
-                  <Field
-                    type="text"
-                    name="address.neigborhood"
-                    className="form-control"
-                    placeholder="Done"
-                  />
-                  <ErrorMessage
-                    name="address.neigborhood"
-                    render={(msg) => <p className="text-danger">{msg}</p>}
-                  />
-                </div>
-                <div>
-                  <div>
-                    <label htmlFor="province">Province</label>
-                    <Field
-                      type="text"
-                      name="address.province"
-                      className="form-control"
-                      placeholder="Salta"
-                    />
-                    <ErrorMessage
-                      name="address.province"
-                      render={(msg) => <p className="text-danger">{msg}</p>}
-                    />
-                  </div>
-                  <div>
-                    <div>
-                      <label htmlFor="location">Location</label>
-                      <Field
-                        type="text"
-                        name="address.location"
-                        className="form-control"
-                        placeholder="Capital"
-                      />
-                      <ErrorMessage
-                        name="address.location"
-                        render={(msg) => <p className="text-danger">{msg}</p>}
-                      />
-                      <label htmlFor="postal-code">Postal Code</label>
-                      <Field
-                        type="number"
-                        name="address.postalCode"
-                        className="form-control"
-                        placeholder="1111"
-                      />
-                      <ErrorMessage
-                        name="address.postalCode"
-                        render={(msg) => <p className="text-danger">{msg}</p>}
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div> */}
               <button type="submit" className="btn btn-primary">
                 Submit
               </button>

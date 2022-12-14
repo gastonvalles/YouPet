@@ -115,6 +115,7 @@
   .formGroup {
 	display: flex;
 	align-items: center;
+	justify-content: space-around;
   }
 
   .formGroup label {

@@ -81,6 +81,9 @@ Turn.belongsTo(Pet);
 Vet.hasMany(Turn);
 Turn.belongsTo(Vet);
 
+Service.hasMany(Turn);
+Turn.belongsTo(Service);
+
 Payments.hasMany(User);
 User.belongsTo(Payments);
 

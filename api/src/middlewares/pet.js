@@ -5,6 +5,7 @@ const {
   getPetByPK,
   getByPetOwner,
   dbCreatePet,
+  dbRemovePet
 } = require("../controllers/getAllPets.js");
 const router = Router();
 
@@ -36,15 +37,24 @@ router.post("/", async (req, res) => {
     res.status(400).send(error);
   }
 });
+router.delete("/:id", async (req, res) => {
+  try {
+    const removePet = await dbRemovePet(req.params);
+    res.status(200).json(removePet);
+  } catch (error) {
+    console.log(error.message)
+    res.status(400).send(error);
+  }
+});
 
-// router.get('/:UserId', async (req, res) => {
-//     try {
-//         const { UserId } = req.params;
-//         const petOwner = await getByPetOwner(UserId);
-//         res.status(200).json(petOwner);
-//     } catch (error) {
-//         res.status(404).send(error);
-//     }
-// });
+router.get('/user/:UserId', async (req, res) => {
+    try {
+        const { UserId } = req.params;
+        const petOwner = await getByPetOwner(UserId);
+        res.status(200).json(petOwner);
+    } catch (error) {
+        res.status(404).send(error);
+    }
+});
 
 module.exports = router;
