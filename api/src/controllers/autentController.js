@@ -74,7 +74,7 @@ const sendEmail = async (name, email, confirmationCode) => {
     <h2>Hello ${name}<h2>
     <p>Thank you for subscribing, confirm your email by clicking on the following link</p>
     
-    <a href="https://youpet-production.up.railway.app/confirm/${confirmationCode}">Click here</a>
+    <a href="https://youpet.vercel.app/confirm/${confirmationCode}">Click here</a>
     `,
     })
     .then((res) => res("se mando el email"))

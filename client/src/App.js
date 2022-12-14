@@ -55,7 +55,7 @@ function App() {
         <Route path="/adminvet/:id" element={<AdminVetDetail />} />
         <Route path="/admin/*" element={<PanelAdmin />} />
         <Route path="/confirm/:confirmationCode" element={<Confirm />} />
-        <Route path="userpanel/*" element={<UserPanel />} />
+        <Route path="/userpanel/*" element={<UserPanel />} />
       </Routes>
     </div>
   );
