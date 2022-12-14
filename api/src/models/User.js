@@ -37,7 +37,7 @@ module.exports = (sequelize) => {
       },
       address: {
         type: DataTypes.STRING,
-        allowNull: false,
+        
       },
       tel: {
         type: DataTypes.BIGINT,
@@ -45,7 +45,6 @@ module.exports = (sequelize) => {
       dni: {
         type: DataTypes.BIGINT,
         unique: true,
-        allowNull: false,
       },
       isAdmin: {
         type: DataTypes.BOOLEAN,

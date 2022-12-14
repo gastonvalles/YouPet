@@ -151,6 +151,18 @@ const deleteUser = async (id) => {
   return `User id:${id} deleted sucessfully`;
 };
 
+
+async function editUser(id, data){
+  try{
+      let user = await User.findByPk(Number(id));
+      await user.update(data);
+      await user.save();
+  }catch(error){
+    console.log(error)
+      throw new Error("El elemento a editar no existe o los parámetros no son válidos");
+  }
+}
+
 // getUserByUsername = async (username) => {
 //     if (username) {
 //         let user = await User.findOne({
@@ -173,5 +185,6 @@ module.exports = {
   getUserByPK,
   getUserByEmail,
   deleteUser,
+  editUser
   //getUserByUsername
 };

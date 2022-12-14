@@ -15,6 +15,8 @@ const autentController = require("../middlewares/autent");
 const favoriteMeddleware = require("../middlewares/favor");
 const imgUpload = require("../controllers/imgUpload");
 
+
+
 router.use("/favoriote", favoriteMeddleware);
 router.use("/service", serviceController);
 router.use(

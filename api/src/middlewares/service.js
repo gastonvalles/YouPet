@@ -18,10 +18,10 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/:serviceId", async (req, res) => {
+router.get("/:id", async (req, res) => {
   try {
-    const { serviceId } = req.params;
-    const service = await getDBServiceByPK(serviceId);
+    const { id } = req.params;
+    const service = await getDBServiceByPK(id);
     res.status(200).json(service);
   } catch (error) {
     res.status(404).send(error.message);
@@ -37,11 +37,11 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.delete("/:serviceId", async (req, res) => {
+router.delete("/:id", async (req, res) => {
   try {
-    const service = await dbDeleteService(req.params.serviceId);
-    if (service) await dbDeleteService(req.params.serviceId, service);
-    const deletedService = await dbDeleteService(req.params.serviceId);
+    const service = await dbDeleteService(req.params.id);
+    if (service) await dbDeleteService(req.params.id, service);
+    const deletedService = await dbDeleteService(req.params.id);
     res.status(200).send(deletedService);
   } catch (error) {
     res.status(404).send(error.message);
