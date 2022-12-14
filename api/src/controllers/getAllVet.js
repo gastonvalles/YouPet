@@ -151,7 +151,6 @@ const getDBVet = async (name) => {
 };
 
 const getDBVetByPK = async (id, user) => {
-  //console.log(user);
   if (id) {
     const vet = await Vet.findOne({
       where: {

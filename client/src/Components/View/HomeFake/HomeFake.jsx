@@ -21,7 +21,7 @@ export default function Home() {
     dispatch(filterService(event.target.value));
     // dispatch(filterVets(event.target.value))
   }
-  console.log(allServices);
+
   return (
     <div>
       <div className="buttonbar">

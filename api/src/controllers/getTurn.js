@@ -34,6 +34,30 @@ const getTurnByVetPK = async ({ vetId, servId }) => {
     throw new Error("Turns not found");
   }
 };
+const getUserTurnByPK = async ({ id }) => {
+  
+  if (id) {
+    let userTurn = await Turn.findAll({
+      where: {
+        UserId: id,
+      },
+      include: [{
+        model: Vet,
+        attributes:['name', 'lastname']
+      }, {
+        model: Service,
+        attributes:['name']
+      }],
+
+      order: [["inicialDate", "DESC"]],
+    });
+
+    return userTurn;
+
+  } else {
+    throw new Error("Turns not found");
+  }
+};
 
 const getTurnForVet = async ({ vetId, servId }) => {
   if (vetId) {
@@ -71,7 +95,24 @@ const getAllTurns = async () => {
   }
 };
 
+
+const deleteTurnByPK = async (params) => {
+  const {id} = params;
+const deletedTurn = await Turn.destroy({
+  where: {
+    id: id
+  },
+});
+if (!deletedTurn) {
+  throw new Error(" Pet not found");
+} else {
+  return deletedTurn;
+}
+};
+
 module.exports = {
+  deleteTurnByPK,
+  getUserTurnByPK,
   getAllTurns,
   getTurnByVetPK,
   getTurnForVet,

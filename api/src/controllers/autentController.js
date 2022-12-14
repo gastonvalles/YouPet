@@ -25,14 +25,12 @@ exports.register = async (req, res) => {
       },
     });
     if (!dbSearch.length) {
-      try {
-        if (img) {
-          const uploadRes = await cloudinary.uploader.upload(img, {
-            upload_preset: "youpet",
-            allowed_formats: ["png", "jpg", "jpeg", "svg"],
-          });
-          if (uploadRes) {
-            req.body.img = uploadRes.url;
+        try {
+          if (img) {
+            const uploadRes = await imgUpload(img);
+            if (uploadRes) {
+              req.body.img = uploadRes;
+            }
           }
         } catch (error) {
           console.log(error.message);

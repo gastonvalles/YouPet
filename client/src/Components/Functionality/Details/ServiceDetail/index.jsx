@@ -17,7 +17,7 @@ export default function ServiceDetail() {
     };
   }, [dispatch, id]);
 
-  console.log(service);
+
   return (
     <div className="service-detail-card">
       <h1>{service.name}</h1>

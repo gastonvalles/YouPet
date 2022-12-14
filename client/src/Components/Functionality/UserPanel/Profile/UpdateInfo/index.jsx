@@ -4,7 +4,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import userPlaceholder from "../../../../../img/user-placeholder.png";
 import loadingSvg from "../../../../../img/loading_dualring.svg";
 import { useSelector, useDispatch } from "react-redux";
-import { createPet, clearCreatePet } from "../../../../../Redux/actions";
+import { updateUserByPanel, clearUpdateUserByPanel, getMyUser } from "../../../../../Redux/actions";
 import { Box } from "@mui/material";
 import Header from "../../Header";
 import Swal from "sweetalert2";
@@ -13,14 +13,14 @@ const UpdateInfo = () => {
   const [userImg, setUserImg] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const myuser = useSelector((state) => state.myuser);
-  const createPetState = useSelector((state) => state.createPet);
+  const updateUserState = useSelector((state) => state.updateUserByPanel);
   const dispatch = useDispatch();
 
   const handleImageUpload = (e, setFieldValue) => {
     const file = e.target.files[0];
     transformFile(file, setFieldValue);
   };
-
+  
   const transformFile = (file, setFieldValue) => {
     const reader = new FileReader();
     if (file) {
@@ -30,20 +30,20 @@ const UpdateInfo = () => {
         setFieldValue("img", reader.result);
       };
     } else {
-      setUserImg("");
-      setFieldValue("img", "");
+      // setUserImg("");
+      // setFieldValue("img", "");
     }
   };
 
   useEffect(() => {
     if (isLoading) {
-      if (createPetState[0] === "nada") {
+      if (updateUserState[0] === "nada") {
         Swal.fire({
           iconHtml: `<img src=${loadingSvg} alt="Loading"/>`,
-          title: `Cargando`,
+          title: `Loading`,
           showConfirmButton: false,
         });
-      } else if (createPetState[0] === "ok") {
+      } else if (updateUserState[0] === "ok") {
         setTimeout(() => {
           Swal.close();
         }, "400");
@@ -51,7 +51,22 @@ const UpdateInfo = () => {
         setTimeout(() => {
           Swal.fire({
             icon: "success",
-            title: `Creado exitosamente`,
+            title: `Updated sucessfully`,
+            showConfirmButton: false,
+            timer: 1000,
+          });
+        }, "600");
+        setIsLoading(false);
+        dispatch(getMyUser());
+      } else if (updateUserState[0] === "error") {
+        setTimeout(() => {
+          Swal.close();
+        }, "400");
+
+        setTimeout(() => {
+          Swal.fire({
+            icon: "error",
+            title: `error`,
             showConfirmButton: false,
             timer: 1000,
           });
@@ -59,12 +74,29 @@ const UpdateInfo = () => {
         setIsLoading(false);
       }
     }
-  }, [isLoading, createPetState]);
+  }, [isLoading, updateUserState, dispatch]);
 
   const handleSubmit = (value) => {
-    setIsLoading(true);
-    dispatch(clearCreatePet());
-    dispatch(createPet(value));
+
+
+    Swal.fire({
+      title: 'Are you sure?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, update it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setIsLoading(true);
+        dispatch(clearUpdateUserByPanel());
+        dispatch(updateUserByPanel(value, value.UserId));
+      }
+    })
+
+
+
+
   };
 
   return (
@@ -77,13 +109,13 @@ const UpdateInfo = () => {
         {myuser?.id ? (
           <Formik
             initialValues={{
-              name: "",
-              lastname: "",
-              password: "",
-              conpass: "",
-              tel: "",
-              address: "",
-              img: "",
+              name: myuser.name ? myuser.name : "",
+              lastname: myuser.lastname ? myuser.lastname : "",
+              password: myuser.password ? myuser.password : "",
+              conpass: myuser.password ? myuser.password : "",
+              tel: myuser.tel ? myuser.tel : "",
+              address: myuser.address ? myuser.address : "",
+              img: myuser.img ? myuser.img : "",
               UserId: myuser?.id || "",
             }}
             validate={(values) => {
@@ -103,8 +135,18 @@ const UpdateInfo = () => {
                   "The lastname can only be alphabetical characters";
               }
 
+                if (!/^[0-9]*$/.test(values.tel)) {
+                errors.tel =
+                  "The Tel can only contain numbers";
+              }
+
               if (!values.password) {
                 errors.password = "Please insert a password";
+              } else if (values.password.length < 8) {
+                errors.password = "Password needs to be 8 or longer";
+              }
+               else if (values.password !== values.conpass) {
+                errors.password = "The passwords needs to match";
               }
 
               if (values.conpass !== values.password) {
@@ -126,7 +168,7 @@ const UpdateInfo = () => {
                     >
                       <img
                         className={upInfoStyle.img_user}
-                        src={userImg ? userImg : userPlaceholder}
+                        src={userImg ? userImg : myuser.img || userPlaceholder}
                         alt="userImg"
                       />
                     </div>
@@ -151,74 +193,82 @@ const UpdateInfo = () => {
                   </div>
 
                   <div className={upInfoStyle.formGroup}>
-                    <label htmlFor="name">Name: </label>
-                    <Field
-                      type="text"
-                      id="name"
-                      name="name"
-                      placeholder="Insert name here..."
-                    />
-                    <ErrorMessage
-                      name="name"
-                      component={() => (
-                        <div className={upInfoStyle.error}>{errors.name}</div>
-                      )}
-                    />
+                    <div>
+                      <label htmlFor="name">Name: </label>
+                      <Field
+                        type="text"
+                        id="name"
+                        name="name"
+                        placeholder="Insert name here..."
+                      />
+                      <ErrorMessage
+                        name="name"
+                        component={() => (
+                          <div className={upInfoStyle.error}>{errors.name}</div>
+                        )}
+                      />
+                    </div>
 
-                    <label htmlFor="lastname"> Lastname: </label>
-                    <Field
-                      type="text"
-                      id="lastname"
-                      name="lastname"
-                      placeholder="Insert lastname here..."
-                    />
-                    <ErrorMessage
-                      name="lastname"
-                      component={() => (
-                        <div className={upInfoStyle.error}>
-                          {errors.lastname}
-                        </div>
-                      )}
-                    />
+                    <div>
+                      <label htmlFor="lastname"> Lastname: </label>
+                      <Field
+                        type="text"
+                        id="lastname"
+                        name="lastname"
+                        placeholder="Insert lastname here..."
+                      />
+                      <ErrorMessage
+                        name="lastname"
+                        component={() => (
+                          <div className={upInfoStyle.error}>
+                            {errors.lastname}
+                          </div>
+                        )}
+                      />
+                    </div>
                   </div>
 
                   <div className={upInfoStyle.formGroup}>
-                    <label htmlFor="tel">Tel: </label>
-                    <Field
-                      type="text"
-                      id="tel"
-                      name="tel"
-                      placeholder="Insert tel here..."
-                    />
-                    <ErrorMessage
-                      name="tel"
-                      component={() => (
-                        <div className={upInfoStyle.error}>{errors.tel}</div>
-                      )}
-                    />
+                    <div>
+                      <label htmlFor="tel">Tel: </label>
+                      <Field
+                        type="text"
+                        id="tel"
+                        name="tel"
+                        placeholder="Insert tel here..."
+                      />
+                      <ErrorMessage
+                        name="tel"
+                        component={() => (
+                          <div className={upInfoStyle.error}>{errors.tel}</div>
+                        )}
+                      />
+                    </div>
 
-                    <label htmlFor="address"> Address: </label>
-                    <Field
-                      type="text"
-                      id="address"
-                      name="address"
-                      placeholder="Insert address here..."
-                    />
-                    <ErrorMessage
-                      name="address"
-                      component={() => (
-                        <div className={upInfoStyle.error}>
-                          {errors.address}
-                        </div>
-                      )}
-                    />
+                    <div>
+                      <label htmlFor="address"> Address: </label>
+                      <Field
+                        type="text"
+                        id="address"
+                        name="address"
+                        placeholder="Insert address here..."
+                      />
+                      <ErrorMessage
+                        name="address"
+                        component={() => (
+                          <div className={upInfoStyle.error}>
+                            {errors.address}
+                          </div>
+                        )}
+                      />
+                    </div>
                   </div>
 
                   <div className={upInfoStyle.formGroup}>
                     <div>
                       <label htmlFor="password">Password: </label>
                       <Field
-                        type="text"
+                        type="password"
                         id="password"
                         name="password"
                         placeholder="Insert password here..."
@@ -236,7 +286,7 @@ const UpdateInfo = () => {
                     <div>
                       <label htmlFor="conpass"> Confirm password: </label>
                       <Field
-                        type="text"
+                        type="password"
                         id="conpass"
                         name="conpass"
                         placeholder="Confirm password"

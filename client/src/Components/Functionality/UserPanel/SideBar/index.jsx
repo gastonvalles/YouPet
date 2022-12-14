@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { ProSidebarProvider, Menu, MenuItem } from "react-pro-sidebar";
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { tokens } from "../theme";
 import userPlaceholder from "../../../../img/user-placeholder.png";
 
@@ -11,6 +11,7 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import PetsIcon from "@mui/icons-material/Pets";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
+import { useEffect } from "react";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -36,6 +37,16 @@ export default function SideBar() {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Dashboard");
   const myuser = useSelector((state) => state.myuser);
+  const navigate = useNavigate();
+
+  
+
+ useEffect(()=>{
+  const path = `/`;
+  if (!(myuser?.id)){
+        navigate(path)
+  }
+ }, [myuser, navigate])
 
   const ruta = "/userpanel";
 
@@ -90,13 +101,22 @@ export default function SideBar() {
           {!isCollapsed && (
             <Box mb="25px">
               <Box display="flex" justifyContent="center" alignItems="center">
-                <img
-                  alt="profile-user"
-                  width="100px"
+                <Box
+                  display="flex"
+                  justifyContent="center"
+                  alignItems="center"
                   height="100px"
-                  src={myuser?.img ? myuser.img : userPlaceholder}
-                  style={{ cursor: "pointer", borderRadius: "50%" }}
-                />
+                  width="100px"
+                  overflow="hidden"
+                  borderRadius="50%"
+                >
+                  <img
+                    alt="profile-user"
+                    height="100%"
+                    src={myuser?.img ? myuser.img : userPlaceholder}
+                    style={{ cursor: "pointer" }}
+                  />
+                </Box>
               </Box>
               <Box textAlign="center">
                 <Typography
@@ -114,12 +134,8 @@ export default function SideBar() {
           )}
 
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
-
-
             <hr />
-            <Typography variant="h6" >
-              Info
-            </Typography>
+            <Typography variant="h6">Info</Typography>
             <Item
               title="Info"
               to={ruta}
@@ -128,12 +144,8 @@ export default function SideBar() {
               setSelected={setSelected}
             />
 
-
-
             <hr />
-            <Typography variant="h6" >
-              Pets
-            </Typography>
+            <Typography variant="h6">Pets</Typography>
             <Item
               title="My pets"
               to={ruta + "/MyPets"}
@@ -149,11 +161,8 @@ export default function SideBar() {
               setSelected={setSelected}
             />
 
-
             <hr />
-            <Typography variant="h6" >
-              Settings
-            </Typography>
+            <Typography variant="h6">Settings</Typography>
             <Item
               title="Update info"
               to={ruta + "/update"}
