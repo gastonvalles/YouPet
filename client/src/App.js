@@ -53,7 +53,7 @@ function App() {
         <Route path="/serv/:id" element={<AdminServiceDetail />} />
         <Route path="/adminvet/:id" element={<AdminVetDetail/>} />
         <Route path="/admin/*" element={<PanelAdmin />} />
-        <Route path="userpanel/*" element={<UserPanel/>}/>
+        <Route path="/userpanel/*" element={<UserPanel/>}/>
         <Route path="/confirm/:confirmationCode" element={<Confirm />} />
       </Routes>
     </div>
