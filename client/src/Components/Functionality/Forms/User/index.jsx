@@ -1,40 +1,32 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
-import { createUser } from "../../../../Redux/actions";
 import userPlaceholder from "./user-placeholder.png"
 import userStyle from "./user.module.css"
+
 function FormUser() {
-  const dispatch = useDispatch();
   const [formSuccess, setformSuccess] = useState(false);
   const navigate = useNavigate();
-
-  
-
   const [userImg, setUserImg] = useState("");
-
   const handleImageUpload = (e, setFieldValue) => {
     const file = e.target.files[0];
     transformFile(file, setFieldValue);
   };
-  
-  const transformFile = (file, setFieldValue)=>{
-    const reader = new FileReader()
+  const transformFile = (file, setFieldValue) => {
+    const reader = new FileReader();
     if (file) {
       reader.readAsDataURL(file);
       reader.onloadend = () => {
         setUserImg(reader.result);
-        setFieldValue("img", reader.result)
+        setFieldValue("img", reader.result);
       };
     } else {
       setUserImg("");
-      setFieldValue("img", "")
+      setFieldValue("img", "");
     }
-    
-  }
+  };
 
   return (
     <div className="container-md">
@@ -48,8 +40,7 @@ function FormUser() {
           password: "",
           passwordCopy: "",
           address: "",
-          img:""
-          
+          img: "",
         }}
         validate={(values) => {
           let errors = {};
@@ -65,7 +56,7 @@ function FormUser() {
           }
           if (!values.username) {
             errors.username = "Por favor ingresa un nombre";
-          } else if (!/^[a-zA-Z0-9\_\-]{4,16}$/.test(values.username)) {
+          } else if (!/^[a-zA-Z0-9\\-]{4,16}$/.test(values.username)) {
             errors.username = "Solo puedes ingresar Letras";
           }
           if (!values.dni) {
@@ -84,7 +75,7 @@ function FormUser() {
           }
           if (!values.passwordCopy) {
             errors.passwordCopy = "Por favor ingresa una contraseña";
-          } else if (!/^[a-zA-Z0-9\_\-]{4,16}$/.test(values.passwordCopy)) {
+          } else if (!/^[a-zA-Z0-9\\-]{4,16}$/.test(values.passwordCopy)) {
             errors.passwordCopy = "Debe tener al menos 5 digitos";
           }
           if (!values.password) {
@@ -140,18 +131,16 @@ function FormUser() {
 
           return errors;
         }}
-        onSubmit={
-          
-          (values) => {
-        
+        onSubmit={(values) => {
           axios
             .post("http://localhost:3001/register/", values, {})
             .then((res) => {
               Swal.fire({
                 //icon: "succes",
-                title: `Creado exitosamente`,
+                title: `Done!
+                Check your inbox to verify your account`,
                 showConfirmButton: false,
-                timer: 1000,
+                timer: 5000,
               });
               /* navigate("/login"); */
             })
@@ -162,24 +151,25 @@ function FormUser() {
                 text: `${error}`,
               })
             );
-        }
-      
-      }
+        }}
       >
         {({ errors, setFieldValue }) => (
           <div className="contenedor">
             <Form className="row g-3">
-
               <div className={userStyle.back_container}>
-              <div className={ "rounded-circle " + userStyle.img_container}>
-              <img className={userStyle.img_user} src={userImg ? userImg : userPlaceholder} alt="userImg"/>
-              </div>
+                <div className={"rounded-circle " + userStyle.img_container}>
+                  <img
+                    className={userStyle.img_user}
+                    src={userImg ? userImg : userPlaceholder}
+                    alt="userImg"
+                  />
+                </div>
               </div>
 
-            <div>
-            <label htmlFor="files" class={"btn " + userStyle.selectLabel}>Select Image</label>
+              <div>
+                <label htmlFor="files" className={"btn " + userStyle.selectLabel}>Select Image</label>
 
-              <input
+                <input
                   className={userStyle.selectButton}
                   id="files"
                   type="file"
@@ -187,15 +177,14 @@ function FormUser() {
                   accept=".png, .jpg, .jpeg, .svg"
                   onChange={(e) => handleImageUpload(e, setFieldValue)}
                 />
-
-            </div>
+              </div>
               <div>
                 <label htmlFor="name">Name</label>
                 <Field
                   type="text"
                   className="form-control"
                   name="name"
-                  placeholder="John"
+                  placeholder="Jane"
                 />
                 <ErrorMessage
                   name="name"
@@ -208,7 +197,7 @@ function FormUser() {
                   type="text"
                   name="lastname"
                   className="form-control"
-                  placeholder="Done"
+                  placeholder="Doe"
                 />
                 <ErrorMessage
                   name="lastname"
@@ -221,39 +210,10 @@ function FormUser() {
                   type="text"
                   name="username"
                   className="form-control"
-                  placeholder="Done"
+                  placeholder="IloveYoupet"
                 />
                 <ErrorMessage
                   name="username"
-                  render={(msg) => <p className="text-danger">{msg}</p>}
-                />
-              </div>
-              <div>
-                <label htmlFor="dni">DNI</label>
-                <Field
-                  type="number"
-                  name="dni"
-                  className="form-control"
-                  placeholder="Done"
-                />
-                <ErrorMessage
-                  name="dni"
-                  render={(msg) => <p className="text-danger">{msg}</p>}
-                />
-                <span id="passwordHelpInline" className="form-text">
-                  Ingresar numero sin puntos
-                </span>
-              </div>
-              <div>
-                <label htmlFor="email">Email</label>
-                <Field
-                  type="text"
-                  name="email"
-                  className="form-control"
-                  placeholder="email@example.com"
-                />
-                <ErrorMessage
-                  name="email"
                   render={(msg) => <p className="text-danger">{msg}</p>}
                 />
               </div>
@@ -278,7 +238,7 @@ function FormUser() {
                   </div>
                   <div className="col-auto">
                     <span id="passwordHelpInline" className="form-text">
-                      Must be 8-20 characters long.
+                      Must have at least 8 digits
                     </span>
                   </div>
                 </div>
@@ -305,12 +265,41 @@ function FormUser() {
                 </div>
               </div>
               <div>
+                <label htmlFor="dni">DNI</label>
+                <Field
+                  type="number"
+                  name="dni"
+                  className="form-control"
+                  placeholder="40558499"
+                />
+                <ErrorMessage
+                  name="dni"
+                  render={(msg) => <p className="text-danger">{msg}</p>}
+                />
+                <span id="passwordHelpInline" className="form-text">
+                  Enter number without dots
+                </span>
+              </div>
+              <div>
+                <label htmlFor="email">Email</label>
+                <Field
+                  type="text"
+                  name="email"
+                  className="form-control"
+                  placeholder="email@example.com"
+                />
+                <ErrorMessage
+                  name="email"
+                  render={(msg) => <p className="text-danger">{msg}</p>}
+                />
+              </div>
+              <div>
                 <label htmlFor="address">Address</label>
                 <Field
                   type="text"
                   name="address"
                   className="form-control"
-                  placeholder="John"
+                  placeholder="Fake Street 123"
                 />
                 <ErrorMessage
                   name="address"

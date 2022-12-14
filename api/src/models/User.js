@@ -37,7 +37,7 @@ module.exports = (sequelize) => {
       },
       address: {
         type: DataTypes.STRING,
-        allowNull: false,
+        
       },
       tel: {
         type: DataTypes.BIGINT,
@@ -45,7 +45,6 @@ module.exports = (sequelize) => {
       dni: {
         type: DataTypes.BIGINT,
         unique: true,
-        allowNull: false,
       },
       isAdmin: {
         type: DataTypes.BOOLEAN,
@@ -56,11 +55,6 @@ module.exports = (sequelize) => {
         type: DataTypes.BOOLEAN,
         defaultValue: true,
         allowNull: false,
-      },
-      status: {
-        type: DataTypes.STRING,
-        enum: ["Pending", "Active"],
-        default: "Pending",
       },
       confirmationCode: {
         type: DataTypes.STRING,

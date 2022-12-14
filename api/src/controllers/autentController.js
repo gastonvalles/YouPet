@@ -3,28 +3,19 @@ const bcryptjs = require("bcryptjs");
 const { promisify } = require("util");
 const { User } = require("../db");
 const { transporter } = require("../../config/mailer");
-
-
-require("dotenv").config()
-const cloudinary = require("cloudinary").v2;
-
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_NAME,
-  api_key: process.env.CLOUDINARY_APIKEY,
-  api_secret: process.env.CLOUDINARY_APISECRET
-});
+const imgUpload = require("./imgUpload");
 
 exports.register = async (req, res) => {
-  const { name, lastname, username, password, email, dni, address, img } = req.body;
-  console.log(name, lastname, username, password, email);
+  const { name, lastname, username, password, email, dni, address, img, isAdmin } = req.body;
+  
   if (
     !name ||
     !lastname ||
     !username ||
     !password ||
-    !email ||
-    !dni ||
-    !address
+    !email //||
+    // !dni ||
+    // !address
   ) {
     return res.status(404).send("Debes completar los todos los archivos");
   }
@@ -34,30 +25,23 @@ exports.register = async (req, res) => {
         email: req.body.email,
       },
     });
-    console.log(dbSearch);
     if (!dbSearch.length) {
       try {
         if (img) {
-
           const uploadRes = await cloudinary.uploader.upload(img, {
             upload_preset: "youpet",
             allowed_formats: ["png", "jpg", "jpeg", "svg"],
           });
-
-          console.log(uploadRes);
-
           if (uploadRes) {
             req.body.img = uploadRes.url;
           }
-
+        }
+        } catch (error) {
+          console.log(error.message);
         }
 
-      } catch (error) {
-        res.status(500).json({ error: error });
-      }
       const newHash = await bcryptjs.hash(req.body.password, 8);
       const token = jwt.sign({ email: req.body.email }, "userKey");
-      console.log(token);
       const user = await User.create({
         name: req.body.name,
         address: req.body.address,
@@ -68,38 +52,35 @@ exports.register = async (req, res) => {
         email: req.body.email,
         address: req.body.address,
         img: req.body.img,
+        isAdmin: req.body.isAdmin,
         confirmationCode: token,
       });
-      console.log(user.username, user.email, user.confirmationCode);
       sendEmail(user.username, user.email, user.confirmationCode);
       return res.status(200).json(user);
     } else {
       return res.status(302).json(dbSearch);
     }
   } catch (error) {
+    console.log(error)
     res.send(error);
   }
 };
-/* if (dbSearch.status !== "Active") {
-  return res
-    .status(401)
-    .send("Cuenta pendiente. Por favor verifique su Email");
-} */
 
 const sendEmail = async (name, email, confirmationCode) => {
-  await transporter.sendMail({
-    from: '"YOUPET" <foo@example.com>', // sender address
-    to: email, // list of receivers
-    subject: "¡Bienvenido a YOUPET!", // Subject line
-    text: "¡Gracias por Registrarte", // plain text body
-    html: `<b>EMAIL DE CONFIRMACION</b>
+  await transporter
+    .sendMail({
+      from: '"YOUPET" <foo@example.com>', // sender address
+      to: email, // list of receivers
+      subject: "¡Bienvenido a YOUPET!", // Subject line
+      text: "¡Gracias por Registrarte", // plain text body
+      html: `<b>EMAIL DE CONFIRMACION</b>
     <h2>Hello ${name}<h2>
-    <p>Gracias por suscribirte, confirmatu email haciendo click en el siguiente link</p>
+    <p>Thank you for subscribing, confirm your email by clicking on the following link</p>
     <a href="http://localhost:3000/confirm/${confirmationCode}">Click here</a>
     `,
   })
-    .then(() => console.log("se mando el email"))
-    .catch((err) => console.log(err));
+    .then((res) => res("se mando el email"))
+    .catch((error) => error.message);
 }
 
 exports.verifyUser = (req, res, next) => {
@@ -117,7 +98,7 @@ exports.verifyUser = (req, res, next) => {
       if (!user) {
         return res.status(404).send("Usuario no encontrado");
       }
-      user.status = "Active";
+      user.isActive = true;
       user.save((err) => {
         if (err) {
           res.status(500).send(err);
@@ -131,9 +112,11 @@ exports.verifyUser = (req, res, next) => {
 
 exports.login = async (req, res) => {
   const { email, password } = req.body;
+  
   try {
     if (!email || !password) {
       return res.status(404).send("Debe completar todos los campos");
+      console.log("email y password no llegaron")
     }
     const findUser = await User.findOne({
       where: { email },
@@ -142,7 +125,12 @@ exports.login = async (req, res) => {
       findUser === null ||
       !(await bcryptjs.compare(password, findUser.password))
     ) {
+      console.log("Contraseña e email invalido")
       return res.status(404).send("Contraseña e email invalido");
+    }
+    if(!findUser.isActive) {
+      console.log("El usuario no esta activo")
+      return res.status(401).send("Comunicarse con soporte")
     }
     const id = findUser.id;
     const token = jwt.sign({ id: id }, "userKey");
@@ -152,6 +140,7 @@ exports.login = async (req, res) => {
       data: token,
     });
   } catch (error) {
+    console.log(error)
     res.send(error.message);
   }
 };
@@ -169,29 +158,3 @@ exports.protectedRoute = async (req, res) => {
     res.send(error);
   }
 };
-
-/* exports.isautent = async (req, res, next) => {
-  if (req.cookie.jwt)
-    try {
-      const decodificada = await promisify(jwt.verify)(
-        req.cookies.jwt,
-        "userKey"
-      );
-      const verifUser = await User.findOne({
-        where: {
-          id: [decodificada.id],
-        },
-      });
-      if (!verifUser) {
-        return next();
-      }
-      req.user = verifUser;
-      return next();
-    } catch (error) {
-      console.log(error);
-    }
-  else {
-    res.redirect("/login");
-    next();
-  }
-}; */

@@ -1,5 +1,5 @@
 const passport = require("passport");
-
+const AnonymousStrategy = require("passport-anonymous").Strategy;
 const JwtStrategy = require("passport-jwt").Strategy,
   ExtractJwt = require("passport-jwt").ExtractJwt;
 
@@ -22,3 +22,4 @@ passport.use(
       .catch((error) => console.log(error));
   })
 );
+passport.use(new AnonymousStrategy());
