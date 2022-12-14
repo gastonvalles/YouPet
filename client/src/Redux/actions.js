@@ -1,7 +1,6 @@
 import axios from "axios";
 import {
-  ADD_FAVORITES,
-  CLEAR_DETAILS,
+  ADD_FAVORITES, CANCEL_TURN, CLEAR_DETAILS,
   CLEAR_TURN,
   CREATE_PET,
   CREATE_SERVICE,
@@ -20,22 +19,15 @@ import {
   GET_SERVICES,
   GET_SERVICE_BY_NAME,
   GET_SERVICE_DETAIL,
-  GET_TURN,
-  GET_USER_TURN,
-  GET_USERS,
+  GET_TURN, GET_USERS,
   GET_USER_BY_EMAIL,
   GET_USER_BY_NAME,
-  GET_USER_DETAIL,
-  GET_VETS,
+  GET_USER_DETAIL, GET_USER_PETS, GET_USER_TURN, GET_VETS,
   GET_VET_BY_NAME,
-  GET_VET_DETAIL,
-  UPDATE_SERVICE,
+  GET_VET_DETAIL, REMOVE_PET, UPDATE_SERVICE,
   UPDATE_USER,
   UPDATE_USER_BYPANEL,
-  UPDATE_VET,
-  GET_USER_PETS,
-  REMOVE_PET,
-  CANCEL_TURN
+  UPDATE_VET
 } from "./const";
 const instance = axios.create({
   baseURL: "http://localhost:3001",
@@ -78,7 +70,7 @@ export function getPetDetail(id) {
 
 export function clearCreatePet() {
   return async function (dispatch) {
-    let json = "nada" ;
+    let json = "nada";
     return dispatch({
       type: CREATE_PET,
       payload: json,
@@ -88,7 +80,7 @@ export function clearCreatePet() {
 
 export function createPet(payload) {
   return async function (dispatch) {
-    let json = "" ;
+    let json = "";
     try {
       await instance.post("http://localhost:3001/pet", payload);
       json = "ok"
@@ -96,7 +88,7 @@ export function createPet(payload) {
       json = "error"
     }
 
-    
+
     return dispatch({
       type: CREATE_PET,
       payload: json,
@@ -375,12 +367,11 @@ export function addFavorites(id, userid) {
       userid,
     });
     return dispatch({
-      type: ADD_FAVORITES,
+      type: GET_VET_DETAIL,
       payload: json.data
     })
   }
 }
-
 
 export function removeFav(id, userid) {
   return async function (dispatch) {
@@ -398,7 +389,7 @@ export function removeFav(id, userid) {
 
 export function clearUpdateUserByPanel() {
   return async function (dispatch) {
-    let json = "nada" ;
+    let json = "nada";
     return dispatch({
       type: UPDATE_USER_BYPANEL,
       payload: json,
@@ -408,7 +399,7 @@ export function clearUpdateUserByPanel() {
 
 export function updateUserByPanel(payload, id) {
   return async function (dispatch) {
-    let json = "" ;
+    let json = "";
     try {
       await instance.put(`http://localhost:3001/user/${id}`, payload);
       json = "ok"
@@ -423,7 +414,7 @@ export function updateUserByPanel(payload, id) {
 }
 export function clearRemovePet() {
   return async function (dispatch) {
-    let json = "nada" ;
+    let json = "nada";
     return dispatch({
       type: REMOVE_PET,
       payload: json,
@@ -433,7 +424,7 @@ export function clearRemovePet() {
 
 export function removePetUser(id) {
   return async function (dispatch) {
-    let json = "" ;
+    let json = "";
     try {
       await instance.delete(`http://localhost:3001/pet/${id}`);
       json = "ok"
@@ -461,7 +452,7 @@ export function getUserTurns(id) {
 
 export function clearCancelTurnUser() {
   return async function (dispatch) {
-    let json = "nada" ;
+    let json = "nada";
     return dispatch({
       type: CANCEL_TURN,
       payload: json,
@@ -471,7 +462,7 @@ export function clearCancelTurnUser() {
 
 export function cancelTurnUser(id) {
   return async function (dispatch) {
-    let json = "" ;
+    let json = "";
     try {
       await instance.delete(`http://localhost:3001/turn/${id}`);
       json = "ok"
