@@ -8,7 +8,6 @@ import Swal from "sweetalert2";
 import logo from "../../../../img/logo.png";
 import { getMyUser, getUserByEmail } from "../../../../Redux/actions";
 import "./index.css";
-import FacebookLogin from 'react-facebook-login';
 
 export default function Login() {
   const [formSuccess] = useState(false);

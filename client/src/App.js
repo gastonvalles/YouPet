@@ -22,8 +22,7 @@ import AdminVetDetail from "./Components/Functionality/PanelAdmin/VetInformation
 import Payment from "./Components/Functionality/Payment";
 import ErrorPay from "./Components/Functionality/Payment/ErrorPay";
 import ChooseVetTurn from "./Components/Functionality/Turns/ChooseVetTurn";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import UserPanel from "./Components/Functionality/UserPanel/Body/UserPanel"
 import Home from "./Components/View/HomeFake/HomeFake";
 import { getMyUser } from "./Redux/actions";
 
@@ -55,7 +54,6 @@ function App() {
         <Route path="/serv/:id" element={<AdminServiceDetail />} />
         <Route path="/adminvet/:id" element={<AdminVetDetail />} />
         <Route path="/admin/*" element={<PanelAdmin />} />
-        <Route path="/userpanel/*" element={<UserPanel/>}/>
         <Route path="/confirm/:confirmationCode" element={<Confirm />} />
         <Route path="/userpanel/*" element={<UserPanel />} />
       </Routes>
