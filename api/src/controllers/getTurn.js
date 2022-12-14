@@ -35,7 +35,7 @@ const getTurnByVetPK = async ({ vetId, servId }) => {
   }
 };
 const getUserTurnByPK = async ({ id }) => {
-  
+
   if (id) {
     let userTurn = await Turn.findAll({
       where: {
@@ -43,10 +43,10 @@ const getUserTurnByPK = async ({ id }) => {
       },
       include: [{
         model: Vet,
-        attributes:['name', 'lastname']
+        attributes: ['name', 'lastname']
       }, {
         model: Service,
-        attributes:['name']
+        attributes: ['name']
       }],
 
       order: [["inicialDate", "DESC"]],
@@ -95,19 +95,18 @@ const getAllTurns = async () => {
   }
 };
 
-
 const deleteTurnByPK = async (params) => {
-  const {id} = params;
-const deletedTurn = await Turn.destroy({
-  where: {
-    id: id
-  },
-});
-if (!deletedTurn) {
-  throw new Error(" Pet not found");
-} else {
-  return deletedTurn;
-}
+  const { id } = params;
+  const deletedTurn = await Turn.destroy({
+    where: {
+      id: id
+    },
+  });
+  if (!deletedTurn) {
+    throw new Error(" Pet not found");
+  } else {
+    return deletedTurn;
+  }
 };
 
 module.exports = {

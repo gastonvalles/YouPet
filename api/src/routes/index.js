@@ -15,16 +15,18 @@ const autentController = require("../middlewares/autent");
 const favoriteMeddleware = require("../middlewares/favor");
 const imgUpload = require("../controllers/imgUpload");
 
-
-
 router.use("/favoriote", favoriteMeddleware);
+
 router.use("/service", serviceController);
+
 router.use(
   "/pet",
   passport.authenticate("jwt", { session: false }),
   petController
 );
+
 router.use("/vet", vetController);
+
 router.use(
   "/pet",
   passport.authenticate(["jwt"], { session: false }),
@@ -36,12 +38,15 @@ router.use(
   passport.authenticate("jwt", { session: false }),
   turnController
 );
+
 router.use("/user", passport.authenticate("jwt", { session: false }), userController);
+
 router.use(
   "/payment",
   passport.authenticate("jwt", { session: false }),
   paymentController
 );
+
 router.use("/", autentController);
 
 async function userActualizado(req, res, next) {
@@ -60,20 +65,17 @@ async function userActualizado(req, res, next) {
     img,
     tel
   } = req.body;
-
   try {
     let user = await User.findByPk(id);
     user.name = name ? name : user.name;
     user.lastname = lastname ? lastname : user.lastname;
     user.username = username ? username : user.username;
-
-    if ( password && password !== user.password) { 
+    if (password && password !== user.password) {
       if (!(await bcryptjs.compare(password, user.password))) {
         const newHash = await bcryptjs.hash(password, 8);
         user.password = newHash;
       }
     }
-
     if (img !== user.img) {
       console.log("la imagen no es la misma")
       try {
@@ -88,9 +90,6 @@ async function userActualizado(req, res, next) {
       }
 
     }
-
-
-
     user.confirmationpass = confirmationpass
       ? confirmationpass
       : user.confirmationpass;
@@ -100,13 +99,13 @@ async function userActualizado(req, res, next) {
     user.dni = dni ? dni : user.dni;
     user.isAdmin = typeof isAdmin === "boolean" ? isAdmin : user.isAdmin;
     user.isActive = typeof isActive === "boolean" ? isActive : user.isActive;
-
     await user.save();
     res.send("usuario actualizado");
   } catch (error) {
     next(error);
   }
 }
+
 router.put("/user/:id", passport.authenticate("jwt", { session: false }), userActualizado);
 
 async function vetActualizado(req, res) {
@@ -123,7 +122,6 @@ async function vetActualizado(req, res) {
     finishDate,
     isActive,
   } = req.body;
-
   try {
     let vet = await Vet.findByPk(id);
     vet.name = name ? name : vet.name;
@@ -136,13 +134,13 @@ async function vetActualizado(req, res) {
     vet.inicialDate = inicialDate ? inicialDate : vet.inicialDate;
     vet.finishDate = finishDate ? finishDate : vet.finishDate;
     vet.isActive = typeof isActive === "boolean" ? isActive : vet.isActive;
-
     await vet.save();
     res.status(200).send("vet actualizado");
   } catch (error) {
     res.send(error.message);
   }
 }
+
 router.put("/vet/:id", vetActualizado);
 
 module.exports = router;
