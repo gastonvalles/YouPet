@@ -7,7 +7,7 @@ const imgUpload = require("./imgUpload");
 
 exports.register = async (req, res) => {
   const { name, lastname, username, password, email, dni, address, img, isAdmin } = req.body;
-  
+
   if (
     !name ||
     !lastname ||
@@ -26,17 +26,16 @@ exports.register = async (req, res) => {
       },
     });
     if (!dbSearch.length) {
-        try {
-          if (img) {
-            const uploadRes = await imgUpload(img);
-            if (uploadRes) {
-              req.body.img = uploadRes;
-            }
+      try {
+        if (img) {
+          const uploadRes = await imgUpload(img);
+          if (uploadRes) {
+            req.body.img = uploadRes;
           }
         }
-        } catch (error) {
-          console.log(error.message);
-        }
+      } catch (error) {
+        console.log(error.message);
+      }
 
       const newHash = await bcryptjs.hash(req.body.password, 8);
       const token = jwt.sign({ email: req.body.email }, "userKey");
@@ -76,7 +75,7 @@ const sendEmail = async (name, email, confirmationCode) => {
     <p>Thank you for subscribing, confirm your email by clicking on the following link</p>
     <a href="http://localhost:3000/confirm/${confirmationCode}">Click here</a>
     `,
-  })
+    })
     .then((res) => res("se mando el email"))
     .catch((error) => error.message);
 }
@@ -110,11 +109,10 @@ exports.verifyUser = (req, res, next) => {
 
 exports.login = async (req, res) => {
   const { email, password } = req.body;
-  
+
   try {
     if (!email || !password) {
       return res.status(404).send("Debe completar todos los campos");
-      console.log("email y password no llegaron")
     }
     const findUser = await User.findOne({
       where: { email },
@@ -126,7 +124,7 @@ exports.login = async (req, res) => {
       console.log("Contraseña e email invalido")
       return res.status(404).send("Contraseña e email invalido");
     }
-    if(!findUser.isActive) {
+    if (!findUser.isActive) {
       console.log("El usuario no esta activo")
       return res.status(401).send("Comunicarse con soporte")
     }
