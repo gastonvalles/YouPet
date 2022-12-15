@@ -59,8 +59,9 @@ function App() {
         <Route path="/userpanel/*" element={<UserPanel />} />
         <Route path="/errorPay" element={<ErrorPay />} />
         <Route path="/successPay" element={<SuccesPay />} />
+        <Route path="*" element={<ErrorPath/>}/>
       </Routes>
-      <ErrorPath/>
+      
     </div>
   );
 }
