@@ -56,6 +56,7 @@ function App() {
         <Route path="/admin/*" element={<PanelAdmin />} />
         <Route path="/confirm/:confirmationCode" element={<Confirm />} />
         <Route path="/userpanel/*" element={<UserPanel />} />
+        <Route path="/errorr" element={<ErrorPay />} />
       </Routes>
     </div>
   );
