@@ -9,7 +9,8 @@ import userPlaceholder from "../../../img/user-placeholder.png";
 import {
   getServiceByName,
   getServices,
-  getVetByName
+  getVetByName,
+  getVets
 } from "../../../Redux/actions";
 import dropMenu from "./dropMenu.module.css";
 import "./Navbar.css";
@@ -36,16 +37,18 @@ export default function NavBar() {
     setName("");
   }
 
-  
-  
-  
+  function handleClick(event) {
+    event.preventDefault();
+    dispatch(getServices());
+    dispatch(getVets())
+  }
 
   return (
     <>
       <nav className="navbar navbar-expand-md bg-info">
         <div className="container-fluid">
           <Link className="Link  me-4" to={"/"}>
-            <img src={logo} alt="Bootstrap" height="55" />
+            <img src={logo} alt="Bootstrap" height="55"  onClick={event =>handleClick(event)}/>
           </Link>
           <button
             className="navbar-toggler"
