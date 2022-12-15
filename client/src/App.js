@@ -21,8 +21,11 @@ import AdminProfileDetail from "./Components/Functionality/PanelAdmin/Users/Deta
 import AdminVetDetail from "./Components/Functionality/PanelAdmin/VetInformation/VetDetail";
 import Payment from "./Components/Functionality/Payment";
 import ErrorPay from "./Components/Functionality/Payment/ErrorPay";
+import SuccesPay from "./Components/Functionality/Payment/SuccessPay";
 import ChooseVetTurn from "./Components/Functionality/Turns/ChooseVetTurn";
 import UserPanel from "./Components/Functionality/UserPanel/Body/UserPanel";
+import ErrorPath from "./Components/View/ErrorPath";
+import ErrorSearch from "./Components/View/HomeFake/ErrorSearch";
 import Home from "./Components/View/HomeFake/HomeFake";
 import { getMyUser } from "./Redux/actions";
 
@@ -49,14 +52,18 @@ function App() {
         <Route exact path="/vet/register" element={<FormVet />} />
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/mp" element={<Payment />} />
-        <Route exact path="/errorPay" element={<ErrorPay />} />
         <Route path="/user/:id" element={<AdminProfileDetail />} />
         <Route path="/serv/:id" element={<AdminServiceDetail />} />
         <Route path="/adminvet/:id" element={<AdminVetDetail />} />
         <Route path="/admin/*" element={<PanelAdmin />} />
         <Route path="/confirm/:confirmationCode" element={<Confirm />} />
         <Route path="/userpanel/*" element={<UserPanel />} />
+        <Route path="/errorPay" element={<ErrorPay />} />
+        <Route path="/successPay" element={<SuccesPay />} />
+        <Route path="/errorSearch" element={<ErrorSearch/>}/>
+        <Route path="*" element={<ErrorPath/>}/>
       </Routes>
+      
     </div>
   );
 }

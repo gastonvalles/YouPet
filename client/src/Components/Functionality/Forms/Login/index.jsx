@@ -102,7 +102,7 @@ export default function Login() {
             }).catch((error) => {
               Swal.fire({
                 icon: "error",
-                title: "existe un error",
+                title: "There is an error",
                 text: `${error.response.data}`,
 
               })

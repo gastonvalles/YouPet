@@ -11,12 +11,12 @@ const getPaymentLink = async(services,userId) => {
   let preference = {
     items: items,
     back_urls: {
-      success: "http://localhost:3000/",
-      failure: "http://localhost:3000/errorPay",
+      success: "https://youpet.vercel.app/successPay",
+      failure: "https://youpet.vercel.app/errorPay",
     },
     auto_return: "approved",
     binary_mode: true,
-    notification_url:`https://1310-181-199-156-167.sa.ngrok.io/payment/notify/${userId}/` //Aqui poner link del back ya deployado sino, no funciona.
+    notification_url:`https://youpet-production.up.railway.app/payment/notify/${userId}/` //Aqui poner link del back ya deployado sino, no funciona.
   };
   return preference;
 };
