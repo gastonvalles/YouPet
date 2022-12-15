@@ -41,15 +41,16 @@ export default function NavBar() {
     event.preventDefault();
     dispatch(getServices());
     dispatch(getVets())
+    navigate("/")
   }
 
   return (
     <>
       <nav className="navbar navbar-expand-md bg-info">
         <div className="container-fluid">
-          <Link className="Link  me-4" to={"/"}>
+         
             <img src={logo} alt="Bootstrap" height="55"  onClick={event =>handleClick(event)}/>
-          </Link>
+      
           <button
             className="navbar-toggler"
             type="button"
