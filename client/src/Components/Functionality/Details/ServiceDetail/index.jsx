@@ -27,9 +27,13 @@ export default function ServiceDetail() {
       <p>Price: ${service.price}</p>
       <div>
         {!myuser?.id ? (
-          <Link to={"/login"}>
-            <span>Sign in to take a turn</span>
-          </Link>
+          <Link
+          to="/login"
+          type="button"
+          className="text-decoration-none btn btn-dark"
+        >
+          Sign in to take a turn
+        </Link>
         ) : (
           <Link
             to="turn"
