@@ -102,7 +102,7 @@ Vet.belongsToMany(Score, { through: "Vet-Score" });
 Score.belongsToMany(Service, { through: "Service-Score" });
 Service.belongsToMany(Score, { through: "Service-Score" });
 
-User.belongsToMany(Vet, { through: "Likes" });
+User.belongsToMany(Vet, { through: "Favorites" });
 Vet.belongsToMany(User, { through: "Favorites" });
 
 module.exports = {

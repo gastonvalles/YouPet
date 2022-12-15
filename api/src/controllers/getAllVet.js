@@ -1,6 +1,5 @@
 const { Op } = require("sequelize");
-const { Vet, User, Favorites } = require("../db");
-const { Sequelize } = require("sequelize");
+const { Vet, Favorites } = require("../db");
 
 const JsonVet = [
   {
@@ -175,9 +174,6 @@ const getDBVetByPK = async (id, user) => {
     if (!vet) {
       throw new Error("vet not found");
     }
-    console.log(userinfo);
-    console.log(vet);
-    /*    if (userinfo !== undefined) vet["isFavorite"] = userinfo === 1; */
     return Object.assign({}, vet, {
       isFavorite: userinfo === 1,
       totalfav: favoritos,
