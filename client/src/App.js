@@ -24,6 +24,7 @@ import ErrorPay from "./Components/Functionality/Payment/ErrorPay";
 import SuccesPay from "./Components/Functionality/Payment/SuccessPay";
 import ChooseVetTurn from "./Components/Functionality/Turns/ChooseVetTurn";
 import UserPanel from "./Components/Functionality/UserPanel/Body/UserPanel";
+import ErrorPath from "./Components/View/ErrorPath";
 import Home from "./Components/View/HomeFake/HomeFake";
 import { getMyUser } from "./Redux/actions";
 
@@ -57,8 +58,9 @@ function App() {
         <Route path="/confirm/:confirmationCode" element={<Confirm />} />
         <Route path="/userpanel/*" element={<UserPanel />} />
         <Route path="/errorPay" element={<ErrorPay />} />
-        <Route path="/successPay" element={<SuccesPay/>}/>
+        <Route path="/successPay" element={<SuccesPay />} />
       </Routes>
+      <ErrorPath/>
     </div>
   );
 }
