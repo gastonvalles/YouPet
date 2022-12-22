@@ -1,7 +1,7 @@
 
 # Project Final - Youpet
 
-<img height="150" src="./logo.png" />
+<img height="100" src="./logo.png" />
 
 ## Objetivos del Proyecto
 
@@ -15,6 +15,8 @@
 # YOUPET
 
 ¡Hola!👋 este es mi proyecto final grupal realizado en el bootcamp de #SoyHenry.
+
+📎Deploy:https://youpet.vercel.app/
 
 
 📎Proposal:
@@ -35,4 +37,16 @@ https://drive.google.com/file/d/17akGSU1BKy_bq39X-Te_B2wk7RITbIaf
 📎Youtube: 
 Proximamente...
  
- 
+📎Contributors:
+</br>
+https://github.com/gastonvalles
+</br>
+https://github.com/ernestovv85
+</br>
+https://github.com/FedeSaffores
+</br>
+https://github.com/Luis-Goytia
+</br>
+https://github.com/Klevens
+</br>
+https://github.com/vemodi
